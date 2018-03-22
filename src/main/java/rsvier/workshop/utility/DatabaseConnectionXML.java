@@ -28,7 +28,7 @@ public class DatabaseConnectionXML {
 		 * missing parts to the new File() and it should find the file. btw don't forget
 		 * to use double backslashes to make it compatible with all Operating Systems.
 		 */
-		File xmlFile = new File("src/main/java/rsvier/workshop/utility/DCXML.xml");
+		File xmlFile = new File("1workshop/DCXML.xml");
 
 		if (xmlFile.exists()) {
 

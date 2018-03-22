@@ -86,8 +86,8 @@ public class Product {
 	@Override
 	public String toString() {
 
-		return getProductId() + " " + getNameOfProduct() + " " + getPriceOfProduct() + " " + getStock() + " "
-				+ creationOfProduct.toString();
+		return "Id of the Product:" + getProductId() + " Name:" + getNameOfProduct() + " Price:" + getPriceOfProduct()
+				+ " Stock" + getStock() + " " + creationOfProduct.toString();
 
 	}
 

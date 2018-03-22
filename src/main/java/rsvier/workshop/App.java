@@ -1,7 +1,6 @@
 package rsvier.workshop;
 
 import java.sql.*;
-
 import rsvier.workshop.utility.DatabaseConnectionXML;
 
 /**

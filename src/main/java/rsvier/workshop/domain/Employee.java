@@ -5,8 +5,10 @@ public class Employee extends Person {
 	private int employeeId;
 	private String password;
 
-	// First call the super builder from class Person, then call EmployeeBuilder to
-	// add the password.
+	/*
+	 * First call the super builder from class Person, then call EmployeeBuilder to
+	 * add the password.
+	 */
 
 	private Employee(EmployeeBuilder builder) {
 		super(builder);
@@ -50,6 +52,6 @@ public class Employee extends Person {
 
 	// Override the toString method that is inherited from the Person class.
 	public String toString() {
-		return getEmployeeId() + " " + getName() + " " + getLastName();
+		return "Id:" + getEmployeeId() + " lastname" + getLastName() + " name:" + getName();
 	}
 }

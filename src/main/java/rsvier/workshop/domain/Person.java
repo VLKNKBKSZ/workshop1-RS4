@@ -8,9 +8,11 @@ public class Person {
 	private String email;
 	private Address address;
 
-	// Make a public constructor for the Person class with the Builder object passed
-	// in. This is solving the wrong order input.
-	// To check if all instance variable are not default there will be a exception.
+	/*
+	 * Make a public constructor for the Person class with the Builder object passed
+	 * in. This is solving the wrong order input. To check if all instance variable
+	 * are not default there will be a exception.
+	 */
 
 	protected Person(PersonBuilder builder) {
 
@@ -85,10 +87,12 @@ public class Person {
 	}
 
 	// Override the toString method that is inherited from the Object class.
+
 	@Override
 
 	public String toString() {
-		return getName() + " " + getLastName() + " " + getMiddleName() + " " + getEmail() + " " + getAddress();
+		return getLastName() + " " + getName() + " " + getMiddleName() + " " + getEmail() + " "
+				+ getAddress().getStreetName() + " " + getAddress().getHouseNumber() + getAddress().getCity();
 	}
 
 }

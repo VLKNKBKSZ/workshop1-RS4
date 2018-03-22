@@ -5,9 +5,10 @@ import java.time.LocalDateTime;
 
 public class Order {
 
-	/* Order has an id, a customer, a total price and a orderdateTime
+	/*
+	 * Order has an id, a customer, a total price and a orderdateTime
 	 * 
-	 * */
+	 */
 
 	private int orderId;
 	private Customer customer;
@@ -78,7 +79,8 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return getOrderId() + " " + getCustomer() + " " + getTotalPrice() + " " + getOrderDateTime();
+		return getOrderId() + " " + getCustomer().getLastName() + getCustomer().getName() + " " + getTotalPrice() + " "
+				+ getOrderDateTime();
 	}
 
 }

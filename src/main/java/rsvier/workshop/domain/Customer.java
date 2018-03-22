@@ -4,8 +4,10 @@ public class Customer extends Person {
 
 	private int customerId;
 
-	// Set the constructor to private to force user to use only the builder to
-	// create new instances.
+	/*
+	 * Set the constructor to private to force user to use only the builder to
+	 * create new instances.
+	 */
 
 	private Customer(CustomerBuilder builder) {
 		super(builder);
@@ -37,12 +39,14 @@ public class Customer extends Person {
 		return customerId;
 	}
 
-	// Override the toString method from the Superclass Person. Could change this in
-	// the future to other format.
+	/*
+	 * Override the toString method from the Superclass Person. Could change this in
+	 * the future to other format.
+	 */
 	@Override
 
 	public String toString() {
 
-		return getCustomerId() + " " + getLastName() + " " + getName() + " " + getAddress();
+		return "Id:" + getCustomerId() + " lastname: " + getLastName() + " name:" + getName();
 	}
 }

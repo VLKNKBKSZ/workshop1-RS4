@@ -1,17 +1,21 @@
 package rsvier.workshop.domain;
 
-import java.math.BigDecimal;
+import java.math.*;
 
 //Added this class to match the database eer diagram. Not sure how this will work with the database.
+
 public class OrderLine {
 
 	private int orderLineId;
 	private Order order;
 	private Product product;
 	private int numberOfProduct;
+	private BigDecimal totalPrice;
 
-	// Set the constructor to private to force user to use only the builder to
-	// create new instances.
+	/*
+	 * Set the constructor to private to force user to use only the builder to
+	 * create new instances.
+	 */
 
 	private OrderLine(OrderLineBuilder builder) {
 
@@ -19,6 +23,7 @@ public class OrderLine {
 		this.order = builder.order;
 		this.product = builder.product;
 		this.numberOfProduct = builder.numberOfProduct;
+		this.totalPrice = builder.totalPrice;
 
 	}
 
@@ -27,7 +32,8 @@ public class OrderLine {
 		private int orderLineId;
 		private Order order;
 		private Product product;
-		private int numberOfProduct;;
+		private int numberOfProduct;
+		private BigDecimal totalPrice;
 
 		public OrderLineBuilder() {
 		}
@@ -47,9 +53,13 @@ public class OrderLine {
 			return this;
 		}
 
-		
 		public OrderLineBuilder numberOfProduct(int numberOfProduct) {
 			this.numberOfProduct = numberOfProduct;
+			return this;
+		}
+
+		public OrderLineBuilder totalPrice(BigDecimal totalPrice) {
+			this.totalPrice = totalPrice;
 			return this;
 		}
 
@@ -71,14 +81,18 @@ public class OrderLine {
 		return product;
 	}
 
-
 	public int getNumberOfProduct() {
 		return numberOfProduct;
 	}
 
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+
 	@Override
 	public String toString() {
-		return getNumberOfProduct() + " x" + getProduct() + " $" + getProduct().getPriceOfProduct() + "Total price"
+		return "Id:" + getOrderLineId() + " Name:" + product.getNameOfProduct() + " Price:"
+				+ getProduct().getPriceOfProduct() + " OrderId " + order.getOrderId() + "Total Price: "
 				+ getProduct().getPriceOfProduct().multiply(new BigDecimal(getNumberOfProduct()));
 	}
 

@@ -37,10 +37,6 @@ public class DatabaseConnection {
 			System.out.println(ex.getMessage());
 
 		}
-		/*
-		 * Check if the connection was successful. If the connection is successful, conn
-		 * is not null, so we should close the connection to save more resources.
-		 */
 
 		return conn;
 	}

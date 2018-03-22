@@ -6,9 +6,8 @@ import java.math.BigDecimal;
 public class OrderLine {
 
 	private int orderLineId;
-	private int orderId;
-	private String product;
-	private BigDecimal productPrice;
+	private Order order;
+	private Product product;
 	private int numberOfProduct;
 
 	// Set the constructor to private to force user to use only the builder to
@@ -17,9 +16,8 @@ public class OrderLine {
 	private OrderLine(OrderLineBuilder builder) {
 
 		this.orderLineId = builder.orderLineId;
-		this.orderId = builder.orderId;
+		this.order = builder.order;
 		this.product = builder.product;
-		this.productPrice = builder.productPrice;
 		this.numberOfProduct = builder.numberOfProduct;
 
 	}
@@ -27,10 +25,9 @@ public class OrderLine {
 	public static class OrderLineBuilder {
 
 		private int orderLineId;
-		private int orderId;
-		private String product;
-		private BigDecimal productPrice;
-		private int numberOfProduct;
+		private Order order;
+		private Product product;
+		private int numberOfProduct;;
 
 		public OrderLineBuilder() {
 		}
@@ -40,21 +37,17 @@ public class OrderLine {
 			return this;
 		}
 
-		public OrderLineBuilder orderId(int orderId) {
-			this.orderId = orderId;
+		public OrderLineBuilder order(Order order) {
+			this.order = order;
 			return this;
 		}
 
-		public OrderLineBuilder product(String product) {
+		public OrderLineBuilder product(Product product) {
 			this.product = product;
 			return this;
 		}
 
-		public OrderLineBuilder productPrice(BigDecimal productPrice) {
-			this.productPrice = productPrice;
-			return this;
-		}
-
+		
 		public OrderLineBuilder numberOfProduct(int numberOfProduct) {
 			this.numberOfProduct = numberOfProduct;
 			return this;
@@ -70,17 +63,14 @@ public class OrderLine {
 		return orderLineId;
 	}
 
-	public int getOrderId() {
-		return orderId;
+	public Order getOrder() {
+		return order;
 	}
 
-	public String getProduct() {
+	public Product getProduct() {
 		return product;
 	}
 
-	public BigDecimal getProductPrice() {
-		return productPrice;
-	}
 
 	public int getNumberOfProduct() {
 		return numberOfProduct;
@@ -88,8 +78,8 @@ public class OrderLine {
 
 	@Override
 	public String toString() {
-		return getNumberOfProduct() + " x" + getProduct() + " $" + getProductPrice() + "Total price"
-				+ getProductPrice().multiply(new BigDecimal(getNumberOfProduct()));
+		return getNumberOfProduct() + " x" + getProduct() + " $" + getProduct().getPriceOfProduct() + "Total price"
+				+ getProduct().getPriceOfProduct().multiply(new BigDecimal(getNumberOfProduct()));
 	}
 
 }

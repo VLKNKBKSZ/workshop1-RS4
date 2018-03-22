@@ -5,17 +5,18 @@ import java.time.LocalDateTime;
 
 public class Order {
 
-	// added also id of order/product/customer and employee. Would be good to link
-	// database tables.
+	/* Order has an id, a customer, a total price and a orderdateTime
+	 * 
+	 * */
 
 	private int orderId;
-	private int customerId;
+	private Customer customer;
 	private BigDecimal totalPrice;
 	private LocalDateTime orderDateTime = LocalDateTime.now();
 
 	private Order(OrderBuilder builder) {
 		this.orderId = builder.orderId;
-		this.customerId = builder.customerId;
+		this.customer = builder.customer;
 		this.totalPrice = builder.totalPrice;
 		this.orderDateTime = builder.orderDateTime;
 
@@ -24,7 +25,7 @@ public class Order {
 	public class OrderBuilder {
 
 		private int orderId;
-		private int customerId;
+		private Customer customer;
 		private BigDecimal totalPrice;
 		private LocalDateTime orderDateTime = LocalDateTime.now();
 
@@ -37,8 +38,8 @@ public class Order {
 			return this;
 		}
 
-		public OrderBuilder customer(int customerId) {
-			this.customerId = customerId;
+		public OrderBuilder customer(Customer customer) {
+			this.customer = customer;
 			return this;
 		}
 
@@ -61,8 +62,8 @@ public class Order {
 		return orderId;
 	}
 
-	public int getCustomerId() {
-		return customerId;
+	public Customer getCustomer() {
+		return customer;
 	}
 
 	public BigDecimal getTotalPrice() {
@@ -77,7 +78,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return getOrderId() + " " + getCustomerId() + " " + getTotalPrice() + " " + getOrderDateTime();
+		return getOrderId() + " " + getCustomer() + " " + getTotalPrice() + " " + getOrderDateTime();
 	}
 
 }

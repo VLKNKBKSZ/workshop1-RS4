@@ -2,4 +2,5 @@
 /.settings
 /.project
 /.classpath
-/src/main/java/rsvier/workshop/utility/DCXML.xml
+src/main/java/rsvier/workshop/utility/DCXML.xml
+git 

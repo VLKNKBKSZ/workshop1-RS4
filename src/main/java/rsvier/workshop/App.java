@@ -14,6 +14,5 @@ public class App {
 		} catch (SQLException ex) {
 			ex.getMessage();
 		}
-		System.out.println("testing eclipse git");
 	}
 }

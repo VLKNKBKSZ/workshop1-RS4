@@ -6,7 +6,8 @@ import java.time.LocalDateTime;
 public class Order {
 
 	/*
-	 * Order has an id, a customer, a total price and a orderdateTime
+	 * Order has an id, a customer, a total price and a orderdateTime we are thinking of adding a ArrayList<OrderLine> orderLine;
+	 * to hold all the orderliness that are being made by the customer. not sure if it will work yet we gonna ask jeroen.
 	 * 
 	 */
 

@@ -9,8 +9,11 @@ public class Address {
 	private String postalCode;
 	private String city;
 	private String country;
-	// Set the constructor to private to force user to use only the builder to
-	// create new instances.
+	
+	/*
+	 * Set the constructor to private to force user to use only the builder to
+	 * create new instances.
+	 */
 
 	private Address(AddressBuilder builder) {
 		this.addressId = builder.addressId;

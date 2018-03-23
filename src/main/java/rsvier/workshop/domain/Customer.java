@@ -43,6 +43,7 @@ public class Customer extends Person {
 	 * Override the toString method from the Superclass Person. Could change this in
 	 * the future to other format.
 	 */
+	
 	@Override
 
 	public String toString() {

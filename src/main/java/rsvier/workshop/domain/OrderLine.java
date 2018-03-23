@@ -2,7 +2,7 @@ package rsvier.workshop.domain;
 
 import java.math.*;
 
-//Added this class to match the database eer diagram. Not sure how this will work with the database.
+//Added this class to match the database EER diagram. Not sure how this will work with the database.
 
 public class OrderLine {
 
@@ -10,7 +10,6 @@ public class OrderLine {
 	private Order order;
 	private Product product;
 	private int numberOfProduct;
-	private BigDecimal totalPrice;
 
 	/*
 	 * Set the constructor to private to force user to use only the builder to
@@ -23,7 +22,6 @@ public class OrderLine {
 		this.order = builder.order;
 		this.product = builder.product;
 		this.numberOfProduct = builder.numberOfProduct;
-		this.totalPrice = builder.totalPrice;
 
 	}
 
@@ -33,7 +31,6 @@ public class OrderLine {
 		private Order order;
 		private Product product;
 		private int numberOfProduct;
-		private BigDecimal totalPrice;
 
 		public OrderLineBuilder() {
 		}
@@ -55,11 +52,6 @@ public class OrderLine {
 
 		public OrderLineBuilder numberOfProduct(int numberOfProduct) {
 			this.numberOfProduct = numberOfProduct;
-			return this;
-		}
-
-		public OrderLineBuilder totalPrice(BigDecimal totalPrice) {
-			this.totalPrice = totalPrice;
 			return this;
 		}
 
@@ -85,9 +77,7 @@ public class OrderLine {
 		return numberOfProduct;
 	}
 
-	public BigDecimal getTotalPrice() {
-		return totalPrice;
-	}
+	// Override the toString method that is inherited from the Object class.
 
 	@Override
 	public String toString() {

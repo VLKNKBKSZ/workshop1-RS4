@@ -8,11 +8,12 @@ import rsvier.workshop.utility.DatabaseConnectionXML;
  *
  */
 public class App {
-	public static void main( String[] args ){
-		
-        try(Connection conn = DatabaseConnectionXML.getConnection()){
-    }catch(SQLException ex) {
-    	ex.getMessage();
-    }
-}
+	public static void main(String[] args) {
+
+		try (Connection conn = DatabaseConnectionXML.getConnection()) {
+		} catch (SQLException ex) {
+			ex.getMessage();
+		}
+		System.out.println("testing eclipse git");
+	}
 }

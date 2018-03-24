@@ -1,12 +1,9 @@
 package rsvier.workshop;
 
 import java.sql.*;
-import rsvier.workshop.utility.DatabaseConnectionXML;
+import java.util.logging.*;
+import rsvier.workshop.utility.*;
 
-/**
- * Hello world!
- *
- */
 public class App {
 	public static void main(String[] args) {
 
@@ -15,5 +12,6 @@ public class App {
 			ex.getMessage();
 		}
 
+		Logger logger = LogConnection.getLogger();
 	}
 }

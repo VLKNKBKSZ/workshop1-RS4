@@ -2,11 +2,15 @@ package rsvier.workshop.utility;
 
 import java.io.*;
 import java.sql.*;
+import java.util.logging.*;
+
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 public class DatabaseConnectionXML {
+
+	private static Logger logger = LogConnection.getLogger();
 
 	private static String URL;
 	private static String USER;
@@ -40,12 +44,13 @@ public class DatabaseConnectionXML {
 				URL = document.getElementsByTagName("url").item(0).getTextContent();
 				USER = document.getElementsByTagName("user").item(0).getTextContent();
 				PASSWORD = document.getElementsByTagName("password").item(0).getTextContent();
+				logger.log(Level.CONFIG,"Xml file exist, parsing is succesfull.");
 			} catch (ParserConfigurationException | SAXException | IOException e) {
-				e.getMessage();
+				logger.log(Level.WARNING, "Parser/Sax/IOexception occured check log", e.getMessage());
 
 			}
 		} else {
-			System.out.println("File is not existing");
+			logger.log(Level.INFO, "xmlFile is not existing.");
 		}
 
 	}
@@ -62,12 +67,12 @@ public class DatabaseConnectionXML {
 		Connection conn = null;
 		try {
 
-			System.out.println("Connecting to the database...");
 			conn = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Connected to the database.");
+			logger.log(Level.INFO, "Connected to Database");
+			System.out.println("Connected to the Database.");
 
 		} catch (SQLException ex) {
-			System.out.println(ex.getMessage());
+			logger.log(Level.WARNING, "SQL exeception ocurred. Connection with database failed.", ex.getMessage());
 
 		}
 

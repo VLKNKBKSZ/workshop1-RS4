@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<databaseMySQL>
-	<url>jdbc:mysql://localhost:3306/evvo</url>
-	<user>root</user>
-	<password>admin</password>
-</databaseMySQL>

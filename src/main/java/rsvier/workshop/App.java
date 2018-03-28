@@ -32,9 +32,6 @@ public class App {
 		} catch (SQLException ex) {
 			ex.getMessage();
 		}
-
-		Logger logger = LogConnection.getLogger();
-		
 		
 	}
 }

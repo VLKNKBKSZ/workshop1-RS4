@@ -1,8 +1,8 @@
 <<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseMySQL>
-	<url>jdbc:mysql://localhost:3306/Evvo</url>
+	<url>jdbc:mysql://localhost:3306/evvo</url>
 	<user>root</user>
-	<password>Pw19102528!</password>
+	<password>admin</password>
 
 </databaseMySQL>

@@ -17,7 +17,7 @@ public class DatabaseConnectionXML {
 	private static String PASSWORD;
 
 	/*
-	 * Create a function that is parsing the xml file. Getting the wright values of
+	 * Create a function that is parsing the xml file. Getting the right values of
 	 * the xml for database connection. We can also declare this class as a
 	 * anonymous static method and just call it once to create the file that should
 	 * be more efficient. Consider this later on in big projects
@@ -46,7 +46,7 @@ public class DatabaseConnectionXML {
 				PASSWORD = document.getElementsByTagName("password").item(0).getTextContent();
 				logger.log(Level.CONFIG,"Xml file exist, parsing is succesfull.");
 			} catch (ParserConfigurationException | SAXException | IOException e) {
-				logger.log(Level.WARNING, "Parser/Sax/IOexception occured check log", e.getMessage());
+				logger.log(Level.WARNING, "Parser/Sax/IOexception occured check log", e);
 
 			}
 		} else {
@@ -71,8 +71,8 @@ public class DatabaseConnectionXML {
 			logger.log(Level.INFO, "Connected to Database");
 			System.out.println("Connected to the Database.");
 
-		} catch (SQLException ex) {
-			logger.log(Level.WARNING, "SQL exeception ocurred. Connection with database failed.", ex.getMessage());
+		} catch (SQLException e) {
+			logger.log(Level.WARNING, "SQL exeception ocurred. Connection with database failed.", e);
 
 		}
 

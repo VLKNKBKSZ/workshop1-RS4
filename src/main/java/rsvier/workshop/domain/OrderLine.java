@@ -9,7 +9,7 @@ public class OrderLine {
 	private int orderLineId;
 	private Order order;
 	private Product product;
-	private int numberOfProduct;
+	private int number;
 
 	/*
 	 * Set the constructor to private to force user to use only the builder to
@@ -21,7 +21,7 @@ public class OrderLine {
 		this.orderLineId = builder.orderLineId;
 		this.order = builder.order;
 		this.product = builder.product;
-		this.numberOfProduct = builder.numberOfProduct;
+		this.number = builder.number;
 
 	}
 
@@ -30,7 +30,7 @@ public class OrderLine {
 		private int orderLineId;
 		private Order order;
 		private Product product;
-		private int numberOfProduct;
+		private int number;
 
 		public OrderLineBuilder() {
 		}
@@ -50,8 +50,8 @@ public class OrderLine {
 			return this;
 		}
 
-		public OrderLineBuilder numberOfProduct(int numberOfProduct) {
-			this.numberOfProduct = numberOfProduct;
+		public OrderLineBuilder number(int number) {
+			this.number = number;
 			return this;
 		}
 
@@ -73,17 +73,17 @@ public class OrderLine {
 		return product;
 	}
 
-	public int getNumberOfProduct() {
-		return numberOfProduct;
+	public int getNumber() {
+		return number;
 	}
 
 	// Override the toString method that is inherited from the Object class.
 
 	@Override
 	public String toString() {
-		return "Id:" + getOrderLineId() + " Name:" + product.getNameOfProduct() + " Price:"
-				+ getProduct().getPriceOfProduct() + " OrderId " + order.getOrderId() + "Total Price: "
-				+ getProduct().getPriceOfProduct().multiply(new BigDecimal(getNumberOfProduct()));
+		return "Id:" + getOrderLineId() + " Name:" + product.getName() + " Price:"
+				+ getProduct().getPrice() + " OrderId " + order.getOrderId() + "Total Price: "
+				+ getProduct().getPrice().multiply(new BigDecimal(getNumber()));
 	}
 
 }

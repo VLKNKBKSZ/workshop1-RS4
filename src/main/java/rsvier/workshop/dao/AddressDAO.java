@@ -11,5 +11,5 @@ public interface AddressDAO {
 	public Address getAddress(Customer customer);
 	public void createAddress(Address address, Customer customer);
 	public void updateAddress(Address address , Customer customer);
-	public void deleteAddress(Address address );
+	public void deleteAddress(Customer customer );
 }

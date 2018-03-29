@@ -144,14 +144,14 @@ public class AddressDAOImp implements AddressDAO {
 	}
 
 	@Override
-	public void deleteAddress(Address address) {
+	public void deleteAddress(Customer customer) {
 
-		String query = "DELETE FROM address WHERE id = ?";
+		String query = "DELETE FROM address WHERE customer_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement ps = conn.prepareStatement(query);) {
 
-			ps.setInt(1, address.getAddressId());
+			ps.setInt(1, customer.getCustomerId());
 
 			ps.executeUpdate();
 

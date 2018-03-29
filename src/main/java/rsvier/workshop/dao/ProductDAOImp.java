@@ -19,9 +19,6 @@ public class ProductDAOImp implements ProductDAO {
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
 				ResultSet rs = pstmt.executeQuery();) {
-
-			logger.log(Level.INFO, "Query prepared and result is succesfull");
-
 			/*
 			 * Check all rows and return those products back to the ArrayList<Product>
 			 */
@@ -88,11 +85,9 @@ public class ProductDAOImp implements ProductDAO {
 			pstmt.setString(1, product.getName());
 			pstmt.setBigDecimal(2, product.getPrice());
 			pstmt.setInt(3, product.getStock());
-
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			logger.log(Level.WARNING, "Sql exception occured", e);
 		}
 

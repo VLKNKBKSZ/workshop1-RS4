@@ -110,8 +110,8 @@ public class ProductDAOImp implements ProductDAO {
 			pstmt.setInt(4, productId);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			logger.log(Level.WARNING, "SQL exception ocurred.", e);
 		}
 	}
 

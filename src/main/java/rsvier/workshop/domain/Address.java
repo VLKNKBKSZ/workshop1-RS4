@@ -38,7 +38,20 @@ public class Address {
 
 		public AddressBuilder() {
 		}
+		// Add another constructor to copy AddressBuilder properties from another Address object.
+		public AddressBuilder(Address add) {
+			
+			this.addressId = add.addressId;
+			this.streetName = add.streetName;
+			this.houseNumber = add.houseNumber;
+			this.additionalHouseNumber = add.additionalHouseNumber;
+			this.postalCode = add.postalCode;
+			this.city = add.city;
+			this.country = add.country;
+		}
 
+		
+		
 		public AddressBuilder addressId(int addressId) {
 			this.addressId = addressId;
 			return this;
@@ -108,11 +121,34 @@ public class Address {
 		return country;
 	}
 
-	// Override the toString method that is inherited from the Object class.
+	/* Override the toString method that is inherited from the Object class.
+	 * Not print addressId in toString()
+	 */
+	
 	@Override
 	public String toString() {
-		return getAddressId() + " " + getStreetName() + " " + getHouseNumber() + " " + getAdditionalHouseNumber() + " "
+		return   getStreetName() + " " + getHouseNumber() + " " + getAdditionalHouseNumber() + " "
 				+ getPostalCode() + " " + getCity() + " " + getCountry() + " ";
 	}
+
+	
+	// Override equals method which is inherited from the Object class
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(this == obj)
+			return true;
+		if(obj == null)
+			return false;
+		if(getClass() != obj.getClass())
+			return false;
+		Address other = (Address) obj;
+		
+		if(addressId != other.addressId)
+			return false;
+		return true;
+	}
+	
+	
 
 }

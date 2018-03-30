@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <databaseMySQL>
     <url>jdbc:mysql://localhost:3306/Evvo?useSSL=false</url>
     <user>root</user>
     <password>mijnjavawachtwoord</password>
 
+=======
+<databaseMySQL>
+	<url>jdbc:mysql://localhost:3306/Evvo</url>
+	<user>root</user>
+	<password>Pw19102528!</password>
+>>>>>>> 94f71b2f6d8dca69410b5677cf72de2dc03d717d
 </databaseMySQL>

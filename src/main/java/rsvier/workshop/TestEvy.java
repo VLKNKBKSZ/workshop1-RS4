@@ -54,8 +54,11 @@ public class TestEvy {
 			
 			
 			
+
 			
 //													Update a Customer
+			
+			
 //           New Data that you want to update
 			
 //					String newMiddleName = "evywetch";  
@@ -79,6 +82,10 @@ public class TestEvy {
 //		4. Update a customer by passing the updatedCustomer object to updateCustomer()
 					
 //					cd.updateCustomer(updatedCustomer);
+			
+			
+			
+			
 				
 						
 // 													Update address

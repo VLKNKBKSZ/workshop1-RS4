@@ -1,30 +1,31 @@
 package rsvier.workshop.domain;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.sql.*;
+import java.text.*;
 
 public class Product {
 
 	private int productId;
-	private String nameOfProduct;
-	private BigDecimal priceOfProduct;
+	private String name;
+	private BigDecimal price;
 	private int stock;
-	private LocalDate creationOfProduct = LocalDate.now();
+	private Timestamp dateTime;
 
 	private Product(ProductBuilder builder) {
 		this.productId = builder.productId;
-		this.nameOfProduct = builder.nameOfProduct;
-		this.priceOfProduct = builder.priceOfProduct;
+		this.name = builder.name;
+		this.price = builder.price;
 		this.stock = builder.stock;
-		this.creationOfProduct = builder.creationOfProduct;
+		this.dateTime = builder.dateTime;
 	}
 
 	public static class ProductBuilder {
 		private int productId;
-		private String nameOfProduct;
-		private BigDecimal priceOfProduct;
+		private String name;
+		private BigDecimal price;
 		private int stock;
-		private LocalDate creationOfProduct = LocalDate.now();
+		private Timestamp dateTime;
 
 		public ProductBuilder() {
 		}
@@ -34,13 +35,13 @@ public class Product {
 			return this;
 		}
 
-		public ProductBuilder nameOfProduct(String nameOfProduct) {
-			this.nameOfProduct = nameOfProduct;
+		public ProductBuilder name(String name) {
+			this.name = name;
 			return this;
 		}
 
-		public ProductBuilder priceOfProduct(BigDecimal priceOfProduct) {
-			this.priceOfProduct = priceOfProduct;
+		public ProductBuilder price(BigDecimal price) {
+			this.price = price;
 			return this;
 		}
 
@@ -49,11 +50,10 @@ public class Product {
 			return this;
 		}
 
-		public ProductBuilder creationOfProduct(LocalDate creationOfProduct) {
-			this.creationOfProduct = creationOfProduct;
+		public ProductBuilder dateTime(Timestamp dateTime) {
+			this.dateTime = dateTime;
 			return this;
 		}
-
 		public Product build() {
 
 			return new Product(this);
@@ -65,20 +65,21 @@ public class Product {
 		return productId;
 	}
 
-	public String getNameOfProduct() {
-		return nameOfProduct;
+	public String getName() {
+		return name;
 	}
 
-	public BigDecimal getPriceOfProduct() {
-		return priceOfProduct;
+	public BigDecimal getPrice() {
+		return price;
 	}
 
 	public int getStock() {
 		return stock;
 	}
-
-	public LocalDate getCreationOfProduct() {
-		return creationOfProduct;
+	
+	public String getTimeStamp() {
+		String s = new SimpleDateFormat().format(dateTime);
+		return s;
 	}
 
 	// Override the toString inherited from the Object class
@@ -86,8 +87,8 @@ public class Product {
 	@Override
 	public String toString() {
 
-		return "Id of the Product:" + getProductId() + " Name:" + getNameOfProduct() + " Price:" + getPriceOfProduct()
-				+ " Stock" + getStock() + " " + creationOfProduct.toString();
+		return "Id:" + getProductId() + " Name:" + getName() + " Price:" + getPrice()
+				+ " Stock:" + getStock() + " DateTime:"+getTimeStamp() ;
 
 	}
 

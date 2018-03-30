@@ -62,7 +62,7 @@ public class TestEvy {
 			
 												// get address
 			
-			Address address = adi.getAddress(c1);
+			Address address = adi.getAddress(customer1);
 			System.out.println(address.toString());
 												
 			

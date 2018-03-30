@@ -40,7 +40,7 @@ public class CustomerDAOImp implements CustomerDAO {
 				cb.middleName(rs.getString(4));
 				cb.email(rs.getString(5));
 				customer = cb.build();
-				cb.address(ad.getAddress(customer);
+				cb.address(ad.getAddress(customer));
 				customer = cb.build();
 				customerList.add(customer);
 				
@@ -86,7 +86,7 @@ public class CustomerDAOImp implements CustomerDAO {
 		}
 		
 		customer = cb.build();
-		cb.address(ad.getAddress(customer);
+		cb.address(ad.getAddress(customer));
 		customer = cb.build();
 			
 		} catch (SQLException e) {

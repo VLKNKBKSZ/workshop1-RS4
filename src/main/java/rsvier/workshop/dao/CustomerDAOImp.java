@@ -33,24 +33,23 @@ public class CustomerDAOImp implements CustomerDAO {
 			
 			while(rs.next()){
 				
-				
 				cb.customerId(rs.getInt(1));
 				cb.name(rs.getString(2));
 				cb.lastName(rs.getString(3));
 				cb.middleName(rs.getString(4));
 				cb.email(rs.getString(5));
 				customer = cb.build();
-				cb.address(ad.getAddress(customer);
+				cb.address(ad.getAddress(customer));
 				customer = cb.build();
 				customerList.add(customer);
 				
 				
 			}
 			
-			
+		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.log(Level.WARNING, "Error occured while trying to find a list of customers" , e);
+			
 		}
 		return customerList;
 	}
@@ -73,8 +72,11 @@ public class CustomerDAOImp implements CustomerDAO {
 		try(ResultSet rs = ps.executeQuery();){
 			
 			
-			while(rs.next()){
+			if(!rs.next()){
 				
+				logger.log(Level.WARNING, "Can't find a customer");
+				
+			} else {
 				cb.customerId(rs.getInt(1));
 				cb.name(rs.getString(2));
 				cb.lastName(rs.getString(3));
@@ -86,13 +88,13 @@ public class CustomerDAOImp implements CustomerDAO {
 		}
 		
 		customer = cb.build();
-		cb.address(ad.getAddress(customer);
+		cb.address(ad.getAddress(customer));
 		customer = cb.build();
 			
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't find a customer");
+			logger.log(Level.WARNING, "Error occured while trying to find a customer", e);
 			
-			e.printStackTrace();
+			
 		}
 		
 		return customer;
@@ -118,8 +120,8 @@ public class CustomerDAOImp implements CustomerDAO {
 			
 			
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't create a customer");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "Can't create a customer" , e);
+			
 		}
 		
 	}
@@ -145,8 +147,8 @@ public class CustomerDAOImp implements CustomerDAO {
 			
 			
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't update the customer");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "Can't update the customer" ,e);
+			
 		}
 	}
 
@@ -162,8 +164,8 @@ public class CustomerDAOImp implements CustomerDAO {
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't delete the customer");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "Can't delete the customer" , e);
+			
 		}
 		
 	}

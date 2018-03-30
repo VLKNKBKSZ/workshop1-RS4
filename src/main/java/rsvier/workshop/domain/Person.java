@@ -2,11 +2,11 @@ package rsvier.workshop.domain;
 
 public class Person {
 
-	private String name;
-	private String lastName;
-	private String middleName;
-	private String email;
-	private Address address;
+	protected String name;
+	protected String lastName;
+	protected String middleName;
+	protected String email;
+	protected Address address;
 
 	/*
 	 * Make a public constructor for the Person class with the Builder object passed
@@ -25,11 +25,11 @@ public class Person {
 
 	public static class PersonBuilder {
 
-		private String name;
-		private String lastName;
-		private String middleName;
-		private String email;
-		private Address address;
+		protected String name;
+		protected String lastName;
+		protected String middleName;
+		protected String email;
+		protected Address address;
 
 		public PersonBuilder() {
 		}

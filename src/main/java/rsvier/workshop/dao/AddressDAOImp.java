@@ -23,10 +23,13 @@ public class AddressDAOImp implements AddressDAO {
 				PreparedStatement ps = conn.prepareStatement(query);
 				ResultSet rs = ps.executeQuery();) {
 
-			// Loop through all rows in address table in the database
+			
 			while (rs.next()) {
-
+				
+				
+				// Loop through all rows in address table in the database
 				// Set Address properties using Addressbuilder
+				
 				Address.AddressBuilder ab = new Address.AddressBuilder();
 				ab.addressId(rs.getInt(1));
 				ab.streetName(rs.getString(2));
@@ -45,8 +48,8 @@ public class AddressDAOImp implements AddressDAO {
 			}
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't get a list of addresses");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "Error occured while trying to find an address list" , e);
+			
 
 		}
 
@@ -68,9 +71,12 @@ public class AddressDAOImp implements AddressDAO {
 
 			try (ResultSet rs = ps.executeQuery();) {
 
-				while (rs.next()) {
+				if (!rs.next()) {
 
-					ab.addressId(rs.getInt(1));
+					logger.log(Level.WARNING, "Can't find an address");
+				}else {
+					
+					ab.addressId(rs.getInt(1)); 
 					ab.streetName(rs.getString(2));
 					ab.houseNumber(rs.getInt(3));
 					ab.additionalHouseNumber(rs.getInt(4));
@@ -83,8 +89,8 @@ public class AddressDAOImp implements AddressDAO {
 			address = ab.build();
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't find an address");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "Error occured while trying to find an address" , e);
+			
 		}
 
 		return address;
@@ -109,8 +115,8 @@ public class AddressDAOImp implements AddressDAO {
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't create address");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "Can't create address" , e);
+			
 		}
 
 	}
@@ -119,7 +125,7 @@ public class AddressDAOImp implements AddressDAO {
 	public void updateAddress(Address address, Customer customer) {
 
 		String query = "UPDATE address "
-				+ "SET streetName = ?,houseNumber = ?,additionalHouseNumber = ?,postalCode = ?,city = ?,country = ?,customer_id = ? "
+				+ "SET streetName = ?,houseNumber = ?,additionalHouseNumber = ?,postalCode = ?,city = ?,country = ? , customer_id = ? "
 				+ "WHERE id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
@@ -137,21 +143,21 @@ public class AddressDAOImp implements AddressDAO {
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't update address");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "Can't update address", e);
+			
 		}
 
 	}
 
 	@Override
-	public void deleteAddress(Customer customer) {
+	public void deleteAddress(Address address) {
 
-		String query = "DELETE FROM address WHERE customer_id = ?";
+		String query = "DELETE FROM address WHERE id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement ps = conn.prepareStatement(query);) {
 
-			ps.setInt(1, customer.getCustomerId());
+			ps.setInt(1, address.getAddressId());
 
 			ps.executeUpdate();
 

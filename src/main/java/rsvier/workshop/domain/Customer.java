@@ -21,6 +21,17 @@ public class Customer extends Person {
 		public CustomerBuilder() {
 
 		}
+		
+		// Create another CustomerBuilder constructor to get a Customer object and copy all properties from a Customer object 
+		public CustomerBuilder(Customer customer){
+			
+			this.customerId = customer.customerId;
+			this.name = customer.name;
+			this.lastName = customer.lastName;
+			this.middleName = customer.middleName;
+			this.email = customer.email;
+			this.address = customer.address;
+		}
 
 		public CustomerBuilder customerId(int customerId) {
 
@@ -48,6 +59,26 @@ public class Customer extends Person {
 
 	public String toString() {
 
-		return "Id:" + getCustomerId() + " lastname: " + getLastName() + " name:" + getName();
+		return "Id: " + getCustomerId() + " lastname: " + getLastName() + " name:" + getName() + " Address: "  + getAddress().toString();
 	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		if (customerId != other.customerId)
+			return false;
+		return true;
+	}
+	
+	
+	
+	
 }
+

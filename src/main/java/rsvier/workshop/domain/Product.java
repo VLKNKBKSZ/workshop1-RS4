@@ -30,6 +30,19 @@ public class Product {
 		public ProductBuilder() {
 		}
 
+		/*
+		 * This is constructor is added to match updateDAO of evy. We copy a product
+		 * then change it and build it again with this constructor
+		 */
+		
+		public ProductBuilder(Product product) {
+			this.productId = product.productId;
+			this.name = product.name;
+			this.price = product.price;
+			this.stock = product.stock;
+			this.dateTime = product.dateTime;
+		}
+
 		public ProductBuilder productId(int productId) {
 			this.productId = productId;
 			return this;
@@ -54,6 +67,7 @@ public class Product {
 			this.dateTime = dateTime;
 			return this;
 		}
+
 		public Product build() {
 
 			return new Product(this);
@@ -76,7 +90,7 @@ public class Product {
 	public int getStock() {
 		return stock;
 	}
-	
+
 	public String getTimeStamp() {
 		String s = new SimpleDateFormat().format(dateTime);
 		return s;
@@ -87,8 +101,8 @@ public class Product {
 	@Override
 	public String toString() {
 
-		return "Id:" + getProductId() + " Name:" + getName() + " Price:" + getPrice()
-				+ " Stock:" + getStock() + " DateTime:"+getTimeStamp() ;
+		return "Id:" + getProductId() + " Name:" + getName() + " Price:" + getPrice() + " Stock:" + getStock()
+				+ " DateTime:" + getTimeStamp();
 
 	}
 

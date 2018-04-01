@@ -39,15 +39,15 @@ public class Address {
 		public AddressBuilder() {
 		}
 		// Add another constructor to copy AddressBuilder properties from another Address object.
-		public AddressBuilder(Address add) {
+		public AddressBuilder(Address address) {
 			
-			this.addressId = add.addressId;
-			this.streetName = add.streetName;
-			this.houseNumber = add.houseNumber;
-			this.additionalHouseNumber = add.additionalHouseNumber;
-			this.postalCode = add.postalCode;
-			this.city = add.city;
-			this.country = add.country;
+			this.addressId = address.addressId;
+			this.streetName = address.streetName;
+			this.houseNumber = address.houseNumber;
+			this.additionalHouseNumber = address.additionalHouseNumber;
+			this.postalCode = address.postalCode;
+			this.city = address.city;
+			this.country = address.country;
 		}
 
 		

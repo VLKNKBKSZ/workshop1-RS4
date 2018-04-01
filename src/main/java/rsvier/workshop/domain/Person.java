@@ -2,6 +2,7 @@ package rsvier.workshop.domain;
 
 public class Person {
 
+	// Declare instance variables as protected. According to this, the child classes can be inherited.
 	protected String name;
 	protected String lastName;
 	protected String middleName;
@@ -25,6 +26,7 @@ public class Person {
 
 	public static class PersonBuilder {
 
+		// Declare instance variables as protected. According to this, the child classes can be inherited.
 		protected String name;
 		protected String lastName;
 		protected String middleName;

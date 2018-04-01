@@ -90,7 +90,7 @@ public class TestEvy {
 						
 // 													Update address
 			
-/*		
+	
 		//* New input
 			  
 					String newStreet = " J.B.Bakemakade";
@@ -102,7 +102,7 @@ public class TestEvy {
 			
 		//* And use customer to find address
 			  
-					Address address = adi.getAddress(customer);
+					Address address = ad.getAddress(customer);
 			
 		//* Copy AddressBuiler of the found address  to the new update AddressBuilder
 			  
@@ -114,10 +114,10 @@ public class TestEvy {
 		
 		//* update Address using update address
 	  
-			 		adi.updateAddress(update, customer);
+			 		ad.updateAddress(update, customer);
 			 
 			 
-			 */
+			 
 			
 			
 			
@@ -135,7 +135,7 @@ public class TestEvy {
 					
 */			
 			
-			
+		/*	
 			 
 //			 							    Delete Customer&Address
 		
@@ -153,7 +153,7 @@ public class TestEvy {
 			// Then delete the address
 			ad.deleteAddress(customer.getAddress());
 			 
-			 
+			 */
 	}
 	
 	

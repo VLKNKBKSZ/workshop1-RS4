@@ -24,7 +24,7 @@ public class ProductDAOImp implements ProductDAO {
 			 */
 
 			// Extract data from result set
-			while (rs.next()) {
+			while(rs.next()) {
 				Product.ProductBuilder pb = new Product.ProductBuilder();
 				pb.productId(rs.getInt(1));
 				pb.name(rs.getString(2));
@@ -45,7 +45,34 @@ public class ProductDAOImp implements ProductDAO {
 	}
 
 	@Override
-	public Product getProduct(int productId) {
+	public Product getProductByName(String name) {
+		Product product = null;
+		String query = "SELECT * FROM product WHERE name = ?;";
+		try (Connection conn = DatabaseConnectionXML.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);) {
+			pstmt.setString(1, name);
+			try (ResultSet rs = pstmt.executeQuery()) {
+
+				if (rs.next()) {
+					Product.ProductBuilder pb = new Product.ProductBuilder();
+					pb.productId(rs.getInt(1));
+					pb.name(rs.getString(2));
+					pb.price(rs.getBigDecimal(3));
+					pb.stock(rs.getInt(4));
+					pb.dateTime(rs.getTimestamp(5));
+					product = pb.build();
+
+				}
+				return product;
+			}
+		} catch (SQLException e) {
+			logger.log(Level.WARNING, "SQL exception occured", e);
+		}
+		return null;
+	}
+
+	@Override
+	public Product getProductById(int productId) {
 		Product product = null;
 		String query = "SELECT * FROM product WHERE id = ?;";
 
@@ -58,7 +85,7 @@ public class ProductDAOImp implements ProductDAO {
 
 				// Extract data from result set
 
-				while (rs.next()) {
+				if(rs.next()) {
 
 					Product.ProductBuilder pb = new Product.ProductBuilder();
 					pb.productId(rs.getInt(1));
@@ -68,13 +95,14 @@ public class ProductDAOImp implements ProductDAO {
 					pb.dateTime(rs.getTimestamp(5));
 					product = pb.build();
 				}
+				return product;
 
 			}
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
-		return product;
+		return null;
 	}
 
 	@Override
@@ -94,7 +122,7 @@ public class ProductDAOImp implements ProductDAO {
 	}
 
 	@Override
-	public void updateProduct(Product product, int productId) {
+	public void updateProduct(Product product) {
 		String query = "UPDATE product SET name = ?, price = ? , stock = ? WHERE id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
@@ -102,7 +130,7 @@ public class ProductDAOImp implements ProductDAO {
 			pstmt.setString(1, product.getName());
 			pstmt.setBigDecimal(2, product.getPrice());
 			pstmt.setInt(3, product.getStock());
-			pstmt.setInt(4, productId);
+			pstmt.setInt(4, product.getProductId());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 
@@ -111,12 +139,12 @@ public class ProductDAOImp implements ProductDAO {
 	}
 
 	@Override
-	public void deleteProduct(int productId) {
+	public void deleteProduct(Product product) {
 		String query = "DELETE FROM product WHERE id =?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setInt(1, productId);
+			pstmt.setInt(1, product.getProductId());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 

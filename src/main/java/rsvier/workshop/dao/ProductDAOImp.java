@@ -38,7 +38,7 @@ public class ProductDAOImp implements ProductDAO {
 
 			return productList;
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Some problem occured at the preparedStamet or Resultset", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 		}
 
 		return null;
@@ -116,7 +116,7 @@ public class ProductDAOImp implements ProductDAO {
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Sql exception occured", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 		}
 
 	}

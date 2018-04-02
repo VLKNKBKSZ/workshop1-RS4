@@ -7,13 +7,6 @@ public class Order {
 
 	private int orderId;
 	private List<OrderLine> totalOrderLines;
-	/*
-	 * Thought of saving all the OrderLines of 1 order inside of this private List.
-	 * Maybe its a ArrayList or LinkedList(Set,Map), When implementing this in the
-	 * DAO the idea is to loop true all orderLines, get the Price add it all to one
-	 * variable an then add that to the TotalPrice in the Order class. Still need to
-	 * think about this, Help me EVA &EVY :D
-	 */
 	private Customer customer;
 	private BigDecimal totalPrice;;
 
@@ -25,7 +18,7 @@ public class Order {
 
 	}
 
-	public class OrderBuilder {
+	public static class OrderBuilder {
 
 		private int orderId;
 		private List<OrderLine> totalOrderLines;

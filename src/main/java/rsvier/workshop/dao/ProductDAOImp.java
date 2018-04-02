@@ -32,7 +32,6 @@ public class ProductDAOImp implements ProductDAO {
 				pb.stock(rs.getInt(4));
 				pb.dateTime(rs.getTimestamp(5));
 				Product product = pb.build();
-				logger.log(Level.INFO, "Build of product is succesfull");
 				productList.add(product);
 			}
 
@@ -63,6 +62,7 @@ public class ProductDAOImp implements ProductDAO {
 					product = pb.build();
 
 				}
+				logger.log(Level.INFO, "List succesfully returned");
 				return product;
 			}
 		} catch (SQLException e) {
@@ -95,6 +95,7 @@ public class ProductDAOImp implements ProductDAO {
 					pb.dateTime(rs.getTimestamp(5));
 					product = pb.build();
 				}
+				logger.log(Level.INFO, "List succesfully returned");
 				return product;
 
 			}
@@ -114,6 +115,7 @@ public class ProductDAOImp implements ProductDAO {
 			pstmt.setBigDecimal(2, product.getPrice());
 			pstmt.setInt(3, product.getStock());
 			pstmt.executeUpdate();
+			logger.log(Level.INFO, "Product succesfully created");
 
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
@@ -132,6 +134,7 @@ public class ProductDAOImp implements ProductDAO {
 			pstmt.setInt(3, product.getStock());
 			pstmt.setInt(4, product.getProductId());
 			pstmt.executeUpdate();
+			logger.log(Level.INFO, "Product succesfully updated");
 		} catch (SQLException e) {
 
 			logger.log(Level.WARNING, "SQL exception ocurred.", e);
@@ -146,6 +149,7 @@ public class ProductDAOImp implements ProductDAO {
 				PreparedStatement pstmt = conn.prepareStatement(query)) {
 			pstmt.setInt(1, product.getProductId());
 			pstmt.executeUpdate();
+			logger.log(Level.INFO, "Product succesfully deleted");
 		} catch (SQLException e) {
 
 			logger.log(Level.WARNING, "SQL exception occured", e);

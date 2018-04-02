@@ -151,7 +151,7 @@ public class TestEvy {
 			cd.deleteCustomer(customer);
 			
 			// Then delete the address
-			ad.deleteAddress(customer.getAddress());
+//			ad.deleteAddress(customer.getCustomerId());
 			 
 			 
 	}

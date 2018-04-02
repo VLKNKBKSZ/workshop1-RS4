@@ -23,24 +23,22 @@ public class AddressDAOImp implements AddressDAO {
 				PreparedStatement ps = conn.prepareStatement(query);
 				ResultSet rs = ps.executeQuery();) {
 
-			
 			while (rs.next()) {
-				
-				
+
 				// Loop through all rows in address table in the database
 				// Set Address properties using Addressbuilder
-				
-				Address.AddressBuilder ab = new Address.AddressBuilder();
-				ab.addressId(rs.getInt(1));
-				ab.streetName(rs.getString(2));
-				ab.houseNumber(rs.getInt(3));
-				ab.additionalHouseNumber(rs.getInt(4));
-				ab.postalCode(rs.getString(5));
-				ab.city(rs.getString(6));
-				ab.country(rs.getString(7));
+
+				Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
+				addressBuilder.addressId(rs.getInt(1));
+				addressBuilder.streetName(rs.getString(2));
+				addressBuilder.houseNumber(rs.getInt(3));
+				addressBuilder.additionalHouseNumber(rs.getInt(4));
+				addressBuilder.postalCode(rs.getString(5));
+				addressBuilder.city(rs.getString(6));
+				addressBuilder.country(rs.getString(7));
 
 				// Create an address object with the all the set properties
-				Address address = ab.build();
+				Address address = addressBuilder.build();
 
 				// Add Adress to ArrayList
 				addressList.add(address);
@@ -48,8 +46,7 @@ public class AddressDAOImp implements AddressDAO {
 			}
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Error occured while trying to find an address list" , e);
-			
+			logger.log(Level.WARNING, "Error occured while trying to find an address list", e);
 
 		}
 
@@ -57,9 +54,9 @@ public class AddressDAOImp implements AddressDAO {
 	}
 
 	@Override
-	public Address getAddress(Customer customer) {
+	public Address getAddress(int customerId) {
 
-		Address.AddressBuilder ab = new Address.AddressBuilder();
+		Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 		Address address = null;
 
 		String query = "SELECT * FROM address WHERE customer_id = ?";
@@ -67,30 +64,30 @@ public class AddressDAOImp implements AddressDAO {
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement ps = conn.prepareStatement(query);) {
 
-			ps.setInt(1, customer.getCustomerId());
+			ps.setInt(1, customerId);
 
 			try (ResultSet rs = ps.executeQuery();) {
 
 				if (!rs.next()) {
 
 					logger.log(Level.WARNING, "Can't find an address");
-				}else {
-					
-					ab.addressId(rs.getInt(1)); 
-					ab.streetName(rs.getString(2));
-					ab.houseNumber(rs.getInt(3));
-					ab.additionalHouseNumber(rs.getInt(4));
-					ab.postalCode(rs.getString(5));
-					ab.city(rs.getString(6));
-					ab.country(rs.getString(7));
+				} else {
+
+					addressBuilder.addressId(rs.getInt(1));
+					addressBuilder.streetName(rs.getString(2));
+					addressBuilder.houseNumber(rs.getInt(3));
+					addressBuilder.additionalHouseNumber(rs.getInt(4));
+					addressBuilder.postalCode(rs.getString(5));
+					addressBuilder.city(rs.getString(6));
+					addressBuilder.country(rs.getString(7));
 				}
 			}
 
-			address = ab.build();
+			address = addressBuilder.build();
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Error occured while trying to find an address" , e);
-			
+			logger.log(Level.WARNING, "Error occured while trying to find an address", e);
+
 		}
 
 		return address;
@@ -115,8 +112,8 @@ public class AddressDAOImp implements AddressDAO {
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't create address" , e);
-			
+			logger.log(Level.WARNING, "Can't create address", e);
+
 		}
 
 	}
@@ -144,26 +141,26 @@ public class AddressDAOImp implements AddressDAO {
 
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "Can't update address", e);
-			
+
 		}
 
 	}
 
 	@Override
-	public void deleteAddress(Address address) {
+	public void deleteAddress(int customerId) {
 
-		String query = "DELETE FROM address WHERE id = ?";
+		String query = "DELETE FROM address WHERE customer_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement ps = conn.prepareStatement(query);) {
 
-			ps.setInt(1, address.getAddressId());
+			ps.setInt(1, customerId);
 
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't delete the address");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "Can't delete the address", e);
+			
 		}
 
 	}

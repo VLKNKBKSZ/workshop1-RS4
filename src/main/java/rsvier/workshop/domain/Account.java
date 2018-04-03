@@ -13,12 +13,12 @@ public class Account {
 	}
 
 
-	public int getId() {
+	public int getAccountId() {
 		return accountId;
 	}
 
 
-	public void setId(int id) {
+	public void setAccountId(int id) {
 		this.accountId = id;
 	}
 

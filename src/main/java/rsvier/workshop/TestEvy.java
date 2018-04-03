@@ -20,7 +20,7 @@ public class TestEvy {
 			
 			Address address1 = new Address.AddressBuilder().streetName("Bakemakade").houseNumber(108).postalCode("3000ME").city("Rotterdam").country("Netherlands").build();
 			
-			Customer customer1  =  (Customer) new Customer.CustomerBuilder().name("Evy").lastName("Wetch").middleName("Evyvy").email("evy@gmail.com").address(address1).build();
+			Person customer1  =  (Person) new Person.PersonBuilder().name("Evy").lastName("Wetch").middleName("Evyvy").address(address1).build();
 			
 		
 			
@@ -98,11 +98,11 @@ public class TestEvy {
 			
 		//* Get customer fist 
 			  
-					Customer customer = cd.getCustomer("Wetch");
+					Person person = cd.getPerson("Wetch");
 			
 		//* And use customer to find address
 			  
-					Address address = ad.getAddress(customer);
+					Address address = ad.getAddress(person.getPersonId());
 			
 		//* Copy AddressBuiler of the found address  to the new update AddressBuilder
 			  
@@ -114,7 +114,7 @@ public class TestEvy {
 		
 		//* update Address using update address
 	  
-			 		ad.updateAddress(update, customer);
+			 		ad.updateAddress(update, person);
 			 
 			 
 			 

@@ -1,13 +1,15 @@
 package rsvier.workshop.domain;
 
 public class Person {
+	
+	private int personId;
+	private int accountId;
+	private String personType;
+	private String name;
+	private String lastName;
+	private String middleName;
+	private Address address;
 
-	// Declare instance variables as protected. According to this, the child classes can be inherited.
-	protected String name;
-	protected String lastName;
-	protected String middleName;
-	protected String email;
-	protected Address address;
 
 	/*
 	 * Make a public constructor for the Person class with the Builder object passed
@@ -15,25 +17,45 @@ public class Person {
 	 * are not default there will be a exception.
 	 */
 
-	protected Person(PersonBuilder builder) {
-
+	private Person(PersonBuilder builder) {
+		
+		this.personId = builder.personId;
+		this.accountId = builder.accountId;
+		this.personType = builder.accountType;
 		this.name = builder.name;
 		this.lastName = builder.lastName;
 		this.middleName = builder.middleName;
-		this.email = builder.email;
 		this.address = builder.address;
 	}
 
 	public static class PersonBuilder {
 
-		// Declare instance variables as protected. According to this, the child classes can be inherited.
-		protected String name;
-		protected String lastName;
-		protected String middleName;
-		protected String email;
-		protected Address address;
+		private int personId;
+		private int accountId;
+		private String accountType;
+		private String name;
+		private String lastName;
+		private String middleName;
+		private Address address;
+
 
 		public PersonBuilder() {
+		}
+		
+		public PersonBuilder id(int id) {
+			this.personId = id;
+			return this;
+		}
+		
+		public PersonBuilder accountId(int accountId) {
+			this.accountId = accountId;
+			
+			return this;
+		}
+		
+		public PersonBuilder accountType(String accountType) {
+			this.accountType = accountType;
+			return this;
 		}
 
 		public PersonBuilder name(String name) {
@@ -46,14 +68,14 @@ public class Person {
 			return this;
 		}
 
-		public PersonBuilder middleName(String middleName) {
-			this.middleName = middleName;
-			return this;
-		}
+		public PersonBuilder middleName(String middleName){
 
-		public PersonBuilder email(String email) {
-			this.email = email;
-			return this;
+			if(middleName == null){
+			this.middleName = " ";
+			} else {
+			this.middleName = middleName;
+			}
+			return this;			
 		}
 
 		public PersonBuilder address(Address address) {
@@ -66,6 +88,17 @@ public class Person {
 
 		}
 
+	public int getAccountId() {
+		return accountId;
+	}
+		
+	}
+	public int getPersonId() {
+		return personId;
+	}
+	
+	public String getPersonType() {
+		return personType;
 	}
 
 	public String getName() {
@@ -77,11 +110,10 @@ public class Person {
 	}
 
 	public String getMiddleName() {
+		if (middleName == null)
+		return " ";
+		else
 		return middleName;
-	}
-
-	public String getEmail() {
-		return email;
 	}
 
 	public Address getAddress() {
@@ -93,8 +125,22 @@ public class Person {
 	@Override
 
 	public String toString() {
-		return getLastName() + " " + getName() + " " + getMiddleName() + " " + getEmail() + " "
-				+ getAddress().getStreetName() + " " + getAddress().getHouseNumber() + getAddress().getCity();
+		return getPersonType() + " " + getLastName() + " " + getName() + " " + getMiddleName() + " " +
+				getAddress().toString();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Person other = (Person) obj;
+		if (personId != other.personId)
+			return false;
+		return true;
 	}
 
 }

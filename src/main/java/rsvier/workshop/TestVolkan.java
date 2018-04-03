@@ -18,7 +18,12 @@ public class TestVolkan {
 		
 		
 		//OrderlineDAOImp orderLineDAO = new OrderlineDAOImp();
-		//OrderLine orderLine = orderLineDAO.getOrderLine(2);
+		//ProductDAOImp productDAO = new ProductDAOImp();
+		//Product product = productDAO.getProductByName("Tafel");
+		//List<OrderLine> orderLine = orderLineDAO.getAllOrderLinesFromProduct(product);
+		//for(OrderLine item : orderLine) {
+		//	System.out.println(item.toString());
+		//}
 		//OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
 		//OrderLine newOrderLine = olBuilder.orderLineId(orderLine.getOrderLineId()).number(555).build();
 		//orderLineDAO.updateOrderLine(newOrderLine);

@@ -54,6 +54,7 @@ public class AddressDAOImp implements AddressDAO {
 	}
 
 	@Override
+
 	public Address getAddress(int personId) {
 
 		Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
@@ -61,19 +62,22 @@ public class AddressDAOImp implements AddressDAO {
 
 		String query = "SELECT * FROM address WHERE person_id = ?";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement ps = conn.prepareStatement(query);) {
+		try (Connection connection = DatabaseConnectionXML.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 
-			ps.setInt(1, personId);
 
-			try (ResultSet rs = ps.executeQuery();) {
+			preparedStatement.setInt(1, personId);
+
+
+			try (ResultSet rs = preparedStatement.executeQuery();) {
 
 				if (!rs.next()) {
 
 					logger.log(Level.WARNING, "Can't find an address");
-				} else {
-
-					addressBuilder.addressId(rs.getInt(1));
+					
+				}else {
+					
+					addressBuilder.addressId(rs.getInt(1)); 
 					addressBuilder.streetName(rs.getString(2));
 					addressBuilder.houseNumber(rs.getInt(3));
 					addressBuilder.additionalHouseNumber(rs.getInt(4));
@@ -85,6 +89,7 @@ public class AddressDAOImp implements AddressDAO {
 
 			address = addressBuilder.build();
 
+
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "Error occured while trying to find an address", e);
 
@@ -94,7 +99,9 @@ public class AddressDAOImp implements AddressDAO {
 	}
 
 	@Override
-	public void createAddress(Address address, Person person) {
+
+	public void createAddress(Address address, Person person ) {
+
 
 		String query = "INSERT INTO address (streetName,houseNumber,additionalHouseNumber,postalCode,city,country,person_id) "
 				+ "VALUES (?,?,?,?,?,?,?)";
@@ -147,14 +154,17 @@ public class AddressDAOImp implements AddressDAO {
 	}
 
 	@Override
-	public void deleteAddress(Person person) {
+
+	public void deleteAddress(int personId) {
+
 
 		String query = "DELETE FROM address WHERE person_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement ps = conn.prepareStatement(query);) {
 
-			ps.setInt(1, person.getPersonId());
+
+			ps.setInt(1, personId);
 
 			ps.executeUpdate();
 

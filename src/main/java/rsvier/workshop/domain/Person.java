@@ -21,7 +21,7 @@ public class Person {
 		
 		this.personId = builder.personId;
 		this.accountId = builder.accountId;
-		this.personType = builder.accountType;
+		this.personType = builder.personType;
 		this.name = builder.name;
 		this.lastName = builder.lastName;
 		this.middleName = builder.middleName;
@@ -32,7 +32,7 @@ public class Person {
 
 		private int personId;
 		private int accountId;
-		private String accountType;
+		private String personType;
 		private String name;
 		private String lastName;
 		private String middleName;
@@ -42,7 +42,7 @@ public class Person {
 		public PersonBuilder() {
 		}
 		
-		public PersonBuilder id(int id) {
+		public PersonBuilder personId(int id) {
 			this.personId = id;
 			return this;
 		}
@@ -53,8 +53,8 @@ public class Person {
 			return this;
 		}
 		
-		public PersonBuilder accountType(String accountType) {
-			this.accountType = accountType;
+		public PersonBuilder personType(String personType) {
+			this.personType = personType;
 			return this;
 		}
 

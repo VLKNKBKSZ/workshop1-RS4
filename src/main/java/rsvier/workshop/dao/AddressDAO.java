@@ -6,9 +6,9 @@ import rsvier.workshop.domain.*;
 public interface AddressDAO {
 
 	public List<Address> getAllAddresses();
-	public Address getAddress(Person person );
+	public Address getAddress(int personId );
 	public void createAddress(Address address, Person person );
 	public void updateAddress(Address address,Person person );
-	public void deleteAddress(Address address);
+	public void deleteAddress(int personId);
 }
 

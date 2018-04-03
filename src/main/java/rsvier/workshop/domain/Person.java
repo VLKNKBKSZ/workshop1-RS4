@@ -10,6 +10,7 @@ public class Person {
 	private String middleName;
 	private Address address;
 
+
 	/*
 	 * Make a public constructor for the Person class with the Builder object passed
 	 * in. This is solving the wrong order input. To check if all instance variable
@@ -36,6 +37,7 @@ public class Person {
 		private String lastName;
 		private String middleName;
 		private Address address;
+
 
 		public PersonBuilder() {
 		}

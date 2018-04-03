@@ -2,19 +2,50 @@ package rsvier.workshop;
 
 import java.util.*;
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import rsvier.workshop.dao.OrderlineDAOImp;
 import rsvier.workshop.dao.ProductDAOImp;
+import rsvier.workshop.domain.OrderLine;
 import rsvier.workshop.domain.Product;
 import rsvier.workshop.domain.Product.ProductBuilder;
+import rsvier.workshop.utility.DatabaseConnectionXML;
 
 public class TestVolkan {
 
 	public static void main(String[] args) {
+		
+		
+		//OrderlineDAOImp orderLineDAO = new OrderlineDAOImp();
+		//ProductDAOImp productDAO = new ProductDAOImp();
+		//Product product = productDAO.getProductByName("Tafel");
+		//List<OrderLine> orderLine = orderLineDAO.getAllOrderLinesFromProduct(product);
+		//for(OrderLine item : orderLine) {
+		//	System.out.println(item.toString());
+		//}
+		//OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
+		//OrderLine newOrderLine = olBuilder.orderLineId(orderLine.getOrderLineId()).number(555).build();
+		//orderLineDAO.updateOrderLine(newOrderLine);
+	
+		//orderLineDAO.deleteOrderLine(orderLine);
+		//OrderLine order = orderLineDAO.getOrderLine(1);
+		//System.out.println(order.toString());
+		//List<OrderLine> list = orderLineDAO.getAllOrderLinesFromProduct(2);
+		 //System.out.println(list.get(0).toString());
+		//for (OrderLine item : list) {
+		//	System.out.println(item.toString());
+		//}
 
-		//ProductDAOImp pd = new ProductDAOImp();
-		// Product a = new Product.ProductBuilder().name("Lamp1").price(new
-		// BigDecimal("233")).stock(15).build();
-		// pd.createProduct(a);
-		// Product b = pd.getProductByName("Lamp1");
+		// OrderlineDAOImp orderLineDAO = new OrderlineDAOImp();
+		// ProductDAOImp productDAO = new ProductDAOImp();
+		// Product a = productDAO.getProductByName("Lamp");
+		// OrderLine b = new OrderLine.OrderLineBuilder().number(99).product(a).build();
+		// orderLineDAO.createOrderLine(b);
+		// System.out.println(b);
+		// Product a = new Product.ProductBuilder().name("Stoel").price(new
+		// BigDecimal("2231.22")).stock(12).build();
+		// productDAO.createProduct(a);
 		// System.out.println(b.toString());
 		// Product c = pd.getProductById(6);
 		// System.out.println(c.toString());

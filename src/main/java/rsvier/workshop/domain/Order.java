@@ -7,6 +7,7 @@ public class Order {
 
 	private int orderId;
 	private List<OrderLine> totalOrderLines;
+
 	/*
 	 * Thought of saving all the OrderLines of 1 order inside of this private List.
 	 * Maybe its a ArrayList or LinkedList(Set,Map), When implementing this in the
@@ -15,6 +16,7 @@ public class Order {
 	 * think about this, Help me EVA &EVY :D
 	 */
 	private Person person;
+
 	private BigDecimal totalPrice;;
 
 	private Order(OrderBuilder builder) {
@@ -25,7 +27,7 @@ public class Order {
 
 	}
 
-	public class OrderBuilder {
+	public static class OrderBuilder {
 
 		private int orderId;
 		private List<OrderLine> totalOrderLines;

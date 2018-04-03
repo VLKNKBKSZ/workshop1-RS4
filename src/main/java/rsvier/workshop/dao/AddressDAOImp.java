@@ -54,17 +54,17 @@ public class AddressDAOImp implements AddressDAO {
 	}
 
 	@Override
-	public Address getAddress(int customerId) {
+	public Address getAddress(int personId) {
 
 		Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 		Address address = null;
 
-		String query = "SELECT * FROM address WHERE customer_id = ?";
+		String query = "SELECT * FROM address WHERE person_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement ps = conn.prepareStatement(query);) {
 
-			ps.setInt(1, customerId);
+			ps.setInt(1, personId);
 
 			try (ResultSet rs = ps.executeQuery();) {
 
@@ -94,9 +94,9 @@ public class AddressDAOImp implements AddressDAO {
 	}
 
 	@Override
-	public void createAddress(Address address, Customer customer) {
+	public void createAddress(Address address, Person person) {
 
-		String query = "INSERT INTO address (streetName,houseNumber,additionalHouseNumber,postalCode,city,country,customer_id) "
+		String query = "INSERT INTO address (streetName,houseNumber,additionalHouseNumber,postalCode,city,country,person_id) "
 				+ "VALUES (?,?,?,?,?,?,?)";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
@@ -108,7 +108,7 @@ public class AddressDAOImp implements AddressDAO {
 			ps.setString(4, address.getPostalCode());
 			ps.setString(5, address.getCity());
 			ps.setString(6, address.getCountry());
-			ps.setInt(7, customer.getCustomerId());
+			ps.setInt(7, person.getPersonId());
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -119,10 +119,10 @@ public class AddressDAOImp implements AddressDAO {
 	}
 
 	@Override
-	public void updateAddress(Address address, Customer customer) {
+	public void updateAddress(Address address, Person person) {
 
 		String query = "UPDATE address "
-				+ "SET streetName = ?,houseNumber = ?,additionalHouseNumber = ?,postalCode = ?,city = ?,country = ? , customer_id = ? "
+				+ "SET streetName = ?,houseNumber = ?,additionalHouseNumber = ?,postalCode = ?,city = ?,country = ? , person_id = ? "
 				+ "WHERE id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
@@ -134,7 +134,7 @@ public class AddressDAOImp implements AddressDAO {
 			ps.setString(4, address.getPostalCode());
 			ps.setString(5, address.getCity());
 			ps.setString(6, address.getCountry());
-			ps.setInt(7, customer.getCustomerId());
+			ps.setInt(7, person.getPersonId());
 			ps.setInt(8, address.getAddressId());
 
 			ps.executeUpdate();
@@ -147,14 +147,14 @@ public class AddressDAOImp implements AddressDAO {
 	}
 
 	@Override
-	public void deleteAddress(int customerId) {
+	public void deleteAddress(Person person) {
 
-		String query = "DELETE FROM address WHERE customer_id = ?";
+		String query = "DELETE FROM address WHERE person_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement ps = conn.prepareStatement(query);) {
 
-			ps.setInt(1, customerId);
+			ps.setInt(1, person.getPersonId());
 
 			ps.executeUpdate();
 

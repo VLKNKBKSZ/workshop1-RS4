@@ -4,8 +4,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rsvier.workshop.domain.OrderLine;
-import rsvier.workshop.domain.Product;
+import rsvier.workshop.domain.*;
 import rsvier.workshop.utility.*;
 
 public class OrderlineDAOImp implements OrderLineDAO {
@@ -47,29 +46,23 @@ public class OrderlineDAOImp implements OrderLineDAO {
 	}
 
 	@Override
-	public List<OrderLine> getAllOrderLinesFromOrder(int orderId) {
+	public List<OrderLine> getAllOrderLinesFromOrder(Order order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<OrderLine> getAllOrderLinesFromProduct(int productId) {
+	public List<OrderLine> getAllOrderLinesFromProduct(Product product) {
 		List<OrderLine> list = new ArrayList<>();
 		String query = "SELECT * FROM orderline WHERE product_id = ?;";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setInt(1, productId);
+			pstmt.setInt(1, product.getProductId());
 
 			try (ResultSet rs = pstmt.executeQuery();) {
 				while (rs.next()) {
 					OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
 					olBuilder.orderLineId(rs.getInt(1));
-					/*
-					 * The OrderLine class has a Product product class field. So the return that
-					 * object saved in de database we need to create first a new object and call the
-					 * getProductById with the DAO
-					 */
-					Product product = productDAO.getProductById(rs.getInt(2));
 					olBuilder.product(product);
 					olBuilder.number(rs.getInt(3));
 					olBuilder.dateTime(rs.getTimestamp(4));

@@ -24,7 +24,7 @@ public class TestEvy {
 			
 		
 			
-			CustomerDAO cd = new CustomerDAOImp();
+			PersonDAO cd = new PersonDAOImp();
 			AddressDAO ad = new AddressDAOImp();
 			
 			

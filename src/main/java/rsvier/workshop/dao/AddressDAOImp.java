@@ -57,36 +57,36 @@ public class AddressDAOImp implements AddressDAO {
 	}
 
 	@Override
-	public Address getAddress(Customer customer) {
+	public Address getAddress(Person person) {
 
-		Address.AddressBuilder ab = new Address.AddressBuilder();
+		Address.AddressBuilder adresBuilder = new Address.AddressBuilder();
 		Address address = null;
 
-		String query = "SELECT * FROM address WHERE customer_id = ?";
+		String query = "SELECT * FROM address WHERE person_id = ?";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement ps = conn.prepareStatement(query);) {
+		try (Connection connection = DatabaseConnectionXML.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 
-			ps.setInt(1, customer.getCustomerId());
+			preparedStatement.setInt(1, person.getPersonId());
 
-			try (ResultSet rs = ps.executeQuery();) {
+			try (ResultSet rs = preparedStatement.executeQuery();) {
 
 				if (!rs.next()) {
 
 					logger.log(Level.WARNING, "Can't find an address");
 				}else {
 					
-					ab.addressId(rs.getInt(1)); 
-					ab.streetName(rs.getString(2));
-					ab.houseNumber(rs.getInt(3));
-					ab.additionalHouseNumber(rs.getInt(4));
-					ab.postalCode(rs.getString(5));
-					ab.city(rs.getString(6));
-					ab.country(rs.getString(7));
+					adresBuilder.addressId(rs.getInt(1)); 
+					adresBuilder.streetName(rs.getString(2));
+					adresBuilder.houseNumber(rs.getInt(3));
+					adresBuilder.additionalHouseNumber(rs.getInt(4));
+					adresBuilder.postalCode(rs.getString(5));
+					adresBuilder.city(rs.getString(6));
+					adresBuilder.country(rs.getString(7));
 				}
 			}
 
-			address = ab.build();
+			address = adresBuilder.build();
 
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "Error occured while trying to find an address" , e);
@@ -97,7 +97,7 @@ public class AddressDAOImp implements AddressDAO {
 	}
 
 	@Override
-	public void createAddress(Address address, Customer customer) {
+	public void createAddress(Address address, Person person ) {
 
 		String query = "INSERT INTO address (streetName,houseNumber,additionalHouseNumber,postalCode,city,country,customer_id) "
 				+ "VALUES (?,?,?,?,?,?,?)";
@@ -111,7 +111,7 @@ public class AddressDAOImp implements AddressDAO {
 			ps.setString(4, address.getPostalCode());
 			ps.setString(5, address.getCity());
 			ps.setString(6, address.getCountry());
-			ps.setInt(7, customer.getCustomerId());
+			ps.setInt(7, person.getPersonId());
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -122,7 +122,7 @@ public class AddressDAOImp implements AddressDAO {
 	}
 
 	@Override
-	public void updateAddress(Address address, Customer customer) {
+	public void updateAddress(Address address, Person person) {
 
 		String query = "UPDATE address "
 				+ "SET streetName = ?,houseNumber = ?,additionalHouseNumber = ?,postalCode = ?,city = ?,country = ? , customer_id = ? "
@@ -137,7 +137,7 @@ public class AddressDAOImp implements AddressDAO {
 			ps.setString(4, address.getPostalCode());
 			ps.setString(5, address.getCity());
 			ps.setString(6, address.getCountry());
-			ps.setInt(7, customer.getCustomerId());
+			ps.setInt(7, person.getPersonId());
 			ps.setInt(8, address.getAddressId());
 
 			ps.executeUpdate();

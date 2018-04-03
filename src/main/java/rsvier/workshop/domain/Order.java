@@ -14,13 +14,13 @@ public class Order {
 	 * variable an then add that to the TotalPrice in the Order class. Still need to
 	 * think about this, Help me EVA &EVY :D
 	 */
-	private Customer customer;
+	private Person person;
 	private BigDecimal totalPrice;;
 
 	private Order(OrderBuilder builder) {
 		this.orderId = builder.orderId;
 		this.totalOrderLines = builder.totalOrderLines;
-		this.customer = builder.customer;
+		this.person = builder.person;
 		this.totalPrice = builder.totalPrice;
 
 	}
@@ -29,7 +29,7 @@ public class Order {
 
 		private int orderId;
 		private List<OrderLine> totalOrderLines;
-		private Customer customer;
+		private Person person;
 		private BigDecimal totalPrice;
 
 		public OrderBuilder() {
@@ -46,8 +46,8 @@ public class Order {
 			return this;
 		}
 
-		public OrderBuilder customer(Customer customer) {
-			this.customer = customer;
+		public OrderBuilder customer(Person person) {
+			this.person = person;
 			return this;
 		}
 
@@ -69,8 +69,8 @@ public class Order {
 		return totalOrderLines;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Person getCustomer() {
+		return person;
 	}
 
 	public BigDecimal getTotalPrice() {

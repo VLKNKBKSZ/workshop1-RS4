@@ -1,16 +1,14 @@
 package rsvier.workshop.dao;
 
 import java.util.*;
-
-import rsvier.workshop.domain.Address;
-import rsvier.workshop.domain.Customer;
+import rsvier.workshop.domain.*;
 
 public interface AddressDAO {
 
 	public List<Address> getAllAddresses();
-	public Address getAddress(Customer customer );
-	public void createAddress(Address address, Customer customer);
-	public void updateAddress(Address address,Customer customer);
+	public Address getAddress(Person person );
+	public void createAddress(Address address, Person person );
+	public void updateAddress(Address address,Person person );
 	public void deleteAddress(Address address);
 }
 

@@ -3,7 +3,7 @@ package rsvier.workshop.dao;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
-import rsvier.workshop.domain.Person;
+import rsvier.workshop.domain.*;
 import rsvier.workshop.utility.*;
 
 public class PersonDAOImp implements PersonDAO {
@@ -173,7 +173,7 @@ public class PersonDAOImp implements PersonDAO {
 	}
 
 	@Override
-	public void createPerson(Person person) {
+	public void createPerson(Person person, Account account) {
 
 		String query = "INSERT INTO person (person_type, name, last_name, middle_name) VALUES(?,?,?,?)";
 

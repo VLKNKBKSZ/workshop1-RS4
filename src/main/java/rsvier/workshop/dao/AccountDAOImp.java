@@ -41,7 +41,7 @@ public class AccountDAOImp implements AccountDAO {
 	@Override
 	public Account getAccount(String email, String password) {
 		
-Account account = null;
+		Account account = null;
 		
 		String query = "SELECT * FROM account WHERE email = ? AND password = ?";
 		
@@ -93,7 +93,7 @@ Account account = null;
 	@Override
 	public void updateAccount(Account account) {
 		
-		String query = "UPDATE account SET email = ?, password = ? WHERE id = ?";
+		String query = "UPDATE account SET email = ?, password = ? WHERE account_id = ?";
 		
 		try(Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
@@ -113,7 +113,7 @@ Account account = null;
 	@Override
 	public void deleteAccount(Account account) {
 		
-String query = "DELETE FROM account WHERE id = ?";
+String query = "DELETE FROM account WHERE account_id = ?";
 		
 		try(Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {

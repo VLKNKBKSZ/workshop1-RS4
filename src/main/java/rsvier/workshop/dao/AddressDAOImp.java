@@ -103,7 +103,7 @@ public class AddressDAOImp implements AddressDAO {
 	public void createAddress(Address address, Person person ) {
 
 
-		String query = "INSERT INTO address (streetName,houseNumber,additionalHouseNumber,postalCode,city,country,person_id) "
+		String query = "INSERT INTO address (street_name,house_number,additional_house_number,postal_code,city,country,person_id) "
 				+ "VALUES (?,?,?,?,?,?,?)";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
@@ -129,8 +129,8 @@ public class AddressDAOImp implements AddressDAO {
 	public void updateAddress(Address address, Person person) {
 
 		String query = "UPDATE address "
-				+ "SET streetName = ?,houseNumber = ?,additionalHouseNumber = ?,postalCode = ?,city = ?,country = ? , person_id = ? "
-				+ "WHERE id = ?";
+				+ "SET street_name = ?,house_number = ?,additional_house_number = ?,postal_code = ?,city = ?,country = ? , person_id = ? "
+				+ "WHERE address_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement ps = conn.prepareStatement(query);) {

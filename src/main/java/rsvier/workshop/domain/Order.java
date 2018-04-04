@@ -9,14 +9,14 @@ public class Order {
 
 	private int orderId;
 	private List<OrderLine> totalOrderLines;
-	private Person customer;
+	private Person person;
 	private BigDecimal totalPrice;;
 	private Timestamp dateTime;
 
 	private Order(OrderBuilder builder) {
 		this.orderId = builder.orderId;
 		this.totalOrderLines = builder.totalOrderLines;
-		this.customer = builder.customer;
+		this.person = builder.person;
 		this.totalPrice = builder.totalPrice;
 		this.dateTime = builder.dateTime;
 
@@ -26,7 +26,7 @@ public class Order {
 
 		private int orderId;
 		private List<OrderLine> totalOrderLines;
-		private Person customer;
+		private Person person;
 		private BigDecimal totalPrice;
 		private Timestamp dateTime;
 
@@ -44,8 +44,8 @@ public class Order {
 			return this;
 		}
 
-		public OrderBuilder person(Person customer) {
-			this.customer = customer;
+		public OrderBuilder customer(Person person) {
+			this.person = person;
 			return this;
 		}
 
@@ -73,7 +73,7 @@ public class Order {
 	}
 
 	public Person getCustomer() {
-		return customer;
+		return person;
 	}
 
 	public BigDecimal getTotalPrice() {

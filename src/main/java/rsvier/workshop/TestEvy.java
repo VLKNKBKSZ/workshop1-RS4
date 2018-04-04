@@ -6,7 +6,7 @@ import java.util.logging.*;
 
 import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.*;
-import rsvier.workshop.domain.Customer.CustomerBuilder;
+
 import rsvier.workshop.utility.*;
 
 
@@ -20,11 +20,11 @@ public class TestEvy {
 			
 			Address address1 = new Address.AddressBuilder().streetName("Bakemakade").houseNumber(108).postalCode("3000ME").city("Rotterdam").country("Netherlands").build();
 			
-			Customer customer1  =  (Customer) new Customer.CustomerBuilder().name("Evy").lastName("Wetch").middleName("Evyvy").email("evy@gmail.com").address(address1).build();
+			Person customer1  =  (Person) new Person.PersonBuilder().name("Evy").lastName("Wetch").middleName("Evyvy").address(address1).build();
 			
 		
 			
-			CustomerDAO cd = new CustomerDAOImp();
+			PersonDAO cd = new PersonDAOImp();
 			AddressDAO ad = new AddressDAOImp();
 			
 			
@@ -90,7 +90,7 @@ public class TestEvy {
 						
 // 													Update address
 			
-/*		
+	
 		//* New input
 			  
 					String newStreet = " J.B.Bakemakade";
@@ -98,11 +98,11 @@ public class TestEvy {
 			
 		//* Get customer fist 
 			  
-					Customer customer = cd.getCustomer("Wetch");
+					Person person = cd.getPerson("Wetch");
 			
 		//* And use customer to find address
 			  
-					Address address = adi.getAddress(customer);
+					Address address = ad.getAddress(person.getPersonId());
 			
 		//* Copy AddressBuiler of the found address  to the new update AddressBuilder
 			  
@@ -114,10 +114,10 @@ public class TestEvy {
 		
 		//* update Address using update address
 	  
-			 		adi.updateAddress(update, customer);
+			 		ad.updateAddress(update, person);
 			 
 			 
-			 */
+			 
 			
 			
 			
@@ -135,7 +135,7 @@ public class TestEvy {
 					
 */			
 			
-			
+		/*	
 			 
 //			 							    Delete Customer&Address
 		
@@ -153,7 +153,7 @@ public class TestEvy {
 			// Then delete the address
 //			ad.deleteAddress(customer.getCustomerId());
 			 
-			 
+			 */
 	}
 	
 	

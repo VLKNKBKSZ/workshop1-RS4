@@ -39,7 +39,15 @@ public class OrderLine {
 
 		public OrderLineBuilder() {
 		}
-
+		
+		public OrderLineBuilder(OrderLine orderLine) {
+			
+			this.orderLineId = orderLine.orderLineId;
+			this.order = orderLine.order;
+			this.product = orderLine.product;
+			this.number = orderLine.number;
+			this.dateTime = orderLine.dateTime;
+		}
 		public OrderLineBuilder orderLineId(int orderLineId) {
 			this.orderLineId = orderLineId;
 			return this;

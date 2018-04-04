@@ -23,8 +23,7 @@ public class OrderDAOImp implements OrderDAO {
 			while (rs.next()) {
 				Order.OrderBuilder orBuilder = new Order.OrderBuilder();
 				orBuilder.id(rs.getInt(1));
-				orBuilder.totalPrice(rs.getBigDecimal(2));
-				orBuilder.dateTime(rs.getTimestamp(3));
+				orBuilder.dateTime(rs.getTimestamp(2));
 				Order order = orBuilder.build();
 				list.add(order);
 
@@ -52,8 +51,7 @@ public class OrderDAOImp implements OrderDAO {
 				if (rs.next()) {
 					Order.OrderBuilder orBuilder = new Order.OrderBuilder();
 					orBuilder.id(rs.getInt(1));
-					orBuilder.totalPrice(rs.getBigDecimal(2));
-					orBuilder.dateTime(rs.getTimestamp(3));
+					orBuilder.dateTime(rs.getTimestamp(2));
 					order = orBuilder.build();
 				}
 				return order;
@@ -66,10 +64,9 @@ public class OrderDAOImp implements OrderDAO {
 
 	@Override
 	public void createOrder(Order order) {
-		String query = "INSERT INTO order_table (total_price) VALUES (?);";
+		String query = "INSERT INTO order_table () VALUES ();";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {
-			pstmt.setBigDecimal(1, order.getTotalPrice());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
@@ -81,7 +78,6 @@ public class OrderDAOImp implements OrderDAO {
 		String query = "UPDATE order_table SET total_price WHERE id= ?;";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setBigDecimal(1, order.getTotalPrice());
 			pstmt.executeUpdate();
 			logger.log(Level.INFO, "Order succesfully updated");
 		} catch (SQLException e) {

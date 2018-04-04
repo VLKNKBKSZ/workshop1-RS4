@@ -6,6 +6,9 @@ public class Account {
 	private String email;
 	private String password;
 	
+	public Account(){
+		
+	}
 	
 	public Account(String email, String password) {
 		this.email = email;

@@ -10,12 +10,13 @@ import rsvier.workshop.utility.*;
 public class AccountDAOImp implements AccountDAO {
 	
 	private Logger logger = LogConnection.getLogger();
+	
 
 	@Override
 	public List<Account> getAllAccounts() {
 		
 		List<Account> accountList = new ArrayList();
-		Account account = null;
+		Account account = new Account();
 		
 		String query = "SELECT * FROM account";
 		
@@ -41,7 +42,7 @@ public class AccountDAOImp implements AccountDAO {
 	@Override
 	public Account getAccount(String email, String password) {
 		
-		Account account = null;
+		Account account = new Account();
 		
 		String query = "SELECT * FROM account WHERE email = ? AND password = ?";
 		
@@ -57,14 +58,18 @@ public class AccountDAOImp implements AccountDAO {
 				
 				logger.log(Level.WARNING, "Can't find an account ");
 			} else {
+				
+					
 				account.setAccountId(resultSet.getInt(1));
 				account.setEmail(resultSet.getString(2));
 				account.setPassword(resultSet.getString(3));
 				
 				
 			}
+			
 			}
 			return account;
+			
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "Error occured while trying to find an account ", e);
 		}

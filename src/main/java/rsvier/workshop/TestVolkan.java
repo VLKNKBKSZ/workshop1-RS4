@@ -5,8 +5,10 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import rsvier.workshop.dao.OrderDAOImp;
 import rsvier.workshop.dao.OrderlineDAOImp;
 import rsvier.workshop.dao.ProductDAOImp;
+import rsvier.workshop.domain.Order;
 import rsvier.workshop.domain.OrderLine;
 import rsvier.workshop.domain.Product;
 import rsvier.workshop.domain.Product.ProductBuilder;
@@ -19,7 +21,23 @@ public class TestVolkan {
 		
 		//OrderlineDAOImp orderLineDAO = new OrderlineDAOImp();
 		//ProductDAOImp productDAO = new ProductDAOImp();
+		OrderDAOImp orderDAO = new OrderDAOImp();
 		//Product product = productDAO.getProductByName("Tafel");
+		Order order = orderDAO.getOrderById(1);
+		orderDAO.deleteOrder(order);
+		//OrderLine a = new OrderLine.OrderLineBuilder().product(product).number(23).build();
+		//orderLineDAO.createOrderLine(a);
+		//Product a = new Product.ProductBuilder().name("Lamp").stock(9).price(new BigDecimal("999")).build();
+		//productDAO.createProduct(a);
+		//List<Product> list = productDAO.getAllProducts();
+		//for(Product item: list) {
+		//	System.out.println(item.toString());
+		//}
+		//Product a = productDAO.getProductById(6);
+		//Product.ProductBuilder newProduct = new Product.ProductBuilder(a);
+		//Product b = newProduct.name("Stoel").build();
+	
+		//productDAO.updateProduct(b);
 		//List<OrderLine> orderLine = orderLineDAO.getAllOrderLinesFromProduct(product);
 		//for(OrderLine item : orderLine) {
 		//	System.out.println(item.toString());

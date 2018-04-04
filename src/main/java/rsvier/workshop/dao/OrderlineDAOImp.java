@@ -9,8 +9,9 @@ import rsvier.workshop.utility.*;
 
 public class OrderlineDAOImp implements OrderLineDAO {
 
-	Logger logger = LogConnection.getLogger();
-	ProductDAOImp productDAO = new ProductDAOImp();
+	private Logger logger = LogConnection.getLogger();
+	private ProductDAOImp productDAO = new ProductDAOImp();
+	private OrderDAOImp orderDAO = new OrderDAOImp();
 
 	@Override
 	public List<OrderLine> getAllOrderLines() {
@@ -23,15 +24,17 @@ public class OrderlineDAOImp implements OrderLineDAO {
 			while (rs.next()) {
 				OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
 				olBuilder.orderLineId(rs.getInt(1));
+				Order order = orderDAO.getOrderById(rs.getInt(2));
+				olBuilder.order(order);
 				/*
 				 * The OrderLine class has a Product product class field. So the return that
 				 * object saved in de database we need to create first a new object and call the
 				 * getProductById with the DAO
 				 */
-				Product product = productDAO.getProductById(rs.getInt(2));
+				Product product = productDAO.getProductById(rs.getInt(3));
 				olBuilder.product(product);
-				olBuilder.number(rs.getInt(3));
-				olBuilder.dateTime(rs.getTimestamp(4));
+				olBuilder.number(rs.getInt(4));
+				olBuilder.dateTime(rs.getTimestamp(5));
 				OrderLine orderLine = olBuilder.build();
 				list.add(orderLine);
 
@@ -47,7 +50,32 @@ public class OrderlineDAOImp implements OrderLineDAO {
 
 	@Override
 	public List<OrderLine> getAllOrderLinesFromOrder(Order order) {
-		// TODO Auto-generated method stub
+		List<OrderLine> list = new ArrayList<>();
+		String query = "SELECT * FROM orderline WHERE order_table_id =?;";
+		
+		try(Connection conn = DatabaseConnectionXML.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			pstmt.setInt(1, order.getOrderId());
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
+					olBuilder.orderLineId(rs.getInt(1));
+					olBuilder.order(order);
+					Product product = productDAO.getProductById(rs.getInt(3));
+					olBuilder.product(product);
+					olBuilder.number(rs.getInt(4));
+					olBuilder.dateTime(rs.getTimestamp(5));
+					OrderLine orderLine = olBuilder.build();
+					list.add(orderLine);
+					
+				}
+				return list;
+			}
+			
+		} catch (SQLException e) {
+			logger.log(Level.WARNING, "SQL exception occcured", e);;
+		}
 		return null;
 	}
 
@@ -63,6 +91,13 @@ public class OrderlineDAOImp implements OrderLineDAO {
 				while (rs.next()) {
 					OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
 					olBuilder.orderLineId(rs.getInt(1));
+					/*
+					 * The OrderLine class has a Order order class field. So the return that
+					 * object saved in the database we need to create first a new object and call the
+					 * getOrderById with the DAO
+					 */
+					Order order = orderDAO.getOrderById(rs.getInt(2));
+					olBuilder.order(order);
 					olBuilder.product(product);
 					olBuilder.number(rs.getInt(3));
 					olBuilder.dateTime(rs.getTimestamp(4));
@@ -92,15 +127,17 @@ public class OrderlineDAOImp implements OrderLineDAO {
 				if (rs.next()) {
 					OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
 					olBuilder.orderLineId(rs.getInt(1));
+					Order order = orderDAO.getOrderById(rs.getInt(2));
+					olBuilder.order(order);
 					/*
 					 * The OrderLine class has a Product product class field. So the return that
-					 * object saved in de database we need to create first a new object and call the
+					 * object saved in the database we need to create first a new object and call the
 					 * getProductById with the DAO
 					 */
-					Product product = productDAO.getProductById(rs.getInt(2));
+					Product product = productDAO.getProductById(rs.getInt(3));
 					olBuilder.product(product);
-					olBuilder.number(rs.getInt(3));
-					olBuilder.dateTime(rs.getTimestamp(4));
+					olBuilder.number(rs.getInt(4));
+					olBuilder.dateTime(rs.getTimestamp(5));
 					orderLine = olBuilder.build();
 
 				}
@@ -115,12 +152,13 @@ public class OrderlineDAOImp implements OrderLineDAO {
 
 	@Override
 	public void createOrderLine(OrderLine orderLine) {
-		String query = "INSERT INTO orderline (product_id , number) VALUES (? ,?)";
+		String query = "INSERT INTO orderline (order_table_id, product_id , number) VALUES (?, ? ,?)";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setInt(1, orderLine.getProduct().getProductId());
-			pstmt.setInt(2, orderLine.getNumber());
+			pstmt.setInt(1, orderLine.getOrder().getOrderId());
+			pstmt.setInt(2, orderLine.getProduct().getProductId());
+			pstmt.setInt(3, orderLine.getNumber());
 			pstmt.executeUpdate();
 			logger.log(Level.INFO, "OrderLine succesfully created.");
 		} catch (SQLException e) {
@@ -146,12 +184,14 @@ public class OrderlineDAOImp implements OrderLineDAO {
 
 	@Override
 	public void updateOrderLine(OrderLine orderLine) {
-		String query = "UPDATe orderline SET number =? WHERE id=?;";
+		String query = "UPDATE orderline SET order_table_id = ?, product_id = ? , number =? WHERE id=?;";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {
-			pstmt.setInt(1, orderLine.getNumber());
-			pstmt.setInt(2, orderLine.getOrderLineId());
+			pstmt.setInt(1, orderLine.getOrder().getOrderId());
+			pstmt.setInt(2, orderLine.getProduct().getProductId());
+			pstmt.setInt(3, orderLine.getNumber());
+			pstmt.setInt(4, orderLine.getOrderLineId());
 			pstmt.executeUpdate();
 			logger.log(Level.INFO, "OrderLine succesfully updated");
 		} catch (SQLException e) {

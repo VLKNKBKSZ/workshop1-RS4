@@ -10,6 +10,7 @@ import rsvier.workshop.dao.OrderlineDAOImp;
 import rsvier.workshop.dao.ProductDAOImp;
 import rsvier.workshop.domain.Order;
 import rsvier.workshop.domain.OrderLine;
+import rsvier.workshop.domain.Person;
 import rsvier.workshop.domain.Product;
 import rsvier.workshop.domain.Product.ProductBuilder;
 import rsvier.workshop.utility.DatabaseConnectionXML;
@@ -18,16 +19,33 @@ public class TestVolkan {
 
 	public static void main(String[] args) {
 		
-		
-		//OrderlineDAOImp orderLineDAO = new OrderlineDAOImp();
+
 		//ProductDAOImp productDAO = new ProductDAOImp();
-		OrderDAOImp orderDAO = new OrderDAOImp();
+		//OrderlineDAOImp orderLineDAO = new OrderlineDAOImp();
+		//OrderDAOImp orderDAO = new OrderDAOImp();
+		//OrderLine orderLine = orderLineDAO.getOrderLine(13);
+		//OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder(orderLine);
+		//OrderLine newOrderLine = olBuilder.number(33).build();
+		//orderLineDAO.updateOrderLine(newOrderLine);
+		
+		//Order order = orderDAO.getOrderById(2);		//Product product = productDAO.getProductByName("Tafel");
+		//List<OrderLine> list = orderLineDAO.getAllOrderLinesFromProduct(product);
+		//for(OrderLine item : list) {
+		//	System.out.println(item.toString());
+		//}
+		//Order order = new Order.OrderBuilder().build();
+		//orderDAO.createOrder(order);
+		//Order order = orderDAO.getOrderById(4);
+		//Product product = productDAO.getProductById(9);
+		//OrderLine orderLine = new OrderLine.OrderLineBuilder().order(order).product(product).number(77).build();
+		//orderLineDAO.createOrderLine(orderLine);
 		//Product product = productDAO.getProductByName("Tafel");
-		Order order = orderDAO.getOrderById(1);
-		orderDAO.deleteOrder(order);
+		//Order order = orderDAO.getOrderById(1);
+		//orderDAO.deleteOrder(order);
+		
 		//OrderLine a = new OrderLine.OrderLineBuilder().product(product).number(23).build();
 		//orderLineDAO.createOrderLine(a);
-		//Product a = new Product.ProductBuilder().name("Lamp").stock(9).price(new BigDecimal("999")).build();
+		//Product a = new Product.ProductBuilder().name("Stoel").stock(77).price(new BigDecimal("777")).build();
 		//productDAO.createProduct(a);
 		//List<Product> list = productDAO.getAllProducts();
 		//for(Product item: list) {

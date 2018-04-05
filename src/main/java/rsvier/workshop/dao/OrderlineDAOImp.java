@@ -156,9 +156,11 @@ public class OrderlineDAOImp implements OrderLineDAO {
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)) {
+			
 			pstmt.setInt(1, orderLine.getOrder().getOrderId());
 			pstmt.setInt(2, orderLine.getProduct().getProductId());
 			pstmt.setInt(3, orderLine.getNumber());
+			
 			pstmt.executeUpdate();
 			logger.log(Level.INFO, "OrderLine succesfully created.");
 		} catch (SQLException e) {

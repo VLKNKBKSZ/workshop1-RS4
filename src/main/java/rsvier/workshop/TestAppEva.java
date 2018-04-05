@@ -1,4 +1,5 @@
 package rsvier.workshop;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -13,7 +14,7 @@ public class TestAppEva {
 	public static void main(String[] args) {
 			
 			//create an account object with email and password, leaving the accountId field empty for now
-			Account account1 = new Account("twwebdk", "oakemf" );
+			Account account1 = new Account("lwjef", "askjf" );
 			
 			// create an accountDAO object
 			AccountDAO accountDAO = new AccountDAOImp();
@@ -21,29 +22,47 @@ public class TestAppEva {
 			//create an account in the database, using the information from the account object
 			accountDAO.createAccount(account1);
 			
-			
+			//create a new account object that holds also the account_id
 			Account account2 = accountDAO.getAccount(account1.getEmail(), account1.getPassword());
 			
-			Address address = new Address.AddressBuilder().streetName("flup").houseNumber(32).postalCode("1236re").city("gsesrt").country("sgerg").build();
+			//create an adres object 
+			Address address1 = new Address.AddressBuilder().streetName("flup").houseNumber(32).postalCode("1236re").city("gsesrt").country("sgerg").build();
 			
+			//create a person object
+			Person person  = new Person.PersonBuilder().accountId(account2.getAccountId()).personType("employee").name("adsf").lastName("poafe").middleName("deaa").address(address1).build();
+			
+			//create a person in the database
 			PersonDAO personDAO = new PersonDAOImp();
-			Person person  = new Person.PersonBuilder().accountId(account2.getAccountId()).personType("employee").name("adsf").lastName("poafe").middleName("deaa").address(address).build();
 			personDAO.createPerson(person);
 			
-				
-			AddressDAO addressDAO = new AddressDAOImp();
-			addressDAO.createAddress(address, person);
-
+			person = personDAO.getPersonById(account2.getAccountId());
+			// deze mag ook: person = personDAO.getPersonByLastName("poafe");
 			
+			//create an address in the database
+			AddressDAO addressDAO = new AddressDAOImp();
+			addressDAO.createAddress(address1, person);
+			
+			//create a product object with the name, price and stock
+			Product product = new Product.ProductBuilder().name("Kroonluchter").price(new BigDecimal("34.45")).stock(12).build();
 		
-			//	create Customer and Address in database
-				
-	//		personDAO.createPerson(customer1);
-				
-	//		System.out.println(personDAO.getAllPersons("customer"));
-				
-		
-		
+			//create a product in the database with the product object
+			ProductDAO productDAO = new ProductDAOImp();
+			productDAO.createProduct(product);
+			
+			//create an order object
+			Order order = new Order.OrderBuilder().build();
+			
+			//create an order in the database
+			OrderDAO orderDAO = new OrderDAOImp();
+			orderDAO.createOrder(order, person);
+			
+			
+			Order order2 = orderDAO.getOrderById(5);
+			
+			OrderLine orderLine = new OrderLine.OrderLineBuilder().order(order2).product(product).number(3).build();
+			OrderLineDAO orderLineDAO = new OrderlineDAOImp();
+			
+			orderLineDAO.createOrderLine(orderLine);
 	}
 
 }

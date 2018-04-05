@@ -8,7 +8,7 @@ public interface OrderDAO {
 	
 	public List<Order> getAllOrders();
 	public List<Order> getAllOrdersFromPerson(Person person);
-	public Order getOrder(Order order);
+	public Order getOrderById(int orderId);
 	public void createOrder(Order order, Person person);
 	public void updateOrder(Order order);
 	public void deleteOrder(Order order);

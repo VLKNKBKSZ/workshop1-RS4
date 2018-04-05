@@ -82,18 +82,14 @@ public class Person {
 			this.address = address;
 			return this;
 		}
+		
+		
 
 		public Person build() {
 			return new Person(this);
 
 		}
-	
-	
-	
-	public int getAccountId() {
-		return accountId;
-	
-	}	
+
 	}
 	public int getPersonId() {
 		return personId;
@@ -122,6 +118,10 @@ public class Person {
 		return address;
 	}
 
+	public int getAccountId() {
+		return accountId;
+	}
+		
 	// Override the toString method that is inherited from the Object class.
 
 	@Override

@@ -10,7 +10,7 @@ public interface PersonDAO {
 	public List<Person> getAllPersons(String personType);
 	public Person getPerson(String lastname);
 	public Person getPersonById(int accountId);
-	public void createPerson(Person person, Account account);
+	public void createPerson(Person person);
 	public void updatePerson(Person person);
 	public void deletePerson(Person person);
 

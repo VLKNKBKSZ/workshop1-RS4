@@ -20,7 +20,9 @@ public class TestEvy {
 			Account account1 = new Account("evy@gmail.com", "123456");
 			Address address1 = new Address.AddressBuilder().streetName("Bakemakade").houseNumber(108).postalCode("3000ME").city("Rotterdam").country("Netherlands").build();
 			
+
 			Person person1  =  (Person) new Person.PersonBuilder().name("Evy").lastName("Wetch").middleName("Evyvy").address(address1).build();
+
 			
 		
 			AccountDAO accountDao = new AccountDAOImp();

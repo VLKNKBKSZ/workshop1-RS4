@@ -64,6 +64,10 @@ public class OrderDAOImp implements OrderDAO {
 
 	@Override
 	public void createOrder(Order order) {
+		/*
+		 * Id and order_date is automatically generated so we don't need anything else,
+		 * later there will be a customer name or id to change
+		 */
 		String query = "INSERT INTO order_table () VALUES ();";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {
@@ -75,9 +79,13 @@ public class OrderDAOImp implements OrderDAO {
 
 	@Override
 	public void updateOrder(Order order) {
-		String query = "UPDATE order_table SET total_price WHERE id= ?;";
+		String query = "UPDATE order_table () WHERE id= ?;";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)) {
+			/*
+			 * Id and order_date is automatically generated so we don't need anything else,
+			 * later there will be a customer name or id to change
+			 */
 			pstmt.executeUpdate();
 			logger.log(Level.INFO, "Order succesfully updated");
 		} catch (SQLException e) {

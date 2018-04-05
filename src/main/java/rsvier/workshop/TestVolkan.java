@@ -22,7 +22,12 @@ public class TestVolkan {
 
 		//ProductDAOImp productDAO = new ProductDAOImp();
 		//OrderlineDAOImp orderLineDAO = new OrderlineDAOImp();
-		//OrderDAOImp orderDAO = new OrderDAOImp();
+		OrderDAOImp orderDAO = new OrderDAOImp();
+		Order order = orderDAO.getOrderById(3);
+		System.out.println(order.toString());
+		//Order order = orderDAO.getOrderById(2);
+		//orderDAO.deleteOrder(order);
+		
 		//OrderLine orderLine = orderLineDAO.getOrderLine(13);
 		//OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder(orderLine);
 		//OrderLine newOrderLine = olBuilder.number(33).build();

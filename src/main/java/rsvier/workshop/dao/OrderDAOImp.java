@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 import rsvier.workshop.domain.Order;
+import rsvier.workshop.domain.Person;
 import rsvier.workshop.utility.DatabaseConnectionXML;
 import rsvier.workshop.utility.LogConnection;
 
@@ -41,7 +42,7 @@ public class OrderDAOImp implements OrderDAO {
 
 	@Override
 	public Order getOrderById(int orderId) {
-		String query = "SELECT * FROM order_table WHERE id =?";
+		String query = "SELECT * FROM order_table WHERE order_table_id =?";
 		Order order = null;
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
@@ -63,14 +64,11 @@ public class OrderDAOImp implements OrderDAO {
 	}
 
 	@Override
-	public void createOrder(Order order) {
-		/*
-		 * Id and order_date is automatically generated so we don't need anything else,
-		 * later there will be a customer name or id to change
-		 */
-		String query = "INSERT INTO order_table () VALUES ();";
+	public void createOrder(Order order, Person person) {
+		String query = "INSERT INTO order_table (person_person_id) VALUES (?);";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {
+			pstmt.setInt(1, person.getPersonId());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
@@ -79,13 +77,10 @@ public class OrderDAOImp implements OrderDAO {
 
 	@Override
 	public void updateOrder(Order order) {
-		String query = "UPDATE order_table () WHERE id= ?;";
+		String query = "UPDATE order_table (person_person_id) WHERE orderline_id = ?;";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)) {
-			/*
-			 * Id and order_date is automatically generated so we don't need anything else,
-			 * later there will be a customer name or id to change
-			 */
+			pstmt.setInt(1, order.getCustomer().getPersonId());
 			pstmt.executeUpdate();
 			logger.log(Level.INFO, "Order succesfully updated");
 		} catch (SQLException e) {
@@ -96,7 +91,7 @@ public class OrderDAOImp implements OrderDAO {
 
 	@Override
 	public void deleteOrder(Order order) {
-		String query = "DELETE FROM order_table WHERE id=?;";
+		String query = "DELETE FROM order_table WHERE order_table_id =?;";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {

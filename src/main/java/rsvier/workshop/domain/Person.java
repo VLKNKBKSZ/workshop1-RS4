@@ -90,7 +90,6 @@ public class Person {
 
 		}
 
-	
 	}
 	public int getPersonId() {
 		return personId;

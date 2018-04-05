@@ -31,8 +31,6 @@ public class TestAppEva {
 			personDAO.createPerson(person);
 			
 				
-			person = personDAO.getPerson("poafe");
-				
 			AddressDAO addressDAO = new AddressDAOImp();
 			addressDAO.createAddress(address, person);
 

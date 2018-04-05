@@ -173,18 +173,19 @@ public class PersonDAOImp implements PersonDAO {
 	}
 
 	@Override
-	public void createPerson(Person person, Account account) {
+	public void createPerson(Person person) {
 
-		String query = "INSERT INTO person (person_type, name, last_name, middle_name) VALUES(?,?,?,?,?)";
+		String query = "INSERT INTO person (account_id, person_type, name, last_name, middle_name) VALUES(?,?,?,?,?)";
 
 		try (Connection connection = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
-
-			preparedStatement.setString(1, person.getPersonType());
-			preparedStatement.setString(2, person.getName());
-			preparedStatement.setString(3, person.getLastName());
-			preparedStatement.setString(4, person.getMiddleName());
-			preparedStatement.setInt(5, account.getAccountId());
+			
+			preparedStatement.setInt(1, person.getAccountId());
+			preparedStatement.setString(2, person.getPersonType());
+			preparedStatement.setString(3, person.getName());
+			preparedStatement.setString(4, person.getLastName());
+			preparedStatement.setString(5, person.getMiddleName());
+			
 			
 			preparedStatement.executeUpdate();
 
@@ -198,17 +199,18 @@ public class PersonDAOImp implements PersonDAO {
 	@Override
 	public void updatePerson(Person person) {
 
-		String query = "UPDATE person " + "SET person_type = ?, name = ?, last_name = ?, middle_name = ? "
+		String query = "UPDATE person " + "SET account_id = ?, person_type = ?, name = ?, last_name = ?, middle_name = ? "
 				+ "WHERE person_id = ?";
 
 		try (Connection connection = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
-
-			preparedStatement.setString(1, person.getPersonType());
-			preparedStatement.setString(2, person.getName());
-			preparedStatement.setString(3, person.getLastName());
-			preparedStatement.setString(4, person.getMiddleName());
-			preparedStatement.setInt(7, person.getPersonId());
+			
+			preparedStatement.setInt(1, person.getAccountId());
+			preparedStatement.setString(2, person.getPersonType());
+			preparedStatement.setString(3, person.getName());
+			preparedStatement.setString(4, person.getLastName());
+			preparedStatement.setString(5, person.getMiddleName());
+			preparedStatement.setInt(6, person.getPersonId());
 
 			preparedStatement.executeUpdate();
 

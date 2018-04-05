@@ -20,11 +20,10 @@ public class TestAppEva {
 				
 				AccountDAO accountDAO = new AccountDAOImp();
 				accountDAO.createAccount(account1);
-			
-				account1 = accountDAO.getAccount("twwebdk", "oakemf");
+				Account account = accountDAO.getAccount(account1.getEmail(), account1.getPassword());
 				
 				PersonDAO personDAO = new PersonDAOImp();
-				personDAO.createPerson(person1, account1);
+				personDAO.createPerson(person1);
 				
 				person1 = personDAO.getPerson("poafe");
 				

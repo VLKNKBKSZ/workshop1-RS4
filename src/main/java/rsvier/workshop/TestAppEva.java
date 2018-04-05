@@ -12,25 +12,31 @@ public class TestAppEva {
 	
 	public static void main(String[] args) {
 			
-			//create address object, person object and account object
-			Address address1 = new Address.AddressBuilder().streetName("flup").houseNumber(32).postalCode("1236re").city("gsesrt").country("sgerg").build();
-			Person person1  = new Person.PersonBuilder().personType("employee").name("adsf").lastName("poafe").middleName("deaa").address(address1).build();
+			//create an account object with email and password, leaving the accountId field empty for now
 			Account account1 = new Account("twwebdk", "oakemf" );
 			
+			// create an accountDAO object
+			AccountDAO accountDAO = new AccountDAOImp();
+			
+			//create an account in the database, using the information from the account object
+			accountDAO.createAccount(account1);
+			
+			
+			Account account2 = accountDAO.getAccount(account1.getEmail(), account1.getPassword());
+			
+			Address address = new Address.AddressBuilder().streetName("flup").houseNumber(32).postalCode("1236re").city("gsesrt").country("sgerg").build();
+			
+			PersonDAO personDAO = new PersonDAOImp();
+			Person person  = new Person.PersonBuilder().accountId(account2.getAccountId()).personType("employee").name("adsf").lastName("poafe").middleName("deaa").address(address).build();
+			personDAO.createPerson(person);
+			
 				
-				AccountDAO accountDAO = new AccountDAOImp();
-				accountDAO.createAccount(account1);
-				Account account = accountDAO.getAccount(account1.getEmail(), account1.getPassword());
+			person = personDAO.getPerson("poafe");
 				
-				PersonDAO personDAO = new PersonDAOImp();
-				personDAO.createPerson(person1);
-				
-				person1 = personDAO.getPerson("poafe");
-				
-				AddressDAO addressDAO = new AddressDAOImp();
-				addressDAO.createAddress(address1, person1);
+			AddressDAO addressDAO = new AddressDAOImp();
+			addressDAO.createAddress(address, person);
 
-				
+			
 		
 			//	create Customer and Address in database
 				

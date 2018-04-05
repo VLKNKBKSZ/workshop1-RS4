@@ -14,7 +14,7 @@ public class OrderDAOImp implements OrderDAO {
 	Logger logger = LogConnection.getLogger();
 
 	@Override
-	public List<Order> getAllOrder() {
+	public List<Order> getAllOrders() {
 		List<Order> list = new ArrayList<>();
 		String query = "SELECT * FROM order_table;";
 
@@ -103,6 +103,12 @@ public class OrderDAOImp implements OrderDAO {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 		}
 
+	}
+
+	@Override
+	public List<Order> getAllOrdersFromPerson(Person person) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

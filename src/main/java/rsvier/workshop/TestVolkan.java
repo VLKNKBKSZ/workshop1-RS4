@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import rsvier.workshop.dao.AccountDAOImp;
 import rsvier.workshop.dao.AddressDAOImp;
 import rsvier.workshop.dao.OrderDAOImp;
-import rsvier.workshop.dao.OrderlineDAOImp;
+import rsvier.workshop.dao.OrderLineDAOImp;
 import rsvier.workshop.dao.PersonDAOImp;
 import rsvier.workshop.dao.ProductDAOImp;
 import rsvier.workshop.domain.Account;
@@ -32,12 +32,14 @@ public class TestVolkan {
 		AccountDAOImp accountDAO = new AccountDAOImp();
 		PersonDAOImp personDAO = new PersonDAOImp();
 		AddressDAOImp addressDAO = new AddressDAOImp();
-		OrderlineDAOImp orderLineDAO = new OrderlineDAOImp();
+		OrderLineDAOImp orderLineDAO = new OrderLineDAOImp();
 		OrderDAOImp orderDAO = new OrderDAOImp();
 		ProductDAOImp productDAO = new ProductDAOImp();
+		Product product = productDAO.getProductByName("Lamp");
+		System.out.println(product.toString());
+		//Person person = personDAO.getPersonByLastName("Jsaak");
 		
-		Person person = personDAO.getPersonByLastName("Jsaak");
-		
+		//System.out.println(person.toString());
 		//Person b = personDAO.getPersonByLastName("Jsaak");
 		//Order order = orderDAO.getOrderById(2);
 		//Product product = productDAO.getProductByName("Lamp");
@@ -49,8 +51,8 @@ public class TestVolkan {
 		//OrderDAOImp orderDAO = new OrderDAOImp();
 		//Order order = new Order.OrderBuilder().build();
 		//orderDAO.createOrder(order, b);
-		Address address1 = new Address.AddressBuilder().streetName("sjaakibaaki").city("Amsterdam").country("Netherlands").houseNumber(1).postalCode("1233BB").build();
-		addressDAO.createAddress(address1, person);
+		//Address address1 = new Address.AddressBuilder().streetName("sjaakibaaki").city("Amsterdam").country("Netherlands").houseNumber(1).postalCode("1233BB").build();
+		//addressDAO.createAddress(address1, person);
 		////ProductDAOImp productDAO = new ProductDAOImp();
 		//OrderlineDAOImp orderLineDAO = new OrderlineDAOImp();
 		//OrderDAOImp orderDAO = new OrderDAOImp();

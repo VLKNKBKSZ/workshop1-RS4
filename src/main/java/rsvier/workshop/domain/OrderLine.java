@@ -11,7 +11,7 @@ public class OrderLine {
 	private int orderLineId;
 	private Order order;
 	private Product product;
-	private int number;
+	private int numberOfProducts;
 	private Timestamp dateTime;
 
 	/*
@@ -24,7 +24,7 @@ public class OrderLine {
 		this.orderLineId = builder.orderLineId;
 		this.order = builder.order;
 		this.product = builder.product;
-		this.number = builder.number;
+		this.numberOfProducts = builder.numberOfProducts;
 		this.dateTime = builder.dateTime;
 
 	}
@@ -34,7 +34,7 @@ public class OrderLine {
 		private int orderLineId;
 		private Order order;
 		private Product product;
-		private int number;
+		private int numberOfProducts;
 		private Timestamp dateTime;
 
 		public OrderLineBuilder() {
@@ -45,7 +45,7 @@ public class OrderLine {
 			this.orderLineId = orderLine.orderLineId;
 			this.order = orderLine.order;
 			this.product = orderLine.product;
-			this.number = orderLine.number;
+			this.numberOfProducts = orderLine.numberOfProducts;
 			this.dateTime = orderLine.dateTime;
 		}
 		public OrderLineBuilder orderLineId(int orderLineId) {
@@ -64,7 +64,7 @@ public class OrderLine {
 		}
 
 		public OrderLineBuilder number(int number) {
-			this.number = number;
+			this.numberOfProducts = numberOfProducts;
 			return this;
 		}
 
@@ -92,7 +92,7 @@ public class OrderLine {
 	}
 
 	public int getNumber() {
-		return number;
+		return numberOfProducts;
 	}
 
 	public String getTimeStamp() {

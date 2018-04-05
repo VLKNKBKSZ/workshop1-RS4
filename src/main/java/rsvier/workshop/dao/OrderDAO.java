@@ -6,7 +6,8 @@ import rsvier.workshop.domain.Person;
 
 public interface OrderDAO {
 	
-	public List<Order> getAllOrder();
+	public List<Order> getAllOrders();
+	public List<Order> getAllOrdersFromPerson(Person person);
 	public Order getOrderById(int orderId);
 	public void createOrder(Order order, Person person);
 	public void updateOrder(Order order);

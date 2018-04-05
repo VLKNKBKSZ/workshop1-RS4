@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.utility.*;
 
-public class OrderlineDAOImp implements OrderLineDAO {
+public class OrderLineDAOImp implements OrderLineDAO {
 
 	private Logger logger = LogConnection.getLogger();
 	private ProductDAOImp productDAO = new ProductDAOImp();

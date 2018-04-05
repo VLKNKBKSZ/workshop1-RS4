@@ -14,7 +14,7 @@ public class OrderDAOImp implements OrderDAO {
 	Logger logger = LogConnection.getLogger();
 
 	@Override
-	public List<Order> getAllOrder() {
+	public List<Order> getAllOrders() {
 		List<Order> list = new ArrayList<>();
 		String query = "SELECT * FROM order_table;";
 
@@ -41,13 +41,11 @@ public class OrderDAOImp implements OrderDAO {
 	}
 
 	@Override
-	public Order getOrderById(int orderId) {
+	public Order getOrder(Order order) {
 		String query = "SELECT * FROM order_table WHERE order_table_id =?";
-		Order order = null;
-
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setInt(1, orderId);
+			pstmt.setInt(1, order.getOrderId());
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					Order.OrderBuilder orBuilder = new Order.OrderBuilder();
@@ -103,6 +101,12 @@ public class OrderDAOImp implements OrderDAO {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 		}
 
+	}
+
+	@Override
+	public List<Order> getAllOrdersFromPerson(Person person) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

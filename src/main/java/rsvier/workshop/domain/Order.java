@@ -33,6 +33,14 @@ public class Order {
 		public OrderBuilder() {
 
 		}
+		
+		public OrderBuilder(Order order) {
+		    this.orderId = order.getOrderId();
+		    this.totalOrderLines = order.getTotalOrderLines();
+		    this.person = order.getPerson();
+		    this.totalPrice = order.getTotalPrice();
+		    this.dateTime = order.getDateTime();
+		}
 
 		public OrderBuilder id(int orderId) {
 			this.orderId = orderId;
@@ -72,8 +80,16 @@ public class Order {
 		return totalOrderLines;
 	}
 
-	public Person getCustomer() {
+	public List<OrderLine> getTotalOrderLines() {
+		return totalOrderLines;
+	}
+
+	public Person getPerson() {
 		return person;
+	}
+
+	public Timestamp getDateTime() {
+		return dateTime;
 	}
 
 	public BigDecimal getTotalPrice() {
@@ -89,7 +105,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return getOrderId() + " " + getOrderLine() + getCustomer().getLastName() + getCustomer().getName() + " "
+		return getOrderId() + " " + getOrderLine() + getPerson().getLastName() + getPerson().getName() + " "
 				+ getTotalPrice();
 	}
 

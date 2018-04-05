@@ -56,11 +56,13 @@ public class TestAppEva {
 			OrderDAO orderDAO = new OrderDAOImp();
 			orderDAO.createOrder(order, person);
 			
+			Product product2 = productDAO.getProductByName("kroonluchter");
 			
-			Order order2 = orderDAO.getOrderById(5);
+			int newId = orderDAO.createOrder(order,person);
+			Order order2 = orderDAO.getOrderById(newId);
 			
-			OrderLine orderLine = new OrderLine.OrderLineBuilder().order(order2).product(product).number(3).build();
-			OrderLineDAO orderLineDAO = new OrderlineDAOImp();
+			OrderLine orderLine = new OrderLine.OrderLineBuilder().order(order2).product(product2).number(3).build();
+			OrderLineDAO orderLineDAO = new OrderLineDAOImp();
 			
 			orderLineDAO.createOrderLine(orderLine);
 	}

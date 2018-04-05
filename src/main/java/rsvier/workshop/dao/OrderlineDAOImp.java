@@ -117,7 +117,7 @@ public class OrderlineDAOImp implements OrderLineDAO {
 	@Override
 	public OrderLine getOrderLine(int orderLineId) {
 		OrderLine orderLine = null;
-		String query = "SELECT * FROM orderline WHERE id = ?";
+		String query = "SELECT * FROM orderline WHERE orderline_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {
@@ -152,7 +152,7 @@ public class OrderlineDAOImp implements OrderLineDAO {
 
 	@Override
 	public void createOrderLine(OrderLine orderLine) {
-		String query = "INSERT INTO orderline (order_table_id, product_id , number) VALUES (?, ? ,?)";
+		String query = "INSERT INTO orderline (order_table_id, product_id , number_of_products) VALUES (?, ? ,?)";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -169,7 +169,7 @@ public class OrderlineDAOImp implements OrderLineDAO {
 
 	@Override
 	public void deleteOrderLine(OrderLine orderLine) {
-		String query = "DELETE FROM orderline WHERE id=?";
+		String query = "DELETE FROM orderline WHERE orderline_id=?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {
@@ -184,7 +184,7 @@ public class OrderlineDAOImp implements OrderLineDAO {
 
 	@Override
 	public void updateOrderLine(OrderLine orderLine) {
-		String query = "UPDATE orderline SET order_table_id = ?, product_id = ? , number =? WHERE id=?;";
+		String query = "UPDATE orderline SET order_table_id = ?, product_id = ? , number_of_products =? WHERE id=?;";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {

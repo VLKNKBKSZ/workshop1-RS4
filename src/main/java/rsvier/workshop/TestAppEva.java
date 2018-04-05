@@ -25,7 +25,7 @@ public class TestAppEva {
 				PersonDAO personDAO = new PersonDAOImp();
 				personDAO.createPerson(person1);
 				
-				person1 = personDAO.getPerson("poafe");
+				//person1 = personDAO.getPerson("poafe");
 				
 				AddressDAO addressDAO = new AddressDAOImp();
 				addressDAO.createAddress(address1, person1);

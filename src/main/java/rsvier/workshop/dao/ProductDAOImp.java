@@ -74,7 +74,7 @@ public class ProductDAOImp implements ProductDAO {
 	@Override
 	public Product getProductById(int productId) {
 		Product product = null;
-		String query = "SELECT * FROM product WHERE id = ?;";
+		String query = "SELECT * FROM product WHERE product_id = ?;";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {
@@ -125,7 +125,7 @@ public class ProductDAOImp implements ProductDAO {
 
 	@Override
 	public void updateProduct(Product product) {
-		String query = "UPDATE product SET name = ?, price = ? , stock = ? WHERE id = ?";
+		String query = "UPDATE product SET name = ?, price = ? , stock = ? WHERE product_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {
@@ -143,7 +143,7 @@ public class ProductDAOImp implements ProductDAO {
 
 	@Override
 	public void deleteProduct(Product product) {
-		String query = "DELETE FROM product WHERE id =?";
+		String query = "DELETE FROM product WHERE product_id =?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)) {

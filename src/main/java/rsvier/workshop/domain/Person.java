@@ -87,11 +87,13 @@ public class Person {
 			return new Person(this);
 
 		}
-
+	
+	
+	
 	public int getAccountId() {
 		return accountId;
-	}
-		
+	
+	}	
 	}
 	public int getPersonId() {
 		return personId;

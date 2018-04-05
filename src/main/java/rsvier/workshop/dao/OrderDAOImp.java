@@ -65,7 +65,7 @@ public class OrderDAOImp implements OrderDAO {
 
 	@Override
 	public void createOrder(Order order, Person person) {
-		String query = "INSERT INTO order_table (person_person_id) VALUES (?);";
+		String query = "INSERT INTO order_table (person_id) VALUES (?);";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {
 			pstmt.setInt(1, person.getPersonId());
@@ -77,7 +77,7 @@ public class OrderDAOImp implements OrderDAO {
 
 	@Override
 	public void updateOrder(Order order) {
-		String query = "UPDATE order_table (person_person_id) WHERE orderline_id = ?;";
+		String query = "UPDATE order_table (person_id) WHERE orderline_id = ?;";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)) {
 			pstmt.setInt(1, order.getCustomer().getPersonId());

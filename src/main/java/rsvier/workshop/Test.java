@@ -3,14 +3,15 @@ package rsvier.workshop;
 import java.sql.*;
 
 import java.util.logging.*;
-
+/*
 import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.domain.Customer.CustomerBuilder;
 import rsvier.workshop.utility.*;
 
-
+*/
 public class Test {
+	/*
 	
 	private static Logger logger = LogConnection.getLogger();
 
@@ -36,5 +37,6 @@ public class Test {
 		}
 
 	}
+	*/
 
 }

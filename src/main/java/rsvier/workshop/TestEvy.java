@@ -20,7 +20,7 @@ public class TestEvy {
 			
 			Address address1 = new Address.AddressBuilder().streetName("Bakemakade").houseNumber(108).postalCode("3000ME").city("Rotterdam").country("Netherlands").build();
 			
-			Person customer1  =  (Person) new Person.PersonBuilder().name("Evy").lastName("Wetch").middleName("Evyvy").address(address1).build();
+			Person customer1  = new Person.PersonBuilder().name("Evy").lastName("Wetch").middleName("Evyvy").address(address1).build();
 			
 		
 			

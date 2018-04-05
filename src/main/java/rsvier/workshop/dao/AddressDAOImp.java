@@ -103,7 +103,7 @@ public class AddressDAOImp implements AddressDAO {
 	public void createAddress(Address address, Person person ) {
 
 
-		String query = "INSERT INTO address (streetName,houseNumber,additionalHouseNumber,postalCode,city,country,person_id) "
+		String query = "INSERT INTO address (street_name,house_number,additional_house_number,postal_code,city,country,person_id) "
 				+ "VALUES (?,?,?,?,?,?,?)";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();

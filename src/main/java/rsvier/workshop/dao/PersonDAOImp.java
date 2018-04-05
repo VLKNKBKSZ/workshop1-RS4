@@ -3,7 +3,7 @@ package rsvier.workshop.dao;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
-import rsvier.workshop.domain.Person;
+import rsvier.workshop.domain.*;
 import rsvier.workshop.utility.*;
 
 public class PersonDAOImp implements PersonDAO {
@@ -93,7 +93,7 @@ public class PersonDAOImp implements PersonDAO {
 		Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 		Person person = null;
 
-		String query = "SELECT * FROM person WHERE lastName = ?";
+		String query = "SELECT * FROM person WHERE last_name = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
@@ -173,9 +173,9 @@ public class PersonDAOImp implements PersonDAO {
 	}
 
 	@Override
-	public void createPerson(Person person) {
+	public void createPerson(Person person, Account account) {
 
-		String query = "INSERT INTO person (person_type, name, last_name, middle_name) VALUES(?,?,?,?)";
+		String query = "INSERT INTO person (person_type, name, last_name, middle_name) VALUES(?,?,?,?,?)";
 
 		try (Connection connection = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -184,7 +184,8 @@ public class PersonDAOImp implements PersonDAO {
 			preparedStatement.setString(2, person.getName());
 			preparedStatement.setString(3, person.getLastName());
 			preparedStatement.setString(4, person.getMiddleName());
-
+			preparedStatement.setInt(5, account.getAccountId());
+			
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {

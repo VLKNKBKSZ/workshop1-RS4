@@ -41,7 +41,7 @@ public class AccountDAOImp implements AccountDAO {
 	@Override
 	public Account getAccount(String email, String password) {
 		
-Account account = null;
+Account account = new Account();
 		
 		String query = "SELECT * FROM account WHERE email = ? AND password = ?";
 		

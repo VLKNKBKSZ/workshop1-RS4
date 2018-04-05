@@ -41,11 +41,13 @@ public class OrderDAOImp implements OrderDAO {
 	}
 
 	@Override
-	public Order getOrder(Order order) {
+	public Order getOrderById(int orderId) {
 		String query = "SELECT * FROM order_table WHERE order_table_id =?";
+		Order order = null;
+
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setInt(1, order.getOrderId());
+			pstmt.setInt(1, orderId);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					Order.OrderBuilder orBuilder = new Order.OrderBuilder();

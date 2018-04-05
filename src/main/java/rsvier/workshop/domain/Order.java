@@ -1,29 +1,24 @@
 package rsvier.workshop.domain;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Order {
 
 	private int orderId;
 	private List<OrderLine> totalOrderLines;
-
-	/*
-	 * Thought of saving all the OrderLines of 1 order inside of this private List.
-	 * Maybe its a ArrayList or LinkedList(Set,Map), When implementing this in the
-	 * DAO the idea is to loop true all orderLines, get the Price add it all to one
-	 * variable an then add that to the TotalPrice in the Order class. Still need to
-	 * think about this, Help me EVA &EVY :D
-	 */
 	private Person person;
-
 	private BigDecimal totalPrice;;
+	private Timestamp dateTime;
 
 	private Order(OrderBuilder builder) {
 		this.orderId = builder.orderId;
 		this.totalOrderLines = builder.totalOrderLines;
 		this.person = builder.person;
 		this.totalPrice = builder.totalPrice;
+		this.dateTime = builder.dateTime;
 
 	}
 
@@ -33,6 +28,7 @@ public class Order {
 		private List<OrderLine> totalOrderLines;
 		private Person person;
 		private BigDecimal totalPrice;
+		private Timestamp dateTime;
 
 		public OrderBuilder() {
 
@@ -58,6 +54,11 @@ public class Order {
 			return this;
 		}
 
+		public OrderBuilder dateTime(Timestamp dateTime) {
+			this.dateTime = dateTime;
+			return this;
+		}
+
 		public Order build() {
 			return new Order(this);
 		}
@@ -77,6 +78,11 @@ public class Order {
 
 	public BigDecimal getTotalPrice() {
 		return totalPrice;
+	}
+
+	public String getTimeStamp() {
+		String s = new SimpleDateFormat().format(dateTime);
+		return s;
 	}
 
 	// Override the toString method from the Object class.

@@ -129,8 +129,8 @@ public class AddressDAOImp implements AddressDAO {
 	public void updateAddress(Address address, Person person) {
 
 		String query = "UPDATE address "
-				+ "SET streetName = ?,houseNumber = ?,additionalHouseNumber = ?,postalCode = ?,city = ?,country = ? , person_id = ? "
-				+ "WHERE id = ?";
+				+ "SET street_name = ?,house_number = ?,additional_house_number = ?,postal_code = ?,city = ?,country = ? , person_id = ? "
+				+ "WHERE address_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement ps = conn.prepareStatement(query);) {

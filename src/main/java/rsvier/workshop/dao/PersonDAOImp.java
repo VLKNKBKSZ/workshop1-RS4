@@ -88,7 +88,7 @@ public class PersonDAOImp implements PersonDAO {
 	}
 
 	@Override
-	public Person getPerson(String lastName) {
+	public Person getPersonByLastName(String lastName) {
 
 		Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 		Person person = null;
@@ -171,7 +171,7 @@ public class PersonDAOImp implements PersonDAO {
 
 		return null;
 	}
-
+	
 	@Override
 	public void createPerson(Person person) {
 

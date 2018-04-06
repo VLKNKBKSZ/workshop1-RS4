@@ -1,3 +1,4 @@
+
 package rsvier.workshop;
 import java.math.BigDecimal;
 import java.util.*;
@@ -40,7 +41,7 @@ public class TestAppEva {
 			
 			//create an address in the database
 			AddressDAO addressDAO = new AddressDAOImp();
-			addressDAO.createAddress(address1, person);
+		// need to change person to personId: 	addressDAO.createAddress(address1, person);
 			
 			//create a product object with the name, price and stock
 			Product product = new Product.ProductBuilder().name("Kroonluchter").price(new BigDecimal("34.45")).stock(12).build();

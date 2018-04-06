@@ -14,7 +14,7 @@ public class PersonDAOImp implements PersonDAO {
 	@Override
 	public List<Person> getAllPersons() {
 
-		List<Person> personList = new ArrayList<Person>();
+		List<Person> personList = new ArrayList<>();
 
 		Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 		Person person = null;
@@ -42,7 +42,7 @@ public class PersonDAOImp implements PersonDAO {
 			return personList;
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Error occured while trying to find a list of persons", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -51,7 +51,7 @@ public class PersonDAOImp implements PersonDAO {
 	@Override
 	public List<Person> getAllPersons(String personType) {
 
-		List<Person> personList = new ArrayList<Person>();
+		List<Person> personList = new ArrayList<>();
 
 		Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 		Person person = null;
@@ -81,7 +81,7 @@ public class PersonDAOImp implements PersonDAO {
 			return personList;
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Error occured while trying to find a list of persons", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -102,11 +102,8 @@ public class PersonDAOImp implements PersonDAO {
 
 			try (ResultSet resultSet = preparedStatement.executeQuery();) {
 
-				if (!resultSet.next()) {
+				if (resultSet.next()) {
 
-					logger.log(Level.WARNING, "Can't find a person");
-
-				} else {
 					personBuilder.personId(resultSet.getInt(1));
 					personBuilder.accountId(resultSet.getInt(2));
 					personBuilder.personType(resultSet.getString(3));
@@ -114,15 +111,16 @@ public class PersonDAOImp implements PersonDAO {
 					personBuilder.lastName(resultSet.getString(5));
 					personBuilder.middleName(resultSet.getString(6));
 					personBuilder.address(addressDao.getAddress(resultSet.getInt(1)));
+					person = personBuilder.build();
 				}
 
 			}
 
-			person = personBuilder.build();
+			logger.log(Level.INFO, "Person succesfully returned");
 			return person;
-			
+
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Error occured while trying to find a person", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 
@@ -130,8 +128,8 @@ public class PersonDAOImp implements PersonDAO {
 	}
 
 	@Override
-	public Person getPersonById(int accountId) {
-		
+	public Person getPersonByAccountId(int accountId) {
+
 		Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 		Person person = null;
 
@@ -144,11 +142,8 @@ public class PersonDAOImp implements PersonDAO {
 
 			try (ResultSet resultSet = preparedStatement.executeQuery();) {
 
-				if (!resultSet.next()) {
+				if (resultSet.next()) {
 
-					logger.log(Level.WARNING, "Can't find a person");
-
-				} else {
 					personBuilder.personId(resultSet.getInt(1));
 					personBuilder.accountId(resultSet.getInt(2));
 					personBuilder.personType(resultSet.getString(3));
@@ -156,55 +151,64 @@ public class PersonDAOImp implements PersonDAO {
 					personBuilder.lastName(resultSet.getString(5));
 					personBuilder.middleName(resultSet.getString(6));
 					personBuilder.address(addressDao.getAddress(resultSet.getInt(1)));
+					person = personBuilder.build();
 				}
 
 			}
-
-			person = personBuilder.build();
+			logger.log(Level.INFO, "Person returned succesfully");
 			return person;
-			
+
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Error occured while trying to find a person", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 
-
 		return null;
 	}
-	
-	@Override
-	public void createPerson(Person person) {
 
+	@Override
+	public int createPerson(Person person) {
+		int generatedId = 0;
 		String query = "INSERT INTO person (account_id, person_type, name, last_name, middle_name) VALUES(?,?,?,?,?)";
 
 		try (Connection connection = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
-			
+				PreparedStatement preparedStatement = connection.prepareStatement(query,
+						PreparedStatement.RETURN_GENERATED_KEYS);) {
+
 			preparedStatement.setInt(1, person.getAccountId());
 			preparedStatement.setString(2, person.getPersonType());
 			preparedStatement.setString(3, person.getName());
 			preparedStatement.setString(4, person.getLastName());
 			preparedStatement.setString(5, person.getMiddleName());
-			
-			
-			preparedStatement.executeUpdate();
 
+			preparedStatement.executeUpdate();
+			System.out.println("Person succesfully created");
+			logger.log(Level.INFO, "Person succesfully created");
+			try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
+				if (resultSet.next()) {
+					generatedId = resultSet.getInt(1);
+					logger.log(Level.INFO, "Key succesfully generated");
+				}
+			}
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't create a person.", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
+		logger.log(Level.INFO, "Key succesfully returned");
+		return generatedId;
 
 	}
 
 	@Override
 	public void updatePerson(Person person) {
 
-		String query = "UPDATE person " + "SET account_id = ?, person_type = ?, name = ?, last_name = ?, middle_name = ? "
+		String query = "UPDATE person "
+				+ "SET account_id = ?, person_type = ?, name = ?, last_name = ?, middle_name = ? "
 				+ "WHERE person_id = ?";
 
 		try (Connection connection = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
-			
+
 			preparedStatement.setInt(1, person.getAccountId());
 			preparedStatement.setString(2, person.getPersonType());
 			preparedStatement.setString(3, person.getName());
@@ -213,9 +217,9 @@ public class PersonDAOImp implements PersonDAO {
 			preparedStatement.setInt(6, person.getPersonId());
 
 			preparedStatement.executeUpdate();
-
+			System.out.println("Person succesfully updated");
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't update the person.", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 
@@ -224,20 +228,62 @@ public class PersonDAOImp implements PersonDAO {
 	@Override
 	public void deletePerson(Person person) {
 
-		String query = "DELETE FROM person WHERE person_id = ?";
+		String query = "DELETE FROM account WHERE account_id = ?";
 
 		try (Connection connection = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 
-			preparedStatement.setInt(1, person.getPersonId());
+			preparedStatement.setInt(1, person.getAccountId());
 
 			preparedStatement.executeUpdate();
+			System.out.println("Person and Account succesfully deleted");
+			addressDao.deleteAddressByPersonId(person.getPersonId());
+			System.out.println("Addresses related to Person has been deleted");
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't delete the person.", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 
+	}
+
+	@Override
+	public Person getPersonById(int personId) {
+		Person.PersonBuilder personBuilder = new Person.PersonBuilder();
+		Person person = null;
+
+		String query = "SELECT * FROM person WHERE person_id = ?";
+
+		try (Connection conn = DatabaseConnectionXML.getConnection();
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+
+			preparedStatement.setInt(1, personId);
+
+			try (ResultSet resultSet = preparedStatement.executeQuery();) {
+
+				if (resultSet.next()) {
+
+					personBuilder.personId(resultSet.getInt(1));
+					personBuilder.accountId(resultSet.getInt(2));
+					personBuilder.personType(resultSet.getString(3));
+					personBuilder.name(resultSet.getString(4));
+					personBuilder.lastName(resultSet.getString(5));
+					personBuilder.middleName(resultSet.getString(6));
+					personBuilder.address(addressDao.getAddress(resultSet.getInt(1)));
+					person = personBuilder.build();
+				}
+
+			}
+			logger.log(Level.INFO, "Person returned succesfully");
+			return person;
+
+		} catch (SQLException e) {
+			logger.log(Level.WARNING, "SQL exception occured", e);
+
+		}
+
+		return null;
+	
 	}
 
 }

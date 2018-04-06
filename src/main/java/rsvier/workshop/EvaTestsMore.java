@@ -12,7 +12,7 @@ public class EvaTestsMore {
 		AccountDAO accountDAO1 = new AccountDAOImp();
 		accountDAO1.createAccount(account1);
 		
-		AccountDAO account2 = account1.getAccount("eva@eva", "wacht");
+	
 
 	}
 

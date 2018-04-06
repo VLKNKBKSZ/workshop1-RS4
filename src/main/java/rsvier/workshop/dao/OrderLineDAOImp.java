@@ -24,7 +24,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 			while (rs.next()) {
 				OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
 				olBuilder.orderLineId(rs.getInt(1));
-				Order order = orderDAO.getOrder(rs.getInt(2));
+				Order order = orderDAO.getOrderById(rs.getInt(2));
 				olBuilder.order(order);
 				/*
 				 * The OrderLine class has a Product product class field. So the return that
@@ -33,7 +33,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 				 */
 				Product product = productDAO.getProductById(rs.getInt(3));
 				olBuilder.product(product);
-				olBuilder.number(rs.getInt(4));
+				olBuilder.numberOfProducts(rs.getInt(4));
 				olBuilder.dateTime(rs.getTimestamp(5));
 				OrderLine orderLine = olBuilder.build();
 				list.add(orderLine);
@@ -64,7 +64,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 					olBuilder.order(order);
 					Product product = productDAO.getProductById(rs.getInt(3));
 					olBuilder.product(product);
-					olBuilder.number(rs.getInt(4));
+					olBuilder.numberOfProducts(rs.getInt(4));
 					olBuilder.dateTime(rs.getTimestamp(5));
 					OrderLine orderLine = olBuilder.build();
 					list.add(orderLine);
@@ -91,15 +91,10 @@ public class OrderLineDAOImp implements OrderLineDAO {
 				while (rs.next()) {
 					OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
 					olBuilder.orderLineId(rs.getInt(1));
-					/*
-					 * The OrderLine class has a Order order class field. So the return that
-					 * object saved in the database we need to create first a new object and call the
-					 * getOrderById with the DAO
-					 */
 					Order order = orderDAO.getOrderById(rs.getInt(2));
 					olBuilder.order(order);
 					olBuilder.product(product);
-					olBuilder.number(rs.getInt(3));
+					olBuilder.numberOfProducts(rs.getInt(3));
 					olBuilder.dateTime(rs.getTimestamp(4));
 					OrderLine orderLine = olBuilder.build();
 					list.add(orderLine);
@@ -136,7 +131,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 					 */
 					Product product = productDAO.getProductById(rs.getInt(3));
 					olBuilder.product(product);
-					olBuilder.number(rs.getInt(4));
+					olBuilder.numberOfProducts(rs.getInt(4));
 					olBuilder.dateTime(rs.getTimestamp(5));
 					orderLine = olBuilder.build();
 

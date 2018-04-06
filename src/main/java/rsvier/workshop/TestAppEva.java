@@ -1,4 +1,5 @@
 package rsvier.workshop;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -12,34 +13,58 @@ public class TestAppEva {
 	
 	public static void main(String[] args) {
 			
-			//create address object, person object and account object
-			Address address1 = new Address.AddressBuilder().streetName("flup").houseNumber(32).postalCode("1236re").city("gsesrt").country("sgerg").build();
-			Person person1  = new Person.PersonBuilder().personType("employee").name("adsf").lastName("poafe").middleName("deaa").address(address1).build();
-			Account account1 = new Account("twwebdk", "oakemf" );
+			//create an account object with email and password, leaving the accountId field empty for now
+			Account account1 = new Account("lwjef", "askjf" );
 			
-				
-				AccountDAO accountDAO = new AccountDAOImp();
-				accountDAO.createAccount(account1);
-				Account account = accountDAO.getAccount(account1.getEmail(), account1.getPassword());
-				
-				PersonDAO personDAO = new PersonDAOImp();
-				personDAO.createPerson(person1);
-				
-				//person1 = personDAO.getPerson("poafe");
-				
-				AddressDAO addressDAO = new AddressDAOImp();
-				addressDAO.createAddress(address1, person1);
-
-				
+			// create an accountDAO object
+			AccountDAO accountDAO = new AccountDAOImp();
+			
+			//create an account in the database, using the information from the account object
+			accountDAO.createAccount(account1);
+			
+			//create a new account object that holds also the account_id
+			Account account2 = accountDAO.getAccount(account1.getEmail(), account1.getPassword());
+			
+			//create an adres object 
+			Address address1 = new Address.AddressBuilder().streetName("flup").houseNumber(32).postalCode("1236re").city("gsesrt").country("sgerg").build();
+			
+			//create a person object
+			Person person  = new Person.PersonBuilder().accountId(account2.getAccountId()).personType("employee").name("adsf").lastName("poafe").middleName("deaa").address(address1).build();
+			
+			//create a person in the database
+			PersonDAO personDAO = new PersonDAOImp();
+			personDAO.createPerson(person);
+			
+			person = personDAO.getPersonById(account2.getAccountId());
+			// deze mag ook: person = personDAO.getPersonByLastName("poafe");
+			
+			//create an address in the database
+			AddressDAO addressDAO = new AddressDAOImp();
+			addressDAO.createAddress(address1, person);
+			
+			//create a product object with the name, price and stock
+			Product product = new Product.ProductBuilder().name("Kroonluchter").price(new BigDecimal("34.45")).stock(12).build();
 		
-			//	create Customer and Address in database
-				
-	//		personDAO.createPerson(customer1);
-				
-	//		System.out.println(personDAO.getAllPersons("customer"));
-				
-		
-		
+			//create a product in the database with the product object
+			ProductDAO productDAO = new ProductDAOImp();
+			productDAO.createProduct(product);
+			
+			//create an order object
+			Order order = new Order.OrderBuilder().build();
+			
+			//create an order in the database
+			OrderDAO orderDAO = new OrderDAOImp();
+			orderDAO.createOrder(order, person);
+			
+			Product product2 = productDAO.getProductByName("kroonluchter");
+			
+			int newId = orderDAO.createOrder(order,person);
+			Order order2 = orderDAO.getOrderById(newId);
+			
+			OrderLine orderLine = new OrderLine.OrderLineBuilder().order(order2).product(product2).numberOfProducts(3).build();
+			OrderLineDAO orderLineDAO = new OrderLineDAOImp();
+			
+			orderLineDAO.createOrderLine(orderLine);
 	}
 
 }

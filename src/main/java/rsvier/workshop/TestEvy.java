@@ -21,7 +21,7 @@ public class TestEvy {
 		AddressDAO addressDao = new AddressDAOImp();
 		ProductDAO productDao = new ProductDAOImp();
 		OrderDAO orderDao = new OrderDAOImp();
-		OrderLineDAO orderLineDao = new OrderlineDAOImp();
+		OrderLineDAO orderLineDao = new OrderLineDAOImp();
 
 		// person 1
 /*
@@ -54,7 +54,7 @@ public class TestEvy {
 		Person person2 = (Person) new Person.PersonBuilder().accountId(accountDatabse2.getAccountId()).personType("employee")
 				.name("appie").lastName("pope").build();
 	//	personDao.createPerson(person2);
-		Person personDatabase2 = personDao.getPersonById(person2.getAccountId());
+		//Person personDatabase2 = personDao.getPersonById(person2.getAccountId());
 
 		Address address2 = new Address.AddressBuilder().streetName("Street").houseNumber(111).postalCode("2000ME")
 				.city("Rotterdam").country("Netherlands").build();

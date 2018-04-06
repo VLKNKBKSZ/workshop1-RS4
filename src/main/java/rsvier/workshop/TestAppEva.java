@@ -35,12 +35,12 @@ public class TestAppEva {
 			PersonDAO personDAO = new PersonDAOImp();
 			personDAO.createPerson(person);
 			
-			person = personDAO.getPersonById(account2.getAccountId());
+			//person = personDAO.getPersonById(account2.getAccountId());
 			// deze mag ook: person = personDAO.getPersonByLastName("poafe");
 			
 			//create an address in the database
 			AddressDAO addressDAO = new AddressDAOImp();
-			addressDAO.createAddress(address1, person);
+			///addressDAO.createAddress(address1, person);
 			
 			//create a product object with the name, price and stock
 			Product product = new Product.ProductBuilder().name("Kroonluchter").price(new BigDecimal("34.45")).stock(12).build();

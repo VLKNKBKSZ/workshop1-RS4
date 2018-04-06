@@ -52,7 +52,7 @@ public class Order {
 			return this;
 		}
 
-		public OrderBuilder customer(Person person) {
+		public OrderBuilder person(Person person) {
 			this.person = person;
 			return this;
 		}

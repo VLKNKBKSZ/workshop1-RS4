@@ -17,24 +17,21 @@ public class ProductDAOImp implements ProductDAO {
 		String query = "SELECT * FROM product;";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query);
-				ResultSet rs = pstmt.executeQuery();) {
-			/*
-			 * Check all rows and return those products back to the ArrayList<Product>
-			 */
+				PreparedStatement preparedStatement = conn.prepareStatement(query);
+				ResultSet resultSet = preparedStatement.executeQuery();) {
 
 			// Extract data from result set
-			while(rs.next()) {
-				Product.ProductBuilder pb = new Product.ProductBuilder();
-				pb.productId(rs.getInt(1));
-				pb.name(rs.getString(2));
-				pb.price(rs.getBigDecimal(3));
-				pb.stock(rs.getInt(4));
-				pb.dateTime(rs.getTimestamp(5));
-				Product product = pb.build();
+			while (resultSet.next()) {
+				Product.ProductBuilder productBuilder = new Product.ProductBuilder();
+				productBuilder.productId(resultSet.getInt(1));
+				productBuilder.name(resultSet.getString(2));
+				productBuilder.price(resultSet.getBigDecimal(3));
+				productBuilder.stock(resultSet.getInt(4));
+				productBuilder.dateTime(resultSet.getTimestamp(5));
+				Product product = productBuilder.build();
 				productList.add(product);
 			}
-
+			logger.log(Level.INFO, "Produclist succcesfuly returned");
 			return productList;
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
@@ -48,21 +45,21 @@ public class ProductDAOImp implements ProductDAO {
 		Product product = null;
 		String query = "SELECT * FROM product WHERE name = ?;";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query);) {
-			pstmt.setString(1, name);
-			try (ResultSet rs = pstmt.executeQuery()) {
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+			preparedStatement.setString(1, name);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
-				if (rs.next()) {
-					Product.ProductBuilder pb = new Product.ProductBuilder();
-					pb.productId(rs.getInt(1));
-					pb.name(rs.getString(2));
-					pb.price(rs.getBigDecimal(3));
-					pb.stock(rs.getInt(4));
-					pb.dateTime(rs.getTimestamp(5));
-					product = pb.build();
+				if (resultSet.next()) {
+					Product.ProductBuilder productBuilder = new Product.ProductBuilder();
+					productBuilder.productId(resultSet.getInt(1));
+					productBuilder.name(resultSet.getString(2));
+					productBuilder.price(resultSet.getBigDecimal(3));
+					productBuilder.stock(resultSet.getInt(4));
+					productBuilder.dateTime(resultSet.getTimestamp(5));
+					product = productBuilder.build();
 
 				}
-				logger.log(Level.INFO, "List succesfully returned");
+				logger.log(Level.INFO, "List successfully returned");
 				return product;
 			}
 		} catch (SQLException e) {
@@ -77,25 +74,24 @@ public class ProductDAOImp implements ProductDAO {
 		String query = "SELECT * FROM product WHERE product_id = ?;";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query);) {
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
-			pstmt.setInt(1, productId);
+			preparedStatement.setInt(1, productId);
 
-			try (ResultSet rs = pstmt.executeQuery()) {
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
-				// Extract data from result set
 
-				if(rs.next()) {
+				if (resultSet.next()) {
 
-					Product.ProductBuilder pb = new Product.ProductBuilder();
-					pb.productId(rs.getInt(1));
-					pb.name(rs.getString(2));
-					pb.price(rs.getBigDecimal(3));
-					pb.stock(rs.getInt(4));
-					pb.dateTime(rs.getTimestamp(5));
-					product = pb.build();
+					Product.ProductBuilder productBuilder = new Product.ProductBuilder();
+					productBuilder.productId(resultSet.getInt(1));
+					productBuilder.name(resultSet.getString(2));
+					productBuilder.price(resultSet.getBigDecimal(3));
+					productBuilder.stock(resultSet.getInt(4));
+					productBuilder.dateTime(resultSet.getTimestamp(5));
+					product = productBuilder.build();
 				}
-				logger.log(Level.INFO, "List succesfully returned");
+				logger.log(Level.INFO, "List successfully returned");
 				return product;
 
 			}
@@ -110,11 +106,11 @@ public class ProductDAOImp implements ProductDAO {
 	public void createProduct(Product product) {
 		String query = "INSERT INTO product (name, price, stock) VALUES (?, ?, ?);";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query);) {
-			pstmt.setString(1, product.getName());
-			pstmt.setBigDecimal(2, product.getPrice());
-			pstmt.setInt(3, product.getStock());
-			pstmt.executeUpdate();
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+			preparedStatement.setString(1, product.getName());
+			preparedStatement.setBigDecimal(2, product.getPrice());
+			preparedStatement.setInt(3, product.getStock());
+			preparedStatement.executeUpdate();
 			logger.log(Level.INFO, "Product succesfully created");
 
 		} catch (SQLException e) {
@@ -128,13 +124,13 @@ public class ProductDAOImp implements ProductDAO {
 		String query = "UPDATE product SET name = ?, price = ? , stock = ? WHERE product_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query);) {
-			pstmt.setString(1, product.getName());
-			pstmt.setBigDecimal(2, product.getPrice());
-			pstmt.setInt(3, product.getStock());
-			pstmt.setInt(4, product.getProductId());
-			pstmt.executeUpdate();
-			logger.log(Level.INFO, "Product succesfully updated");
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+			preparedStatement.setString(1, product.getName());
+			preparedStatement.setBigDecimal(2, product.getPrice());
+			preparedStatement.setInt(3, product.getStock());
+			preparedStatement.setInt(4, product.getProductId());
+			preparedStatement.executeUpdate();
+			logger.log(Level.INFO, "Product successfully updated");
 		} catch (SQLException e) {
 
 			logger.log(Level.WARNING, "SQL exception ocurred.", e);
@@ -146,10 +142,10 @@ public class ProductDAOImp implements ProductDAO {
 		String query = "DELETE FROM product WHERE product_id =?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setInt(1, product.getProductId());
-			pstmt.executeUpdate();
-			logger.log(Level.INFO, "Product succesfully deleted");
+				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+			preparedStatement.setInt(1, product.getProductId());
+			preparedStatement.executeUpdate();
+			logger.log(Level.INFO, "Product successfully deleted");
 		} catch (SQLException e) {
 
 			logger.log(Level.WARNING, "SQL exception occured", e);

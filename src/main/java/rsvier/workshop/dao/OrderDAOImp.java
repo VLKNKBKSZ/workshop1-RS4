@@ -105,14 +105,12 @@ public class OrderDAOImp implements OrderDAO {
 
 	}
 
-<<<<<<< HEAD
-	
-=======
+
 	@Override
 	public List<Order> getAllOrdersFromPerson(Person person) {
 		// TODO Auto-generated method stub
 		return null;
 	}
->>>>>>> 9b49fe752688798b12bbe82ed3b10d433b2a7097
+
 
 }

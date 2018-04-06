@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.utility.*;
 
-public class OrderlineDAOImp implements OrderLineDAO {
+public class OrderLineDAOImp implements OrderLineDAO {
 
 	private Logger logger = LogConnection.getLogger();
 	private ProductDAOImp productDAO = new ProductDAOImp();
@@ -24,7 +24,7 @@ public class OrderlineDAOImp implements OrderLineDAO {
 			while (rs.next()) {
 				OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
 				olBuilder.orderLineId(rs.getInt(1));
-				Order order = orderDAO.getOrderById(rs.getInt(2));
+				Order order = orderDAO.getOrder(rs.getInt(2));
 				olBuilder.order(order);
 				/*
 				 * The OrderLine class has a Product product class field. So the return that

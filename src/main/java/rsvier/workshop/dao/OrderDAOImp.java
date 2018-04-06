@@ -66,29 +66,27 @@ public class OrderDAOImp implements OrderDAO {
 	@Override
 	public int createOrder(Order order, Person person) {
 		int newOrderId = 0;
-	
-		
+
 		String query = "INSERT INTO order_table (person_id) VALUES (?);";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query, 
-						PreparedStatement.RETURN_GENERATED_KEYS);) {
-		
+				PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);) {
+
 			pstmt.setInt(1, person.getPersonId());
 			pstmt.executeUpdate();
-			
-			try (ResultSet rs = pstmt.getGeneratedKeys();){
-                if (rs.next()) {
-                    newOrderId = rs.getInt(1);
-                  
-                    logger.info("Succesfully created new order.");
-                }
-            } catch (SQLException e) {
-                System.out.println("Creating new order failed.");
-            }
+
+			try (ResultSet rs = pstmt.getGeneratedKeys();) {
+				if (rs.next()) {
+					newOrderId = rs.getInt(1);
+
+					logger.info("Succesfully created new order.");
+				}
+			} catch (SQLException e) {
+				System.out.println("Creating new order failed.");
+			}
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 		}
-			return newOrderId;
+		return newOrderId;
 	}
 
 	@Override

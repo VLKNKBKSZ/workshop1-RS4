@@ -15,7 +15,7 @@ public class AccountDAOImp implements AccountDAO {
 	@Override
 	public List<Account> getAllAccounts() {
 		
-		List<Account> accountList = new ArrayList();
+		List<Account> accountList = new ArrayList<>();
 		Account account = new Account();
 		
 		String query = "SELECT * FROM account";
@@ -96,25 +96,37 @@ Account account = new Account();
 		
 	}
 
-	@Override
-	public void updateAccount(Account account) {
+	public boolean updateAccount(Account account) {
 		
+		boolean updateIsSuccesfull = false;
+	       
 		String query = "UPDATE account SET email = ?, password = ? WHERE account_id = ?";
-		
-		try(Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
-			
-			preparedStatement.setString(1, account.getEmail());
-			preparedStatement.setString(2, account.getPassword());
-			preparedStatement.setInt(3, account.getAccountId());
-			
-			preparedStatement.executeUpdate();
-			
-		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Error occured while trying to update an account ", e);
-		}
-		
-	}
+
+	        try (Connection conn = DatabaseConnectionXML.getConnection();
+	                PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+
+	        			preparedStatement.setString(1, account.getEmail());
+	        			preparedStatement.setString(2, account.getPassword());
+	        			preparedStatement.setInt(3, account.getAccountId());
+
+	        			preparedStatement.executeUpdate();
+	        
+	        			logger.log(Level.WARNING, "Account updated succesfully");
+	   
+	        			updateIsSuccesfull = true;
+
+	        		} catch (SQLException e) {
+	   
+	        			logger.log(Level.WARNING, "SQL exception occurred ", e);
+	        			
+	        			updateIsSuccesfull = false;
+	        }
+
+	        logger.log(Level.WARNING, "Can't update an account ");
+	        return updateIsSuccesfull ;
+
+	    }
+	
 
 	@Override
 	public void deleteAccount(Account account) {

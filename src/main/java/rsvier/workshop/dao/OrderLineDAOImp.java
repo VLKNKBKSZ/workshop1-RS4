@@ -158,7 +158,9 @@ public class OrderLineDAOImp implements OrderLineDAO {
 			
 			pstmt.executeUpdate();
 			logger.log(Level.INFO, "OrderLine succesfully created.");
-		} catch (SQLException e) {
+			
+			} catch (SQLException e) {
+		
 			logger.log(Level.WARNING, "SQL Exception occured", e);
 		}
 

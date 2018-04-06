@@ -63,8 +63,9 @@ public class OrderLine {
 			return this;
 		}
 
-		public OrderLineBuilder number(int number) {
-			this.numberOfProducts = number;
+
+		public OrderLineBuilder numberOfProducts(int numberOfProducts) {
+			this.numberOfProducts = numberOfProducts;
 			return this;
 		}
 

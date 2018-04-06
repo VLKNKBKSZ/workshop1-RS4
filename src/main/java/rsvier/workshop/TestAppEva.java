@@ -61,7 +61,7 @@ public class TestAppEva {
 			int newId = orderDAO.createOrder(order,person);
 			Order order2 = orderDAO.getOrderById(newId);
 			
-			OrderLine orderLine = new OrderLine.OrderLineBuilder().order(order2).product(product2).number(3).build();
+			OrderLine orderLine = new OrderLine.OrderLineBuilder().order(order2).product(product2).numberOfProducts(3).build();
 			OrderLineDAO orderLineDAO = new OrderLineDAOImp();
 			
 			orderLineDAO.createOrderLine(orderLine);

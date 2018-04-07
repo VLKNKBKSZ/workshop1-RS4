@@ -21,7 +21,7 @@ public class TestEvy {
 		AddressDAO addressDao = new AddressDAOImp();
 		ProductDAO productDao = new ProductDAOImp();
 		OrderDAO orderDao = new OrderDAOImp();
-		OrderLineDAO orderLineDao = new OrderlineDAOImp();
+		OrderLineDAO orderLineDao = new OrderLineDAOImp();
 
 		// person 1
 /*
@@ -61,25 +61,28 @@ public class TestEvy {
 	//	addressDao.createAddress(address2,personDatabase2);
 		
 		
-		Product product = new Product.ProductBuilder().name("stole").price(new BigDecimal("100")).stock(5).build();
+	//	Product product = new Product.ProductBuilder().name("stole").price(new BigDecimal("100")).stock(5).build();
 		
 		
 	
 //		productDao.createProduct(product);
 		
-		Product productDatabase = productDao.getProductByName("stole");
+	//	Product productDatabase = productDao.getProductByName("stole");
 		
 		
 		Order order = new Order.OrderBuilder().build();
 	//	orderDao.createOrder(order, personDatabase2);
 		
-		Order orderDatabse = orderDao.getOrderById(1);
+	//	Order orderDatabse = orderDao.getOrderById(1);
 		
-		OrderLine orderLine = new OrderLine.OrderLineBuilder().order(orderDatabse).product(productDatabase).build();
+	//	OrderLine orderLine = new OrderLine.OrderLineBuilder().order(orderDatabse).product(productDatabase).build();
 		
-		orderLineDao.createOrderLine(orderLine);
+	//	orderLineDao.createOrderLine(orderLine);
 		
 		
+		addressDao.deleteAddress(personDatabase2.getPersonId());
+		
+		personDao.deletePerson(personDatabase2);
 		
 		
 		

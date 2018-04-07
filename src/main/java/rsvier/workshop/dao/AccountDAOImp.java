@@ -104,39 +104,28 @@ public class AccountDAOImp implements AccountDAO {
 
 	}
 
+	public void updateAccount(Account account) {
 
-	public boolean updateAccount(Account account) {
-		
-		boolean updateIsSuccesfull = false;
-	       
 		String query = "UPDATE account SET email = ?, password = ? WHERE account_id = ?";
 
-	        try (Connection conn = DatabaseConnectionXML.getConnection();
-	                PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+		try (Connection conn = DatabaseConnectionXML.getConnection();
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
-	        			preparedStatement.setString(1, account.getEmail());
-	        			preparedStatement.setString(2, account.getPassword());
-	        			preparedStatement.setInt(3, account.getAccountId());
+			preparedStatement.setString(1, account.getEmail());
+			preparedStatement.setString(2, account.getPassword());
+			preparedStatement.setInt(3, account.getAccountId());
 
-	        			preparedStatement.executeUpdate();
-	        
-	        			logger.log(Level.WARNING, "Account updated succesfully");
-	   
-	        			updateIsSuccesfull = true;
+			preparedStatement.executeUpdate();
 
-	        		} catch (SQLException e) {
-	   
-	        			logger.log(Level.WARNING, "SQL exception occurred ", e);
-	        			
-	        			updateIsSuccesfull = false;
-	        }
+			System.out.println("Account updated succesfully");
 
-	        logger.log(Level.WARNING, "Can't update an account ");
-	        return updateIsSuccesfull ;
+		} catch (SQLException e) {
 
-	    }
-	
+			logger.log(Level.WARNING, "SQL exception occurred ", e);
 
+		}
+
+	}
 
 	@Override
 	public void deleteAccount(Account account) {

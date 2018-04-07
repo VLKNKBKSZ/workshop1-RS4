@@ -9,6 +9,6 @@ public interface AccountDAO {
 	public List<Account> getAllAccounts();
 	public Account getAccount(String email, String password);
 	public int createAccount(Account account);
-	public boolean updateAccount(Account account);
+	public void updateAccount(Account account);
 	public void deleteAccount(Account account);
 }

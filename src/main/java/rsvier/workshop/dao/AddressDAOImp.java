@@ -167,6 +167,8 @@ public class AddressDAOImp implements AddressDAO {
 			ps.setInt(1, personId);
 
 			ps.executeUpdate();
+			
+			System.out.println("Address successfully deleted");
 
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "Can't delete the address", e);

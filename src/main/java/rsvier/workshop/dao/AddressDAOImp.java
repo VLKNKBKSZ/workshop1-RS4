@@ -1,3 +1,4 @@
+
 package rsvier.workshop.dao;
 
 import java.sql.*;
@@ -15,42 +16,43 @@ public class AddressDAOImp implements AddressDAO {
 
 		// Declare an ArrayList to hold all Addresses
 
-		List<Address> addressList = new ArrayList<Address>();
+		List<Address> addressList = new ArrayList<>();
 
 		String query = "SELECT * FROM address";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement ps = conn.prepareStatement(query);
-				ResultSet rs = ps.executeQuery();) {
+				PreparedStatement preparedStatement = conn.prepareStatement(query);
+				ResultSet resultSet = preparedStatement.executeQuery();) {
 
-			while (rs.next()) {
+			while (resultSet.next()) {
 
 				// Loop through all rows in address table in the database
 				// Set Address properties using Addressbuilder
 
 				Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
-				addressBuilder.addressId(rs.getInt(1));
-				addressBuilder.streetName(rs.getString(2));
-				addressBuilder.houseNumber(rs.getInt(3));
-				addressBuilder.additionalHouseNumber(rs.getInt(4));
-				addressBuilder.postalCode(rs.getString(5));
-				addressBuilder.city(rs.getString(6));
-				addressBuilder.country(rs.getString(7));
+				addressBuilder.addressId(resultSet.getInt(1));
+				addressBuilder.streetName(resultSet.getString(2));
+				addressBuilder.houseNumber(resultSet.getInt(3));
+				addressBuilder.additionalHouseNumber(resultSet.getInt(4));
+				addressBuilder.postalCode(resultSet.getString(5));
+				addressBuilder.city(resultSet.getString(6));
+				addressBuilder.country(resultSet.getString(7));
 
 				// Create an address object with the all the set properties
 				Address address = addressBuilder.build();
 
-				// Add Adress to ArrayList
+				// Add Address to ArrayList
 				addressList.add(address);
 
 			}
+			return addressList;
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Error occured while trying to find an address list", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 
-		return addressList;
+		return null;
 	}
 
 	@Override
@@ -65,89 +67,86 @@ public class AddressDAOImp implements AddressDAO {
 		try (Connection connection = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 
-
 			preparedStatement.setInt(1, personId);
-
 
 			try (ResultSet rs = preparedStatement.executeQuery();) {
 
-				if (!rs.next()) {
+				if (rs.next()) {
 
-					logger.log(Level.WARNING, "Can't find an address");
-					
-				}else {
-					
-					addressBuilder.addressId(rs.getInt(1)); 
+					addressBuilder.addressId(rs.getInt(1));
 					addressBuilder.streetName(rs.getString(2));
 					addressBuilder.houseNumber(rs.getInt(3));
 					addressBuilder.additionalHouseNumber(rs.getInt(4));
 					addressBuilder.postalCode(rs.getString(5));
 					addressBuilder.city(rs.getString(6));
 					addressBuilder.country(rs.getString(7));
+					address = addressBuilder.build();
 				}
 			}
 
-			address = addressBuilder.build();
-
+			logger.log(Level.INFO, "Addres succesfully returned");
+			return address;
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Error occured while trying to find an address", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 
-		return address;
+		return null;
 	}
 
 	@Override
 
-	public void createAddress(Address address, Person person ) {
-
+	public void createAddress(Address address, int personId) {
 
 		String query = "INSERT INTO address (street_name,house_number,additional_house_number,postal_code,city,country,person_id) "
 				+ "VALUES (?,?,?,?,?,?,?)";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement ps = conn.prepareStatement(query);) {
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
-			ps.setString(1, address.getStreetName());
-			ps.setInt(2, address.getHouseNumber());
-			ps.setInt(3, address.getAdditionalHouseNumber());
-			ps.setString(4, address.getPostalCode());
-			ps.setString(5, address.getCity());
-			ps.setString(6, address.getCountry());
-			ps.setInt(7, person.getPersonId());
-			ps.executeUpdate();
+			preparedStatement.setString(1, address.getStreetName());
+			preparedStatement.setInt(2, address.getHouseNumber());
+			preparedStatement.setInt(3, address.getAdditionalHouseNumber());
+			preparedStatement.setString(4, address.getPostalCode());
+			preparedStatement.setString(5, address.getCity());
+			preparedStatement.setString(6, address.getCountry());
+			preparedStatement.setInt(7, personId);
+			preparedStatement.executeUpdate();
+			System.out.println("Adress succesfully created");
+			logger.log(Level.INFO, "Address succesfully created");
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't create address", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 
 	}
 
 	@Override
-	public void updateAddress(Address address, Person person) {
+	public void updateAddress(Address address) {
 
 		String query = "UPDATE address "
-				+ "SET street_name = ?,house_number = ?,additional_house_number = ?,postal_code = ?,city = ?,country = ? , person_id = ? "
+				+ "SET street_name = ?,house_number = ?,additional_house_number = ?,postal_code = ?,city = ?,country = ? "
 				+ "WHERE address_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement ps = conn.prepareStatement(query);) {
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
-			ps.setString(1, address.getStreetName());
-			ps.setInt(2, address.getHouseNumber());
-			ps.setInt(3, address.getAdditionalHouseNumber());
-			ps.setString(4, address.getPostalCode());
-			ps.setString(5, address.getCity());
-			ps.setString(6, address.getCountry());
-			ps.setInt(7, person.getPersonId());
-			ps.setInt(8, address.getAddressId());
+			preparedStatement.setString(1, address.getStreetName());
+			preparedStatement.setInt(2, address.getHouseNumber());
+			preparedStatement.setInt(3, address.getAdditionalHouseNumber());
+			preparedStatement.setString(4, address.getPostalCode());
+			preparedStatement.setString(5, address.getCity());
+			preparedStatement.setString(6, address.getCountry());
+			preparedStatement.setInt(7, address.getAddressId());
 
-			ps.executeUpdate();
+			preparedStatement.executeUpdate();
+			System.out.println("Address succesfully updated");
+			logger.log(Level.INFO,"Address succesfully updated");
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't update address", e);
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 
@@ -155,26 +154,38 @@ public class AddressDAOImp implements AddressDAO {
 
 	@Override
 
-	public void deleteAddress(int personId) {
+	public void deleteAddressByPersonId(int personId) {
 
-
-		String query = "DELETE FROM address WHERE person_id = ?";
+		String query = "DELETE FROM address WHERE person_id=?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement ps = conn.prepareStatement(query);) {
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
+			preparedStatement.setInt(1, personId);
 
-			ps.setInt(1, personId);
-
-			ps.executeUpdate();
-			
-			System.out.println("Address successfully deleted");
+			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "Can't delete the address", e);
-			
+			logger.log(Level.WARNING, "SQL exception occured", e);
+
 		}
 
+	}
+
+	@Override
+	public void deleteAdressByAddressId(Address address) {
+		String query = "DELETE FROM address WHERE id =?;";
+		
+		try(Connection conn = DatabaseConnectionXML.getConnection();
+				PreparedStatement preparedStatement = conn.prepareStatement(query)){
+			preparedStatement.setInt(1, address.getAddressId());
+			preparedStatement.executeUpdate();
+			System.out.println("Address deleted succesfully");
+			logger.log(Level.INFO, "Address deleted succesfully");
+		} catch (SQLException e) {
+			logger.log(Level.INFO, "SQL exception occured", e);
+		}
+		
 	}
 
 }

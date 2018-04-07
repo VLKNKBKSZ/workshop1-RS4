@@ -1,3 +1,4 @@
+
 package rsvier.workshop;
 
 import java.math.BigDecimal;
@@ -80,7 +81,7 @@ public class TestEvy {
 	//	orderLineDao.createOrderLine(orderLine);
 		
 		
-		addressDao.deleteAddress(personDatabase2.getPersonId());
+	//	addressDao.deleteAddress(personDatabase2.getPersonId());
 		
 		personDao.deletePerson(personDatabase2);
 		

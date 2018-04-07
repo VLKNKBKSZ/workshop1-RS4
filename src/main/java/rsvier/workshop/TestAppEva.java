@@ -1,3 +1,4 @@
+
 package rsvier.workshop;
 import java.math.BigDecimal;
 import java.util.*;
@@ -26,7 +27,7 @@ public class TestAppEva {
 			Account account2 = accountDAO.getAccount(account1.getEmail(), account1.getPassword());
 			
 			//create an adres object 
-			Address address1 = new Address.AddressBuilder().streetName("flup").houseNumber(32).postalCode("1236re").city("gsesrt").country("sgerg").build();
+			Address address1 = new Address.AddressBuilder().streetName("kdsfh").houseNumber(245).postalCode("1246re").city("bbbb").country("bbb").build();
 			
 			//create a person object
 			Person person  = new Person.PersonBuilder().accountId(account2.getAccountId()).personType("employee").name("adsf").lastName("poafe").middleName("deaa").address(address1).build();
@@ -40,7 +41,7 @@ public class TestAppEva {
 			
 			//create an address in the database
 			AddressDAO addressDAO = new AddressDAOImp();
-			addressDAO.createAddress(address1, person);
+		// need to change person to personId: 	addressDAO.createAddress(address1, person);
 			
 			//create a product object with the name, price and stock
 			Product product = new Product.ProductBuilder().name("Kroonluchter").price(new BigDecimal("34.45")).stock(12).build();

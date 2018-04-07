@@ -1,3 +1,4 @@
+
 package rsvier.workshop.dao;
 
 import java.util.List;
@@ -12,3 +13,4 @@ public interface AccountDAO {
 	public void updateAccount(Account account);
 	public void deleteAccount(Account account);
 }
+

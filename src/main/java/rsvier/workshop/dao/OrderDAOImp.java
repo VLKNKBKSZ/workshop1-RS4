@@ -12,24 +12,59 @@ import rsvier.workshop.utility.LogConnection;
 public class OrderDAOImp implements OrderDAO {
 
 	Logger logger = LogConnection.getLogger();
+	PersonDAOImp personDAO = new PersonDAOImp();
 
 	@Override
 	public List<Order> getAllOrders() {
-		List<Order> list = new ArrayList<>();
+		List<Order> orderList = new ArrayList<>();
 		String query = "SELECT * FROM order_table;";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query);
-				ResultSet rs = pstmt.executeQuery();) {
-			while (rs.next()) {
-				Order.OrderBuilder orBuilder = new Order.OrderBuilder();
-				orBuilder.id(rs.getInt(1));
-				orBuilder.dateTime(rs.getTimestamp(2));
-				Order order = orBuilder.build();
-				list.add(order);
+				PreparedStatement preparedStatement = conn.prepareStatement(query);
+				ResultSet resultSet = preparedStatement.executeQuery();) {
+			while (resultSet.next()) {
+				Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
+				orderBuilder.id(resultSet.getInt(1));
+				Person person = personDAO.getPersonById(resultSet.getInt(2));
+				orderBuilder.person(person);
+				orderBuilder.dateTime(resultSet.getTimestamp(3));
+				Order order = orderBuilder.build();
+				orderList.add(order);
 
 			}
-			return list;
+			logger.log(Level.INFO, "List successfully returned");
+			return orderList;
+		} catch (SQLException e) {
+			logger.log(Level.WARNING, "SQL exception occured", e);
+
+		} catch (Exception ex) {
+			logger.log(Level.WARNING, "Exception occured", ex);
+		}
+
+		return null;
+	}
+
+	@Override
+	public List<Order> getAllOrdersFromPerson(Person person) {
+		List<Order> orderList = new ArrayList<>();
+		String query = "SELECT * FROM order_table WHERE person_id = ?;";
+
+		try (Connection conn = DatabaseConnectionXML.getConnection();
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+			preparedStatement.setInt(1, person.getPersonId());
+			try (ResultSet resultSet = preparedStatement.executeQuery();) {
+				while (resultSet.next()) {
+					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
+					orderBuilder.id(resultSet.getInt(1));
+					orderBuilder.person(personDAO.getPersonById(resultSet.getInt(2)));
+					orderBuilder.dateTime(resultSet.getTimestamp(3));
+					Order order = orderBuilder.build();
+					orderList.add(order);
+
+				}
+			}
+			logger.log(Level.INFO, "List successfully returned");
+			return orderList;
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 
@@ -46,15 +81,18 @@ public class OrderDAOImp implements OrderDAO {
 		Order order = null;
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setInt(1, orderId);
-			try (ResultSet rs = pstmt.executeQuery()) {
-				if (rs.next()) {
-					Order.OrderBuilder orBuilder = new Order.OrderBuilder();
-					orBuilder.id(rs.getInt(1));
-					orBuilder.dateTime(rs.getTimestamp(2));
-					order = orBuilder.build();
+				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+			preparedStatement.setInt(1, orderId);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
+					orderBuilder.id(resultSet.getInt(1));
+					Person person = personDAO.getPersonById(resultSet.getInt(2));
+					orderBuilder.person(person);
+					orderBuilder.dateTime(resultSet.getTimestamp(3));
+					order = orderBuilder.build();
 				}
+				logger.log(Level.INFO, "Order succesfully returned");
 				return order;
 			}
 		} catch (SQLException e) {
@@ -65,18 +103,19 @@ public class OrderDAOImp implements OrderDAO {
 
 	@Override
 	public int createOrder(Order order, Person person) {
-		int newOrderId = 0;
+		int generatedId = 0;
 
 		String query = "INSERT INTO order_table (person_id) VALUES (?);";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);) {
+				PreparedStatement preparedStatement = conn.prepareStatement(query,
+						PreparedStatement.RETURN_GENERATED_KEYS);) {
 
-			pstmt.setInt(1, person.getPersonId());
-			pstmt.executeUpdate();
+			preparedStatement.setInt(1, person.getPersonId());
+			preparedStatement.executeUpdate();
 
-			try (ResultSet rs = pstmt.getGeneratedKeys();) {
-				if (rs.next()) {
-					newOrderId = rs.getInt(1);
+			try (ResultSet resultSet = preparedStatement.getGeneratedKeys();) {
+				if (resultSet.next()) {
+					generatedId = resultSet.getInt(1);
 
 					logger.info("Succesfully created new order.");
 				}
@@ -86,16 +125,16 @@ public class OrderDAOImp implements OrderDAO {
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 		}
-		return newOrderId;
+		return generatedId;
 	}
 
 	@Override
 	public void updateOrder(Order order) {
 		String query = "UPDATE order_table (person_id) WHERE orderline_id = ?;";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setInt(1, order.getPerson().getPersonId());
-			pstmt.executeUpdate();
+				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+			preparedStatement.setInt(1, order.getPerson().getPersonId());
+			preparedStatement.executeUpdate();
 			logger.log(Level.INFO, "Order succesfully updated");
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
@@ -118,13 +157,5 @@ public class OrderDAOImp implements OrderDAO {
 		}
 
 	}
-
-
-	@Override
-	public List<Order> getAllOrdersFromPerson(Person person) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

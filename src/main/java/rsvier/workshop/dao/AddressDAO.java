@@ -8,9 +8,10 @@ public interface AddressDAO {
 
 	public List<Address> getAllAddresses();
 	public Address getAddress(int personId );
-	public void createAddress(Address address, Person person );
-	public void updateAddress(Address address,Person person );
-	public void deleteAddress(int personId);
+	public void createAddress(Address address, int personId );
+	public void updateAddress(Address address);
+	public void deleteAddressByPersonId(int personId);
+	public void deleteAdressByAddressId(Address address);
 
 }
 

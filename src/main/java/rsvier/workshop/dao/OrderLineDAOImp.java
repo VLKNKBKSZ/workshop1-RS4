@@ -16,31 +16,26 @@ public class OrderLineDAOImp implements OrderLineDAO {
 	@Override
 	public List<OrderLine> getAllOrderLines() {
 
-		List<OrderLine> list = new ArrayList<>();
+		List<OrderLine> orderLineList = new ArrayList<>();
 		String query = "SELECT * FROM orderline;";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query);
-				ResultSet rs = pstmt.executeQuery()) {
-			while (rs.next()) {
-				OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
-				olBuilder.orderLineId(rs.getInt(1));
-				Order order = orderDAO.getOrderById(rs.getInt(2));
-				olBuilder.order(order);
-				/*
-				 * The OrderLine class has a Product product class field. So the return that
-				 * object saved in de database we need to create first a new object and call the
-				 * getProductById with the DAO
-				 */
-				Product product = productDAO.getProductById(rs.getInt(3));
-				olBuilder.product(product);
-				olBuilder.numberOfProducts(rs.getInt(4));
-				olBuilder.dateTime(rs.getTimestamp(5));
-				OrderLine orderLine = olBuilder.build();
-				list.add(orderLine);
+				PreparedStatement preparedStatement = conn.prepareStatement(query);
+				ResultSet resultSet = preparedStatement.executeQuery()) {
+			while (resultSet.next()) {
+				OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
+				orderLineBuilder.orderLineId(resultSet.getInt(1));
+				Order order = orderDAO.getOrderById(resultSet.getInt(2));
+				orderLineBuilder.order(order);
+				Product product = productDAO.getProductById(resultSet.getInt(3));
+				orderLineBuilder.product(product);
+				orderLineBuilder.numberOfProducts(resultSet.getInt(4));
+				orderLineBuilder.dateTime(resultSet.getTimestamp(5));
+				OrderLine orderLine = orderLineBuilder.build();
+				orderLineList.add(orderLine);
 
 			}
-			logger.log(Level.INFO, "List succesfuly created and returned");
-			return list;
+			logger.log(Level.INFO, "List successfuly created and returned");
+			return orderLineList;
 
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
@@ -50,57 +45,59 @@ public class OrderLineDAOImp implements OrderLineDAO {
 
 	@Override
 	public List<OrderLine> getAllOrderLinesFromOrder(Order order) {
-		List<OrderLine> list = new ArrayList<>();
+		List<OrderLine> orderLineList = new ArrayList<>();
 		String query = "SELECT * FROM orderline WHERE order_table_id =?;";
-		
-		try(Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query)){
-			pstmt.setInt(1, order.getOrderId());
-			
-			try(ResultSet rs = pstmt.executeQuery()){
-				while(rs.next()) {
-					OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
-					olBuilder.orderLineId(rs.getInt(1));
-					olBuilder.order(order);
-					Product product = productDAO.getProductById(rs.getInt(3));
-					olBuilder.product(product);
-					olBuilder.numberOfProducts(rs.getInt(4));
-					olBuilder.dateTime(rs.getTimestamp(5));
-					OrderLine orderLine = olBuilder.build();
-					list.add(orderLine);
-					
+
+		try (Connection conn = DatabaseConnectionXML.getConnection();
+				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+			preparedStatement.setInt(1, order.getOrderId());
+
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				while (resultSet.next()) {
+					OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
+					orderLineBuilder.orderLineId(resultSet.getInt(1));
+					orderLineBuilder.order(orderDAO.getOrderById(resultSet.getInt(2)));
+					Product product = productDAO.getProductById(resultSet.getInt(3));
+					orderLineBuilder.product(product);
+					orderLineBuilder.numberOfProducts(resultSet.getInt(4));
+					orderLineBuilder.dateTime(resultSet.getTimestamp(5));
+					OrderLine orderLine = orderLineBuilder.build();
+					orderLineList.add(orderLine);
+
 				}
-				return list;
+				logger.log(Level.INFO, "OrderLineList successfully returned");
+				return orderLineList;
 			}
-			
+
 		} catch (SQLException e) {
-			logger.log(Level.WARNING, "SQL exception occcured", e);;
+			logger.log(Level.WARNING, "SQL exception occcured", e);
+			;
 		}
 		return null;
 	}
 
 	@Override
 	public List<OrderLine> getAllOrderLinesFromProduct(Product product) {
-		List<OrderLine> list = new ArrayList<>();
+		List<OrderLine> orderLineList = new ArrayList<>();
 		String query = "SELECT * FROM orderline WHERE product_id = ?;";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setInt(1, product.getProductId());
+				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+			preparedStatement.setInt(1, product.getProductId());
 
-			try (ResultSet rs = pstmt.executeQuery();) {
-				while (rs.next()) {
-					OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
-					olBuilder.orderLineId(rs.getInt(1));
-					Order order = orderDAO.getOrderById(rs.getInt(2));
-					olBuilder.order(order);
-					olBuilder.product(product);
-					olBuilder.numberOfProducts(rs.getInt(3));
-					olBuilder.dateTime(rs.getTimestamp(4));
-					OrderLine orderLine = olBuilder.build();
-					list.add(orderLine);
+			try (ResultSet resultSet = preparedStatement.executeQuery();) {
+				while (resultSet.next()) {
+					OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
+					orderLineBuilder.orderLineId(resultSet.getInt(1));
+					Order order = orderDAO.getOrderById(resultSet.getInt(2));
+					orderLineBuilder.order(order);
+					orderLineBuilder.product(productDAO.getProductById(resultSet.getInt(3)));
+					orderLineBuilder.numberOfProducts(resultSet.getInt(4));
+					orderLineBuilder.dateTime(resultSet.getTimestamp(5));
+					OrderLine orderLine = orderLineBuilder.build();
+					orderLineList.add(orderLine);
 				}
-				logger.log(Level.INFO, "List succesfuly created and returned");
-				return list;
+				logger.log(Level.INFO, "OrderLineList from product successfully created and returned");
+				return orderLineList;
 
 			}
 		} catch (SQLException e) {
@@ -115,28 +112,23 @@ public class OrderLineDAOImp implements OrderLineDAO {
 		String query = "SELECT * FROM orderline WHERE orderline_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query);) {
-			pstmt.setInt(1, orderLineId);
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+			preparedStatement.setInt(1, orderLineId);
 
-			try (ResultSet rs = pstmt.executeQuery()) {
-				if (rs.next()) {
-					OrderLine.OrderLineBuilder olBuilder = new OrderLine.OrderLineBuilder();
-					olBuilder.orderLineId(rs.getInt(1));
-					Order order = orderDAO.getOrderById(rs.getInt(2));
-					olBuilder.order(order);
-					/*
-					 * The OrderLine class has a Product product class field. So the return that
-					 * object saved in the database we need to create first a new object and call the
-					 * getProductById with the DAO
-					 */
-					Product product = productDAO.getProductById(rs.getInt(3));
-					olBuilder.product(product);
-					olBuilder.numberOfProducts(rs.getInt(4));
-					olBuilder.dateTime(rs.getTimestamp(5));
-					orderLine = olBuilder.build();
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
+					orderLineBuilder.orderLineId(resultSet.getInt(1));
+					Order order = orderDAO.getOrderById(resultSet.getInt(2));
+					orderLineBuilder.order(order);
+					Product product = productDAO.getProductById(resultSet.getInt(3));
+					orderLineBuilder.product(product);
+					orderLineBuilder.numberOfProducts(resultSet.getInt(4));
+					orderLineBuilder.dateTime(resultSet.getTimestamp(5));
+					orderLine = orderLineBuilder.build();
 
 				}
-				logger.log(Level.INFO, "List succesfuly created and returned");
+				logger.log(Level.INFO, "OrderLine successfully created and returned");
 				return orderLine;
 			}
 		} catch (SQLException e) {
@@ -150,15 +142,17 @@ public class OrderLineDAOImp implements OrderLineDAO {
 		String query = "INSERT INTO orderline (order_table_id, product_id , number_of_products) VALUES (?, ? ,?)";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query)) {
-			
-			pstmt.setInt(1, orderLine.getOrder().getOrderId());
-			pstmt.setInt(2, orderLine.getProduct().getProductId());
-			pstmt.setInt(3, orderLine.getNumber());
-			
-			pstmt.executeUpdate();
+				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+
+			preparedStatement.setInt(1, orderLine.getOrder().getOrderId());
+			preparedStatement.setInt(2, orderLine.getProduct().getProductId());
+			preparedStatement.setInt(3, orderLine.getNumber());
+
+			preparedStatement.executeUpdate();
 			logger.log(Level.INFO, "OrderLine succesfully created.");
-		} catch (SQLException e) {
+			
+			} catch (SQLException e) {
+		
 			logger.log(Level.WARNING, "SQL Exception occured", e);
 		}
 
@@ -169,10 +163,11 @@ public class OrderLineDAOImp implements OrderLineDAO {
 		String query = "DELETE FROM orderline WHERE orderline_id=?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query);) {
-			pstmt.setInt(1, orderLine.getOrderLineId());
-			pstmt.executeUpdate();
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+			preparedStatement.setInt(1, orderLine.getOrderLineId());
+			preparedStatement.executeUpdate();
 			logger.log(Level.INFO, "OrderLine succesfully deleted");
+			System.out.println("OrderLine succesfully deleted");
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 		}
@@ -181,16 +176,17 @@ public class OrderLineDAOImp implements OrderLineDAO {
 
 	@Override
 	public void updateOrderLine(OrderLine orderLine) {
-		String query = "UPDATE orderline SET order_table_id = ?, product_id = ? , number_of_products =? WHERE id=?;";
+		String query = "UPDATE orderline SET product_id = ? , number_of_products = ? WHERE id=?;";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query);) {
-			pstmt.setInt(1, orderLine.getOrder().getOrderId());
-			pstmt.setInt(2, orderLine.getProduct().getProductId());
-			pstmt.setInt(3, orderLine.getNumber());
-			pstmt.setInt(4, orderLine.getOrderLineId());
-			pstmt.executeUpdate();
+				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+			preparedStatement.setInt(1, orderLine.getOrder().getOrderId());
+			preparedStatement.setInt(2, orderLine.getProduct().getProductId());
+			preparedStatement.setInt(3, orderLine.getNumber());
+			preparedStatement.setInt(4, orderLine.getOrderLineId());
+			preparedStatement.executeUpdate();
 			logger.log(Level.INFO, "OrderLine succesfully updated");
+			System.out.println("OrderLine successfully updated");
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 		}

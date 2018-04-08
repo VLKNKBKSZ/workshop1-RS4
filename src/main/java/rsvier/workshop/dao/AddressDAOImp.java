@@ -31,12 +31,12 @@ public class AddressDAOImp implements AddressDAO {
 
 				Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 				addressBuilder.addressId(resultSet.getInt(1));
-				addressBuilder.streetName(resultSet.getString(2));
-				addressBuilder.houseNumber(resultSet.getInt(3));
-				addressBuilder.additionalHouseNumber(resultSet.getInt(4));
-				addressBuilder.postalCode(resultSet.getString(5));
-				addressBuilder.city(resultSet.getString(6));
-				addressBuilder.country(resultSet.getString(7));
+				addressBuilder.streetName(resultSet.getString(3));
+				addressBuilder.houseNumber(resultSet.getInt(4));
+				addressBuilder.additionalHouseNumber(resultSet.getInt(5));
+				addressBuilder.postalCode(resultSet.getString(6));
+				addressBuilder.city(resultSet.getString(7));
+				addressBuilder.country(resultSet.getString(8));
 
 				// Create an address object with the all the set properties
 				Address address = addressBuilder.build();
@@ -45,6 +45,7 @@ public class AddressDAOImp implements AddressDAO {
 				addressList.add(address);
 
 			}
+			logger.log(Level.WARNING, "Address list successfully returned");
 			return addressList;
 
 		} catch (SQLException e) {
@@ -59,7 +60,7 @@ public class AddressDAOImp implements AddressDAO {
 
 	public Address getAddress(int personId) {
 
-		Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
+	
 		Address address = null;
 
 		String query = "SELECT * FROM address WHERE person_id = ?";
@@ -72,20 +73,22 @@ public class AddressDAOImp implements AddressDAO {
 			try (ResultSet rs = preparedStatement.executeQuery();) {
 
 				if (rs.next()) {
-
+					Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 					addressBuilder.addressId(rs.getInt(1));
-					addressBuilder.streetName(rs.getString(2));
-					addressBuilder.houseNumber(rs.getInt(3));
-					addressBuilder.additionalHouseNumber(rs.getInt(4));
-					addressBuilder.postalCode(rs.getString(5));
-					addressBuilder.city(rs.getString(6));
-					addressBuilder.country(rs.getString(7));
+					addressBuilder.streetName(rs.getString(3));
+					addressBuilder.houseNumber(rs.getInt(4));
+					addressBuilder.additionalHouseNumber(rs.getInt(5));
+					addressBuilder.postalCode(rs.getString(6));
+					addressBuilder.city(rs.getString(7));
+					addressBuilder.country(rs.getString(8));
 					address = addressBuilder.build();
 				}
+				
+				logger.log(Level.INFO, "Address succesfully returned");
+				return address;
 			}
 
-			logger.log(Level.INFO, "Addres succesfully returned");
-			return address;
+			
 
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
@@ -164,6 +167,8 @@ public class AddressDAOImp implements AddressDAO {
 			preparedStatement.setInt(1, personId);
 
 			preparedStatement.executeUpdate();
+			System.out.println("Address succesfully deleted");
+			logger.log(Level.INFO,"Address succesfully deleted");
 
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
@@ -180,8 +185,8 @@ public class AddressDAOImp implements AddressDAO {
 				PreparedStatement preparedStatement = conn.prepareStatement(query)){
 			preparedStatement.setInt(1, address.getAddressId());
 			preparedStatement.executeUpdate();
-			System.out.println("Address deleted succesfully");
-			logger.log(Level.INFO, "Address deleted succesfully");
+			System.out.println("Address succesfully deleted");
+			logger.log(Level.INFO,"Address succesfully deleted");
 		} catch (SQLException e) {
 			logger.log(Level.INFO, "SQL exception occured", e);
 		}

@@ -15,7 +15,7 @@ public class AccountDAOImp implements AccountDAO {
 	public List<Account> getAllAccounts() {
 
 		List<Account> accountList = new ArrayList<>();
-		Account account = new Account();
+		
 
 		String query = "SELECT * FROM account";
 
@@ -24,19 +24,20 @@ public class AccountDAOImp implements AccountDAO {
 				ResultSet resultSet = preparedStatement.executeQuery();) {
 
 			while (resultSet.next()) {
+				Account account = new Account();
 				account.setAccountId(resultSet.getInt(1));
 				account.setEmail(resultSet.getString(2));
 				account.setPassword(resultSet.getString(3));
 				accountList.add(account);
 
 			}
-
+			logger.log(Level.WARNING, "Account list successfully returned");
 			return accountList;
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occurred", e);
 		}
 
-		logger.log(Level.WARNING, "Error occured while trying to find an account list ");
+		
 		return null;
 	}
 
@@ -64,13 +65,14 @@ public class AccountDAOImp implements AccountDAO {
 				}
 
 			}
+			logger.log(Level.WARNING, "Account successfully returned");
 			return account;
 
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occurred ", e);
 		}
 
-		logger.log(Level.WARNING, "Can't find an account ");
+		
 		return null;
 	}
 
@@ -93,7 +95,7 @@ public class AccountDAOImp implements AccountDAO {
 			try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
 				if (rs.next()) {
 					generatedId = rs.getInt(1);
-					logger.log(Level.INFO, "succesfully created account");
+					logger.log(Level.INFO, "Account successfully created");
 				}
 			}
 
@@ -117,8 +119,9 @@ public class AccountDAOImp implements AccountDAO {
 			preparedStatement.setInt(3, account.getAccountId());
 
 			preparedStatement.executeUpdate();
-
-			System.out.println("Account updated succesfully");
+			
+			logger.log(Level.INFO, "Account successfully updated");
+			System.out.println("Account successfully updated ");
 
 		} catch (SQLException e) {
 
@@ -139,7 +142,9 @@ public class AccountDAOImp implements AccountDAO {
 			preparedStatement.setInt(1, account.getAccountId());
 
 			preparedStatement.executeUpdate();
-			System.out.println("Account deleted succesfully");
+			
+			logger.log(Level.INFO, "Account succesfully deleted");
+			System.out.println("Account successfully deleted ");
 
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occurred ", e);

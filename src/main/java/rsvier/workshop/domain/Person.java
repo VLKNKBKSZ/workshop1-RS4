@@ -42,6 +42,16 @@ public class Person {
 		public PersonBuilder() {
 		}
 		
+		public PersonBuilder(Person person) {
+			this.personId = person.personId;
+			this.accountId = person.accountId;
+			this.personType = person.personType;
+			this.name = person.name;
+			this.lastName = person.lastName;
+			this.middleName = person.lastName;
+			this.address = person.address;
+		}
+		
 		public PersonBuilder personId(int id) {
 			this.personId = id;
 			return this;
@@ -128,7 +138,7 @@ public class Person {
 
 	public String toString() {
 		return getPersonType() + " " + getLastName() + " " + getName() + " " + getMiddleName() + " " +
-				getAddress().toString();
+		getAddress().toString();
 	}
 	
 	@Override

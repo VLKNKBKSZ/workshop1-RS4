@@ -36,7 +36,7 @@ public class TestAppEva {
 			PersonDAO personDAO = new PersonDAOImp();
 			personDAO.createPerson(person);
 			
-			person = personDAO.getPersonById(account2.getAccountId());
+			person = personDAO.getPersonByAccountId(account2.getAccountId());
 			// deze mag ook: person = personDAO.getPersonByLastName("poafe");
 			
 			//create an address in the database

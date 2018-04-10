@@ -21,7 +21,7 @@ public class EvaTestsMore {
 		
 		//createPerson geeft een personId als int terug, dus deze gebruiken als argument voor createAddress
 		
-		Address address1 = new Address.AddressBuilder().streetName("Straatje").houseNumber(12).postalCode("1231rt").city("supercity").country("CrazyLand").build();
+		Address address1 = new Address.AddressBuilder().personId(personDAO.createPerson(person1)).streetName("Straatje").houseNumber(12).postalCode("1231rt").city("supercity").country("CrazyLand").build();
 		AddressDAO addressDAO = new AddressDAOImp();
 		addressDAO.createAddress(address1, personDAO.createPerson(person1)); 
 			System.out.println(address1.toString());

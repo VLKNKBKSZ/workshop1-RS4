@@ -100,15 +100,15 @@ public class AddressDAOImp implements AddressDAO {
 
 	@Override
 
-	public void createAddress(Address address, int personId) {
+	public void createAddress(Address address) {
 
 		String query = "INSERT INTO address (person_id, street_name,house_number,additional_house_number,postal_code,city,country) "
-				+ "VALUES (?,?,?,?,?,?,?,?)";
+				+ "VALUES (?,?,?,?,?,?,?)";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 			
-			preparedStatement.setInt(1, personId);
+			preparedStatement.setInt(1, address.getPersonId());
 			preparedStatement.setString(2, address.getStreetName());
 			preparedStatement.setInt(3, address.getHouseNumber());
 			preparedStatement.setInt(4, address.getAdditionalHouseNumber());

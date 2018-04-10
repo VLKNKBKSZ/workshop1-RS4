@@ -16,9 +16,6 @@ public class PersonDAOImp implements PersonDAO {
 
 		List<Person> personList = new ArrayList<>();
 
-		Person.PersonBuilder personBuilder = new Person.PersonBuilder();
-		Person person = null;
-
 		String query = "SELECT * FROM person";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
@@ -26,7 +23,7 @@ public class PersonDAOImp implements PersonDAO {
 				ResultSet resultSet = preparedStatement.executeQuery();) {
 
 			while (resultSet.next()) {
-
+				Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 				personBuilder.personId(resultSet.getInt(1));
 				personBuilder.accountId(resultSet.getInt(2));
 				personBuilder.personType(resultSet.getString(3));
@@ -34,11 +31,11 @@ public class PersonDAOImp implements PersonDAO {
 				personBuilder.lastName(resultSet.getString(5));
 				personBuilder.middleName(resultSet.getString(6));
 				personBuilder.address(addressDao.getAddress(resultSet.getInt(1)));
-				person = personBuilder.build();
+				Person person = personBuilder.build();
 				personList.add(person);
 
 			}
-
+			logger.log(Level.WARNING, "Person list successfully returned");
 			return personList;
 
 		} catch (SQLException e) {
@@ -53,9 +50,6 @@ public class PersonDAOImp implements PersonDAO {
 
 		List<Person> personList = new ArrayList<>();
 
-		Person.PersonBuilder personBuilder = new Person.PersonBuilder();
-		Person person = null;
-
 		String query = "SELECT * FROM person WHERE person_type = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
@@ -65,7 +59,7 @@ public class PersonDAOImp implements PersonDAO {
 			try (ResultSet resultSet = preparedStatement.executeQuery();) {
 
 				while (resultSet.next()) {
-
+					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
 					personBuilder.accountId(resultSet.getInt(2));
 					personBuilder.personType(resultSet.getString(3));
@@ -73,11 +67,11 @@ public class PersonDAOImp implements PersonDAO {
 					personBuilder.lastName(resultSet.getString(5));
 					personBuilder.middleName(resultSet.getString(6));
 					personBuilder.address(addressDao.getAddress(resultSet.getInt(1)));
-					person = personBuilder.build();
+					Person person = personBuilder.build();
 					personList.add(person);
 				}
 			}
-
+			logger.log(Level.WARNING, "Person list successfully returned");
 			return personList;
 
 		} catch (SQLException e) {
@@ -90,7 +84,6 @@ public class PersonDAOImp implements PersonDAO {
 	@Override
 	public Person getPersonByLastName(String lastName) {
 
-		Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 		Person person = null;
 
 		String query = "SELECT * FROM person WHERE last_name = ?";
@@ -103,7 +96,7 @@ public class PersonDAOImp implements PersonDAO {
 			try (ResultSet resultSet = preparedStatement.executeQuery();) {
 
 				if (resultSet.next()) {
-
+					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
 					personBuilder.accountId(resultSet.getInt(2));
 					personBuilder.personType(resultSet.getString(3));
@@ -130,7 +123,6 @@ public class PersonDAOImp implements PersonDAO {
 	@Override
 	public Person getPersonByAccountId(int accountId) {
 
-		Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 		Person person = null;
 
 		String query = "SELECT * FROM person WHERE account_id = ?";
@@ -143,7 +135,7 @@ public class PersonDAOImp implements PersonDAO {
 			try (ResultSet resultSet = preparedStatement.executeQuery();) {
 
 				if (resultSet.next()) {
-
+					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
 					personBuilder.accountId(resultSet.getInt(2));
 					personBuilder.personType(resultSet.getString(3));
@@ -155,7 +147,7 @@ public class PersonDAOImp implements PersonDAO {
 				}
 
 			}
-			logger.log(Level.INFO, "Person returned succesfully");
+			logger.log(Level.INFO, "Person succesfully returned ");
 			return person;
 
 		} catch (SQLException e) {
@@ -182,6 +174,7 @@ public class PersonDAOImp implements PersonDAO {
 			preparedStatement.setString(5, person.getMiddleName());
 
 			preparedStatement.executeUpdate();
+			
 			System.out.println("Person succesfully created");
 			logger.log(Level.INFO, "Person succesfully created");
 			try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
@@ -194,7 +187,7 @@ public class PersonDAOImp implements PersonDAO {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
-		logger.log(Level.INFO, "Key succesfully returned");
+		
 		return generatedId;
 
 	}
@@ -217,6 +210,7 @@ public class PersonDAOImp implements PersonDAO {
 			preparedStatement.setInt(6, person.getPersonId());
 
 			preparedStatement.executeUpdate();
+			logger.log(Level.INFO, "Person succesfully updated");
 			System.out.println("Person succesfully updated");
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
@@ -236,6 +230,7 @@ public class PersonDAOImp implements PersonDAO {
 			preparedStatement.setInt(1, person.getAccountId());
 
 			preparedStatement.executeUpdate();
+			logger.log(Level.INFO, "Person succesfully deleted");
 			System.out.println("Person and Account succesfully deleted");
 			addressDao.deleteAddressByPersonId(person.getPersonId());
 			System.out.println("Addresses related to Person has been deleted");
@@ -249,7 +244,7 @@ public class PersonDAOImp implements PersonDAO {
 
 	@Override
 	public Person getPersonById(int personId) {
-		Person.PersonBuilder personBuilder = new Person.PersonBuilder();
+
 		Person person = null;
 
 		String query = "SELECT * FROM person WHERE person_id = ?";
@@ -262,7 +257,7 @@ public class PersonDAOImp implements PersonDAO {
 			try (ResultSet resultSet = preparedStatement.executeQuery();) {
 
 				if (resultSet.next()) {
-
+					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
 					personBuilder.accountId(resultSet.getInt(2));
 					personBuilder.personType(resultSet.getString(3));
@@ -274,7 +269,7 @@ public class PersonDAOImp implements PersonDAO {
 				}
 
 			}
-			logger.log(Level.INFO, "Person returned succesfully");
+			logger.log(Level.INFO, "Person succesfully returned ");
 			return person;
 
 		} catch (SQLException e) {
@@ -283,7 +278,7 @@ public class PersonDAOImp implements PersonDAO {
 		}
 
 		return null;
-	
+
 	}
 
 }

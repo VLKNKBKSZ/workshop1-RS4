@@ -8,7 +8,6 @@ public class Person {
 	private String name;
 	private String lastName;
 	private String middleName;
-	private Address address;
 
 
 	/*
@@ -25,7 +24,6 @@ public class Person {
 		this.name = builder.name;
 		this.lastName = builder.lastName;
 		this.middleName = builder.middleName;
-		this.address = builder.address;
 	}
 
 	public static class PersonBuilder {
@@ -36,7 +34,6 @@ public class Person {
 		private String name;
 		private String lastName;
 		private String middleName;
-		private Address address;
 
 
 		public PersonBuilder() {
@@ -49,7 +46,7 @@ public class Person {
 			this.name = person.name;
 			this.lastName = person.lastName;
 			this.middleName = person.lastName;
-			this.address = person.address;
+			
 		}
 		
 		public PersonBuilder personId(int id) {
@@ -88,13 +85,7 @@ public class Person {
 			return this;			
 		}
 
-		public PersonBuilder address(Address address) {
-			this.address = address;
-			return this;
-		}
 		
-		
-
 		public Person build() {
 			return new Person(this);
 
@@ -124,10 +115,6 @@ public class Person {
 		return middleName;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
 	public int getAccountId() {
 		return accountId;
 	}
@@ -137,8 +124,7 @@ public class Person {
 	@Override
 
 	public String toString() {
-		return getPersonType() + " " + getLastName() + " " + getName() + " " + getMiddleName() + " " +
-		getAddress().toString();
+		return getPersonType() + " " + getLastName() + " " + getName() + " " + getMiddleName() + " " ;
 	}
 	
 	@Override

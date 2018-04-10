@@ -3,6 +3,7 @@ package rsvier.workshop.domain;
 public class Address {
 
 	private int addressId;
+	private int personId;
 	private String streetName;
 	private int houseNumber;
 	private int additionalHouseNumber;
@@ -17,6 +18,7 @@ public class Address {
 
 	private Address(AddressBuilder builder) {
 		this.addressId = builder.addressId;
+		this.personId = builder.personId;
 		this.streetName = builder.streetName;
 		this.houseNumber = builder.houseNumber;
 		this.additionalHouseNumber = builder.additionalHouseNumber;
@@ -29,6 +31,7 @@ public class Address {
 	public static class AddressBuilder {
 
 		private int addressId;
+		private int personId;
 		private String streetName;
 		private int houseNumber;
 		private int additionalHouseNumber;
@@ -42,6 +45,7 @@ public class Address {
 		public AddressBuilder(Address address) {
 			
 			this.addressId = address.addressId;
+			this.personId = address.personId;
 			this.streetName = address.streetName;
 			this.houseNumber = address.houseNumber;
 			this.additionalHouseNumber = address.additionalHouseNumber;
@@ -54,6 +58,11 @@ public class Address {
 		
 		public AddressBuilder addressId(int addressId) {
 			this.addressId = addressId;
+			return this;
+		}
+		
+		public AddressBuilder personId(int personId) {
+			this.personId = personId;
 			return this;
 		}
 
@@ -95,6 +104,10 @@ public class Address {
 
 	public int getAddressId() {
 		return addressId;
+	}
+	
+	public int getPersonId() {
+		return personId;
 	}
 
 	public String getStreetName() {

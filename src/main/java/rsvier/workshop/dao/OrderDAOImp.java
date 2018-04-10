@@ -24,7 +24,7 @@ public class OrderDAOImp implements OrderDAO {
 				ResultSet resultSet = preparedStatement.executeQuery();) {
 			while (resultSet.next()) {
 				Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
-				orderBuilder.id(resultSet.getInt(1));
+				orderBuilder.orderId(resultSet.getInt(1));
 				Person person = personDAO.getPersonById(resultSet.getInt(2));
 				orderBuilder.person(person);
 				orderBuilder.dateTime(resultSet.getTimestamp(3));
@@ -55,7 +55,7 @@ public class OrderDAOImp implements OrderDAO {
 			try (ResultSet resultSet = preparedStatement.executeQuery();) {
 				while (resultSet.next()) {
 					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
-					orderBuilder.id(resultSet.getInt(1));
+					orderBuilder.orderId(resultSet.getInt(1));
 					orderBuilder.person(personDAO.getPersonById(resultSet.getInt(2)));
 					orderBuilder.dateTime(resultSet.getTimestamp(3));
 					Order order = orderBuilder.build();
@@ -86,7 +86,7 @@ public class OrderDAOImp implements OrderDAO {
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				if (resultSet.next()) {
 					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
-					orderBuilder.id(resultSet.getInt(1));
+					orderBuilder.orderId(resultSet.getInt(1));
 					Person person = personDAO.getPersonById(resultSet.getInt(2));
 					orderBuilder.person(person);
 					orderBuilder.dateTime(resultSet.getTimestamp(3));

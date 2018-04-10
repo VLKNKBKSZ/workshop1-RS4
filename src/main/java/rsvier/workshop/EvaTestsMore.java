@@ -11,30 +11,34 @@ public class EvaTestsMore {
 		
 		Account account1 = new Account("eva@eva", "wacht");
 		AccountDAO accountDAO = new AccountDAOImp();
+		int accountIdeetje = accountDAO.createAccount(account1);
 		
 		
-		//createAccount() geeft een accountId als int terug,dus deze gebruiken als argument voor createPerson:
-		
-		Person person1 = new Person.PersonBuilder().accountId(accountDAO.createAccount(account1)).name("Eveline").lastName("Noenij").personType("superperson").build();
+		Person person1 = new Person.PersonBuilder().accountId(accountIdeetje).name("Eveline").lastName("Noenij").personType("superperson").build();
 		PersonDAO personDAO = new PersonDAOImp();
-			System.out.println(person1.toString());
+		int personIdeetje = personDAO.createPerson(person1);
 		
-		//createPerson geeft een personId als int terug, dus deze gebruiken als argument voor createAddress
+		Person person2 = new Person.PersonBuilder().accountId(accountIdeetje).personId(personIdeetje).build();
 		
-		Address address1 = new Address.AddressBuilder().streetName("Straatje").houseNumber(12).postalCode("1231rt").city("supercity").country("CrazyLand").build();
+		Address address1 = new Address.AddressBuilder().personId(personIdeetje).streetName("Straatje").houseNumber(12).postalCode("1231rt").city("supercity").country("CrazyLand").build();
 		AddressDAO addressDAO = new AddressDAOImp();
-		addressDAO.createAddress(address1, personDAO.createPerson(person1)); 
-			System.out.println(address1.toString());
+		addressDAO.createAddress(address1); 
+			
 		
 		Product product = new Product.ProductBuilder().name("Stoelie").price(new BigDecimal("95.00")).stock(20).build();
 		ProductDAO productDAO = new ProductDAOImp();
 		productDAO.createProduct(product);
+		//int productIdeetje = (productDAO.getProductByName(product.getName())).getProductId();
+		product = productDAO.getProductByName(product.getName());
 		
-		Order order = new Order.OrderBuilder().person(person1).build();
+		Order order = new Order.OrderBuilder().person(person2).build();
 		OrderDAO orderDAO = new OrderDAOImp();
-		orderDAO.createOrder(order, person1); //geeft order_table_id terug, dus int orderId
+		int orderIdeetje = orderDAO.createOrder(order, person2); //geeft order_table_id terug, dus int orderId
 		
-		OrderLine orderLine = new OrderLine.OrderLineBuilder().order(order).product(product).numberOfProducts(3).build();
+		//order2 is order maar dan met int orderId
+		Order order2 = new Order.OrderBuilder().person(person2).orderId(orderIdeetje).build();
+		
+		OrderLine orderLine = new OrderLine.OrderLineBuilder().order(order2).product(product).numberOfProducts(3).build();
 		OrderLineDAO orderLineDAO = new OrderLineDAOImp();
 		orderLineDAO.createOrderLine(orderLine);
 		

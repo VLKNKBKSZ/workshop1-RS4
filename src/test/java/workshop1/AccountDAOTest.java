@@ -1,8 +1,7 @@
-package test;
+package workshop1;
 
 
 import static org.junit.jupiter.api.Assertions.*;
-//import static org.junit.Assert.*;
 import org.junit.jupiter.api.*;
 import java.sql.*;
 import java.util.*;
@@ -41,7 +40,7 @@ public class AccountDAOTest {
 		try {
 			Connection conn = DatabaseConnectionXML.getConnection();
 			Statement stmt = conn.createStatement();
-			String query = "DALETE FROM account";
+			String query = "DELETE FROM account";
 			stmt.addBatch(query);
 			String query2 = "ALTER TABLE account AUTO_INCREMENT = 1";
 			stmt.addBatch(query2);
@@ -73,7 +72,7 @@ public class AccountDAOTest {
 
 	@Test
 	public void testGetAllAccounts() {
-		List<Account> accountList = new ArrayList<>();
+		List<Account> accountList = accountDao.getAllAccounts();
 		Assertions.assertAll(() -> assertEquals(2, accountList.size()), () -> assertNotNull(accountList),
 				() -> assertNotNull(accountList.get(0)), () -> assertNotNull(accountList.get(1))
 
@@ -119,3 +118,4 @@ public class AccountDAOTest {
 		}
 	}
 }
+

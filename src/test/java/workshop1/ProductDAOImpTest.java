@@ -51,7 +51,9 @@ class ProductDAOImpTest {
 			Connection conn = DatabaseConnectionXML.getConnection();
 			Statement statement = conn.createStatement();
 			String query = "DELETE FROM product;";
+			String query_2 = "ALTER TABLE product AUTO_INCREMENT = 1";
 			statement.addBatch(query);
+			statement.addBatch(query_2);
 			statement.executeBatch();
 			logger.log(Level.INFO, "Deletion of product table data is succesfull");
 
@@ -63,13 +65,13 @@ class ProductDAOImpTest {
 
 	@Test
 	void canCreateProduct() {
-		Product product = new Product.ProductBuilder().name("Sjaakie").price(new BigDecimal("999.00")).stock(99)
+		Product product = new Product.ProductBuilder().name("Stoel").price(new BigDecimal("999.00")).stock(99)
 				.build();
 		productDAO.createProduct(product);
-		Product productReturned = productDAO.getProductByName("Sjaakie");
+		Product productReturned = productDAO.getProductByName("Stoel");
 		String name = productReturned.getName();
 
-		assertEquals("Sjaakie", name);
+		assertEquals("Stoel", name);
 
 	}
 

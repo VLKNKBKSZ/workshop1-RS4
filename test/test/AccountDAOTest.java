@@ -1,12 +1,12 @@
 package test;
 
-import static org.junit.Assert.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.Assert.*;
 import org.junit.jupiter.api.*;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
-import org.junit.Test;
-
 import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.utility.*;

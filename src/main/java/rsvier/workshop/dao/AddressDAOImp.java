@@ -31,6 +31,7 @@ public class AddressDAOImp implements AddressDAO {
 
 				Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 				addressBuilder.addressId(resultSet.getInt(1));
+				addressBuilder.personId(resultSet.getInt(2));
 				addressBuilder.streetName(resultSet.getString(3));
 				addressBuilder.houseNumber(resultSet.getInt(4));
 				addressBuilder.additionalHouseNumber(resultSet.getInt(5));
@@ -70,25 +71,24 @@ public class AddressDAOImp implements AddressDAO {
 
 			preparedStatement.setInt(1, personId);
 
-			try (ResultSet rs = preparedStatement.executeQuery();) {
+			try (ResultSet resultSet = preparedStatement.executeQuery();) {
 
-				if (rs.next()) {
+				if (resultSet.next()) {
 					Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
-					addressBuilder.addressId(rs.getInt(1));
-					addressBuilder.streetName(rs.getString(3));
-					addressBuilder.houseNumber(rs.getInt(4));
-					addressBuilder.additionalHouseNumber(rs.getInt(5));
-					addressBuilder.postalCode(rs.getString(6));
-					addressBuilder.city(rs.getString(7));
-					addressBuilder.country(rs.getString(8));
+					addressBuilder.addressId(resultSet.getInt(1));
+					addressBuilder.personId(resultSet.getInt(2));
+					addressBuilder.streetName(resultSet.getString(3));
+					addressBuilder.houseNumber(resultSet.getInt(4));
+					addressBuilder.additionalHouseNumber(resultSet.getInt(5));
+					addressBuilder.postalCode(resultSet.getString(6));
+					addressBuilder.city(resultSet.getString(7));
+					addressBuilder.country(resultSet.getString(8));
 					address = addressBuilder.build();
 				}
 				
 				logger.log(Level.INFO, "Address succesfully returned");
 				return address;
 			}
-
-			
 
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
@@ -100,22 +100,24 @@ public class AddressDAOImp implements AddressDAO {
 
 	@Override
 
-	public void createAddress(Address address, int personId) {
+	public void createAddress(Address address) {
 
-		String query = "INSERT INTO address (street_name,house_number,additional_house_number,postal_code,city,country,person_id) "
+		String query = "INSERT INTO address (person_id, street_name,house_number,additional_house_number,postal_code,city,country) "
 				+ "VALUES (?,?,?,?,?,?,?)";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
-
-			preparedStatement.setString(1, address.getStreetName());
-			preparedStatement.setInt(2, address.getHouseNumber());
-			preparedStatement.setInt(3, address.getAdditionalHouseNumber());
-			preparedStatement.setString(4, address.getPostalCode());
-			preparedStatement.setString(5, address.getCity());
-			preparedStatement.setString(6, address.getCountry());
-			preparedStatement.setInt(7, personId);
+			
+			preparedStatement.setInt(1, address.getPersonId());
+			preparedStatement.setString(2, address.getStreetName());
+			preparedStatement.setInt(3, address.getHouseNumber());
+			preparedStatement.setInt(4, address.getAdditionalHouseNumber());
+			preparedStatement.setString(5, address.getPostalCode());
+			preparedStatement.setString(6, address.getCity());
+			preparedStatement.setString(7, address.getCountry());
+			
 			preparedStatement.executeUpdate();
+			
 			System.out.println("Adress succesfully created");
 			logger.log(Level.INFO, "Address succesfully created");
 
@@ -145,6 +147,7 @@ public class AddressDAOImp implements AddressDAO {
 			preparedStatement.setInt(7, address.getAddressId());
 
 			preparedStatement.executeUpdate();
+			
 			System.out.println("Address succesfully updated");
 			logger.log(Level.INFO,"Address succesfully updated");
 
@@ -167,6 +170,7 @@ public class AddressDAOImp implements AddressDAO {
 			preparedStatement.setInt(1, personId);
 
 			preparedStatement.executeUpdate();
+			
 			System.out.println("Address succesfully deleted");
 			logger.log(Level.INFO,"Address succesfully deleted");
 
@@ -183,10 +187,13 @@ public class AddressDAOImp implements AddressDAO {
 		
 		try(Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query)){
+			
 			preparedStatement.setInt(1, address.getAddressId());
 			preparedStatement.executeUpdate();
+			
 			System.out.println("Address succesfully deleted");
 			logger.log(Level.INFO,"Address succesfully deleted");
+			
 		} catch (SQLException e) {
 			logger.log(Level.INFO, "SQL exception occured", e);
 		}

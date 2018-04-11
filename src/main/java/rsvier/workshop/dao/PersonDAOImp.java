@@ -30,7 +30,6 @@ public class PersonDAOImp implements PersonDAO {
 				personBuilder.name(resultSet.getString(4));
 				personBuilder.lastName(resultSet.getString(5));
 				personBuilder.middleName(resultSet.getString(6));
-				personBuilder.address(addressDao.getAddress(resultSet.getInt(1)));
 				Person person = personBuilder.build();
 				personList.add(person);
 
@@ -66,7 +65,6 @@ public class PersonDAOImp implements PersonDAO {
 					personBuilder.name(resultSet.getString(4));
 					personBuilder.lastName(resultSet.getString(5));
 					personBuilder.middleName(resultSet.getString(6));
-					personBuilder.address(addressDao.getAddress(resultSet.getInt(1)));
 					Person person = personBuilder.build();
 					personList.add(person);
 				}
@@ -103,7 +101,6 @@ public class PersonDAOImp implements PersonDAO {
 					personBuilder.name(resultSet.getString(4));
 					personBuilder.lastName(resultSet.getString(5));
 					personBuilder.middleName(resultSet.getString(6));
-					personBuilder.address(addressDao.getAddress(resultSet.getInt(1)));
 					person = personBuilder.build();
 				}
 
@@ -142,7 +139,6 @@ public class PersonDAOImp implements PersonDAO {
 					personBuilder.name(resultSet.getString(4));
 					personBuilder.lastName(resultSet.getString(5));
 					personBuilder.middleName(resultSet.getString(6));
-					personBuilder.address(addressDao.getAddress(resultSet.getInt(1)));
 					person = personBuilder.build();
 				}
 
@@ -264,7 +260,6 @@ public class PersonDAOImp implements PersonDAO {
 					personBuilder.name(resultSet.getString(4));
 					personBuilder.lastName(resultSet.getString(5));
 					personBuilder.middleName(resultSet.getString(6));
-					personBuilder.address(addressDao.getAddress(resultSet.getInt(1)));
 					person = personBuilder.build();
 				}
 

@@ -14,7 +14,7 @@ public class TestAppEva {
 	
 	public static void main(String[] args) {
 			
-			//create an account object with email and password, leaving the accountId field empty for now
+			/*create an account object with email and password, leaving the accountId field empty for now
 			Account account1 = new Account("lwjef", "askjf" );
 			
 			// create an accountDAO object
@@ -36,7 +36,7 @@ public class TestAppEva {
 			PersonDAO personDAO = new PersonDAOImp();
 			personDAO.createPerson(person);
 			
-			person = personDAO.getPersonById(account2.getAccountId());
+			person = personDAO.getPersonByAccountId(account2.getAccountId());
 			// deze mag ook: person = personDAO.getPersonByLastName("poafe");
 			
 			//create an address in the database
@@ -65,7 +65,7 @@ public class TestAppEva {
 			OrderLine orderLine = new OrderLine.OrderLineBuilder().order(order2).product(product2).numberOfProducts(3).build();
 			OrderLineDAO orderLineDAO = new OrderLineDAOImp();
 			
-			orderLineDAO.createOrderLine(orderLine);
+			orderLineDAO.createOrderLine(orderLine); */
 	}
 
 }

@@ -19,7 +19,7 @@ public class AccountDAOTest {
 	@BeforeEach
 	public void setup() {
 
-		logger.info("Seeting up database....");
+		logger.info("Setting up database....");
 		try {
 			Connection conn = DatabaseConnectionXML.getConnection();
 			Statement stmt = conn.createStatement();

@@ -32,7 +32,7 @@ class ProductDAOImpTest {
 			statement.addBatch(query_2);
 			statement.addBatch(query_3);
 			statement.executeBatch();
-			logger.log(Level.INFO, "Creation of dummy product is successfull");
+			logger.log(Level.INFO, "Creation of dummy products is successfull");
 
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
@@ -86,6 +86,15 @@ class ProductDAOImpTest {
 		productDAO.createProduct(product);
 		productDAO.deleteProduct(productDAO.getProductByName("Stoel"));
 		assertNull("This should return null", productDAO.getProductByName("Stoel"));
+	}
+
+	@Test
+	void canUpdateProduct() {
+		Product product = productDAO.getProductByName("Hoekbank");
+		Product.ProductBuilder newProduct = new Product.ProductBuilder(product);
+		Product updatedProduct = newProduct.name("Loungebank").build();
+		productDAO.updateProduct(updatedProduct);
+		assertEquals("Loungebank", productDAO.getProductByName("Loungebank").getName());
 	}
 
 	@Test

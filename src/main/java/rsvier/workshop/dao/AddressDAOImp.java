@@ -66,8 +66,9 @@ public class AddressDAOImp implements AddressDAO {
 
 		String query = "SELECT * FROM address WHERE person_id = ?";
 
-		try (Connection connection = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+		try (
+			Connection connection = DatabaseConnectionXML.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, personId);
 

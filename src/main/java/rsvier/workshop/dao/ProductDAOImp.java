@@ -124,13 +124,16 @@ public class ProductDAOImp implements ProductDAO {
 		String query = "UPDATE product SET name = ?, price = ? , stock = ? WHERE product_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+			PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+			
 			preparedStatement.setString(1, product.getName());
 			preparedStatement.setBigDecimal(2, product.getPrice());
 			preparedStatement.setInt(3, product.getStock());
 			preparedStatement.setInt(4, product.getProductId());
 			preparedStatement.executeUpdate();
+			
 			logger.log(Level.INFO, "Product successfully updated");
+			
 		} catch (SQLException e) {
 
 			logger.log(Level.WARNING, "SQL exception ocurred.", e);

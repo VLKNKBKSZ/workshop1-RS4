@@ -170,7 +170,7 @@ public class PersonDAOImp implements PersonDAO {
 			preparedStatement.setString(5, person.getMiddleName());
 
 			preparedStatement.executeUpdate();
-
+			
 			System.out.println("Person succesfully created");
 			logger.log(Level.INFO, "Person succesfully created");
 			try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
@@ -183,7 +183,7 @@ public class PersonDAOImp implements PersonDAO {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
-
+		
 		return generatedId;
 
 	}

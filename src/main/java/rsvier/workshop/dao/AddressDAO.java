@@ -3,7 +3,6 @@ package rsvier.workshop.dao;
 import java.util.*;
 import rsvier.workshop.domain.*;
 
-
 public interface AddressDAO {
 
 	public List<Address> getAllAddresses();
@@ -14,4 +13,3 @@ public interface AddressDAO {
 	public void deleteAdressByAddressId(Address address);
 
 }
-

@@ -42,7 +42,11 @@ public class Order {
 		    this.dateTime = order.getDateTime();
 		}
 
+<<<<<<< HEAD
 		public OrderBuilder orderId(int orderId) {
+=======
+		public OrderBuilder id(int orderId) {
+>>>>>>> refs/remotes/origin/master
 			this.orderId = orderId;
 			return this;
 		}

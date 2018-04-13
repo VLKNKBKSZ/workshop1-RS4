@@ -3,6 +3,7 @@ package rsvier.workshop.domain;
 public class Address {
 
 	private int addressId;
+<<<<<<< HEAD
 	private int personId;
 	private String streetName;
 	private int houseNumber;
@@ -108,6 +109,100 @@ public class Address {
 	
 	public int getPersonId() {
 		return personId;
+=======
+	private String streetName;
+	private int houseNumber;
+	private int additionalHouseNumber;
+	private String postalCode;
+	private String city;
+	private String country;
+	
+	/*
+	 * Set the constructor to private to force user to use only the builder to
+	 * create new instances.
+	 */
+
+	private Address(AddressBuilder builder) {
+		this.addressId = builder.addressId;
+		this.streetName = builder.streetName;
+		this.houseNumber = builder.houseNumber;
+		this.additionalHouseNumber = builder.additionalHouseNumber;
+		this.postalCode = builder.postalCode;
+		this.city = builder.city;
+		this.country = builder.country;
+
+	}
+
+	public static class AddressBuilder {
+
+		private int addressId;
+		private String streetName;
+		private int houseNumber;
+		private int additionalHouseNumber;
+		private String postalCode;
+		private String city;
+		private String country;
+
+		public AddressBuilder() {
+		}
+		// Add another constructor to copy AddressBuilder properties from another Address object.
+		public AddressBuilder(Address address) {
+			
+			this.addressId = address.addressId;
+			this.streetName = address.streetName;
+			this.houseNumber = address.houseNumber;
+			this.additionalHouseNumber = address.additionalHouseNumber;
+			this.postalCode = address.postalCode;
+			this.city = address.city;
+			this.country = address.country;
+		}
+
+		
+		
+		public AddressBuilder addressId(int addressId) {
+			this.addressId = addressId;
+			return this;
+		}
+
+		public AddressBuilder streetName(String streetName) {
+			this.streetName = streetName;
+			return this;
+		}
+
+		public AddressBuilder houseNumber(int houseNumber) {
+			this.houseNumber = houseNumber;
+			return this;
+		}
+
+		public AddressBuilder additionalHouseNumber(int additionalHouseNumber) {
+			this.additionalHouseNumber = additionalHouseNumber;
+			return this;
+		}
+
+		public AddressBuilder postalCode(String postalCode) {
+			this.postalCode = postalCode;
+			return this;
+		}
+
+		public AddressBuilder city(String city) {
+			this.city = city;
+			return this;
+		}
+
+		public AddressBuilder country(String country) {
+			this.country = country;
+			return this;
+		}
+
+		public Address build() {
+			return new Address(this);
+		}
+
+	}
+
+	public int getAddressId() {
+		return addressId;
+>>>>>>> refs/remotes/origin/master
 	}
 
 	public String getStreetName() {

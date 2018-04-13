@@ -38,7 +38,11 @@ public class LogConnection {
 
 		try {
 
+<<<<<<< HEAD
 			fh = new FileHandler("log.xml",true); // Remove true to get a new xmlFile on every run. true means append
+=======
+			fh = new FileHandler("log.xml", true); // Remove true to get a new xmlFile on every run. true means append
+>>>>>>> refs/remotes/origin/master
 													// to the previous logs
 			fh.setLevel(Level.ALL);
 			fh.setFormatter(sf);

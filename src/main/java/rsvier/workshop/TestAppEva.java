@@ -36,7 +36,11 @@ public class TestAppEva {
 			PersonDAO personDAO = new PersonDAOImp();
 			personDAO.createPerson(person);
 			
+<<<<<<< HEAD
 			person = personDAO.getPersonByAccountId(account2.getAccountId());
+=======
+			person = personDAO.getPersonById(account2.getAccountId());
+>>>>>>> refs/remotes/origin/master
 			// deze mag ook: person = personDAO.getPersonByLastName("poafe");
 			
 			//create an address in the database

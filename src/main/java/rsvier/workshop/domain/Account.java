@@ -51,7 +51,11 @@ public class Account {
 	@Override
 
 	public String toString() {
+<<<<<<< HEAD
 		return "Account ID = " + getAccountId()+ " Email = "  + getEmail() + " Password = " + getPassword();
+=======
+		return " Email = "  + getEmail() + " Password = " + getPassword();
+>>>>>>> refs/remotes/origin/master
 	
 	}
 	

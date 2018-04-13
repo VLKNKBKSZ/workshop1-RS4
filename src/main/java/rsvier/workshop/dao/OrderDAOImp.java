@@ -24,7 +24,6 @@ public class OrderDAOImp implements OrderDAO {
 				ResultSet resultSet = preparedStatement.executeQuery();) {
 			while (resultSet.next()) {
 				Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
-<<<<<<< HEAD
 				orderBuilder.orderId(resultSet.getInt(1));
 				Person person = personDAO.getPersonById(resultSet.getInt(2));
 				orderBuilder.person(person);
@@ -88,71 +87,6 @@ public class OrderDAOImp implements OrderDAO {
 				if (resultSet.next()) {
 					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 					orderBuilder.orderId(resultSet.getInt(1));
-=======
-				orderBuilder.id(resultSet.getInt(1));
-				Person person = personDAO.getPersonById(resultSet.getInt(2));
-				orderBuilder.person(person);
-				orderBuilder.dateTime(resultSet.getTimestamp(3));
-				Order order = orderBuilder.build();
-				orderList.add(order);
-
-			}
-			logger.log(Level.INFO, "List successfully returned");
-			return orderList;
-		} catch (SQLException e) {
-			logger.log(Level.WARNING, "SQL exception occured", e);
-
-		} catch (Exception ex) {
-			logger.log(Level.WARNING, "Exception occured", ex);
-		}
-
-		return null;
-	}
-
-	@Override
-	public List<Order> getAllOrdersFromPerson(Person person) {
-		List<Order> orderList = new ArrayList<>();
-		String query = "SELECT * FROM order_table WHERE person_id = ?;";
-
-		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
-			preparedStatement.setInt(1, person.getPersonId());
-			try (ResultSet resultSet = preparedStatement.executeQuery();) {
-				while (resultSet.next()) {
-					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
-					orderBuilder.id(resultSet.getInt(1));
-					orderBuilder.person(personDAO.getPersonById(resultSet.getInt(2)));
-					orderBuilder.dateTime(resultSet.getTimestamp(3));
-					Order order = orderBuilder.build();
-					orderList.add(order);
-
-				}
-			}
-			logger.log(Level.INFO, "List successfully returned");
-			return orderList;
-		} catch (SQLException e) {
-			logger.log(Level.WARNING, "SQL exception occured", e);
-
-		} catch (Exception ex) {
-			logger.log(Level.WARNING, "Exception occured", ex);
-		}
-
-		return null;
-	}
-
-	@Override
-	public Order getOrderById(int orderId) {
-		String query = "SELECT * FROM order_table WHERE order_table_id =?";
-		Order order = null;
-
-		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-			preparedStatement.setInt(1, orderId);
-			try (ResultSet resultSet = preparedStatement.executeQuery()) {
-				if (resultSet.next()) {
-					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
-					orderBuilder.id(resultSet.getInt(1));
->>>>>>> refs/remotes/origin/master
 					Person person = personDAO.getPersonById(resultSet.getInt(2));
 					orderBuilder.person(person);
 					orderBuilder.dateTime(resultSet.getTimestamp(3));

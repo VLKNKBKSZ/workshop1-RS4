@@ -1,6 +1,7 @@
 package workshop1;
 
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import java.sql.*;
@@ -81,18 +82,20 @@ public class AccountDAOTest {
 
 	@Test
 	public void testUpdateAccount() {
-		Account account = new Account();
-		account.setAccountId(2);
+		Account account = accountDao.getAccount("hippo@gmail.com","5678");
+		
 		account.setPassword("55555");
+		
 		accountDao.updateAccount(account);
 
 		try {
 			Connection conn = DatabaseConnectionXML.getConnection();
 			String query = "SELECT * from account WHERE account_id = 2";
-			PreparedStatement ps = conn.prepareStatement(query);
-			ResultSet rs = ps.executeQuery();
-
-			assertEquals("55555", rs.getString(3));
+			Statement statement = conn.createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+if(resultSet.next()) {
+			assertEquals("55555", resultSet.getString(3));
+}
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -108,12 +111,16 @@ public class AccountDAOTest {
 
 		try {
 			Connection conn = DatabaseConnectionXML.getConnection();
-			String query = "DElETE FROM account WHERE account_id = 2";
+			String query = "SELECT * FROM account WHERE account_id = 2";
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-			rs.next();
+			ResultSet resultSet = stmt.executeQuery(query);
+			if(resultSet.next()) {
+				assertNull("Null",resultSet.getInt(1));
+			}
+			
 		} catch (SQLException e) {
 
+			
 			e.printStackTrace();
 		}
 	}

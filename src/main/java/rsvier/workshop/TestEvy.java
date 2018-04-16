@@ -1,4 +1,3 @@
-
 package rsvier.workshop;
 
 import java.math.BigDecimal;
@@ -25,6 +24,7 @@ public class TestEvy {
 		OrderLineDAO orderLineDao = new OrderLineDAOImp();
 
 		// person 1
+
 /*
 		Account account1 = new Account("evy@gmail.com", "123456");
 		Address address1 = new Address.AddressBuilder().streetName("Bakemakade").houseNumber(108).postalCode("3000ME")
@@ -47,8 +47,7 @@ public class TestEvy {
 		
 
 		// Person 2
-		
-		
+
 
 		//	Account account2 = new Account("appie@gmail.com", "678910");
 // @Test 1 Create account = successful
@@ -239,5 +238,6 @@ public class TestEvy {
 		//OrderLine orderLineUpdate = new OrderLine.OrderLineBuilder(orderLineDatabase).numberOfProducts(2).build();
 		//System.out.println((orderLineUpdate.getNumber()));
 		//orderLineDao.updateOrderLine(orderLineUpdate);
+
 	}
 }

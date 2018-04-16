@@ -31,12 +31,13 @@ public class AddressDAOImp implements AddressDAO {
 				Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 				addressBuilder.addressId(resultSet.getInt(1));
 				addressBuilder.personId(resultSet.getInt(2));
-				addressBuilder.streetName(resultSet.getString(3));
-				addressBuilder.houseNumber(resultSet.getInt(4));
-				addressBuilder.additionalHouseNumber(resultSet.getInt(5));
-				addressBuilder.postalCode(resultSet.getString(6));
-				addressBuilder.city(resultSet.getString(7));
-				addressBuilder.country(resultSet.getString(8));
+				addressBuilder.addressType(resultSet.getString(3));
+				addressBuilder.streetName(resultSet.getString(4));
+				addressBuilder.houseNumber(resultSet.getInt(5));
+				addressBuilder.additionalHouseNumber(resultSet.getInt(6));
+				addressBuilder.postalCode(resultSet.getString(7));
+				addressBuilder.city(resultSet.getString(8));
+				addressBuilder.country(resultSet.getString(9));
 
 				// Create an address object with the all the set properties
 				Address address = addressBuilder.build();
@@ -77,13 +78,13 @@ public class AddressDAOImp implements AddressDAO {
 					Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 					addressBuilder.addressId(resultSet.getInt(1));
 					addressBuilder.personId(resultSet.getInt(2));
-					addressBuilder.streetName(resultSet.getString(3));
-					addressBuilder.houseNumber(resultSet.getInt(4));
-					addressBuilder.additionalHouseNumber(resultSet.getInt(5));
-					addressBuilder.postalCode(resultSet.getString(6));
-					addressBuilder.city(resultSet.getString(7));
-					addressBuilder.country(resultSet.getString(8));
-					address = addressBuilder.build();
+					addressBuilder.addressType(resultSet.getString(3));
+					addressBuilder.streetName(resultSet.getString(4));
+					addressBuilder.houseNumber(resultSet.getInt(5));
+					addressBuilder.additionalHouseNumber(resultSet.getInt(6));
+					addressBuilder.postalCode(resultSet.getString(7));
+					addressBuilder.city(resultSet.getString(8));
+					addressBuilder.country(resultSet.getString(9));
 				}
 				
 				logger.log(Level.INFO, "Address succesfully returned");
@@ -102,19 +103,20 @@ public class AddressDAOImp implements AddressDAO {
 
 	public void createAddress(Address address) {
 
-		String query = "INSERT INTO address (person_id, street_name,house_number,additional_house_number,postal_code,city,country) "
-				+ "VALUES (?,?,?,?,?,?,?)";
+		String query = "INSERT INTO address (person_id, address_type, street_name,house_number,additional_house_number,postal_code,city,country) "
+				+ "VALUES (?,?,?,?,?,?,?,?)";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 			
 			preparedStatement.setInt(1, address.getPersonId());
-			preparedStatement.setString(2, address.getStreetName());
-			preparedStatement.setInt(3, address.getHouseNumber());
-			preparedStatement.setInt(4, address.getAdditionalHouseNumber());
-			preparedStatement.setString(5, address.getPostalCode());
-			preparedStatement.setString(6, address.getCity());
-			preparedStatement.setString(7, address.getCountry());
+			preparedStatement.setString(2, address.getAddressType());
+			preparedStatement.setString(3, address.getStreetName());
+			preparedStatement.setInt(4, address.getHouseNumber());
+			preparedStatement.setInt(5, address.getAdditionalHouseNumber());
+			preparedStatement.setString(6, address.getPostalCode());
+			preparedStatement.setString(7, address.getCity());
+			preparedStatement.setString(8, address.getCountry());
 			
 			preparedStatement.executeUpdate();
 			
@@ -132,19 +134,20 @@ public class AddressDAOImp implements AddressDAO {
 	public void updateAddress(Address address) {
 
 		String query = "UPDATE address "
-				+ "SET street_name = ?,house_number = ?,additional_house_number = ?,postal_code = ?,city = ?,country = ? "
+				+ "SET address_type = ?, street_name = ?,house_number = ?,additional_house_number = ?,postal_code = ?,city = ?,country = ? "
 				+ "WHERE address_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
-
-			preparedStatement.setString(1, address.getStreetName());
-			preparedStatement.setInt(2, address.getHouseNumber());
-			preparedStatement.setInt(3, address.getAdditionalHouseNumber());
-			preparedStatement.setString(4, address.getPostalCode());
-			preparedStatement.setString(5, address.getCity());
-			preparedStatement.setString(6, address.getCountry());
-			preparedStatement.setInt(7, address.getAddressId());
+			
+			preparedStatement.setString(1,  address.getAddressType());
+			preparedStatement.setString(2, address.getStreetName());
+			preparedStatement.setInt(3, address.getHouseNumber());
+			preparedStatement.setInt(4, address.getAdditionalHouseNumber());
+			preparedStatement.setString(5, address.getPostalCode());
+			preparedStatement.setString(6, address.getCity());
+			preparedStatement.setString(7, address.getCountry());
+			preparedStatement.setInt(8, address.getAddressId());
 
 			preparedStatement.executeUpdate();
 			

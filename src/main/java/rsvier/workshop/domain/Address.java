@@ -4,6 +4,7 @@ public class Address {
 
 	private int addressId;
 	private int personId;
+	private String addressType;
 	private String streetName;
 	private int houseNumber;
 	private int additionalHouseNumber;
@@ -18,6 +19,7 @@ public class Address {
 
 	private Address(AddressBuilder builder) {
 		this.addressId = builder.addressId;
+		this.addressType = builder.addressType;
 		this.personId = builder.personId;
 		this.streetName = builder.streetName;
 		this.houseNumber = builder.houseNumber;
@@ -32,6 +34,7 @@ public class Address {
 
 		private int addressId;
 		private int personId;
+		private String addressType;
 		private String streetName;
 		private int houseNumber;
 		private int additionalHouseNumber;
@@ -46,6 +49,7 @@ public class Address {
 			
 			this.addressId = address.addressId;
 			this.personId = address.personId;
+			this.addressType = address.addressType;
 			this.streetName = address.streetName;
 			this.houseNumber = address.houseNumber;
 			this.additionalHouseNumber = address.additionalHouseNumber;
@@ -66,6 +70,11 @@ public class Address {
 			return this;
 		}
 
+		public AddressBuilder addressType(String addressType) {
+			this.addressType = addressType;
+			return this;
+		}
+		
 		public AddressBuilder streetName(String streetName) {
 			this.streetName = streetName;
 			return this;
@@ -109,6 +118,10 @@ public class Address {
 	public int getPersonId() {
 		return personId;
 	}
+	
+	public String getAddressType() {
+		return addressType;
+	}
 
 	public String getStreetName() {
 		return streetName;
@@ -140,7 +153,7 @@ public class Address {
 	
 	@Override
 	public String toString() {
-		return   getStreetName() + " " + getHouseNumber() + " " + getAdditionalHouseNumber() + " "
+		return  "Address: " + getAddressType() + "-address, " + getStreetName() + " " + getHouseNumber() + " " + getAdditionalHouseNumber() + " "
 				+ getPostalCode() + " " + getCity() + " " + getCountry() + " ";
 	}
 

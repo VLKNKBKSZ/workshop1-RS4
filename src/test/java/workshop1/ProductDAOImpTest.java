@@ -1,7 +1,6 @@
 package workshop1;
 
 import static org.junit.Assert.assertNull;
-//import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.math.*;
 import java.sql.*;

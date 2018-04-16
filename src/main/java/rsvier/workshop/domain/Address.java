@@ -7,7 +7,7 @@ public class Address {
 	private String addressType;
 	private String streetName;
 	private int houseNumber;
-	private int additionalHouseNumber;
+	private String additionalHouseNumber;
 	private String postalCode;
 	private String city;
 	private String country;
@@ -37,7 +37,7 @@ public class Address {
 		private String addressType;
 		private String streetName;
 		private int houseNumber;
-		private int additionalHouseNumber;
+		private String additionalHouseNumber;
 		private String postalCode;
 		private String city;
 		private String country;
@@ -85,7 +85,7 @@ public class Address {
 			return this;
 		}
 
-		public AddressBuilder additionalHouseNumber(int additionalHouseNumber) {
+		public AddressBuilder additionalHouseNumber(String additionalHouseNumber) {
 			this.additionalHouseNumber = additionalHouseNumber;
 			return this;
 		}
@@ -131,7 +131,7 @@ public class Address {
 		return houseNumber;
 	}
 
-	public int getAdditionalHouseNumber() {
+	public String getAdditionalHouseNumber() {
 		return additionalHouseNumber;
 	}
 

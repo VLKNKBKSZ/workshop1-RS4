@@ -34,7 +34,7 @@ public class AddressDAOImp implements AddressDAO {
 				addressBuilder.addressType(resultSet.getString(3));
 				addressBuilder.streetName(resultSet.getString(4));
 				addressBuilder.houseNumber(resultSet.getInt(5));
-				addressBuilder.additionalHouseNumber(resultSet.getInt(6));
+				addressBuilder.additionalHouseNumber(resultSet.getString(6));
 				addressBuilder.postalCode(resultSet.getString(7));
 				addressBuilder.city(resultSet.getString(8));
 				addressBuilder.country(resultSet.getString(9));
@@ -81,7 +81,7 @@ public class AddressDAOImp implements AddressDAO {
 					addressBuilder.addressType(resultSet.getString(3));
 					addressBuilder.streetName(resultSet.getString(4));
 					addressBuilder.houseNumber(resultSet.getInt(5));
-					addressBuilder.additionalHouseNumber(resultSet.getInt(6));
+					addressBuilder.additionalHouseNumber(resultSet.getString(6));
 					addressBuilder.postalCode(resultSet.getString(7));
 					addressBuilder.city(resultSet.getString(8));
 					addressBuilder.country(resultSet.getString(9));
@@ -113,7 +113,7 @@ public class AddressDAOImp implements AddressDAO {
 			preparedStatement.setString(2, address.getAddressType());
 			preparedStatement.setString(3, address.getStreetName());
 			preparedStatement.setInt(4, address.getHouseNumber());
-			preparedStatement.setInt(5, address.getAdditionalHouseNumber());
+			preparedStatement.setString(5, address.getAdditionalHouseNumber());
 			preparedStatement.setString(6, address.getPostalCode());
 			preparedStatement.setString(7, address.getCity());
 			preparedStatement.setString(8, address.getCountry());
@@ -143,7 +143,7 @@ public class AddressDAOImp implements AddressDAO {
 			preparedStatement.setString(1,  address.getAddressType());
 			preparedStatement.setString(2, address.getStreetName());
 			preparedStatement.setInt(3, address.getHouseNumber());
-			preparedStatement.setInt(4, address.getAdditionalHouseNumber());
+			preparedStatement.setString(4, address.getAdditionalHouseNumber());
 			preparedStatement.setString(5, address.getPostalCode());
 			preparedStatement.setString(6, address.getCity());
 			preparedStatement.setString(7, address.getCountry());

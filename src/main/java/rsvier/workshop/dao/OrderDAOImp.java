@@ -105,12 +105,13 @@ public class OrderDAOImp implements OrderDAO {
 	public int createOrder(Order order, Person person) {
 		int generatedId = 0;
 
-		String query = "INSERT INTO order_table (person_id) VALUES (?);";
+		String query = "INSERT INTO order_table (person_id, total_price) VALUES (?,?);";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 
 			preparedStatement.setInt(1, person.getPersonId());
+			preparedStatement.setBigDecimal(2, order.getTotalPrice());
 			preparedStatement.executeUpdate();
 
 			try (ResultSet resultSet = preparedStatement.getGeneratedKeys();) {

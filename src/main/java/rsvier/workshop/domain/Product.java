@@ -101,8 +101,8 @@ public class Product {
 	@Override
 	public String toString() {
 
-		return "Id:" + getProductId() + " Name:" + getName() + " Price:" + getPrice() + " Stock:" + getStock()
-				+ " DateTime:" + getTimeStamp();
+		return "Id:" + getProductId() + " Naam:" + getName() + " Prijs:" + getPrice() + " Voorraad:" + getStock()
+				+ " Datum_Tijd:" + getTimeStamp();
 
 	}
 

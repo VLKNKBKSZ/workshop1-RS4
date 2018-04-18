@@ -42,10 +42,6 @@ public class TestVolkan {
 		Order order = new Order.OrderBuilder().person(personDAO.getPersonByAccountId(generatedIdPerson)).totalPrice(sum)
 				.build();
 		int generatedIdOfOrder = orderDAO.createOrder(order, personDAO.getPersonById(generatedId));
-		Order order2 = orderDAO.getOrderById(generatedIdOfOrder);
-		OrderLine.OrderLineBuilder newOrderLine = new OrderLine.OrderLineBuilder(orderLine1);
-		//OrderLine orderLine2 = newOrderLine.order(orderDAO.getOrderById(generatedIdOfOrder)).build();
-		//orderLineDAO.createOrderLine(orderLine2);
 
 	}
 

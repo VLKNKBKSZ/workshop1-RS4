@@ -168,7 +168,7 @@ public class AccountDAOImp implements AccountDAO {
 				if(resultSet.next()) {
 					
 					if((email.equals(resultSet.getString(2))) && (password.equals(resultSet.getString(3))) ) {
-						logger.log(Level.INFO, "Account succesfully deleted");
+						logger.log(Level.INFO, "Login succesful");
 						System.out.println("Login succesful ");
 						return true;
 						

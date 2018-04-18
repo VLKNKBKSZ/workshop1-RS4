@@ -9,7 +9,7 @@ public class EvaTestsMore {
 
 	public static void main(String[] args) {
 		
-		Account account1 = new Account("eva@eva", "wacht");
+		/*Account account1 = new Account("eva@eva", "wacht");
 		AccountDAO accountDAO = new AccountDAOImp();
 		int accountIdeetje = accountDAO.createAccount(account1);
 		
@@ -74,7 +74,7 @@ public class EvaTestsMore {
 		//deleteAddress
 		//deleteProduct
 		//deleteOrder
-		//deleteOrderLine
+		//deleteOrderLine */
 	}
 
 }

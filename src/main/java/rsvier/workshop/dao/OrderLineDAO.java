@@ -9,7 +9,7 @@ public interface OrderLineDAO {
 	public List<OrderLine> getAllOrderLinesFromProduct(Product product);
 	public List<OrderLine> getAllOrderLinesFromOrder(Order order);
 	public OrderLine getOrderLine(int orderLineId);
-	public void createOrderLine(OrderLine orderLine);
+	public void createOrderLine(List<OrderLine> orderLines, int orderId);
 	public void deleteOrderLine(OrderLine orderLine);
 	public void updateOrderLine(OrderLine orderLine);
 	

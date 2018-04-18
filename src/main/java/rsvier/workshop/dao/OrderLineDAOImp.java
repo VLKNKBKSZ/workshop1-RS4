@@ -24,8 +24,6 @@ public class OrderLineDAOImp implements OrderLineDAO {
 			while (resultSet.next()) {
 				OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
 				orderLineBuilder.orderLineId(resultSet.getInt(1));
-				Order order = orderDAO.getOrderById(resultSet.getInt(2));
-				orderLineBuilder.order(order);
 				Product product = productDAO.getProductById(resultSet.getInt(3));
 				orderLineBuilder.product(product);
 				orderLineBuilder.numberOfProducts(resultSet.getInt(4));
@@ -56,8 +54,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 				while (resultSet.next()) {
 					OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
 					orderLineBuilder.orderLineId(resultSet.getInt(1));
-					orderLineBuilder.order(orderDAO.getOrderById(resultSet.getInt(2)));
-					Product product = productDAO.getProductById(resultSet.getInt(3));
+					Product product = productDAO.getProductById(resultSet.getInt(2));
 					orderLineBuilder.product(product);
 					orderLineBuilder.numberOfProducts(resultSet.getInt(4));
 					orderLineBuilder.dateTime(resultSet.getTimestamp(5));
@@ -88,8 +85,6 @@ public class OrderLineDAOImp implements OrderLineDAO {
 				while (resultSet.next()) {
 					OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
 					orderLineBuilder.orderLineId(resultSet.getInt(1));
-					Order order = orderDAO.getOrderById(resultSet.getInt(2));
-					orderLineBuilder.order(order);
 					orderLineBuilder.product(productDAO.getProductById(resultSet.getInt(3)));
 					orderLineBuilder.numberOfProducts(resultSet.getInt(4));
 					orderLineBuilder.dateTime(resultSet.getTimestamp(5));
@@ -119,8 +114,6 @@ public class OrderLineDAOImp implements OrderLineDAO {
 				if (resultSet.next()) {
 					OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
 					orderLineBuilder.orderLineId(resultSet.getInt(1));
-					Order order = orderDAO.getOrderById(resultSet.getInt(2));
-					orderLineBuilder.order(order);
 					Product product = productDAO.getProductById(resultSet.getInt(3));
 					orderLineBuilder.product(product);
 					orderLineBuilder.numberOfProducts(resultSet.getInt(4));
@@ -138,17 +131,22 @@ public class OrderLineDAOImp implements OrderLineDAO {
 	}
 
 	@Override
-	public void createOrderLine(OrderLine orderLine) {
+	public void createOrderLine(List<OrderLine> orderLines, int orderId) {
 		String query = "INSERT INTO orderline (order_table_id, product_id , number_of_products) VALUES (?, ? ,?)";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+			
+			for(OrderLine orderLine: orderLines) {
+				preparedStatement.setInt(1, orderId);
+				preparedStatement.setInt(2, orderLine.getProduct().getProductId());
+				preparedStatement.setInt(3, orderLine.getNumber());
 
-			preparedStatement.setInt(1, orderLine.getOrder().getOrderId());
-			preparedStatement.setInt(2, orderLine.getProduct().getProductId());
-			preparedStatement.setInt(3, orderLine.getNumber());
+				preparedStatement.executeUpdate();
+				
+			}
 
-			preparedStatement.executeUpdate();
+			
 			logger.log(Level.INFO, "OrderLine succesfully created.");
 			
 			} catch (SQLException e) {
@@ -176,14 +174,12 @@ public class OrderLineDAOImp implements OrderLineDAO {
 
 	@Override
 	public void updateOrderLine(OrderLine orderLine) {
-		String query = "UPDATE orderline SET product_id = ? , number_of_products = ? WHERE id=?;";
+		String query = "UPDATE orderline SET number_of_products = ? WHERE orderline_id=?;";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
-			preparedStatement.setInt(1, orderLine.getOrder().getOrderId());
-			preparedStatement.setInt(2, orderLine.getProduct().getProductId());
-			preparedStatement.setInt(3, orderLine.getNumber());
-			preparedStatement.setInt(4, orderLine.getOrderLineId());
+			preparedStatement.setInt(1, orderLine.getNumber());
+			preparedStatement.setInt(2, orderLine.getOrderLineId());
 			preparedStatement.executeUpdate();
 			logger.log(Level.INFO, "OrderLine succesfully updated");
 			System.out.println("OrderLine successfully updated");

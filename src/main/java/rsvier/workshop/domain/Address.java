@@ -40,6 +40,7 @@ public class Address {
 		private String country;
 
 		public AddressBuilder() {
+			
 		}
 		// Add another constructor to copy AddressBuilder properties from another Address object.
 		public AddressBuilder(Address address) {
@@ -65,7 +66,7 @@ public class Address {
 			this.personId = personId;
 			return this;
 		}
-
+		
 		public AddressBuilder streetName(String streetName) {
 			this.streetName = streetName;
 			return this;
@@ -85,6 +86,7 @@ public class Address {
 			this.postalCode = postalCode;
 			return this;
 		}
+		
 
 		public AddressBuilder city(String city) {
 			this.city = city;
@@ -110,6 +112,7 @@ public class Address {
 		return personId;
 	}
 
+	
 	public String getStreetName() {
 		return streetName;
 	}
@@ -165,3 +168,4 @@ public class Address {
 	
 
 }
+

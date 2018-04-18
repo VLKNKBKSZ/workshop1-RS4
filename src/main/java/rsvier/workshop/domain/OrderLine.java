@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 public class OrderLine {
 
 	private int orderLineId;
-	private Order order;
 	private Product product;
 	private int numberOfProducts;
 	private Timestamp dateTime;
@@ -22,7 +21,6 @@ public class OrderLine {
 	private OrderLine(OrderLineBuilder builder) {
 
 		this.orderLineId = builder.orderLineId;
-		this.order = builder.order;
 		this.product = builder.product;
 		this.numberOfProducts = builder.numberOfProducts;
 		this.dateTime = builder.dateTime;
@@ -32,7 +30,6 @@ public class OrderLine {
 	public static class OrderLineBuilder {
 
 		private int orderLineId;
-		private Order order;
 		private Product product;
 		private int numberOfProducts;
 		private Timestamp dateTime;
@@ -43,7 +40,6 @@ public class OrderLine {
 		public OrderLineBuilder(OrderLine orderLine) {
 
 			this.orderLineId = orderLine.orderLineId;
-			this.order = orderLine.order;
 			this.product = orderLine.product;
 			this.numberOfProducts = orderLine.numberOfProducts;
 			this.dateTime = orderLine.dateTime;
@@ -51,11 +47,6 @@ public class OrderLine {
 
 		public OrderLineBuilder orderLineId(int orderLineId) {
 			this.orderLineId = orderLineId;
-			return this;
-		}
-
-		public OrderLineBuilder order(Order order) {
-			this.order = order;
 			return this;
 		}
 
@@ -82,10 +73,6 @@ public class OrderLine {
 
 	public int getOrderLineId() {
 		return orderLineId;
-	}
-
-	public Order getOrder() {
-		return order;
 	}
 
 	public Product getProduct() {

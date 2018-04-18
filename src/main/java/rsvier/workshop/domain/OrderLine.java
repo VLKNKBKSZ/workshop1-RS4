@@ -39,15 +39,16 @@ public class OrderLine {
 
 		public OrderLineBuilder() {
 		}
-		
+
 		public OrderLineBuilder(OrderLine orderLine) {
-			
+
 			this.orderLineId = orderLine.orderLineId;
 			this.order = orderLine.order;
 			this.product = orderLine.product;
 			this.numberOfProducts = orderLine.numberOfProducts;
 			this.dateTime = orderLine.dateTime;
 		}
+
 		public OrderLineBuilder orderLineId(int orderLineId) {
 			this.orderLineId = orderLineId;
 			return this;
@@ -62,7 +63,6 @@ public class OrderLine {
 			this.product = product;
 			return this;
 		}
-
 
 		public OrderLineBuilder numberOfProducts(int numberOfProducts) {
 			this.numberOfProducts = numberOfProducts;
@@ -106,8 +106,8 @@ public class OrderLine {
 	@Override
 	public String toString() {
 		return "Id:" + getOrderLineId() + " Name:" + product.getName() + " Price:" + getProduct().getPrice()
-		/* + " OrderId " + order.getOrderId() */+ " Total Price:"
-				+ getProduct().getPrice().multiply(new BigDecimal(getNumber())) + " Datetime: " + getTimeStamp(); 
+		/* + " OrderId " + order.getOrderId() */ + " Total Price:"
+				+ getProduct().getPrice().multiply(new BigDecimal(getNumber())) + " Datetime: " + getTimeStamp();
 	}
 
 }

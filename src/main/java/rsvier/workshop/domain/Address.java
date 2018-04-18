@@ -4,9 +4,10 @@ public class Address {
 
 	private int addressId;
 	private int personId;
+	private String addressType;
 	private String streetName;
 	private int houseNumber;
-	private int additionalHouseNumber;
+	private String additionalHouseNumber;
 	private String postalCode;
 	private String city;
 	private String country;
@@ -18,6 +19,7 @@ public class Address {
 
 	private Address(AddressBuilder builder) {
 		this.addressId = builder.addressId;
+		this.addressType = builder.addressType;
 		this.personId = builder.personId;
 		this.streetName = builder.streetName;
 		this.houseNumber = builder.houseNumber;
@@ -32,9 +34,10 @@ public class Address {
 
 		private int addressId;
 		private int personId;
+		private String addressType;
 		private String streetName;
 		private int houseNumber;
-		private int additionalHouseNumber;
+		private String additionalHouseNumber;
 		private String postalCode;
 		private String city;
 		private String country;
@@ -47,6 +50,7 @@ public class Address {
 			
 			this.addressId = address.addressId;
 			this.personId = address.personId;
+			this.addressType = address.addressType;
 			this.streetName = address.streetName;
 			this.houseNumber = address.houseNumber;
 			this.additionalHouseNumber = address.additionalHouseNumber;
@@ -66,6 +70,13 @@ public class Address {
 			this.personId = personId;
 			return this;
 		}
+
+
+		public AddressBuilder addressType(String addressType) {
+			this.addressType = addressType;
+			return this;
+		}
+
 		
 		public AddressBuilder streetName(String streetName) {
 			this.streetName = streetName;
@@ -77,7 +88,7 @@ public class Address {
 			return this;
 		}
 
-		public AddressBuilder additionalHouseNumber(int additionalHouseNumber) {
+		public AddressBuilder additionalHouseNumber(String additionalHouseNumber) {
 			this.additionalHouseNumber = additionalHouseNumber;
 			return this;
 		}
@@ -111,6 +122,10 @@ public class Address {
 	public int getPersonId() {
 		return personId;
 	}
+	
+	public String getAddressType() {
+		return addressType;
+	}
 
 	
 	public String getStreetName() {
@@ -121,7 +136,7 @@ public class Address {
 		return houseNumber;
 	}
 
-	public int getAdditionalHouseNumber() {
+	public String getAdditionalHouseNumber() {
 		return additionalHouseNumber;
 	}
 
@@ -143,7 +158,7 @@ public class Address {
 	
 	@Override
 	public String toString() {
-		return   getStreetName() + " " + getHouseNumber() + " " + getAdditionalHouseNumber() + " "
+		return  "Address: " + getAddressType() + "-address, " + getStreetName() + " " + getHouseNumber() + " " + getAdditionalHouseNumber() + " "
 				+ getPostalCode() + " " + getCity() + " " + getCountry() + " ";
 	}
 

@@ -16,5 +16,6 @@ public interface AccountDAO {
 	public void updateAccount(Account account);
 
 	public void deleteAccount(Account account);
+	public boolean login(String email, String password);
 
 }

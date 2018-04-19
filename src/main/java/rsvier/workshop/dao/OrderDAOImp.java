@@ -1,7 +1,8 @@
 package rsvier.workshop.dao;
 
 import java.sql.*;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.*;
 import rsvier.workshop.domain.Order;
@@ -11,8 +12,9 @@ import rsvier.workshop.utility.LogConnection;
 
 public class OrderDAOImp implements OrderDAO {
 
-	Logger logger = LogConnection.getLogger();
-	PersonDAOImp personDAO = new PersonDAOImp();
+	private Logger logger = LogConnection.getLogger();
+	private PersonDAOImp personDAO = new PersonDAOImp();
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	@Override
 	public List<Order> getAllOrders() {
@@ -27,7 +29,9 @@ public class OrderDAOImp implements OrderDAO {
 				orderBuilder.orderId(resultSet.getInt(1));
 				Person person = personDAO.getPersonById(resultSet.getInt(2));
 				orderBuilder.person(person);
-				orderBuilder.dateTime(resultSet.getTimestamp(3));
+				orderBuilder.totalPrice(resultSet.getBigDecimal(3));
+				LocalDate parsedDate = LocalDate.parse(resultSet.getString(4), formatter);
+				orderBuilder.getOrderDate(parsedDate);
 				Order order = orderBuilder.build();
 				orderList.add(order);
 
@@ -57,7 +61,9 @@ public class OrderDAOImp implements OrderDAO {
 					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 					orderBuilder.orderId(resultSet.getInt(1));
 					orderBuilder.person(personDAO.getPersonById(resultSet.getInt(2)));
-					orderBuilder.dateTime(resultSet.getTimestamp(3));
+					orderBuilder.totalPrice(resultSet.getBigDecimal(3));
+					LocalDate parsedDate = LocalDate.parse(resultSet.getString(4), formatter);
+					orderBuilder.getOrderDate(parsedDate);
 					Order order = orderBuilder.build();
 					orderList.add(order);
 
@@ -89,7 +95,9 @@ public class OrderDAOImp implements OrderDAO {
 					orderBuilder.orderId(resultSet.getInt(1));
 					Person person = personDAO.getPersonById(resultSet.getInt(2));
 					orderBuilder.person(person);
-					orderBuilder.dateTime(resultSet.getTimestamp(3));
+					orderBuilder.totalPrice(resultSet.getBigDecimal(3));
+					LocalDate parsedDate = LocalDate.parse(resultSet.getString(4), formatter);
+					orderBuilder.getOrderDate(parsedDate);
 					order = orderBuilder.build();
 				}
 				logger.log(Level.INFO, "Order succesfully returned");
@@ -105,13 +113,14 @@ public class OrderDAOImp implements OrderDAO {
 	public int createOrder(Order order, Person person) {
 		int generatedId = 0;
 
-		String query = "INSERT INTO order_table (person_id, total_price) VALUES (?,?);";
+		String query = "INSERT INTO order_table (person_id, total_price, order_date) VALUES (?,?,?);";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 
 			preparedStatement.setInt(1, person.getPersonId());
 			preparedStatement.setBigDecimal(2, order.getTotalPrice());
+			preparedStatement.setString(3, order.getOrderDate().toString());
 			preparedStatement.executeUpdate();
 
 			try (ResultSet resultSet = preparedStatement.getGeneratedKeys();) {

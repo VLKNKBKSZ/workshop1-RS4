@@ -3,6 +3,7 @@ package rsvier.workshop.domain;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Order {
@@ -11,14 +12,14 @@ public class Order {
 	private List<OrderLine> totalOrderLines;
 	private Person person;
 	private BigDecimal totalPrice;;
-	private Timestamp dateTime;
+	private LocalDate orderDate;
 
 	private Order(OrderBuilder builder) {
 		this.orderId = builder.orderId;
 		this.totalOrderLines = builder.totalOrderLines;
 		this.person = builder.person;
 		this.totalPrice = builder.totalPrice;
-		this.dateTime = builder.dateTime;
+		this.orderDate = builder.orderDate;
 
 	}
 
@@ -28,7 +29,7 @@ public class Order {
 		private List<OrderLine> totalOrderLines;
 		private Person person;
 		private BigDecimal totalPrice;
-		private Timestamp dateTime;
+		private LocalDate orderDate;
 
 		public OrderBuilder() {
 
@@ -39,7 +40,7 @@ public class Order {
 		    this.totalOrderLines = order.getTotalOrderLines();
 		    this.person = order.getPerson();
 		    this.totalPrice = order.getTotalPrice();
-		    this.dateTime = order.getDateTime();
+		    this.orderDate = order.getOrderDate();
 		}
 
 		public OrderBuilder orderId(int orderId) {
@@ -62,8 +63,8 @@ public class Order {
 			return this;
 		}
 
-		public OrderBuilder dateTime(Timestamp dateTime) {
-			this.dateTime = dateTime;
+		public OrderBuilder getOrderDate(LocalDate orderDate) {
+			this.orderDate = orderDate;
 			return this;
 		}
 
@@ -88,18 +89,15 @@ public class Order {
 		return person;
 	}
 
-	public Timestamp getDateTime() {
-		return dateTime;
+	public LocalDate getOrderDate() {
+		return orderDate;
 	}
 
 	public BigDecimal getTotalPrice() {
 		return totalPrice;
 	}
 
-	public String getTimeStamp() {
-		String s = new SimpleDateFormat().format(dateTime);
-		return s;
-	}
+
 
 	// Override the toString method from the Object class.
 

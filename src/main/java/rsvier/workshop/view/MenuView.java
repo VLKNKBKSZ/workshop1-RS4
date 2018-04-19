@@ -18,6 +18,14 @@ public class MenuView {
         }
     }
 
+    public void requestEmailInput() {
+        System.out.print("Vul email adres in: ");
+    }
+
+    public void requestPasswordInput() {
+        System.out.print("Vul wachtwoord in: ");
+    }
+
     public String getStringInput() {
         String s = input.nextLine();
 

@@ -4,8 +4,6 @@ import rsvier.workshop.dao.AccountDAOImp;
 import rsvier.workshop.domain.Account;
 import rsvier.workshop.view.MenuView;
 
-import java.util.Scanner;
-
 public class MenuController {
 
 
@@ -26,9 +24,9 @@ public class MenuController {
     }
 
     private boolean login() {
-        System.out.print("Vul email adres in: ");
+        menuView.requestEmailInput();
         String email = menuView.getStringInput();
-        System.out.print("Vul wachtwoord in: ");
+        menuView.requestPasswordInput();
         String password = menuView.getStringInput();
 
         Account account = accountDAOImp.getAccountLogin(email);

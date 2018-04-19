@@ -20,7 +20,7 @@ public class MainMenuController {
         switch (menuNumber) {
 
             case 0: System.out.println("Thank you, Bye Bye!"); break;
-            case 1: if(login()) {
+            case 1: if(loginCheckAccountValidation()) {
                 //todo open main menu
             } else {
 
@@ -31,13 +31,16 @@ public class MainMenuController {
         }
     }
 
-    private boolean login() {
+    private boolean loginCheckAccountValidation() {
         mainMenuView.requestEmailInput();
         String email = View.getStringInput();
         mainMenuView.requestPasswordInput();
         String password = View.getStringInput();
 
         Account account = accountDAOImp.getAccountLogin(email);
+        if (account == null) {
+            return false;
+        }
         return (account.getPassword().equals(password));
     }
 }

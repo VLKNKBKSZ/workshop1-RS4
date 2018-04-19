@@ -13,6 +13,7 @@ public class Product {
 	private int stock;
 
 	private Product(ProductBuilder builder) {
+		
 		this.productId = builder.productId;
 		this.name = builder.name;
 		this.price = builder.price;
@@ -20,6 +21,7 @@ public class Product {
 	}
 
 	public static class ProductBuilder {
+		
 		private int productId;
 		private String name;
 		private BigDecimal price;
@@ -34,6 +36,7 @@ public class Product {
 		 */
 		
 		public ProductBuilder(Product product) {
+			
 			this.productId = product.productId;
 			this.name = product.name;
 			this.price = product.price;
@@ -41,21 +44,25 @@ public class Product {
 		}
 
 		public ProductBuilder productId(int productId) {
+			
 			this.productId = productId;
 			return this;
 		}
 
 		public ProductBuilder name(String name) {
+			
 			this.name = name;
 			return this;
 		}
 
 		public ProductBuilder price(BigDecimal price) {
+			
 			this.price = price;
 			return this;
 		}
 
 		public ProductBuilder stock(int stock) {
+			
 			this.stock = stock;
 			return this;
 		}
@@ -68,18 +75,22 @@ public class Product {
 	}
 
 	public int getProductId() {
+		
 		return productId;
 	}
 
 	public String getName() {
+		
 		return name;
 	}
 
 	public BigDecimal getPrice() {
+		
 		return price;
 	}
 
 	public int getStock() {
+		
 		return stock;
 	}
 

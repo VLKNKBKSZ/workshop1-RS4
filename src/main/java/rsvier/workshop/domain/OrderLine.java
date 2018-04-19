@@ -42,34 +42,41 @@ public class OrderLine {
 		}
 
 		public OrderLineBuilder orderLineId(int orderLineId) {
+			
 			this.orderLineId = orderLineId;
 			return this;
 		}
 
 		public OrderLineBuilder product(Product product) {
+			
 			this.product = product;
 			return this;
 		}
 
 		public OrderLineBuilder numberOfProducts(int numberOfProducts) {
+			
 			this.numberOfProducts = numberOfProducts;
 			return this;
 		}
 		public OrderLine build() {
+			
 			return new OrderLine(this);
 		}
 
 	}
 
 	public int getOrderLineId() {
+		
 		return orderLineId;
 	}
 
 	public Product getProduct() {
+		
 		return product;
 	}
 
 	public int getNumber() {
+		
 		return numberOfProducts;
 	}
 

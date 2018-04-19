@@ -15,6 +15,7 @@ public class Order {
 	private LocalDate orderDate;
 
 	private Order(OrderBuilder builder) {
+		
 		this.orderId = builder.orderId;
 		this.totalOrderLines = builder.totalOrderLines;
 		this.person = builder.person;
@@ -36,6 +37,7 @@ public class Order {
 		}
 		
 		public OrderBuilder(Order order) {
+			
 		    this.orderId = order.getOrderId();
 		    this.totalOrderLines = order.getTotalOrderLines();
 		    this.person = order.getPerson();
@@ -44,60 +46,70 @@ public class Order {
 		}
 
 		public OrderBuilder orderId(int orderId) {
+			
 			this.orderId = orderId;
 			return this;
 		}
 
 		public OrderBuilder totalOrderLines(List<OrderLine> totalOrderLines) {
+			
 			this.totalOrderLines = totalOrderLines;
 			return this;
 		}
 
 		public OrderBuilder person(Person person) {
+			
 			this.person = person;
 			return this;
 		}
 
 		public OrderBuilder totalPrice(BigDecimal totalPrice) {
+			
 			this.totalPrice = totalPrice;
 			return this;
 		}
 
 		public OrderBuilder getOrderDate(LocalDate orderDate) {
+			
 			this.orderDate = orderDate;
 			return this;
 		}
 
 		public Order build() {
+			
 			return new Order(this);
 		}
 	}
 
 	public int getOrderId() {
+		
 		return orderId;
 	}
 
 	public List<OrderLine> getOrderLine() {
+		
 		return totalOrderLines;
 	}
 
 	public List<OrderLine> getTotalOrderLines() {
+		
 		return totalOrderLines;
 	}
 
 	public Person getPerson() {
+		
 		return person;
 	}
 
 	public LocalDate getOrderDate() {
+		
 		return orderDate;
 	}
 
 	public BigDecimal getTotalPrice() {
+		
 		return totalPrice;
 	}
-
-
 
 	// Override the toString method from the Object class.
 

@@ -4,9 +4,6 @@
 /.classpath
 /log.xml
 src/main/java/rsvier/workshop/utility/DCXML.xml
-/1workshop.iml
-/log.xml.lck
-
 
 #### For IntelliJ ####
 
@@ -14,8 +11,6 @@ src/main/java/rsvier/workshop/utility/DCXML.xml
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
-/.idea
-/idea
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries

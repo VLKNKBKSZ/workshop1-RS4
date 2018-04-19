@@ -16,6 +16,15 @@ public class OrderDAOImp implements OrderDAO {
 	private PersonDAOImp personDAO = new PersonDAOImp();
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+	/*
+	 * Static LocalDate parse(CharSequence text, DateTimeFormatter formatter)
+	 * Obtains an instance of LocalDate from a text string using a specific
+	 * formatter.
+	 * So i use a DateTimeFormatter instance to specify a pattern for the Date that
+	 * is saved in de database.When i retrieve it back, i need a LocalDate so i
+	 * parse the string into a LocalDate with the formatter.
+	 */
+
 	@Override
 	public List<Order> getAllOrders() {
 

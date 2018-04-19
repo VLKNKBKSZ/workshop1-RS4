@@ -3,7 +3,7 @@ package rsvier.workshop.view;
 import java.util.Scanner;
 
 public class MenuView {
-    private Scanner input = new Scanner(System.in);
+    private Scanner userInput = new Scanner(System.in);
     public void printLoginOrCreateNewAccountMenu() {
         System.out.println("Welkom Op Evvo Meubels\r\n" + "\r\n" + "----------------------------------\r\n" + "\r\n"
                 + "1 - Login\r\n" + "2 - Maak een nieuw Account\r\n0 - Verlaat Evvo Meubels ");
@@ -11,7 +11,7 @@ public class MenuView {
 
     public Integer getIntInput(){
         try {
-            return Integer.parseInt(input.nextLine());
+            return Integer.parseInt(userInput.nextLine());
         } catch (NumberFormatException ex) {
             System.out.print("Wrong input, please enter a number: ");
             return getIntInput();
@@ -19,7 +19,7 @@ public class MenuView {
     }
 
     public String getStringInput() {
-        String s = input.nextLine();
+        String s = userInput.nextLine();
 
         if (s == null){
             System.out.print("Please enter a String: ");

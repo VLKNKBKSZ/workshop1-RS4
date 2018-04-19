@@ -2,14 +2,14 @@ package rsvier.workshop.controller;
 
 import rsvier.workshop.dao.AccountDAOImp;
 import rsvier.workshop.domain.Account;
-import rsvier.workshop.view.MenuView;
+import rsvier.workshop.view.MainMenuView;
 import rsvier.workshop.view.View;
 
-public class MenuController {
+public class MainMenuController {
 
 
     private AccountDAOImp accountDAOImp = new AccountDAOImp();
-    private MenuView menuView = new MenuView();
+    private MainMenuView menuView = new MainMenuView();
 
     public void loginMenu(int menuNumber) {
         switch (menuNumber) {
@@ -19,7 +19,7 @@ public class MenuController {
                 //open main menu
             }; break;
             case 2:
-                accountDAOImp.createAccount();
+                //accountDAOImp.createAccount();
                 break;
         }
     }

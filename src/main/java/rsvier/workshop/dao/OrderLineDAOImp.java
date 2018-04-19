@@ -27,7 +27,6 @@ public class OrderLineDAOImp implements OrderLineDAO {
 				Product product = productDAO.getProductById(resultSet.getInt(3));
 				orderLineBuilder.product(product);
 				orderLineBuilder.numberOfProducts(resultSet.getInt(4));
-				orderLineBuilder.dateTime(resultSet.getTimestamp(5));
 				OrderLine orderLine = orderLineBuilder.build();
 				orderLineList.add(orderLine);
 
@@ -57,7 +56,6 @@ public class OrderLineDAOImp implements OrderLineDAO {
 					Product product = productDAO.getProductById(resultSet.getInt(2));
 					orderLineBuilder.product(product);
 					orderLineBuilder.numberOfProducts(resultSet.getInt(4));
-					orderLineBuilder.dateTime(resultSet.getTimestamp(5));
 					OrderLine orderLine = orderLineBuilder.build();
 					orderLineList.add(orderLine);
 
@@ -87,7 +85,6 @@ public class OrderLineDAOImp implements OrderLineDAO {
 					orderLineBuilder.orderLineId(resultSet.getInt(1));
 					orderLineBuilder.product(productDAO.getProductById(resultSet.getInt(3)));
 					orderLineBuilder.numberOfProducts(resultSet.getInt(4));
-					orderLineBuilder.dateTime(resultSet.getTimestamp(5));
 					OrderLine orderLine = orderLineBuilder.build();
 					orderLineList.add(orderLine);
 				}
@@ -117,7 +114,6 @@ public class OrderLineDAOImp implements OrderLineDAO {
 					Product product = productDAO.getProductById(resultSet.getInt(3));
 					orderLineBuilder.product(product);
 					orderLineBuilder.numberOfProducts(resultSet.getInt(4));
-					orderLineBuilder.dateTime(resultSet.getTimestamp(5));
 					orderLine = orderLineBuilder.build();
 
 				}

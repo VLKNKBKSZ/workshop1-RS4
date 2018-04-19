@@ -27,7 +27,6 @@ public class ProductDAOImp implements ProductDAO {
 				productBuilder.name(resultSet.getString(2));
 				productBuilder.price(resultSet.getBigDecimal(3));
 				productBuilder.stock(resultSet.getInt(4));
-				productBuilder.dateTime(resultSet.getTimestamp(5));
 				Product product = productBuilder.build();
 				productList.add(product);
 			}
@@ -55,7 +54,6 @@ public class ProductDAOImp implements ProductDAO {
 					productBuilder.name(resultSet.getString(2));
 					productBuilder.price(resultSet.getBigDecimal(3));
 					productBuilder.stock(resultSet.getInt(4));
-					productBuilder.dateTime(resultSet.getTimestamp(5));
 					product = productBuilder.build();
 
 				}
@@ -88,7 +86,6 @@ public class ProductDAOImp implements ProductDAO {
 					productBuilder.name(resultSet.getString(2));
 					productBuilder.price(resultSet.getBigDecimal(3));
 					productBuilder.stock(resultSet.getInt(4));
-					productBuilder.dateTime(resultSet.getTimestamp(5));
 					product = productBuilder.build();
 				}
 				logger.log(Level.INFO, "List successfully returned");

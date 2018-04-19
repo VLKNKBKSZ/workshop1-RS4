@@ -151,31 +151,61 @@ public class AccountDAOImp implements AccountDAO {
 
 	}
 
-	
+	@Override
+	public Account getAccountLogin(String email) {
+
+		Account account = new Account();
+
+		String query = "SELECT * FROM account WHERE email = ?";
+
+		try (Connection conn = DatabaseConnectionXML.getConnection();
+			 PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+
+			preparedStatement.setString(1, email);
+
+			try (ResultSet resultSet = preparedStatement.executeQuery();) {
+
+				if (resultSet.next()) {
+
+					account.setAccountId(resultSet.getInt(1));
+					account.setEmail(resultSet.getString(2));
+					account.setPassword(resultSet.getString(3));
+				}
+
+			}
+			logger.log(Level.WARNING, "Account successfully returned");
+			return account;
+
+		} catch (SQLException e) {
+			logger.log(Level.WARNING, "SQL exception occurred ", e);
+		}
+
+		return null;
+	}
+
 	@Override
 	public boolean login(String email, String password) {
-		
+
 		String query = "SELECT * FROM account WHERE email = ? AND password = ? ";
-		
+
 		try(Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);	) {
-			
+
 			preparedStatement.setString(1, email);
 			preparedStatement.setString(2, password);
-			
+
 			try(ResultSet resultSet = preparedStatement.executeQuery();){
-				
+
 				if(resultSet.next()) {
-					
+
 					if((email.equals(resultSet.getString(2))) && (password.equals(resultSet.getString(3))) ) {
 						logger.log(Level.INFO, "Login succesful");
 						System.out.println("Login succesful ");
 						return true;
-						
-						
-					} 
+
+					}
 				}
-			
+
 			}
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occurred ", e);

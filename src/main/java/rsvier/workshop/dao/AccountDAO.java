@@ -17,6 +17,9 @@ public interface AccountDAO {
 
 	public void deleteAccount(Account account);
 
+	public Account getAccountLogin(String email);
+
 	public boolean login(String email, String password);
+
 
 }

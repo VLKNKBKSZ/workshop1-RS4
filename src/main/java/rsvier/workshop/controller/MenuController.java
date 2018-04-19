@@ -3,6 +3,7 @@ package rsvier.workshop.controller;
 import rsvier.workshop.dao.AccountDAOImp;
 import rsvier.workshop.domain.Account;
 import rsvier.workshop.view.MenuView;
+import rsvier.workshop.view.View;
 
 public class MenuController {
 
@@ -25,9 +26,9 @@ public class MenuController {
 
     private boolean login() {
         menuView.requestEmailInput();
-        String email = menuView.getStringInput();
+        String email = View.getStringInput();
         menuView.requestPasswordInput();
-        String password = menuView.getStringInput();
+        String password = View.getStringInput();
 
         Account account = accountDAOImp.getAccountLogin(email);
         return (account.getPassword().equals(password));

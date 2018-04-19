@@ -9,25 +9,32 @@ public class MainMenuController {
 
 
     private AccountDAOImp accountDAOImp = new AccountDAOImp();
-    private MainMenuView menuView = new MainMenuView();
+    private MainMenuView mainMenuView = new MainMenuView();
 
-    public void loginMenu(int menuNumber) {
+    public void doLoginMenu() {
+        mainMenuView.printLoginOrCreateNewAccountMenu();
+        loginMenu(View.getIntInput());
+    }
+
+    private void loginMenu(int menuNumber) {
         switch (menuNumber) {
 
             case 0: System.out.println("Thank you, Bye Bye!"); break;
             case 1: if(login()) {
-                //open main menu
-            }; break;
+                //todo open main menu
+            } else {
+
+            } break;
             case 2:
-                //accountDAOImp.createAccount();
+                //todo accountDAOImp.createAccount();
                 break;
         }
     }
 
     private boolean login() {
-        menuView.requestEmailInput();
+        mainMenuView.requestEmailInput();
         String email = View.getStringInput();
-        menuView.requestPasswordInput();
+        mainMenuView.requestPasswordInput();
         String password = View.getStringInput();
 
         Account account = accountDAOImp.getAccountLogin(email);

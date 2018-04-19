@@ -3,9 +3,9 @@ package rsvier.workshop.view;
 import java.util.Scanner;
 
 public class View {
-    private static Scanner userInput = new Scanner(System.in);
+    private Scanner userInput = new Scanner(System.in);
 
-    public static Integer getIntInput(){
+    public Integer getIntInput(){
         try {
             return Integer.parseInt(userInput.nextLine());
         } catch (NumberFormatException ex) {
@@ -14,7 +14,7 @@ public class View {
         }
     }
 
-    public static String getStringInput() {
+    public String getStringInput() {
         String s = userInput.nextLine();
 
         if (s == null){

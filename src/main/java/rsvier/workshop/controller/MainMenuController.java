@@ -10,10 +10,11 @@ public class MainMenuController {
 
     private AccountDAOImp accountDAOImp = new AccountDAOImp();
     private MainMenuView mainMenuView = new MainMenuView();
+    private View view = new View();
 
     public void doLoginMenu() {
         mainMenuView.printLoginOrCreateNewAccountMenu();
-        loginMenu(View.getIntInput());
+        loginMenu(view.getIntInput());
     }
 
     private void loginMenu(int menuNumber) {
@@ -33,9 +34,9 @@ public class MainMenuController {
 
     private boolean loginCheckAccountValidation() {
         mainMenuView.requestEmailInput();
-        String email = View.getStringInput();
+        String email = view.getStringInput();
         mainMenuView.requestPasswordInput();
-        String password = View.getStringInput();
+        String password = view.getStringInput();
 
         Account account = accountDAOImp.getAccountLogin(email);
         if (account == null) {

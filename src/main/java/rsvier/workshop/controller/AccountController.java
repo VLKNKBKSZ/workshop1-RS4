@@ -11,7 +11,7 @@ public class AccountController {
 	private AccountDAO accountDAO = new AccountDAOImp();
 	private AccountView accountView = new AccountView();
 	private Account account;
-	private Validator validator;
+	private Validator validator = new Validator();
 
 	public AccountController() {
 

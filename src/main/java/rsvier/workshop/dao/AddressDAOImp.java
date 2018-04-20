@@ -85,6 +85,7 @@ public class AddressDAOImp implements AddressDAO {
 					addressBuilder.postalCode(resultSet.getString(7));
 					addressBuilder.city(resultSet.getString(8));
 					addressBuilder.country(resultSet.getString(9));
+					address = addressBuilder.build();
 				}
 				
 				logger.log(Level.INFO, "Address succesfully returned");

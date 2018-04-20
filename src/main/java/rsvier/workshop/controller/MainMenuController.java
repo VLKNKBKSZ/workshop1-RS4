@@ -19,14 +19,14 @@ public class MainMenuController {
     private void loginMenu(int menuNumber) {
         switch (menuNumber) {
 
-            case 0: System.out.println("Thank you, Bye Bye!"); break;
+            case 0: mainMenuView.printExitApplicationMessage(); break;
             case 1: if(loginCheckAccountValidation()) {
-                //todo open main menu
+            	//EmployeeMenu 
             } else {
 
             } break;
             case 2:
-                //todo accountDAOImp.createAccount();
+            	
                 break;
         }
     }

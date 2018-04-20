@@ -41,15 +41,20 @@ public class DatabaseConnectionXML {
 				DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 				Document document = dBuilder.parse(xmlFile);
 				document.getDocumentElement().normalize();
+				
 				URL = document.getElementsByTagName("url").item(0).getTextContent();
 				USER = document.getElementsByTagName("user").item(0).getTextContent();
 				PASSWORD = document.getElementsByTagName("password").item(0).getTextContent();
+				
 				logger.log(Level.CONFIG,"Xml file exist, parsing is succesfull.");
+				
 			} catch (ParserConfigurationException | SAXException | IOException e) {
+				
 				logger.log(Level.WARNING, "Parser/Sax/IOexception occured check log", e);
 
 			}
 		} else {
+			
 			logger.log(Level.INFO, "xmlFile is not existing.");
 		}
 
@@ -72,6 +77,7 @@ public class DatabaseConnectionXML {
 			System.out.println("Connected to the Database.");
 
 		} catch (SQLException e) {
+			
 			logger.log(Level.WARNING, "SQL exeception ocurred. Connection with database failed.", e);
 
 		}

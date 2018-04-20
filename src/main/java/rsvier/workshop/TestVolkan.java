@@ -7,14 +7,19 @@ import rsvier.workshop.dao.AddressDAOImp;
 import rsvier.workshop.dao.OrderDAOImp;
 import rsvier.workshop.dao.OrderLineDAOImp;
 import rsvier.workshop.dao.PersonDAOImp;
+import rsvier.workshop.dao.ProductDAO;
 import rsvier.workshop.dao.ProductDAOImp;
 import rsvier.workshop.domain.*;
+import rsvier.workshop.domain.Product.ProductBuilder;
 
 public class TestVolkan {
 
 	public static void main(String[] args) {
 
-		AccountDAOImp accountDAO = new AccountDAOImp();
+		//ProductDAOImp productDAO = new ProductDAOImp();
+		//Product product = new Product.ProductBuilder().name("Tafel").price(new BigDecimal("555.55")).stock(22).build();
+		//productDAO.createProduct(product);
+		/*AccountDAOImp accountDAO = new AccountDAOImp();
 		PersonDAOImp personDAO = new PersonDAOImp();
 		ProductDAOImp productDAO = new ProductDAOImp();
 		OrderDAOImp orderDAO = new OrderDAOImp();
@@ -41,7 +46,7 @@ public class TestVolkan {
 
 		Order order = new Order.OrderBuilder().person(personDAO.getPersonByAccountId(generatedIdPerson)).totalPrice(sum)
 				.build();
-		int generatedIdOfOrder = orderDAO.createOrder(order, personDAO.getPersonById(generatedId));
+		int generatedIdOfOrder = orderDAO.createOrder(order, personDAO.getPersonById(generatedId));*/
 
 	}
 

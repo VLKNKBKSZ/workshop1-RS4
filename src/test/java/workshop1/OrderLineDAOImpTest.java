@@ -41,16 +41,22 @@ class OrderLineDAOImpTest {
 
 	@BeforeEach
 	void setUp() {
+		
 		try (Connection conn = DatabaseConnectionXML.getConnection(); Statement statement = conn.createStatement();) {
+			
 		} catch (SQLException e) {
+			
 			logger.log(Level.WARNING, "SQL Exception occured", e);
 		}
 	}
 
 	@AfterEach
 	void tearDown() {
+		
 		try (Connection conn = DatabaseConnectionXML.getConnection(); Statement statement = conn.createStatement();) {
+			
 		} catch (SQLException e) {
+			
 			logger.log(Level.WARNING, "SQL exception occured", e);
 		}
 

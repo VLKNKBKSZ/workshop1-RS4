@@ -46,11 +46,15 @@ public class LogConnection {
 			fh.setFormatter(sf);
 			/* fh.setFormatter(xmlFormatter); */
 			// logger.addHandler(ch);
+			
 			logger.addHandler(fh);
+			
 		} catch (SecurityException ex) {
+			
 			logger.log(Level.WARNING, "Security error ocured", ex.getMessage());
 
 		} catch (IOException e) {
+			
 			logger.log(Level.SEVERE, "IO exception occured, check log.xml", e.getMessage());
 
 		}

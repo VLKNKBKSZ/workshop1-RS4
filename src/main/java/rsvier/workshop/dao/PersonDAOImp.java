@@ -9,6 +9,7 @@ import rsvier.workshop.utility.*;
 public class PersonDAOImp implements PersonDAO {
 
 	private Logger logger = LogConnection.getLogger();
+	private AccountDAO accountDao = new AccountDAOImp();
 	private AddressDAO addressDao = new AddressDAOImp();
 
 	@Override
@@ -25,7 +26,7 @@ public class PersonDAOImp implements PersonDAO {
 			while (resultSet.next()) {
 				Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 				personBuilder.personId(resultSet.getInt(1));
-				personBuilder.accountId(resultSet.getInt(2));
+				personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
 				personBuilder.personType(resultSet.getString(3));
 				personBuilder.name(resultSet.getString(4));
 				personBuilder.lastName(resultSet.getString(5));
@@ -60,7 +61,7 @@ public class PersonDAOImp implements PersonDAO {
 				while (resultSet.next()) {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
-					personBuilder.accountId(resultSet.getInt(2));
+					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
 					personBuilder.personType(resultSet.getString(3));
 					personBuilder.name(resultSet.getString(4));
 					personBuilder.lastName(resultSet.getString(5));
@@ -96,7 +97,7 @@ public class PersonDAOImp implements PersonDAO {
 				if (resultSet.next()) {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
-					personBuilder.accountId(resultSet.getInt(2));
+					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
 					personBuilder.personType(resultSet.getString(3));
 					personBuilder.name(resultSet.getString(4));
 					personBuilder.lastName(resultSet.getString(5));
@@ -134,7 +135,7 @@ public class PersonDAOImp implements PersonDAO {
 				if (resultSet.next()) {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
-					personBuilder.accountId(resultSet.getInt(2));
+					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
 					personBuilder.personType(resultSet.getString(3));
 					personBuilder.name(resultSet.getString(4));
 					personBuilder.lastName(resultSet.getString(5));
@@ -163,7 +164,7 @@ public class PersonDAOImp implements PersonDAO {
 				PreparedStatement preparedStatement = connection.prepareStatement(query,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 
-			preparedStatement.setInt(1, person.getAccountId());
+			preparedStatement.setInt(1, person.getAccount().getAccountId());
 			preparedStatement.setString(2, person.getPersonType());
 			preparedStatement.setString(3, person.getName());
 			preparedStatement.setString(4, person.getLastName());
@@ -198,7 +199,7 @@ public class PersonDAOImp implements PersonDAO {
 		try (Connection connection = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 
-			preparedStatement.setInt(1, person.getAccountId());
+			preparedStatement.setInt(1, person.getAccount().getAccountId());
 			preparedStatement.setString(2, person.getPersonType());
 			preparedStatement.setString(3, person.getName());
 			preparedStatement.setString(4, person.getLastName());
@@ -223,7 +224,7 @@ public class PersonDAOImp implements PersonDAO {
 		try (Connection connection = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 
-			preparedStatement.setInt(1, person.getAccountId());
+			preparedStatement.setInt(1, person.getAccount().getAccountId());
 
 			preparedStatement.executeUpdate();
 			logger.log(Level.INFO, "Person succesfully deleted");
@@ -255,7 +256,7 @@ public class PersonDAOImp implements PersonDAO {
 				if (resultSet.next()) {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
-					personBuilder.accountId(resultSet.getInt(2));
+					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
 					personBuilder.personType(resultSet.getString(3));
 					personBuilder.name(resultSet.getString(4));
 					personBuilder.lastName(resultSet.getString(5));

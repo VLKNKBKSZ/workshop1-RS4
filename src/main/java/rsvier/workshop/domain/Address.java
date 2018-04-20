@@ -66,7 +66,7 @@ public class Address {
 			return this;
 		}
 		
-		public AddressBuilder personId(Person person) {
+		public AddressBuilder person(Person person) {
 			this.person = person;
 			return this;
 		}

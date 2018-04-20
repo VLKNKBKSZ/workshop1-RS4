@@ -213,4 +213,35 @@ public class AccountDAOImp implements AccountDAO {
 		return false;
 	}
 
+	@Override
+	public Account getAccountById(int accountId) {
+		Account account = new Account();
+
+		String query = "SELECT * FROM account WHERE accountId = ?";
+
+		try (Connection conn = DatabaseConnectionXML.getConnection();
+			 PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+
+			preparedStatement.setInt(1, accountId);
+
+			try (ResultSet resultSet = preparedStatement.executeQuery();) {
+
+				if (resultSet.next()) {
+
+					account.setAccountId(resultSet.getInt(1));
+					account.setEmail(resultSet.getString(2));
+					account.setPassword(resultSet.getString(3));
+				}
+
+			}
+			logger.log(Level.WARNING, "Account successfully returned");
+			return account;
+
+		} catch (SQLException e) {
+			logger.log(Level.WARNING, "SQL exception occurred ", e);
+		}
+
+		return null;
+	}
+
 }

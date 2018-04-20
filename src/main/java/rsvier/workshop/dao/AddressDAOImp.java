@@ -9,6 +9,7 @@ import rsvier.workshop.utility.*;
 public class AddressDAOImp implements AddressDAO {
 
 	private Logger logger = LogConnection.getLogger();
+	private PersonDAO personDao = new PersonDAOImp();
 
 	@Override
 	public List<Address> getAllAddresses() {
@@ -30,7 +31,7 @@ public class AddressDAOImp implements AddressDAO {
 
 				Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 				addressBuilder.addressId(resultSet.getInt(1));
-				addressBuilder.personId(resultSet.getInt(2));
+				addressBuilder.person(personDao.getPersonById(resultSet.getInt(2)));
 				addressBuilder.addressType(resultSet.getString(3));
 				addressBuilder.streetName(resultSet.getString(4));
 				addressBuilder.houseNumber(resultSet.getInt(5));
@@ -76,7 +77,7 @@ public class AddressDAOImp implements AddressDAO {
 				if (resultSet.next()) {
 					Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 					addressBuilder.addressId(resultSet.getInt(1));
-					addressBuilder.personId(resultSet.getInt(2));
+					addressBuilder.person(personDao.getPersonById(resultSet.getInt(2)));
 					addressBuilder.addressType(resultSet.getString(3));
 					addressBuilder.streetName(resultSet.getString(4));
 					addressBuilder.houseNumber(resultSet.getInt(5));
@@ -108,7 +109,7 @@ public class AddressDAOImp implements AddressDAO {
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 			
-			preparedStatement.setInt(1, address.getPersonId());
+			preparedStatement.setInt(1, address.getPerson().getPersonId());
 			preparedStatement.setString(2, address.getAddressType());
 			preparedStatement.setString(3, address.getStreetName());
 			preparedStatement.setInt(4, address.getHouseNumber());

@@ -82,8 +82,8 @@ public class TestEvy {
 		accountDao.deleteAccount(accountDatabse2);
 		
 		
-		Person person2 = (Person) new Person.PersonBuilder().accountId(accountDatabse2.getAccountId()).personType("employee")
-			.name("appie").lastName("pope").build();
+	//	Person person2 = (Person) new Person.PersonBuilder().accountId(accountDatabse2.getAccountId()).personType("employee")
+	//		.name("appie").lastName("pope").build();
 // @Test Create person = successful
 		//	personDao.createPerson(person2);
 		

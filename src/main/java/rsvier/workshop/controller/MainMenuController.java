@@ -3,18 +3,17 @@ package rsvier.workshop.controller;
 import rsvier.workshop.dao.AccountDAOImp;
 import rsvier.workshop.domain.Account;
 import rsvier.workshop.view.MainMenuView;
-import rsvier.workshop.view.View;
 
 public class MainMenuController {
 
 
     private AccountDAOImp accountDAOImp = new AccountDAOImp();
     private MainMenuView mainMenuView = new MainMenuView();
-    private View view = new View();
 
     public void doLoginMenu() {
-        mainMenuView.printLoginOrCreateNewAccountMenu();
-        loginMenu(view.getIntInput());
+    	mainMenuView.printHeaderMessage();
+        mainMenuView.printMenuMessage();
+        loginMenu(mainMenuView.getIntInput());
     }
 
     private void loginMenu(int menuNumber) {
@@ -34,9 +33,9 @@ public class MainMenuController {
 
     private boolean loginCheckAccountValidation() {
         mainMenuView.requestEmailInput();
-        String email = view.getStringInput();
+        String email = mainMenuView.getStringInput();
         mainMenuView.requestPasswordInput();
-        String password = view.getStringInput();
+        String password = mainMenuView.getStringInput();
 
         Account account = accountDAOImp.getAccountLogin(email);
         if (account == null) {

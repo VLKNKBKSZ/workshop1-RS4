@@ -9,6 +9,10 @@ public abstract class View {
 	public abstract void printHeaderMessage();
 
 	public abstract void printMenuMessage();
+	
+	public void printExitApplicationMessage() {
+		System.out.println("Bedankt. Tot ziens !");
+	}
 
 	public Integer getIntInput() {
 		try {

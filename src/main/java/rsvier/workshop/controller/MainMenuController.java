@@ -29,7 +29,7 @@ public class MainMenuController {
 
             } break;
             
-            case 2: accountController.doAccountMenu(); break;
+            case 2: accountController.doCreateAccount(); break;
             
         }
     }

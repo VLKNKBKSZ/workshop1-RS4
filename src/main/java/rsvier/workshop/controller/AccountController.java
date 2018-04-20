@@ -1,14 +1,15 @@
 package rsvier.workshop.controller;
 
 import rsvier.workshop.dao.AccountDAO;
+import rsvier.workshop.dao.AccountDAOImp;
 import rsvier.workshop.domain.Account;
 import rsvier.workshop.domain.Validator;
 import rsvier.workshop.view.AccountView;
 
 public class AccountController {
 
-	private AccountDAO accountDAO;
-	private AccountView accountView;
+	private AccountDAO accountDAO = new AccountDAOImp();
+	private AccountView accountView = new AccountView();
 	private Account account;
 	private Validator validator;
 

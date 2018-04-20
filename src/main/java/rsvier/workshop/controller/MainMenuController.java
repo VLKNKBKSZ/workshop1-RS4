@@ -11,6 +11,7 @@ public class MainMenuController {
     private AccountDAOImp accountDAOImp = new AccountDAOImp();
     private MainMenuView mainMenuView = new MainMenuView();
     private AccountView accountView = new AccountView();
+    private AccountController accountController = new AccountController();
 
     public void doLoginMenu() {
     	mainMenuView.printHeaderMessage();
@@ -28,9 +29,8 @@ public class MainMenuController {
 
             } break;
             
-            case 2:
-            	
-            break; 
+            case 2: accountController.doAccountMenu(); break;
+            
         }
     }
 

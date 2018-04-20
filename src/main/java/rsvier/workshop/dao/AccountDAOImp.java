@@ -95,9 +95,10 @@ public class AccountDAOImp implements AccountDAO {
 				if (rs.next()) {
 					generatedId = rs.getInt(1);
 					logger.log(Level.INFO, "Account successfully created");
+					
 				}
 			}
-
+			System.out.println("Account is succesvol aangemaakt");
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occurred ", e);
 		}

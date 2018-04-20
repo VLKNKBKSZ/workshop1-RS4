@@ -15,13 +15,6 @@ public class MainMenuView extends View {
 		System.out.println("1- Inloggen\n2- Maak een nieuw Account\n0- Verlaat Evvo Meubels");
 	}
 
-	public void requestEmailInput() {
-		System.out.print("Vul email adres in: ");
-	}
-
-	public void requestPasswordInput() {
-		System.out.print("Vul wachtwoord in: ");
-	}
 
 
 }

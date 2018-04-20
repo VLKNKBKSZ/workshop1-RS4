@@ -2,6 +2,7 @@ package rsvier.workshop.controller;
 
 import rsvier.workshop.dao.AccountDAOImp;
 import rsvier.workshop.domain.Account;
+import rsvier.workshop.view.AccountView;
 import rsvier.workshop.view.MainMenuView;
 
 public class MainMenuController {
@@ -9,6 +10,7 @@ public class MainMenuController {
 
     private AccountDAOImp accountDAOImp = new AccountDAOImp();
     private MainMenuView mainMenuView = new MainMenuView();
+    private AccountView accountView = new AccountView();
 
     public void doLoginMenu() {
     	mainMenuView.printHeaderMessage();
@@ -25,16 +27,17 @@ public class MainMenuController {
             } else {
 
             } break;
+            
             case 2:
             	
-                break;
+            break; 
         }
     }
 
     private boolean loginCheckAccountValidation() {
-        mainMenuView.requestEmailInput();
+        accountView.requestEmailInput();
         String email = mainMenuView.getStringInput();
-        mainMenuView.requestPasswordInput();
+        accountView.requestPasswordInput();
         String password = mainMenuView.getStringInput();
 
         Account account = accountDAOImp.getAccountLogin(email);

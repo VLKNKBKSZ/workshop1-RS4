@@ -7,43 +7,53 @@ import rsvier.workshop.view.MainMenuView;
 
 public class MainMenuController {
 
+	private AccountDAOImp accountDAOImp = new AccountDAOImp();
+	private MainMenuView mainMenuView = new MainMenuView();
+	private AccountView accountView = new AccountView();
+	private AccountController accountController = new AccountController();
 
-    private AccountDAOImp accountDAOImp = new AccountDAOImp();
-    private MainMenuView mainMenuView = new MainMenuView();
-    private AccountView accountView = new AccountView();
-    private AccountController accountController = new AccountController();
+	public void doLoginMenu() {
+		mainMenuView.printHeaderMessage();
+		mainMenuView.printMenuMessage();
+		loginMenu(mainMenuView.getIntInput());
+	}
 
-    public void doLoginMenu() {
-    	mainMenuView.printHeaderMessage();
-        mainMenuView.printMenuMessage();
-        loginMenu(mainMenuView.getIntInput());
-    }
+	private void loginMenu(int menuNumber) {
+		switch (menuNumber) {
 
-    private void loginMenu(int menuNumber) {
-        switch (menuNumber) {
+		case 0:
+			mainMenuView.printExitApplicationMessage();
+			break;
+		case 1:loginCheckAccountValidation();
+			break;
 
-            case 0: mainMenuView.printExitApplicationMessage(); break;
-            case 1: if(loginCheckAccountValidation()) {
-            	//EmployeeMenu 
-            } else {
+		case 2:
+			accountController.doCreateAccount();
+			break;
 
-            } break;
-            
-            case 2: accountController.doCreateAccount(); break;
-            
-        }
-    }
+		}
+	}
 
-    private boolean loginCheckAccountValidation() {
-        accountView.requestEmailInput();
-        String email = mainMenuView.getStringInput();
-        accountView.requestPasswordInput();
-        String password = mainMenuView.getStringInput();
+	public void loginCheckAccountValidation() {
+		
+		accountView.requestEmailInput();
+		String email = mainMenuView.getStringInput();
+		accountView.requestPasswordInput();
+		String password = mainMenuView.getStringInput();
 
-        Account account = accountDAOImp.getAccountLogin(email);
-        if (account == null) {
-            return false;
-        }
-        return (account.getPassword().equals(password));
-    }
+		Account account = accountDAOImp.getAccountLogin(email);
+		if (account.getEmail() == null) {
+			
+			accountView.printRequestedAccountIsNull();
+			doLoginMenu();
+		} else {
+			
+			if(account.getPassword().equals(password)) {
+				accountView.printLoginAccountIsSuccesfull();
+				// call method of main menu that is not here yet
+			} else {
+				accountView.printPasswordOfAccountNotMatching();
+			}
+		}
+	}
 }

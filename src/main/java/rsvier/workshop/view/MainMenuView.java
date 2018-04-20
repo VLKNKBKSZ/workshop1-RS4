@@ -14,6 +14,8 @@ public class MainMenuView extends View {
 
 		System.out.println("1- Inloggen\n2- Maak een nieuw Account\n0- Verlaat Evvo Meubels");
 	}
+	
+	
 
 
 

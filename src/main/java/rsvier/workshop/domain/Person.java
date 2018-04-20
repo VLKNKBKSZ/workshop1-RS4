@@ -3,7 +3,7 @@ package rsvier.workshop.domain;
 public class Person {
 	
 	private int personId;
-	private int accountId;
+	private Account account;
 	private String personType;
 	private String name;
 	private String lastName;
@@ -19,7 +19,7 @@ public class Person {
 	private Person(PersonBuilder builder) {
 		
 		this.personId = builder.personId;
-		this.accountId = builder.accountId;
+		this.account = builder.account;
 		this.personType = builder.personType;
 		this.name = builder.name;
 		this.lastName = builder.lastName;
@@ -29,7 +29,7 @@ public class Person {
 	public static class PersonBuilder {
 
 		private int personId;
-		private int accountId;
+		private Account account;
 		private String personType;
 		private String name;
 		private String lastName;
@@ -41,7 +41,7 @@ public class Person {
 		
 		public PersonBuilder(Person person) {
 			this.personId = person.personId;
-			this.accountId = person.accountId;
+			this.account = person.account;
 			this.personType = person.personType;
 			this.name = person.name;
 			this.lastName = person.lastName;
@@ -54,8 +54,8 @@ public class Person {
 			return this;
 		}
 		
-		public PersonBuilder accountId(int accountId) {
-			this.accountId = accountId;
+		public PersonBuilder account(Account account) {
+			this.account = account;
 			
 			return this;
 		}
@@ -115,8 +115,8 @@ public class Person {
 		return middleName;
 	}
 
-	public int getAccountId() {
-		return accountId;
+	public Account getAccount() {
+		return account;
 	}
 		
 	// Override the toString method that is inherited from the Object class.

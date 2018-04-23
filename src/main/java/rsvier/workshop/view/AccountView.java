@@ -22,15 +22,13 @@ public class AccountView extends View{
 		System.out.print("Vul wachtwoord in: ");
 	}
 
-	public void printRequestedAccountIsNull () {
-		System.out.println("Het opgegeven email adres is onjuist!");
-	}
+	public void printLoginDetailsWrong() {
+        System.out.println("De opgegeven inloggegevens zijn onjuist!");
+    }
 	
 	public void printLoginAccountIsSuccesfull() {
 		System.out.println("Het inloggen is succesvol afgerond");
 	}
 	
-	public void printPasswordOfAccountNotMatching() {
-		System.out.println("Het passwoord komt niet overeen met het opgegeven email adres");
-	}
+	
 }

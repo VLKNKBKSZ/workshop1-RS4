@@ -41,4 +41,8 @@ public abstract class View {
 	public void confirmExitProgram() {
 		System.out.println("You are about to exit the program.");
 	}
+	
+	public void printMenuInputIsWrong() {
+		System.out.println("Het ingevoerde menu keuze is onjuist, probeer het nogmaals");
+	}
 }

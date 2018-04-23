@@ -24,7 +24,8 @@ public class MainMenuController {
 		case 0:
 			mainMenuView.printExitApplicationMessage();
 			break;
-		case 1:loginCheckAccountValidation();
+		case 1:
+			loginCheckAccountValidation();
 			break;
 
 		case 2:
@@ -35,7 +36,7 @@ public class MainMenuController {
 	}
 
 	public void loginCheckAccountValidation() {
-		
+
 		accountView.requestEmailInput();
 		String email = mainMenuView.getStringInput();
 		accountView.requestPasswordInput();
@@ -43,16 +44,17 @@ public class MainMenuController {
 
 		Account account = accountDAOImp.getAccountLogin(email);
 		if (account.getEmail() == null) {
-			
+
 			accountView.printRequestedAccountIsNull();
 			doLoginMenu();
 		} else {
-			
-			if(account.getPassword().equals(password)) {
+
+			if (account.getPassword().equals(password)) {
 				accountView.printLoginAccountIsSuccesfull();
 				// call method of main menu that is not here yet
 			} else {
 				accountView.printPasswordOfAccountNotMatching();
+				doLoginMenu();
 			}
 		}
 	}

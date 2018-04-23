@@ -218,7 +218,7 @@ public class AccountDAOImp implements AccountDAO {
 	public Account getAccountById(int accountId) {
 		Account account = new Account();
 
-		String query = "SELECT * FROM account WHERE accountId = ?";
+		String query = "SELECT * FROM account WHERE account_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 			 PreparedStatement preparedStatement = conn.prepareStatement(query);) {

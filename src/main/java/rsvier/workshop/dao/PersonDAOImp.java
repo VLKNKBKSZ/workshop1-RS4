@@ -274,6 +274,4 @@ public class PersonDAOImp implements PersonDAO {
 		return null;
 
 	}
-
->>>>>>> 285909e641ba64ca61cf403e2ab0a23ef7b4cdf2
 }

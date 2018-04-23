@@ -10,7 +10,7 @@ public class PersonDAOImp implements PersonDAO {
 
 	private Logger logger = LogConnection.getLogger();
 	private AccountDAO accountDao = new AccountDAOImp();
-	private AddressDAO addressDao = new AddressDAOImp();
+//	private AddressDAO addressDao = new AddressDAOImp();
 
 	@Override
 	public List<Person> getAllPersons() {
@@ -229,7 +229,7 @@ public class PersonDAOImp implements PersonDAO {
 			preparedStatement.executeUpdate();
 			logger.log(Level.INFO, "Person succesfully deleted");
 			System.out.println("Person and Account succesfully deleted");
-			addressDao.deleteAddressByPersonId(person.getPersonId());
+		//	addressDao.deleteAddressByPersonId(person.getPersonId());
 			System.out.println("Addresses related to Person has been deleted");
 
 		} catch (SQLException e) {

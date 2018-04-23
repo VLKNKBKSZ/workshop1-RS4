@@ -81,40 +81,38 @@ public class PersonDAOImp implements PersonDAO {
 	}
 
 	@Override
-	public Person getPersonByLastName(String lastName) {
+	public List<Person> getPersonByLastName(String lastName) {
 
-		Person person = null;
+		List<Person> personList = new ArrayList<>();
 
 		String query = "SELECT * FROM person WHERE last_name = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
-
+				PreparedStatement preparedStatement = conn.prepareStatement(query);){
 			preparedStatement.setString(1, lastName);
-
-			try (ResultSet resultSet = preparedStatement.executeQuery();) {
-
-				if (resultSet.next()) {
-					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
-					personBuilder.personId(resultSet.getInt(1));
-					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
-					personBuilder.personType(resultSet.getString(3));
-					personBuilder.name(resultSet.getString(4));
-					personBuilder.lastName(resultSet.getString(5));
-					personBuilder.middleName(resultSet.getString(6));
-					person = personBuilder.build();
-				}
+			
+			try(ResultSet resultSet = preparedStatement.executeQuery();){
+			
+			while (resultSet.next()) {
+				Person.PersonBuilder personBuilder = new Person.PersonBuilder();
+				personBuilder.personId(resultSet.getInt(1));
+				personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
+				personBuilder.personType(resultSet.getString(3));
+				personBuilder.name(resultSet.getString(4));
+				personBuilder.lastName(resultSet.getString(5));
+				personBuilder.middleName(resultSet.getString(6));
+				Person person = personBuilder.build();
+				personList.add(person);
 
 			}
-
-			logger.log(Level.INFO, "Person succesfully returned");
-			return person;
+			}
+			logger.log(Level.WARNING, "Person list successfully returned");
+			return personList;
 
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
-
 		return null;
 	}
 

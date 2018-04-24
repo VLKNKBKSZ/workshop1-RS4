@@ -10,6 +10,18 @@ public abstract class View {
 
 	public abstract void printMenuMessage();
 	
+	public void printAskUserYesOrNo() {
+		System.out.println("Vul in \"J\" indien Ja en \"N\" indien Nee.");
+	}
+
+	public void printConfirmExitProgram() {
+		System.out.println("U verlaat het programma.");
+	}
+	
+	public void printMenuInputIsWrong() {
+		System.out.println("De ingevoerde menu keuze is onjuist, probeer het nogmaals");
+	}
+	
 	public void printExitApplicationMessage() {
 		System.out.println("Bedankt. Tot ziens !");
 	}
@@ -34,15 +46,5 @@ public abstract class View {
 		}
 	}
 
-	public void askUserYesOrNo() {
-		System.out.println("Vul in \"J\" indien Ja en \"N\" indien Nee.");
-	}
-
-	public void confirmExitProgram() {
-		System.out.println("U verlaat het programma.");
-	}
 	
-	public void printMenuInputIsWrong() {
-		System.out.println("De ingevoerde menu keuze is onjuist, probeer het nogmaals");
-	}
 }

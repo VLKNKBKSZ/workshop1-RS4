@@ -34,29 +34,30 @@ public class MainMenuController {
 			accountController.doCreateAccount();
 			break;
 			
-			default:
-				mainMenuView.printMenuInputIsWrong();
-				doLoginMenu();
+		default:
+			mainMenuView.printMenuInputIsWrong();
+			doLoginMenu();
 
 		}
 	}
 
 	public void loginCheckAccountValidation() {
 
-		accountView.requestEmailInput();
-		String email = mainMenuView.getStringInput();
-		accountView.requestPasswordInput();
-		String password = mainMenuView.getStringInput();
+		accountView.printRequestEmailInput();
+		String email = mainMenuView.getStringInput();		
 
 		Account account = accountDAOImp.getAccountLogin(email);
 		
 		if (account.getEmail() == null) {
 			accountView.printLoginDetailsWrong();
 			doLoginMenu();	
+			
 		} else {
+			accountView.printRequestPasswordInput();
+			String password = mainMenuView.getStringInput();
 
 			if (account.getPassword().equals(password)) {
-				accountView.printLoginAccountIsSuccesfull();
+				accountView.printLoginAccountIsSuccessful();
 				// call method of main menu that is not here yet	
 			} else {
 				accountView.printLoginDetailsWrong();

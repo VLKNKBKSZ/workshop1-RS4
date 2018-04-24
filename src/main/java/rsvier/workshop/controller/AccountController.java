@@ -26,7 +26,7 @@ public class AccountController {
 		String email;
 		
 		do {
-			accountView.requestEmailInput();
+			accountView.printRequestEmailInput();
 			email = accountView.getStringInput();
 		
 		} while (!validator.validateEmail(email));
@@ -38,7 +38,7 @@ public class AccountController {
 		String password;
 		
 		do {
-			accountView.requestPasswordInput();;
+			accountView.printRequestPasswordInput();;
 			password = accountView.getStringInput();
 		
 		} while (!validator.validatePassword(password));

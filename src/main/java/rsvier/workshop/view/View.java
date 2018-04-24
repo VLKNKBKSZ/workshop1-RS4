@@ -18,7 +18,7 @@ public abstract class View {
 		try {
 			return Integer.parseInt(userInput.nextLine());
 		} catch (NumberFormatException ex) {
-			System.out.print("Wrong input, please enter a number: ");
+			System.out.print("Verkeerde input. Vul aub een nummer in: ");
 			return getIntInput();
 		}
 	}
@@ -26,8 +26,8 @@ public abstract class View {
 	public String getStringInput() {
 		String s = userInput.nextLine();
 
-		if (s == null) {
-			System.out.print("Please enter a String: ");
+		if (s == null || (s.trim().isEmpty())) {
+			System.out.print("U kunt dit gedeelte niet leeg laten. Vul aub iets in: ");
 			return getStringInput();
 		} else {
 			return s;
@@ -35,14 +35,14 @@ public abstract class View {
 	}
 
 	public void askUserYesOrNo() {
-		System.out.println("Please enter \"Y\" for Yes or \"N\" for No");
+		System.out.println("Vul in \"J\" indien Ja en \"N\" indien Nee.");
 	}
 
 	public void confirmExitProgram() {
-		System.out.println("You are about to exit the program.");
+		System.out.println("U verlaat het programma.");
 	}
 	
 	public void printMenuInputIsWrong() {
-		System.out.println("Het ingevoerde menu keuze is onjuist, probeer het nogmaals");
+		System.out.println("De ingevoerde menu keuze is onjuist, probeer het nogmaals");
 	}
 }

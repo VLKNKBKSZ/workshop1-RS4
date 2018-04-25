@@ -57,7 +57,7 @@ public class CustomerController extends Controller {
 			break;
 		case 2:
 
-			String yesOrNo = customerView.confirmDeleteYesOrNo();
+			String yesOrNo = customerView.confirmYesOrNo();
 			if (yesOrNo.equals("J")) {
 				
 				addressDao.deleteAddressByPersonId(person.getPersonId());

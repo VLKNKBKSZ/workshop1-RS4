@@ -58,7 +58,7 @@ public abstract class View {
 	}
 	
 	
-	public String confirmDeleteYesOrNo() {
+	public String confirmYesOrNo() {
 		
 		printAskConfirmation();
 		printAskUserYesOrNo();

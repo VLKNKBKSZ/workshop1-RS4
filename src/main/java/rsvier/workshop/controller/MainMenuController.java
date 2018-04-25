@@ -12,10 +12,19 @@ public class MainMenuController extends Controller{
 	private AccountView accountView = new AccountView();
 	private AccountController accountController = new AccountController();
 	
+	
+	@Override
+	public void runView() {
+		
+		mainMenuView.printHeaderMessage();
+		mainMenuView.printMenuMessage();
+		loginMainMenuSwitch(mainMenuView.getIntInput());	
+		
+	}
 
 	
-
-	public void loginMenu(int menuNumber) {
+	public void loginMainMenuSwitch(int menuNumber) {
+		
 		switch (menuNumber) {
 
 		case 0:
@@ -37,8 +46,9 @@ public class MainMenuController extends Controller{
 		}
 	}
 
+	
 	public void loginCheckAccountValidation() {
-
+		
 		accountView.printRequestEmailInput();
 		String email = mainMenuView.getStringInput();		
 
@@ -62,13 +72,6 @@ public class MainMenuController extends Controller{
 		}
 	}
 
-	@Override
-	public void runView() {
-		mainMenuView.printHeaderMessage();
-		mainMenuView.printMenuMessage();
-		loginMenu(mainMenuView.getIntInput());
-		
-	}
-
+	
 	
 }

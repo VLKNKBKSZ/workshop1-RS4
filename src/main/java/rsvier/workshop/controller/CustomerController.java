@@ -13,6 +13,16 @@ public class CustomerController extends Controller {
 	private AccountDAO accountDao = new AccountDAOImp();
 	private AddressDAO addressDao = new AddressDAOImp();
 
+	
+	@Override
+	public void runView() {
+		
+		customerView.printHeaderMessage();
+		customerView.printMenuMessage();
+		customerMenuSwitch(customerView.getIntInput());
+
+	}
+	
 	public void customerMenuSwitch(int menuNumber) {
 
 		switch (menuNumber) {
@@ -34,33 +44,8 @@ public class CustomerController extends Controller {
 
 		}
 	}
-
-	public Person searchCustomer() {
-
-		customerView.printAskCustomerLastName();
-		String customerLastName = customerView.getStringInput();
-		List<Person> customerList = personDao.getCustomerByLastName(customerLastName);
-
-		if (customerList.size() == 1) {
-			System.out.println(customerList.get(0).toString());
-		} else {
-
-			for (int i = 1; i < customerList.size(); i++) {
-				System.out.println("No. " + i + " : " + customerList.get(i - 1).toString());
-			}
-
-		}
-		return customerList.get(selectCustomer() - 1);
-	}
-
-	public int selectCustomer() {
-
-		customerView.printSelectCustomer();
-		int chosenCustomerNumber = customerView.getIntInput();
-
-		return chosenCustomerNumber;
-	}
-
+	
+	
 	public void updateOrDeleteCustomerSwitch(Person person) {
 
 		customerView.printAskDeleteOrUpdateCustomer();
@@ -90,12 +75,34 @@ public class CustomerController extends Controller {
 		}
 	}
 
-	@Override
-	public void runView() {
-		customerView.printHeaderMessage();
-		customerView.printMenuMessage();
-		customerMenuSwitch(customerView.getIntInput());
 
+	public Person searchCustomer() {
+
+		customerView.printAskCustomerLastName();
+		String customerLastName = customerView.getStringInput();
+		List<Person> customerList = personDao.getCustomerByLastName(customerLastName);
+
+		if (customerList.size() == 1) {
+			System.out.println(customerList.get(0).toString());
+		} else {
+
+			for (int i = 1; i < customerList.size(); i++) {
+				System.out.println("No. " + i + " : " + customerList.get(i - 1).toString());
+			}
+
+		}
+		return customerList.get(selectCustomer() - 1);
 	}
+	
+
+	public int selectCustomer() {
+
+		customerView.printSelectCustomer();
+		int chosenCustomerNumber = customerView.getIntInput();
+
+		return chosenCustomerNumber;
+		
+	}
+
 
 }

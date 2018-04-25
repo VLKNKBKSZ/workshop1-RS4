@@ -34,7 +34,7 @@ public class AccountController extends Controller{
 		
 	}
 
-	private void accountMenuSwitch(int menuNumber) {
+	public void accountMenuSwitch(int menuNumber) {
 		
 		switch (menuNumber) {
 

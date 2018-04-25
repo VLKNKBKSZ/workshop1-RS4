@@ -18,7 +18,7 @@ public class EmployeeController extends Controller{
 	}
 
 	
-	private void  employeeMenuSwitch(int menuNumber) {
+	public void  employeeMenuSwitch(int menuNumber) {
 		
 		switch (menuNumber) {
 

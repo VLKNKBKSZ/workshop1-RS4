@@ -134,7 +134,7 @@ public class PersonDAOImp implements PersonDAO {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
 					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
-					personBuilder.personType(resultSet.getString(3));
+					personBuilder.personType(resultSet.getInt(3));
 					personBuilder.name(resultSet.getString(4));
 					personBuilder.lastName(resultSet.getString(5));
 					personBuilder.middleName(resultSet.getString(6));
@@ -163,7 +163,7 @@ public class PersonDAOImp implements PersonDAO {
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 
 			preparedStatement.setInt(1, person.getAccount().getAccountId());
-			preparedStatement.setString(2, person.getPersonType());
+			preparedStatement.setInt(2, person.getPersonType());
 			preparedStatement.setString(3, person.getName());
 			preparedStatement.setString(4, person.getLastName());
 			preparedStatement.setString(5, person.getMiddleName());
@@ -198,7 +198,7 @@ public class PersonDAOImp implements PersonDAO {
 				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, person.getAccount().getAccountId());
-			preparedStatement.setString(2, person.getPersonType());
+			preparedStatement.setInt(2, person.getPersonType());
 			preparedStatement.setString(3, person.getName());
 			preparedStatement.setString(4, person.getLastName());
 			preparedStatement.setString(5, person.getMiddleName());
@@ -253,7 +253,7 @@ public class PersonDAOImp implements PersonDAO {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
 					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
-					personBuilder.personType(resultSet.getString(3));
+					personBuilder.personType(resultSet.getInt(3));
 					personBuilder.name(resultSet.getString(4));
 					personBuilder.lastName(resultSet.getString(5));
 					personBuilder.middleName(resultSet.getString(6));

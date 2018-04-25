@@ -1,4 +1,4 @@
-package rsvier.workshop.domain;
+package rsvier.workshop.service;
 
 public class Validator {
 

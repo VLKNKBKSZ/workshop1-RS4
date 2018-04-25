@@ -3,7 +3,7 @@ package rsvier.workshop.controller;
 import rsvier.workshop.dao.AccountDAO;
 import rsvier.workshop.dao.AccountDAOImp;
 import rsvier.workshop.domain.Account;
-import rsvier.workshop.domain.Validator;
+import rsvier.workshop.service.Validator;
 import rsvier.workshop.view.AccountView;
 
 public class AccountController {

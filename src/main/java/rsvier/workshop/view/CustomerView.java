@@ -14,15 +14,19 @@ public class CustomerView extends View {
 
 	}
 
+	
 	public void printAskCustomerLastName() {
 
 		System.out.println("vul achternaam in:");
 	}
 
+	
 	public void printSelectCustomer() {
 
 		System.out.println("Voer het nummer in van de klant die u wilt verwijderen of aanpassen:");
 	}
+	
+	
 	public void printAskDeleteOrUpdateCustomer() {
 
 		System.out.println("1- Klantgegevens aanpassen\n 2- Klant verwijderen\n 0- Terug naar naar vorige menu");

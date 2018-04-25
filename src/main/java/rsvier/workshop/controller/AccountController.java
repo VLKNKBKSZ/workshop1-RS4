@@ -42,6 +42,12 @@ public class AccountController extends Controller{
 			accountView.printExitApplicationMessage();
 			break;
 		case 1:
+			//maak nieuw account
+			break;
+		case 2:
+			//terug naar hoofdmenu
+			break;
+		default:
 
 		}
 	}

@@ -32,11 +32,11 @@ public class CustomerController extends Controller {
 			break;
 
 		case 1:
-
+			//search customer
 			break;
 
 		case 2:
-
+			//add customer
 			break;
 
 		default:
@@ -53,10 +53,10 @@ public class CustomerController extends Controller {
 
 		switch (choice) {
 		case 1:
-
+			//update customer
 			break;
 		case 2:
-
+			//delete customer
 			String yesOrNo = customerView.confirmYesOrNo();
 			if (yesOrNo.equals("J")) {
 				
@@ -68,7 +68,7 @@ public class CustomerController extends Controller {
 			}
 
 			break;
-		case 0:
+		case 0: //back to previous menu
 			break;
 		default:
 			break;

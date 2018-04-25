@@ -10,8 +10,10 @@ public class CustomerController extends Controller {
 
 	private CustomerView customerView = new CustomerView();
 	private PersonDAO personDao = new PersonDAOImp();
+	private AccountDAO accountDao = new AccountDAOImp();
+	private AddressDAO addressDao = new AddressDAOImp();
 
-	public void customerMenu(int menuNumber) {
+	public void customerMenuSwitch(int menuNumber) {
 
 		switch (menuNumber) {
 
@@ -33,7 +35,7 @@ public class CustomerController extends Controller {
 		}
 	}
 
-	public void searchCustomer() {
+	public Person searchCustomer() {
 
 		customerView.printAskCustomerLastName();
 		String customerLastName = customerView.getStringInput();
@@ -43,40 +45,43 @@ public class CustomerController extends Controller {
 			System.out.println(customerList.get(0).toString());
 		} else {
 
-			for (Person customer : customerList) {
-				System.out.println(customer.toString());
+			for (int i = 1; i < customerList.size(); i++) {
+				System.out.println("No. " + i + " : " + customerList.get(i - 1).toString());
 			}
 
 		}
+		return customerList.get(selectCustomer() - 1);
 	}
 
 	public int selectCustomer() {
-		customerView.printSelectCustomer();
-		int chosenCustomerId = customerView.getIntInput();
 
-		return chosenCustomerId;
+		customerView.printSelectCustomer();
+		int chosenCustomerNumber = customerView.getIntInput();
+
+		return chosenCustomerNumber;
 	}
 
-	public void updateOrDeleteCustomerSwitch(int chosenCustomerId) {
+	public void updateOrDeleteCustomerSwitch(Person person) {
 
 		customerView.printAskDeleteOrUpdateCustomer();
 		int choice = customerView.getIntInput();
 
 		switch (choice) {
 		case 1:
-			
+
 			break;
 		case 2:
-			
-			String yesOrNo = customerView.confirmYesOrNoSwitch()
-			if(yesOrNo.equals("J")) {
-				Person person = personDao.getPersonById(chosenCustomerId);
+
+			String yesOrNo = customerView.confirmYesOrNo();
+			if (yesOrNo.equals("J")) {
+				
+				addressDao.deleteAddressByPersonId(person.getPersonId());
+				accountDao.deleteAccount(person.getAccount());
 				personDao.deletePerson(person);
 			} else {
-				
+
 			}
-				
-			
+
 			break;
 		case 0:
 			break;
@@ -89,10 +94,8 @@ public class CustomerController extends Controller {
 	public void runView() {
 		customerView.printHeaderMessage();
 		customerView.printMenuMessage();
-		customerMenu(customerView.getIntInput());
+		customerMenuSwitch(customerView.getIntInput());
 
 	}
 
-	
-	
 }

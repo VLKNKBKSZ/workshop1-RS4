@@ -21,7 +21,7 @@ public class CustomerView extends View {
 
 	public void printSelectCustomer() {
 
-		System.out.println("Voer het Id nummer in van de klant die u wilt verwijderen of aanpassen :");
+		System.out.println("Voer het nummer in van de klant die u wilt verwijderen of aanpassen:");
 	}
 	public void printAskDeleteOrUpdateCustomer() {
 

@@ -4,21 +4,19 @@ public class AccountView extends View{
 
 	@Override
 	public void printHeaderMessage() {
-		System.out.println("=========== Account ===========");
-		
+		System.out.println("=========== Account ===========");	
 	}
 
 	@Override
 	public void printMenuMessage() {
-
-			System.out.println("1- Maak nieuw account\n2- Terug naar Hoofdmenu\n0- Verlaat Evvo Meubels");
-		}
+		System.out.println("1- Maak nieuw account\n2- Terug naar Hoofdmenu\n0- Verlaat Evvo Meubels");
+	}
 		
-	public void requestEmailInput() {
+	public void printRequestEmailInput() {
 		System.out.print("Vul email adres in: ");
 	}
 
-	public void requestPasswordInput() {
+	public void printRequestPasswordInput() {
 		System.out.print("Vul wachtwoord in: ");
 	}
 
@@ -26,8 +24,8 @@ public class AccountView extends View{
         System.out.println("De opgegeven inloggegevens zijn onjuist!");
     }
 	
-	public void printLoginAccountIsSuccesfull() {
-		System.out.println("Het inloggen is succesvol afgerond");
+	public void printLoginAccountIsSuccessful() {
+		System.out.println("U bent nu ingelogd in uw account.");
 	}
 	
 	

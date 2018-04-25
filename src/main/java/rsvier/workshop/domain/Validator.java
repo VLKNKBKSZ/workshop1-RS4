@@ -10,7 +10,7 @@ public class Validator {
 		}
 
 		if (!email.matches("\\w+@\\w+\\.\\w+")) {
-			System.out.println("Invalid email address");
+			System.out.println("Dit is geen geldig e-mail adres");
 			return false;
 		}
 
@@ -20,18 +20,18 @@ public class Validator {
 	public boolean validatePassword(String password) {
 
 		if (password == null) {
-			System.out.println("Invalid password");
+			System.out.println("Dit is geen geldig wachtwoord.");
 			return false;
 		}
 
 		if (password.matches(".*\\s+.*")) {
-			System.out.println("Password can not contain space");
+			System.out.println("Uw wachtwoord mag geen spatie bevatten.");
 			return false;
 		}
 		if (!(password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{8,}$"))) {
 			System.out.println(
-					"Password must contain at least one uppercase letter, one lowercase letter, one number and one special character."
-							+ " It must also be at least 8 characters long.");
+				"Uw wachtwoord moet minstens een hoofdletter, een kleine letter, een getal \nen een speciaal "
+				+ "leesteken bevatten en uit minimaal 8 karakters bestaan.");
 			return false;
 		}
 

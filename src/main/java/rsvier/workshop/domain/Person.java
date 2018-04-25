@@ -124,7 +124,7 @@ public class Person {
 	@Override
 
 	public String toString() {
-		return getPersonType() + " " + getLastName() + " " + getName() + " " + getMiddleName() + " " ;
+		return "ID : " + getPersonId() + " " + "Last name: " + getLastName() + " " + "Name : "+ getName() + " " + "Middle name: " + getMiddleName() + " " ;
 	}
 	
 	@Override

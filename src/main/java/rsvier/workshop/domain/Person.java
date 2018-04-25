@@ -4,7 +4,7 @@ public class Person {
 	
 	private int personId;
 	private Account account;
-	private String personType;
+	private int personType;
 	private String name;
 	private String lastName;
 	private String middleName;
@@ -30,7 +30,7 @@ public class Person {
 
 		private int personId;
 		private Account account;
-		private String personType;
+		private int personType;
 		private String name;
 		private String lastName;
 		private String middleName;
@@ -60,7 +60,7 @@ public class Person {
 			return this;
 		}
 		
-		public PersonBuilder personType(String personType) {
+		public PersonBuilder personType(int personType) {
 			this.personType = personType;
 			return this;
 		}
@@ -96,7 +96,7 @@ public class Person {
 		return personId;
 	}
 	
-	public String getPersonType() {
+	public int getPersonType() {
 		return personType;
 	}
 

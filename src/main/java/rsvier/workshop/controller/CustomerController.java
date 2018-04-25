@@ -4,6 +4,7 @@ import rsvier.workshop.dao.*;
 import rsvier.workshop.view.CustomerView;
 
 public class CustomerController extends Controller {
+	
 	private CustomerView customerView = new CustomerView();
 	private PersonDAO personDao = new PersonDAOImp();
 

@@ -3,40 +3,41 @@ package rsvier.workshop.controller;
 import rsvier.workshop.dao.*;
 import rsvier.workshop.view.CustomerView;
 
-public class CustomerController {
+public class CustomerController extends Controller {
 	private CustomerView customerView = new CustomerView();
 	private PersonDAO personDao = new PersonDAOImp();
 
-public void doCustomerMenu() {
-	
-	customerView.printHeaderMessage();
-	customerView.printMenuMessage();
-	customerMenu(customerView.getIntInput());
-}
+	public void customerMenu(int menuNumber) {
 
+		switch (menuNumber) {
 
-public void customerMenu(int menuNumber) {
-	
-	switch (menuNumber) {
+		case 0:
+			customerView.printExitApplicationMessage();
+			break;
 
-	case 0:
-		customerView.printExitApplicationMessage();
-		break;
-		
-	case 1:
-		
-		break;
+		case 1:
 
-	case 2:
-		
-		break;
-		
+			break;
+
+		case 2:
+
+			break;
+
 		default:
 			customerView.printMenuInputIsWrong();
-			
-}
-}	
+
+		}
+	}
+
 	public void searchCustomer() {
-		
+
+	}
+
+	@Override
+	public void runView() {
+		customerView.printHeaderMessage();
+		customerView.printMenuMessage();
+		customerMenu(customerView.getIntInput());
+
 	}
 }

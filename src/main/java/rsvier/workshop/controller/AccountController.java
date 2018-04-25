@@ -6,7 +6,7 @@ import rsvier.workshop.domain.Account;
 import rsvier.workshop.service.Validator;
 import rsvier.workshop.view.AccountView;
 
-public class AccountController {
+public class AccountController extends Controller{
 
 	private AccountDAO accountDAO = new AccountDAOImp();
 	private AccountView accountView = new AccountView();
@@ -54,11 +54,7 @@ public class AccountController {
 		accountDAO.createAccount(account);
 	}
 
-	public void doAccountMenu() {
-		accountView.printHeaderMessage();
-		accountView.printMenuMessage();
-		accountMenu(accountView.getIntInput());
-	}
+	
 
 	private void accountMenu(int menuNumber) {
 		switch (menuNumber) {
@@ -69,6 +65,14 @@ public class AccountController {
 		case 1:
 
 		}
+	}
+
+	@Override
+	public void runView() {
+		accountView.printHeaderMessage();
+		accountView.printMenuMessage();
+		accountMenu(accountView.getIntInput());
+		
 	}
 
 }

@@ -5,21 +5,17 @@ import rsvier.workshop.domain.Account;
 import rsvier.workshop.view.AccountView;
 import rsvier.workshop.view.MainMenuView;
 
-public class MainMenuController {
+public class MainMenuController extends Controller{
 
 	private AccountDAOImp accountDAOImp = new AccountDAOImp();
 	private MainMenuView mainMenuView = new MainMenuView();
 	private AccountView accountView = new AccountView();
 	private AccountController accountController = new AccountController();
+	
 
-	public void doLoginMenu() {
-		
-		mainMenuView.printHeaderMessage();
-		mainMenuView.printMenuMessage();
-		loginMenu(mainMenuView.getIntInput());
-	}
+	
 
-	private void loginMenu(int menuNumber) {
+	public void loginMenu(int menuNumber) {
 		switch (menuNumber) {
 
 		case 0:
@@ -36,7 +32,7 @@ public class MainMenuController {
 			
 		default:
 			mainMenuView.printMenuInputIsWrong();
-			doLoginMenu();
+			runView();
 
 		}
 	}
@@ -50,7 +46,7 @@ public class MainMenuController {
 		
 		if (account.getEmail() == null) {
 			accountView.printLoginDetailsWrong();
-			doLoginMenu();	
+			runView();	
 			
 		} else {
 			accountView.printRequestPasswordInput();
@@ -61,8 +57,18 @@ public class MainMenuController {
 				// call method of main menu that is not here yet	
 			} else {
 				accountView.printLoginDetailsWrong();
-				doLoginMenu();
+				runView();
 			}
 		}
 	}
+
+	@Override
+	public void runView() {
+		mainMenuView.printHeaderMessage();
+		mainMenuView.printMenuMessage();
+		loginMenu(mainMenuView.getIntInput());
+		
+	}
+
+	
 }

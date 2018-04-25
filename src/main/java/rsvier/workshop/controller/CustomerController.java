@@ -35,7 +35,7 @@ public class CustomerController extends Controller {
 
 	public void searchCustomer() {
 
-		customerView.askCustomerLastName();
+		customerView.printAskCustomerLastName();
 		String customerLastName = customerView.getStringInput();
 		List<Person> customerList = personDao.getCustomerByLastName(customerLastName);
 
@@ -50,9 +50,39 @@ public class CustomerController extends Controller {
 		}
 	}
 
-	public void selectCustomer() {
+	public int selectCustomer() {
 		customerView.printSelectCustomer();
-		int chosenCustomer = customerView.getIntInput();
+		int chosenCustomerId = customerView.getIntInput();
+
+		return chosenCustomerId;
+	}
+
+	public void updateOrDeleteCustomerSwitch(int chosenCustomerId) {
+
+		customerView.printAskDeleteOrUpdateCustomer();
+		int choice = customerView.getIntInput();
+
+		switch (choice) {
+		case 1:
+			
+			break;
+		case 2:
+			
+			String yesOrNo = customerView.confirmYesOrNoSwitch()
+			if(yesOrNo.equals("J")) {
+				Person person = personDao.getPersonById(chosenCustomerId);
+				personDao.deletePerson(person);
+			} else {
+				
+			}
+				
+			
+			break;
+		case 0:
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -62,4 +92,7 @@ public class CustomerController extends Controller {
 		customerMenu(customerView.getIntInput());
 
 	}
+
+	
+	
 }

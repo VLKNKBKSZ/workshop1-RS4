@@ -10,9 +10,20 @@ public abstract class View {
 
 	public abstract void printMenuMessage();
 	
+	
 	public void printAskUserYesOrNo() {
 		System.out.println("Vul in \"J\" indien Ja en \"N\" indien Nee.");
 	}
+	public void printAskconfirmDelete() {
+		System.out.println("Weet u het zeker?");
+	}
+	public  String confirmYesOrNoSwitch() {
+		printAskconfirmDelete();
+		printAskUserYesOrNo();
+		String yesOrNo = getStringInput();
+		return yesOrNo;
+	}
+
 
 	public void printConfirmExitProgram() {
 		System.out.println("U verlaat het programma.");

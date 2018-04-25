@@ -97,7 +97,7 @@ public class CustomerController extends Controller {
 
 	public int selectCustomer() {
 
-		customerView.printSelectCustomer();
+		customerView.printAskNumberOfCustomer();
 		int chosenCustomerNumber = customerView.getIntInput();
 
 		return chosenCustomerNumber;

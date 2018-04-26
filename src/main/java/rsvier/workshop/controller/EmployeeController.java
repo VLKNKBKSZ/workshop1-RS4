@@ -7,8 +7,18 @@ public class EmployeeController extends Controller{
 	
 	private EmployeeView employeeView = new EmployeeView();
 	
+	
+	@Override
+	public void runView() {
+		
+		employeeView.printHeaderMessage();
+		employeeView.printMenuMessage();
+		employeeMenuSwitch(employeeView.getIntInput());
+		
+	}
 
-	private void  employeeMenu(int menuNumber) {
+	
+	public void  employeeMenuSwitch(int menuNumber) {
 		
 		switch (menuNumber) {
 
@@ -17,27 +27,21 @@ public class EmployeeController extends Controller{
 			break;
 			
 		case 1:
-			
+			//klanten beheren
 			break;
 
 		case 2:
-			
+			//producten beheren
 			break;
 			
-			default:
-				employeeView.printMenuInputIsWrong();
+		case 3:
+			//bestellingen beheren
+			break;
+			
+		default:
+			employeeView.printMenuInputIsWrong();
 				
-
 		}
-	}
-
-
-	@Override
-	public void runView() {
-		employeeView.printHeaderMessage();
-		employeeView.printMenuMessage();
-		employeeMenu(employeeView.getIntInput());
-		
 	}
 
 	

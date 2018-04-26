@@ -13,6 +13,16 @@ public class CustomerController extends Controller {
 	private AccountDAO accountDao = new AccountDAOImp();
 	private AddressDAO addressDao = new AddressDAOImp();
 
+	
+	@Override
+	public void runView() {
+		
+		customerView.printHeaderMessage();
+		customerView.printMenuMessage();
+		customerMenuSwitch(customerView.getIntInput());
+
+	}
+	
 	public void customerMenuSwitch(int menuNumber) {
 
 		switch (menuNumber) {
@@ -22,16 +32,46 @@ public class CustomerController extends Controller {
 			break;
 
 		case 1:
-
+			//search customer
 			break;
 
 		case 2:
-
+			//add customer
 			break;
 
 		default:
 			customerView.printMenuInputIsWrong();
 
+		}
+	}
+	
+	
+	public void updateOrDeleteCustomerSwitch(Person person) {
+
+		customerView.printAskDeleteOrUpdateCustomer();
+		int choice = customerView.getIntInput();
+
+		switch (choice) {
+		case 1:
+			//update customer
+			break;
+		case 2:
+			//delete customer
+			String yesOrNo = customerView.confirmYesOrNo();
+			if (yesOrNo.equals("J")) {
+
+				addressDao.deleteAddressByPersonId(person.getPersonId());
+				accountDao.deleteAccount(person.getAccount());
+				personDao.deletePerson(person);
+			} else {
+
+			}
+
+			break;
+		case 0: //back to previous menu
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -52,51 +92,16 @@ public class CustomerController extends Controller {
 		}
 		return customerList.get(selectCustomer() - 1);
 	}
+	
 
 	public int selectCustomer() {
 
-		customerView.printSelectCustomer();
+		customerView.printAskNumberOfCustomer();
 		int chosenCustomerNumber = customerView.getIntInput();
 
 		return chosenCustomerNumber;
-	}
-
-	public void updateOrDeleteCustomerSwitch(Person person) {
-
-		customerView.printAskDeleteOrUpdateCustomer();
-		int choice = customerView.getIntInput();
-
-		switch (choice) {
-		case 1:
-
-			break;
-		case 2:
-
-			String yesOrNo = customerView.confirmYesOrNo();
-			if (yesOrNo.equals("J")) {
-
-				addressDao.deleteAddressByPersonId(person.getPersonId());
-				accountDao.deleteAccount(person.getAccount());
-				personDao.deletePerson(person);
-			} else {
-
-			}
-
-			break;
-		case 0:
-			break;
-		default:
-			break;
-		}
-	}
-
-	@Override
-	public void runView() {
 		
-		customerView.printHeaderMessage();
-		customerView.printMenuMessage();
-		customerMenuSwitch(customerView.getIntInput());
-
 	}
+
 
 }

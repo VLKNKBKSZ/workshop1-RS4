@@ -48,7 +48,7 @@ public class TestEvy {
 		int generatedAccountId = accountDao.createAccount(account1);
 		Account accountDatabase = accountDao.getAccountById(generatedAccountId);
 		System.out.println(accountDatabase == null);
-		Person person = (Person) new Person.PersonBuilder().account(accountDatabase).personType("customer")
+		Person person = (Person) new Person.PersonBuilder().account(accountDatabase).personType(1)
 				.name("Evy").lastName("Wetch").middleName("Evyvy").build();
 		System.out.println(person == null);
 		int generatedPersonId = personDao.createPerson(person);

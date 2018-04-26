@@ -36,6 +36,7 @@ public class MainMenuController extends Controller{
 			
 		case 1:
 			loginValidation.loginCheckAccountValidation();
+			runView();
 			break;
 
 		case 2:

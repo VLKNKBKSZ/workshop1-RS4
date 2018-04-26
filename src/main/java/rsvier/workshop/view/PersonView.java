@@ -10,11 +10,12 @@ public class PersonView extends View {
 
 	@Override
 	public void printMenuMessage() {
-		System.out.println("1- ");
 		
 	}
 	
-	public void print() {}
+	public void printUpdateUserDetailsMenu() {
+		System.out.println("\n1- Naam\n2- Achternaam\n3- Tussenvoegsel\n4- Adresgegevens");
+	}
 	
 
 }

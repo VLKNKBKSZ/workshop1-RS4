@@ -9,15 +9,13 @@ public interface AccountDAO {
 
 	public List<Account> getAllAccounts();
 
-	public Account getAccount(String email, String password);
-
 	public int createAccount(Account account);
 
 	public void updateAccount(Account account);
 
 	public void deleteAccount(Account account);
 
-	public Account getAccountLogin(String email);
+	public Account getAccountByEmail(String email);
 	
 	public Account getAccountById(int accountId);
 

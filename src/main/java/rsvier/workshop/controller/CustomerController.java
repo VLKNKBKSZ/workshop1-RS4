@@ -15,7 +15,7 @@ public class CustomerController extends Controller {
 	private AccountDAO accountDao = new AccountDAOImp();
 	private AddressDAO addressDao = new AddressDAOImp();
 	private AccountController accountController = new AccountController();
-	private AccountView accountView = new AccountView();
+	
 	
 
 	
@@ -46,8 +46,10 @@ public class CustomerController extends Controller {
 
 		case 2:
 			//add customer
-			accountView.printMakeCustomerAccount();
-			accountController.doCreateAccount();
+			AccountView.printMakeCustomerAccount();
+			accountController.doCreateAccount(); //we should also make the accountType 2 here, so
+												//have to add a constructor in the accountdomain for that
+												
 			runView();
 			break;
 

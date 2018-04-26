@@ -12,7 +12,7 @@ public class AccountView extends View{
 		System.out.println("1- Maak nieuw account\n2- Terug naar Hoofdmenu\n0- Verlaat Evvo Meubels");
 	}
 	
-	public void printMakeCustomerAccount() {
+	public static void printMakeCustomerAccount() {
 		System.out.println("Maak eerst een nieuw account aan voor de klant.");
 	}
 		

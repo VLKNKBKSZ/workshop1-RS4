@@ -44,6 +44,8 @@ public class TestEvy {
 		addressDao.createAddress(address1, person);
 		
 		*/
+		
+		/*
 		Account account1 = new Account("hippo@gmail.com", "123456");
 		int generatedAccountId = accountDao.createAccount(account1);
 		Account accountDatabase = accountDao.getAccountById(generatedAccountId);
@@ -59,7 +61,7 @@ public class TestEvy {
 		
 		addressDao.createAddress(address);
 		
-
+*/
 		// Person 2
 
 

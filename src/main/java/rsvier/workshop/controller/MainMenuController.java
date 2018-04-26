@@ -11,7 +11,7 @@ public class MainMenuController extends Controller{
 	private MainMenuView mainMenuView = new MainMenuView();
 	private AccountView accountView = new AccountView();
 	private AccountController accountController = new AccountController();
-	
+	private EmployeeController employeeController = new EmployeeController();
 	
 	@Override
 	public void runView() {
@@ -64,7 +64,7 @@ public class MainMenuController extends Controller{
 
 			if (account.getPassword().equals(password)) {
 				accountView.printLoginAccountIsSuccessful();
-				// call method of main menu that is not here yet	
+				employeeController.runView();
 			} else {
 				accountView.printLoginDetailsWrong();
 				runView();

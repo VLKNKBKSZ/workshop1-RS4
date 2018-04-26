@@ -74,7 +74,7 @@ public class CustomerController extends Controller {
 
 			String yesOrNo = customerView.confirmYesOrNo();
 			if (yesOrNo.equals("J")) {
-				
+
 				addressDao.deleteAddressByPersonId(person.getPersonId());
 				accountDao.deleteAccount(person.getAccount());
 				personDao.deletePerson(person);
@@ -92,6 +92,7 @@ public class CustomerController extends Controller {
 
 	@Override
 	public void runView() {
+		
 		customerView.printHeaderMessage();
 		customerView.printMenuMessage();
 		customerMenuSwitch(customerView.getIntInput());

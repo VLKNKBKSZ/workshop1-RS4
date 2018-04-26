@@ -27,13 +27,13 @@ public class CustomerController extends Controller {
 
 		switch (menuNumber) {
 
-		case 0:
+		case 0://leave and go back to previous menu
 			customerView.printExitApplicationMessage();
 			break;
 
-		case 1:
-			//enter lastname
-			//personDAO.getCustomerByLastName
+		case 1://search customer by lastname
+			Person person = searchCustomer();
+			updateOrDeleteCustomerSwitch(person);
 			break;
 
 		case 2:

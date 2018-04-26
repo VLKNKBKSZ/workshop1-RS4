@@ -1,18 +1,14 @@
 package rsvier.workshop.controller;
 
-import rsvier.workshop.dao.*;
-import rsvier.workshop.domain.Account;
+
 import rsvier.workshop.service.LoginValidation;
-import rsvier.workshop.view.AccountView;
+
 import rsvier.workshop.view.MainMenuView;
 
 public class MainMenuController extends Controller{
 
-	private AccountDAO accountDAOImp = new AccountDAOImp();
 	private MainMenuView mainMenuView = new MainMenuView();
-	private AccountView accountView = new AccountView();
 	private AccountController accountController = new AccountController();
-	private EmployeeController employeeController = new EmployeeController();
 	private LoginValidation loginValidation = new LoginValidation();
 	
 	
@@ -34,12 +30,12 @@ public class MainMenuController extends Controller{
 			mainMenuView.printExitApplicationMessage();
 			break;
 			
-		case 1:
+		case 1://Login into account
 			loginValidation.loginCheckAccountValidation();
 			runView();
 			break;
 
-		case 2:
+		case 2: //Create a new account
 			accountController.doCreateAccount();
 			runView();
 			break;

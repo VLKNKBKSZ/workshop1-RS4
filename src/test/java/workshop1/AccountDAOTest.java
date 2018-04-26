@@ -66,7 +66,7 @@ public class AccountDAOTest {
 
 	@Test
 	public void testGetAccount() {
-		Account account = accountDao.getAccount("hippo@gmail.com", "5678");
+		Account account = accountDao.getAccountByEmail("hippo@gmail.com");
 
 		Assertions.assertAll(() -> assertNotNull(account), () -> assertEquals(2, account.getAccountId()));
 
@@ -83,7 +83,7 @@ public class AccountDAOTest {
 
 	@Test
 	public void testUpdateAccount() {
-		Account account = accountDao.getAccount("hippo@gmail.com", "5678");
+		Account account = accountDao.getAccountByEmail("hippo@gmail.com");
 
 		account.setPassword("55555");
 
@@ -127,6 +127,6 @@ public class AccountDAOTest {
 	
 	@Test
 	public void testLogin() {
-		assertTrue("true",accountDao.login("evy@gmail.com","1234"));
+		assertTrue("true",accountDao.getAccountByEmail("evy@gmail.com"));
 	}
 }

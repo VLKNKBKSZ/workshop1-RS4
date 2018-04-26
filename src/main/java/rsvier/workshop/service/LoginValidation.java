@@ -9,8 +9,6 @@ public class LoginValidation {
 	
 	private AccountView accountView = new AccountView();
 	private AccountDAO accountDAOImp = new AccountDAOImp();
-	private Controller mainMenuController = new MainMenuController();
-	private EmployeeController employeeController = new EmployeeController();
 	
 	
 public void loginCheckAccountValidation() {
@@ -24,12 +22,10 @@ public void loginCheckAccountValidation() {
 		String password = accountView.getStringInput();
 		
 		if (account.getEmail() == null|| (!account.getPassword().equals(password))) {
-			accountView.printLoginDetailsWrong();
-			mainMenuController.runView();	
+			accountView.printLoginDetailsWrong();	
 			
 		} else {
 			accountView.printLoginAccountIsSuccessful();
-			employeeController.runView();
 			
 		}
 	}

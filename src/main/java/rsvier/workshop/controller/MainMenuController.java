@@ -41,6 +41,7 @@ public class MainMenuController extends Controller{
 
 		case 2:
 			accountController.doCreateAccount();
+			runView();
 			break;
 			
 		default:

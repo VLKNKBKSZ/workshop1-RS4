@@ -3,6 +3,7 @@ package rsvier.workshop.domain;
 public class Account {
 
 	private int accountId;
+	private int accountType;
 	private String email;
 	private String password;
 	
@@ -21,13 +22,23 @@ public class Account {
 	public int getAccountId() {
 		return accountId;
 	}
-
+	
 
 	public void setAccountId(int id) {
 		this.accountId = id;
 	}
 
+	
+	public int getAccountType() {
+		return accountType;
+	}
 
+	
+	public void setAccountType(int accountType) {
+		this.accountType = accountType;
+	}
+	
+	
 	public String getEmail() {
 		return email;
 	}
@@ -51,7 +62,8 @@ public class Account {
 	@Override
 
 	public String toString() {
-		return "Account ID = " + getAccountId()+ " Email = "  + getEmail() + " Password = " + getPassword();
+		return "Account ID = " + getAccountId() + "Account type = " + getAccountType() + 
+				" Email = "  + getEmail() + " Password = " + getPassword();
 	
 	}
 	

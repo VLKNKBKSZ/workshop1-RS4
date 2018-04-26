@@ -10,6 +10,7 @@ public class AccountDAOImp implements AccountDAO {
 
 	private Logger logger = LogConnection.getLogger();
 
+	
 	@Override
 	public List<Account> getAllAccounts() {
 
@@ -25,8 +26,9 @@ public class AccountDAOImp implements AccountDAO {
 			while (resultSet.next()) {
 				Account account = new Account();
 				account.setAccountId(resultSet.getInt(1));
-				account.setEmail(resultSet.getString(2));
-				account.setPassword(resultSet.getString(3));
+				account.setAccountType(resultSet.getInt(2));
+				account.setEmail(resultSet.getString(3));
+				account.setPassword(resultSet.getString(4));
 				accountList.add(account);
 
 			}
@@ -58,8 +60,9 @@ public class AccountDAOImp implements AccountDAO {
 				if (resultSet.next()) {
 
 					account.setAccountId(resultSet.getInt(1));
-					account.setEmail(resultSet.getString(2));
-					account.setPassword(resultSet.getString(3));
+					account.setAccountType(resultSet.getInt(2));
+					account.setEmail(resultSet.getString(3));
+					account.setPassword(resultSet.getString(4));
 
 				}
 
@@ -80,14 +83,15 @@ public class AccountDAOImp implements AccountDAO {
 
 		int generatedId = 0;
 
-		String query = "INSERT INTO account (email,password) VALUES(?,?)";
+		String query = "INSERT INTO account (account_type,email,password) VALUES(?,?,?)";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
-
-			preparedStatement.setString(1, account.getEmail());
-			preparedStatement.setString(2, account.getPassword());
+			
+			preparedStatement.setInt(1, account.getAccountType());
+			preparedStatement.setString(2, account.getEmail());
+			preparedStatement.setString(3, account.getPassword());
 
 			preparedStatement.executeUpdate();
 
@@ -109,14 +113,15 @@ public class AccountDAOImp implements AccountDAO {
 
 	public void updateAccount(Account account) {
 
-		String query = "UPDATE account SET email = ?, password = ? WHERE account_id = ?";
+		String query = "UPDATE account SET account_type = ?, email = ?, password = ? WHERE account_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
-
-			preparedStatement.setString(1, account.getEmail());
-			preparedStatement.setString(2, account.getPassword());
-			preparedStatement.setInt(3, account.getAccountId());
+			
+			preparedStatement.setInt(1, account.getAccountType());
+			preparedStatement.setString(2, account.getEmail());
+			preparedStatement.setString(3, account.getPassword());
+			preparedStatement.setInt(4, account.getAccountId());
 
 			preparedStatement.executeUpdate();
 			
@@ -167,10 +172,11 @@ public class AccountDAOImp implements AccountDAO {
 			try (ResultSet resultSet = preparedStatement.executeQuery();) {
 
 				if (resultSet.next()) {
-
+					
 					account.setAccountId(resultSet.getInt(1));
-					account.setEmail(resultSet.getString(2));
-					account.setPassword(resultSet.getString(3));
+					account.setAccountType(resultSet.getInt(2));
+					account.setEmail(resultSet.getString(3));
+					account.setPassword(resultSet.getString(4));
 				}
 
 			}
@@ -230,8 +236,9 @@ public class AccountDAOImp implements AccountDAO {
 				if (resultSet.next()) {
 
 					account.setAccountId(resultSet.getInt(1));
-					account.setEmail(resultSet.getString(2));
-					account.setPassword(resultSet.getString(3));
+					account.setAccountType(resultSet.getInt(2));
+					account.setEmail(resultSet.getString(3));
+					account.setPassword(resultSet.getString(4));
 				}
 
 			}

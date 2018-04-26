@@ -3,6 +3,7 @@ package rsvier.workshop.controller;
 import java.util.List;
 
 import rsvier.workshop.dao.*;
+import rsvier.workshop.controller.*;
 import rsvier.workshop.domain.Person;
 import rsvier.workshop.view.CustomerView;
 
@@ -12,6 +13,7 @@ public class CustomerController extends Controller {
 	private PersonDAO personDao = new PersonDAOImp();
 	private AccountDAO accountDao = new AccountDAOImp();
 	private AddressDAO addressDao = new AddressDAOImp();
+	private AccountController accountController = new AccountController();
 
 	
 	@Override
@@ -38,6 +40,8 @@ public class CustomerController extends Controller {
 
 		case 2:
 			//add customer
+			accountController.doCreateAccount();
+			runView();
 			break;
 
 		default:

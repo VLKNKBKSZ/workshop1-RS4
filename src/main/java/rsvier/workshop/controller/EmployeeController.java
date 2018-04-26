@@ -1,6 +1,6 @@
 package rsvier.workshop.controller;
 
-import rsvier.workshop.domain.Account;
+import rsvier.workshop.domain.*;
 import rsvier.workshop.view.EmployeeView;
 
 public class EmployeeController extends Controller{
@@ -22,20 +22,18 @@ public class EmployeeController extends Controller{
 		
 		switch (menuNumber) {
 
-		case 0:
+		case 0://Exit Menu
 			employeeView.printExitApplicationMessage();
 			break;
 			
-		case 1:
+		case 1:	//Klanten beheren
 			customerController.runView();
 			break;
 
-		case 2:
-			//producten beheren
+		case 2: //producten beheren
 			break;
 			
-		case 3:
-			//bestellingen beheren
+		case 3:	//bestellingen beheren
 			break;
 			
 		default:

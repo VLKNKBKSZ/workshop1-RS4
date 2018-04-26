@@ -11,6 +11,10 @@ public class AccountView extends View{
 	public void printMenuMessage() {
 		System.out.println("1- Maak nieuw account\n2- Terug naar Hoofdmenu\n0- Verlaat Evvo Meubels");
 	}
+	
+	public void printMakeCustomerAccount() {
+		System.out.println("Maak eerst een nieuw account aan voor de klant.");
+	}
 		
 	public void printRequestEmailInput() {
 		System.out.print("Vul email adres in: ");

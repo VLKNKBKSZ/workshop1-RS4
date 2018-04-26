@@ -5,7 +5,8 @@ import java.util.List;
 import rsvier.workshop.dao.*;
 import rsvier.workshop.controller.*;
 import rsvier.workshop.domain.Person;
-import rsvier.workshop.view.CustomerView;
+import rsvier.workshop.view.*;
+import rsvier.workshop.view.View;
 
 public class CustomerController extends Controller {
 
@@ -14,7 +15,8 @@ public class CustomerController extends Controller {
 	private AccountDAO accountDao = new AccountDAOImp();
 	private AddressDAO addressDao = new AddressDAOImp();
 	private AccountController accountController = new AccountController();
-	private EmployeeController employeeController = new EmployeeController();
+	private AccountView accountView = new AccountView();
+	
 
 	
 	@Override
@@ -30,8 +32,10 @@ public class CustomerController extends Controller {
 
 		switch (menuNumber) {
 
-		case 0://leave and go back to previous menu
+		case 0://leave and go back to employee-menu
+			
 			customerView.printExitApplicationMessage();
+			EmployeeController employeeController = new EmployeeController();
 			employeeController.runView();
 			break;
 
@@ -42,6 +46,7 @@ public class CustomerController extends Controller {
 
 		case 2:
 			//add customer
+			accountView.printMakeCustomerAccount();
 			accountController.doCreateAccount();
 			runView();
 			break;

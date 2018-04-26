@@ -9,6 +9,7 @@ public class LoginValidation {
 	
 	private AccountView accountView = new AccountView();
 	private AccountDAO accountDAOImp = new AccountDAOImp();
+	private Controller employeeController = new EmployeeController();
 	
 	
 public void loginCheckAccountValidation() {
@@ -26,7 +27,7 @@ public void loginCheckAccountValidation() {
 			
 		} else {
 			accountView.printLoginAccountIsSuccessful();
-			
+			employeeController.runView();
 		}
 	}
 

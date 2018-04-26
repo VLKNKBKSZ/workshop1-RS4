@@ -1,17 +1,20 @@
 package rsvier.workshop.controller;
 
-import rsvier.workshop.dao.AccountDAOImp;
+import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.Account;
+import rsvier.workshop.service.LoginValidation;
 import rsvier.workshop.view.AccountView;
 import rsvier.workshop.view.MainMenuView;
 
 public class MainMenuController extends Controller{
 
-	private AccountDAOImp accountDAOImp = new AccountDAOImp();
+	private AccountDAO accountDAOImp = new AccountDAOImp();
 	private MainMenuView mainMenuView = new MainMenuView();
 	private AccountView accountView = new AccountView();
 	private AccountController accountController = new AccountController();
 	private EmployeeController employeeController = new EmployeeController();
+	private LoginValidation loginValidation = new LoginValidation();
+	
 	
 	@Override
 	public void runView() {
@@ -32,7 +35,7 @@ public class MainMenuController extends Controller{
 			break;
 			
 		case 1:
-			loginCheckAccountValidation();
+			loginValidation.loginCheckAccountValidation();
 			break;
 
 		case 2:
@@ -47,31 +50,7 @@ public class MainMenuController extends Controller{
 	}
 
 	
-	public void loginCheckAccountValidation() {
-		
-		accountView.printRequestEmailInput();
-		String email = mainMenuView.getStringInput();		
-
-		Account account = accountDAOImp.getAccountLogin(email);
-		
-		if (account.getEmail() == null) {
-			accountView.printLoginDetailsWrong();
-			runView();	
-			
-		} else {
-			accountView.printRequestPasswordInput();
-			String password = mainMenuView.getStringInput();
-
-			if (account.getPassword().equals(password)) {
-				accountView.printLoginAccountIsSuccessful();
-				employeeController.runView();
-			} else {
-				accountView.printLoginDetailsWrong();
-				runView();
-			}
-		}
-	}
-
+	
 	
 	
 }

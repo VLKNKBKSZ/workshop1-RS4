@@ -32,7 +32,8 @@ public class CustomerController extends Controller {
 			break;
 
 		case 1:
-			//search customer
+			//enter lastname
+			//personDAO.getCustomerByLastName
 			break;
 
 		case 2:

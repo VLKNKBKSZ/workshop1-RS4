@@ -21,7 +21,5 @@ public interface AccountDAO {
 	
 	public Account getAccountById(int accountId);
 
-	public boolean login(String email, String password);
-
 
 }

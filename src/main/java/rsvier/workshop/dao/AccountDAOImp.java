@@ -190,36 +190,7 @@ public class AccountDAOImp implements AccountDAO {
 		return null;
 	}
 
-	@Override
-	public boolean login(String email, String password) {
-
-		String query = "SELECT * FROM account WHERE email = ? AND password = ? ";
-
-		try(Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = conn.prepareStatement(query);	) {
-
-			preparedStatement.setString(1, email);
-			preparedStatement.setString(2, password);
-
-			try(ResultSet resultSet = preparedStatement.executeQuery();){
-
-				if(resultSet.next()) {
-
-					if((email.equals(resultSet.getString(2))) && (password.equals(resultSet.getString(3))) ) {
-						logger.log(Level.INFO, "Login succesful");
-						System.out.println("Login succesful ");
-						return true;
-
-					}
-				}
-
-			}
-		} catch (SQLException e) {
-			logger.log(Level.WARNING, "SQL exception occurred ", e);
-		}
-		return false;
-	}
-
+	
 	@Override
 	public Account getAccountById(int accountId) {
 		Account account = new Account();

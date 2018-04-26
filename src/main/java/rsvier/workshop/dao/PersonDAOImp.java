@@ -11,73 +11,7 @@ public class PersonDAOImp implements PersonDAO {
 	private Logger logger = LogConnection.getLogger();
 	private AccountDAO accountDao = new AccountDAOImp();
 
-	@Override
-	public List<Person> getAllPersons() {
-
-		List<Person> personList = new ArrayList<>();
-
-		String query = "SELECT * FROM person";
-
-		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = conn.prepareStatement(query);
-				ResultSet resultSet = preparedStatement.executeQuery();) {
-
-			while (resultSet.next()) {
-				Person.PersonBuilder personBuilder = new Person.PersonBuilder();
-				personBuilder.personId(resultSet.getInt(1));
-				personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
-				personBuilder.personType(resultSet.getInt(3));
-				personBuilder.name(resultSet.getString(4));
-				personBuilder.lastName(resultSet.getString(5));
-				personBuilder.middleName(resultSet.getString(6));
-				Person person = personBuilder.build();
-				personList.add(person);
-
-			}
-			logger.log(Level.WARNING, "Person list successfully returned");
-			return personList;
-
-		} catch (SQLException e) {
-			logger.log(Level.WARNING, "SQL exception occured", e);
-
-		}
-		return null;
-	}
-
-	@Override
-	public List<Person> getAllPersons(String personType) {
-
-		List<Person> personList = new ArrayList<>();
-
-		String query = "SELECT * FROM person WHERE person_type = ?";
-
-		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
-			preparedStatement.setString(1, personType);
-
-			try (ResultSet resultSet = preparedStatement.executeQuery();) {
-
-				while (resultSet.next()) {
-					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
-					personBuilder.personId(resultSet.getInt(1));
-					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
-					personBuilder.personType(resultSet.getInt(3));
-					personBuilder.name(resultSet.getString(4));
-					personBuilder.lastName(resultSet.getString(5));
-					personBuilder.middleName(resultSet.getString(6));
-					Person person = personBuilder.build();
-					personList.add(person);
-				}
-			}
-			logger.log(Level.WARNING, "Person list successfully returned");
-			return personList;
-
-		} catch (SQLException e) {
-			logger.log(Level.WARNING, "SQL exception occured", e);
-
-		}
-		return null;
-	}
+	
 
 	@Override
 	public List<Person> getCustomerByLastName(String lastName) {
@@ -97,10 +31,9 @@ public class PersonDAOImp implements PersonDAO {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
 					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
-					personBuilder.personType(resultSet.getInt(3));
-					personBuilder.name(resultSet.getString(4));
-					personBuilder.lastName(resultSet.getString(5));
-					personBuilder.middleName(resultSet.getString(6));
+					personBuilder.name(resultSet.getString(3));
+					personBuilder.lastName(resultSet.getString(4));
+					personBuilder.middleName(resultSet.getString(5));
 					Person person = personBuilder.build();
 					personList.add(person);
 
@@ -134,10 +67,9 @@ public class PersonDAOImp implements PersonDAO {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
 					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
-					personBuilder.personType(resultSet.getInt(3));
-					personBuilder.name(resultSet.getString(4));
-					personBuilder.lastName(resultSet.getString(5));
-					personBuilder.middleName(resultSet.getString(6));
+					personBuilder.name(resultSet.getString(3));
+					personBuilder.lastName(resultSet.getString(4));
+					personBuilder.middleName(resultSet.getString(5));
 					person = personBuilder.build();
 				}
 
@@ -156,17 +88,16 @@ public class PersonDAOImp implements PersonDAO {
 	@Override
 	public int createPerson(Person person) {
 		int generatedId = 0;
-		String query = "INSERT INTO person (account_id, person_type, name, last_name, middle_name) VALUES(?,?,?,?,?)";
+		String query = "INSERT INTO person (account_id, name, last_name, middle_name) VALUES(?,?,?,?)";
 
 		try (Connection connection = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 
 			preparedStatement.setInt(1, person.getAccount().getAccountId());
-			preparedStatement.setInt(2, person.getPersonType());
-			preparedStatement.setString(3, person.getName());
-			preparedStatement.setString(4, person.getLastName());
-			preparedStatement.setString(5, person.getMiddleName());
+			preparedStatement.setString(2, person.getName());
+			preparedStatement.setString(3, person.getLastName());
+			preparedStatement.setString(4, person.getMiddleName());
 
 			preparedStatement.executeUpdate();
 
@@ -191,18 +122,17 @@ public class PersonDAOImp implements PersonDAO {
 	public void updatePerson(Person person) {
 
 		String query = "UPDATE person "
-				+ "SET account_id = ?, person_type = ?, name = ?, last_name = ?, middle_name = ? "
+				+ "SET account_id = ?, name = ?, last_name = ?, middle_name = ? "
 				+ "WHERE person_id = ?";
 
 		try (Connection connection = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, person.getAccount().getAccountId());
-			preparedStatement.setInt(2, person.getPersonType());
-			preparedStatement.setString(3, person.getName());
-			preparedStatement.setString(4, person.getLastName());
-			preparedStatement.setString(5, person.getMiddleName());
-			preparedStatement.setInt(6, person.getPersonId());
+			preparedStatement.setString(2, person.getName());
+			preparedStatement.setString(3, person.getLastName());
+			preparedStatement.setString(4, person.getMiddleName());
+			preparedStatement.setInt(5, person.getPersonId());
 
 			preparedStatement.executeUpdate();
 			logger.log(Level.INFO, "Person succesfully updated");
@@ -253,10 +183,9 @@ public class PersonDAOImp implements PersonDAO {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
 					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
-					personBuilder.personType(resultSet.getInt(3));
-					personBuilder.name(resultSet.getString(4));
-					personBuilder.lastName(resultSet.getString(5));
-					personBuilder.middleName(resultSet.getString(6));
+					personBuilder.name(resultSet.getString(3));
+					personBuilder.lastName(resultSet.getString(4));
+					personBuilder.middleName(resultSet.getString(5));
 					person = personBuilder.build();
 				}
 

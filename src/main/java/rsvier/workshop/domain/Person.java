@@ -20,7 +20,6 @@ public class Person {
 		
 		this.personId = builder.personId;
 		this.account = builder.account;
-		this.personType = builder.personType;
 		this.name = builder.name;
 		this.lastName = builder.lastName;
 		this.middleName = builder.middleName;
@@ -30,7 +29,6 @@ public class Person {
 
 		private int personId;
 		private Account account;
-		private int personType;
 		private String name;
 		private String lastName;
 		private String middleName;
@@ -42,7 +40,6 @@ public class Person {
 		public PersonBuilder(Person person) {
 			this.personId = person.personId;
 			this.account = person.account;
-			this.personType = person.personType;
 			this.name = person.name;
 			this.lastName = person.lastName;
 			this.middleName = person.lastName;
@@ -60,10 +57,6 @@ public class Person {
 			return this;
 		}
 		
-		public PersonBuilder personType(int personType) {
-			this.personType = personType;
-			return this;
-		}
 
 		public PersonBuilder name(String name) {
 			this.name = name;
@@ -96,9 +89,6 @@ public class Person {
 		return personId;
 	}
 	
-	public int getPersonType() {
-		return personType;
-	}
 
 	public String getName() {
 		return name;

@@ -6,8 +6,6 @@ import rsvier.workshop.domain.*;
 
 public interface PersonDAO {
 
-	public List<Person> getAllPersons();
-	public List<Person> getAllPersons(String personType);
 	public List<Person> getCustomerByLastName(String lastname);
 	public Person getPersonByAccountId(int accountId);
 	public Person getPersonById(int personId);

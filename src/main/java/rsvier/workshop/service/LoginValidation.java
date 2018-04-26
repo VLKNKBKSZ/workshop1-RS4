@@ -16,11 +16,10 @@ public void loginCheckAccountValidation() {
 		
 		accountView.printRequestEmailInput();
 		String email = accountView.getStringInput();		
-
-		Account account = accountDAOImp.getAccountByEmail(email);
-		
 		accountView.printRequestPasswordInput();
 		String password = accountView.getStringInput();
+		Account account = accountDAOImp.getAccountByEmail(email);
+		
 		
 		if (account.getEmail() == null|| (!account.getPassword().equals(password))) {
 			accountView.printLoginDetailsWrong();	

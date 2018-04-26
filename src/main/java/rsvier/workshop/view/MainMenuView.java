@@ -5,7 +5,7 @@ public class MainMenuView extends View {
 
 	@Override
 	public void printHeaderMessage() {
-		System.out.println("=========== Welkom Op Evvo Meubels ===========");
+		System.out.println("\n=========== Welkom Op Evvo Meubels ===========\n");
 		
 	}
 

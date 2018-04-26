@@ -14,6 +14,7 @@ public class Account {
 	}
 	
 	public Account(String email, String password) {
+		accountType = 1;
 		this.email = email;
 		this.password = password;
 	}

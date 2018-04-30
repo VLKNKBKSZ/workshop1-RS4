@@ -21,10 +21,10 @@ public class PersonDAOImp implements PersonDAO {
 		String query = "SELECT * FROM person WHERE last_name = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-			PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+			PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 			preparedStatement.setString(1, lastName);
 
-			try (ResultSet resultSet = preparedStatement.executeQuery();) {
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
 				while (resultSet.next()) {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
@@ -56,11 +56,11 @@ public class PersonDAOImp implements PersonDAO {
 		String query = "SELECT * FROM person WHERE account_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
 			preparedStatement.setInt(1, accountId);
 
-			try (ResultSet resultSet = preparedStatement.executeQuery();) {
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
 				if (resultSet.next()) {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
@@ -91,7 +91,7 @@ public class PersonDAOImp implements PersonDAO {
 
 		try (Connection connection = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query,
-						PreparedStatement.RETURN_GENERATED_KEYS);) {
+						PreparedStatement.RETURN_GENERATED_KEYS)) {
 
 			preparedStatement.setInt(1, person.getAccount().getAccountId());
 			preparedStatement.setString(2, person.getName());
@@ -125,7 +125,7 @@ public class PersonDAOImp implements PersonDAO {
 				+ "WHERE person_id = ?";
 
 		try (Connection connection = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
 			preparedStatement.setInt(1, person.getAccount().getAccountId());
 			preparedStatement.setString(2, person.getName());
@@ -149,7 +149,7 @@ public class PersonDAOImp implements PersonDAO {
 		String query = "DELETE FROM account WHERE account_id = ?";
 
 		try (Connection connection = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
 			preparedStatement.setInt(1, person.getAccount().getAccountId());
 
@@ -172,11 +172,11 @@ public class PersonDAOImp implements PersonDAO {
 		String query = "SELECT * FROM person WHERE person_id = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
 			preparedStatement.setInt(1, personId);
 
-			try (ResultSet resultSet = preparedStatement.executeQuery();) {
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
 				if (resultSet.next()) {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();

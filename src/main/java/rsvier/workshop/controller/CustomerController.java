@@ -17,6 +17,7 @@ public class CustomerController extends Controller {
 	private AccountController accountController = new AccountController();
 	
 	
+	
 
 	
 	@Override
@@ -66,14 +67,16 @@ public class CustomerController extends Controller {
 	
 	
 	public void updateOrDeleteCustomerSwitch(Person person) {
+		// PersonController has been removed from the data field to prevent stackoverflow error
+		PersonController personController = new PersonController();
 
 		customerView.printAskDeleteOrUpdateCustomer();
 		int choice = customerView.getIntInput();
 
 		switch (choice) {
-		case 1:
-			
-			//update customer
+		case 1: 
+			// after a integer is given the returned person object from the search is also passed to use that to edit the user details.
+			personController.personUpdateMenuSwitch(choice, person);
 			break;
 		case 2:
 			//delete customer

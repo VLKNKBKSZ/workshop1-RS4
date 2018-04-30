@@ -17,5 +17,10 @@ public class PersonView extends View {
 		System.out.println("\n1- Naam\n2- Achternaam\n3- Tussenvoegsel\n4- Adresgegevens");
 	}
 	
+	
+	public void printAskUserForName() {
+		System.out.println("Wat is de nieuwe naam van de gebruiker?");
+	}
+	
 
 }

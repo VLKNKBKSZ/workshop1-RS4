@@ -30,7 +30,7 @@ public abstract class View {
 
 	
 	public void printExitApplicationMessage() {
-		System.out.println("U verlaat het programma. Bedankt. Tot ziens !");
+		System.out.println("U verlaat het programma. Bedankt en tot ziens!");
 	}
 
 	

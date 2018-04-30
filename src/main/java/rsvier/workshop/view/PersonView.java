@@ -14,7 +14,8 @@ public class PersonView extends View {
 	}
 	
 	public void printUpdateUserDetailsMenu() {
-		System.out.println("\n1- Naam\n2- Achternaam\n3- Tussenvoegsel\n4- Adresgegevens");
+		System.out.println("Welke gegevens wilt u veranderen?"
+				+ "\n1- Naam\n2- Achternaam\n3- Tussenvoegsel\n4- Adresgegevens\n0- Terug naar vorige menu");
 	}
 	
 	
@@ -27,7 +28,7 @@ public class PersonView extends View {
 	}
 	
 	public void printAskUserForMiddleName() {
-		System.out.println("Wat is de nieuwe tussenvoegsel van de gebruiker?");
+		System.out.println("Wat is het nieuwe tussenvoegsel van de gebruiker?");
 	}
 
 }

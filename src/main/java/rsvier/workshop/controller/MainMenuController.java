@@ -26,29 +26,31 @@ public class MainMenuController extends Controller{
 		
 		switch (menuNumber) {
 
-		case 0:
-			mainMenuView.printExitApplicationMessage();
-			break;
+			case 0:
+					mainMenuView.printExitApplicationMessage();
+					
+					break;
 			
-		case 1://Login into account
-			loginValidation.loginCheckAccountValidation();
-			runView();
-			break;
-
-		case 2: //Create a new account
-			accountController.doCreateAccount();
-			runView();
-			break;
+			case 1://Login into account
+					loginValidation.loginCheckAccountValidation();
+					runView();
 			
-		default:
-			mainMenuView.printMenuInputIsWrong();
-			runView();
+					break;
 
+			case 2: //Create a new account
+					accountController.doCreateAccount();
+					runView();
+		
+					break;
+			
+			default:
+					mainMenuView.printMenuInputIsWrong();
+					runView();
+					
+					break;
 		}
 	}
 
-	
-	
 	
 	
 }

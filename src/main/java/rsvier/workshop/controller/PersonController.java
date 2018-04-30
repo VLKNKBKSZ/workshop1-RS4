@@ -15,6 +15,7 @@ public class PersonController extends Controller {
 	
 	@Override
 	public void runView() {
+		
 		personView.printHeaderMessage();
 		personView.printUpdateUserDetailsMenu();
 		//
@@ -23,48 +24,68 @@ public class PersonController extends Controller {
 
 	public void personUpdateMenuSwitch(int menuNumber, Person person) {
 		
+		//Switch menu for updating personal data like name and address
+		
 		personView.printUpdateUserDetailsMenu();
 		int choice = personView.getIntInput();
 		
 		switch(choice) {
 		
-		case 0: employeeController.runView();
-				break;
-		// pass in new name and builded person object to update the persons name
-		case 1:updatePersonName(personUpdateName(), person);
-		break;
-			
-		case 2:updatePersonLastName(personUpdateLastName(), person);
-		break;
+			case 0: //exit and go back to employee menu
+					employeeController.runView();
+				
+					break;
 		
-		case 3:updatePersondMiddleName(personUpdateMiddleName(), person);
-		break;
+			case 1:
+					updatePersonName(personUpdateName(), person);
+				
+					break;
 			
-		case 4:
+			case 2:	
+					updatePersonLastName(personUpdateLastName(), person);
 			
+					break;
+		
+			case 3:	
+					updatePersondMiddleName(personUpdateMiddleName(), person);
+					
+					break;
+			
+			case 4:
+					//Update address
+					
+					break;
 		}
 		
 	}
-
-	// Ask user for a new name that he wants to change
+	
+	
+	//Methods for obtaining Strings from users
+	
 	public String personUpdateName() {
+		
 		personView.printAskUserForNewName();
 		String newName = personView.getStringInput();	
 		return newName;
 	}
 	
 	public String personUpdateLastName() {
+		
 		personView.printAskUserForNewLastName();
 		String lastName = personView.getStringInput();	
 		return lastName;
 	}
 	
 	public String personUpdateMiddleName() {
+		
 		personView.printAskUserForMiddleName();
 		String additonalName = personView.getStringInput();	
 		return additonalName;
 	}
-	// Use the the new name that has been given by the user to pass it in this method together with the returned person object from the search
+	
+	//Methods fo updating the personal data with the obtained Strings
+	
+	
 	public void updatePersonName(String name, Person person) {
 		
 		PersonBuilder personBuilder = new PersonBuilder(person);

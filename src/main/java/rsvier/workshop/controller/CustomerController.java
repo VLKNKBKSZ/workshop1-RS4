@@ -25,81 +25,91 @@ public class CustomerController extends Controller {
 		
 		customerView.printHeaderMessage();
 		customerView.printMenuMessage();
-		customerMenuSwitch(customerView.getIntInput());
+		searchOrAddCustomerMenuSwitch(customerView.getIntInput());
 
 	}
 	
-	public void customerMenuSwitch(int menuNumber) {
-
+	public void searchOrAddCustomerMenuSwitch(int menuNumber) {
+		
 		switch (menuNumber) {
-
-		case 0://leave and go back to employee-menu
+			case 0:	//Go back to employee-menu
 			
-			customerView.printExitApplicationMessage();
-			EmployeeController employeeController = new EmployeeController();
-			employeeController.runView();
-			break;
+					customerView.printExitApplicationMessage();
+					EmployeeController employeeController = new EmployeeController();
+					employeeController.runView();
+					
+					break;
 
-		case 1://search customer by lastname
-			Person person = searchCustomer();
-			if (person != null) {
-				updateOrDeleteCustomerSwitch(person);
-			} else {
-				runView();
-			}
+			case 1:	//search customer by last name
+					Person person = searchCustomerByLastName();
+					
+					if (person != null) {
+						
+						updateOrDeleteCustomerSwitch(person);
+						
+					} else {
+						
+					runView();
+					
+					}
+					
+					break;
 
-			break;
-
-		case 2:
-			//add customer
-			AccountView.printMakeCustomerAccount();
-			accountController.doCreateAccount(); //we should also make the accountType 2 here, so
-												//have to add a constructor in the accountdomain for that
+			case 2:	//add customer
+					AccountView.printMakeCustomerAccount();
+					accountController.doCreateAccount(); 
 												
-			runView();
-			break;
+					runView();
+					
+					break;
 
-		default:
-			customerView.printMenuInputIsWrong();
+			default:
+					customerView.printMenuInputIsWrong();
 
 		}
 	}
 	
 	
 	public void updateOrDeleteCustomerSwitch(Person person) {
-		// PersonController has been removed from the data field to prevent stackoverflow error
+		
 		PersonController personController = new PersonController();
 
 		customerView.printAskDeleteOrUpdateCustomer();
 		int choice = customerView.getIntInput();
 
 		switch (choice) {
-		case 1: 
-			// after a integer is given the returned person object from the search is also passed to use that to edit the user details.
-			personController.personUpdateMenuSwitch(choice, person);
-			break;
-		case 2:
-			//delete customer
-			String yesOrNo = customerView.confirmYesOrNo();
-			if (yesOrNo.equals("J")) {
+			case 1:	//update person 
+					personController.personUpdateMenuSwitch(choice, person);
+					
+					break;
+					
+			case 2:	//delete person
+					String yesOrNo = customerView.confirmYesOrNo();
+					
+					if (yesOrNo.equals("J")) {
 				
-				addressDao.deleteAddressByPersonId(person.getPersonId());
-				accountDao.deleteAccount(person.getAccount());
-				personDao.deletePerson(person);
-			} else {
+						addressDao.deleteAddressByPersonId(person.getPersonId());
+						accountDao.deleteAccount(person.getAccount());
+						personDao.deletePerson(person);
+				
+					} else {
+						//implementation for when answer is No
+						
+					}
 
-			}
-
-			break;
-		case 0: //back to previous menu
-			break;
-		default:
-			break;
+					break;
+					
+			case 0: //back to previous menu
+				
+					break;
+					
+			default:
+					break;
 		}
 	}
 
 
-	public Person searchCustomer() {
+	public Person searchCustomerByLastName() {
 
 		customerView.printAskCustomerLastName();
 		String customerLastName = customerView.getStringInput();
@@ -114,6 +124,7 @@ public class CustomerController extends Controller {
 		if (customerList.size() == 1) {
 			System.out.println(customerList.get(0).toString());
 			return customerList.get(0);
+			
 		} else {
 
 			for (int i = 1; i < customerList.size(); i++) {
@@ -121,12 +132,13 @@ public class CustomerController extends Controller {
 			}
 
 		}
+		//Let user select specific person in case there are more than one
 		return customerList.get(selectCustomer() - 1);
 	}
 	
 
 	public int selectCustomer() {
-
+		
 		customerView.printAskNumberOfCustomer();
 		int chosenCustomerNumber = customerView.getIntInput();
 

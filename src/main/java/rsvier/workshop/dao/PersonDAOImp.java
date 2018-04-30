@@ -18,12 +18,11 @@ public class PersonDAOImp implements PersonDAO {
 
 		List<Person> personList = new ArrayList<>();
 		int customer = 1;
-		String query = "SELECT * FROM person WHERE last_name = ? AND person_type = ?";
+		String query = "SELECT * FROM person WHERE last_name = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();
-				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+			PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 			preparedStatement.setString(1, lastName);
-			preparedStatement.setInt(2, customer);
 
 			try (ResultSet resultSet = preparedStatement.executeQuery();) {
 

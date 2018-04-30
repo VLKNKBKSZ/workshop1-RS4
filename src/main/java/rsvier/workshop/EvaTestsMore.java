@@ -75,6 +75,10 @@ public class EvaTestsMore {
 		//deleteProduct
 		//deleteOrder
 		//deleteOrderLine */
+		
+	//	PersonDAO personDAOImp = new PersonDAOImp();
+		
+	//	Person person1 = new Person.PersonBuilder().name("Koos").lastName("Doos")
 	}
 
 }

@@ -4,7 +4,6 @@ public class Person {
 	
 	private int personId;
 	private Account account;
-	private int personType;
 	private String name;
 	private String lastName;
 	private String middleName;

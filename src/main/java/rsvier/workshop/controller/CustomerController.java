@@ -41,7 +41,12 @@ public class CustomerController extends Controller {
 
 		case 1://search customer by lastname
 			Person person = searchCustomer();
-			updateOrDeleteCustomerSwitch(person);
+			if (person != null) {
+				updateOrDeleteCustomerSwitch(person);
+			} else {
+				runView();
+			}
+
 			break;
 
 		case 2:
@@ -96,6 +101,12 @@ public class CustomerController extends Controller {
 		customerView.printAskCustomerLastName();
 		String customerLastName = customerView.getStringInput();
 		List<Person> customerList = personDao.getCustomerByLastName(customerLastName);
+
+
+		if (customerList.size() == 0){
+			customerView.printCustomerNotFound();
+			return null;
+		}
 
 		if (customerList.size() == 1) {
 			System.out.println(customerList.get(0).toString());

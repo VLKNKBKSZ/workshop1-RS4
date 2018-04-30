@@ -17,7 +17,6 @@ public class PersonDAOImp implements PersonDAO {
 	public List<Person> getCustomerByLastName(String lastName) {
 
 		List<Person> personList = new ArrayList<>();
-		int customer = 1;
 		String query = "SELECT * FROM person WHERE last_name = ?";
 
 		try (Connection conn = DatabaseConnectionXML.getConnection();

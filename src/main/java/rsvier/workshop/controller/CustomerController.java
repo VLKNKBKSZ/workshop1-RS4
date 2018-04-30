@@ -99,6 +99,7 @@ public class CustomerController extends Controller {
 
 		if (customerList.size() == 1) {
 			System.out.println(customerList.get(0).toString());
+			return customerList.get(0);
 		} else {
 
 			for (int i = 1; i < customerList.size(); i++) {

@@ -31,11 +31,14 @@ public class PersonController extends Controller {
 		case 0: employeeController.runView();
 				break;
 		// pass in new name and builded person object to update the persons name
-		case 1:updatePersonNameWithNewName(personUpdateName(), person);
+		case 1:updatePersonName(personUpdateName(), person);
+		break;
 			
-		case 2:
+		case 2:updatePersonLastName(personUpdateLastName(), person);
+		break;
 		
-		case 3:
+		case 3:updatePersondMiddleName(personUpdateMiddleName(), person);
+		break;
 			
 		case 4:
 			
@@ -45,16 +48,43 @@ public class PersonController extends Controller {
 
 	// Ask user for a new name that he wants to change
 	public String personUpdateName() {
-		personView.printAskUserForName();
+		personView.printAskUserForNewName();
 		String newName = personView.getStringInput();	
 		return newName;
 	}
 	
+	public String personUpdateLastName() {
+		personView.printAskUserForNewLastName();
+		String lastName = personView.getStringInput();	
+		return lastName;
+	}
+	
+	public String personUpdateMiddleName() {
+		personView.printAskUserForMiddleName();
+		String additonalName = personView.getStringInput();	
+		return additonalName;
+	}
 	// Use the the new name that has been given by the user to pass it in this method together with the returned person object from the search
-	public void updatePersonNameWithNewName(String newName, Person person) {
+	public void updatePersonName(String name, Person person) {
 		
 		PersonBuilder personBuilder = new PersonBuilder(person);
-		personBuilder.name(newName);
+		personBuilder.name(name);
+		Person newPersonWithNewName = personBuilder.build();
+		personDAO.updatePerson(newPersonWithNewName);			
+	}
+	
+	public void updatePersonLastName(String lastName, Person person) {
+		
+		PersonBuilder personBuilder = new PersonBuilder(person);
+		personBuilder.lastName(lastName);
+		Person newPersonWithNewName = personBuilder.build();
+		personDAO.updatePerson(newPersonWithNewName);			
+	}
+	
+	public void updatePersondMiddleName(String middleName, Person person) {
+		
+		PersonBuilder personBuilder = new PersonBuilder(person);
+		personBuilder.middleName(middleName);
 		Person newPersonWithNewName = personBuilder.build();
 		personDAO.updatePerson(newPersonWithNewName);			
 	}

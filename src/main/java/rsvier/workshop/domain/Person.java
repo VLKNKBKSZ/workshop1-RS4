@@ -113,7 +113,7 @@ public class Person {
 	@Override
 
 	public String toString() {
-		return "ID : " + getPersonId() + " " + "Last name: " + getLastName() + " " + "Name : "+ getName() + " " + "Middle name: " + getMiddleName() + " " ;
+		return "ID: " + getPersonId() + " " + "Achternaam: " + getLastName() + " " + "Voornaam : "+ getName() + " " + "Tussenvoegsel: " + getMiddleName() + " " ;
 	}
 	
 	@Override

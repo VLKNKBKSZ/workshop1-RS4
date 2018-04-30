@@ -25,6 +25,11 @@ public class CustomerView extends View {
 		System.out.println("Vul achternaam in:");
 	}
 
+	public void printCustomerNotFound() {
+
+		System.out.println("Geen klant met deze naam gevonden.");
+	}
+
 	
 	public void printAskNumberOfCustomer() {
 

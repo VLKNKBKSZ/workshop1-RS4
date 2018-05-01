@@ -61,6 +61,7 @@ public class PersonController extends Controller {
 	
 	public void doCreatePerson(Account account) {
 		PersonBuilder personBuilder = new PersonBuilder();
+		personBuilder.account(account);
 		personBuilder.name(personUpdateName());
 		personBuilder.lastName(personUpdateLastName());
 		personBuilder.middleName(personUpdateMiddleName());

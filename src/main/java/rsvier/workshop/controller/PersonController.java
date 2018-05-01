@@ -2,6 +2,7 @@ package rsvier.workshop.controller;
 
 import rsvier.workshop.dao.PersonDAO;
 import rsvier.workshop.dao.PersonDAOImp;
+import rsvier.workshop.domain.Account;
 import rsvier.workshop.domain.Person;
 import rsvier.workshop.domain.Person.PersonBuilder;
 import rsvier.workshop.view.*;
@@ -30,7 +31,7 @@ public class PersonController extends Controller {
 		while (updating) {
 			personView.printUpdateUserDetailsMenu();
 			int choice = personView.getIntInput();
-			
+
 			switch (choice) {
 
 				case 0: //exit and go back to employee menu
@@ -58,7 +59,15 @@ public class PersonController extends Controller {
 		}
 	}
 	
-	
+	public void doCreatePerson(Account account) {
+		PersonBuilder personBuilder = new PersonBuilder();
+		personBuilder.name(personUpdateName());
+		personBuilder.lastName(personUpdateLastName());
+		personBuilder.middleName(personUpdateMiddleName());
+		Person person = personBuilder.build();
+		personDAO.createPerson(person);
+	}
+
 	//Methods for obtaining Strings from users
 	
 	public String personUpdateName() {

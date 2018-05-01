@@ -5,6 +5,7 @@ import java.util.List;
 
 import rsvier.workshop.dao.*;
 import rsvier.workshop.controller.*;
+import rsvier.workshop.domain.Account;
 import rsvier.workshop.domain.Person;
 import rsvier.workshop.view.*;
 import rsvier.workshop.view.View;
@@ -17,6 +18,7 @@ public class CustomerController extends Controller {
 	private AccountDAO accountDao = new AccountDAOImp();
 	private AddressDAO addressDao = new AddressDAOImp();
 	private AccountController accountController = new AccountController();
+	private PersonController personController = new PersonController();
 
 	
 	@Override
@@ -33,34 +35,34 @@ public class CustomerController extends Controller {
 		switch (menuNumber) {
 			case 0:	//Go back to employee-menu
 
-					MainController.setController(TypeOfController.EMPLOYEE);
-					break;
+				MainController.setController(TypeOfController.EMPLOYEE);
+				break;
 
 			case 1:	//search customer by last name
-					Person person = searchCustomerByLastName();
+				Person person = searchCustomerByLastName();
 					
-					if (person != null) {
+				if (person != null) {
 						
-						updateOrDeleteCustomerSwitch(person);
+					updateOrDeleteCustomerSwitch(person);
 						
-					} else {
+				} else {
 						
-					runView();
+				runView();
 					
-					}
+				}
 					
-					break;
+				break;
 
 			case 2:	//add customer
-					AccountView.printMakeCustomerAccount();
-					accountController.doCreateAccount(); 
-												
-					runView();
+				AccountView.printMakeCustomerAccount();
+				Account account = accountController.doCreateAccount();
+				personController.doCreatePerson(account);
+				runView();
 					
-					break;
+				break;
 
 			default:
-					customerView.printMenuInputIsWrong();
+				customerView.printMenuInputIsWrong();
 
 		}
 	}
@@ -75,32 +77,34 @@ public class CustomerController extends Controller {
 
 		switch (choice) {
 			case 1:	//update person 
-					personController.personUpdateMenuSwitch(person);
+				personController.personUpdateMenuSwitch(person);
 					
-					break;
+				break;
 					
 			case 2:	//delete person
-					String yesOrNo = customerView.confirmYesOrNo();
+				String yesOrNo = customerView.confirmYesOrNo();
 					
-					if (yesOrNo.equals("J")) {
+				if (yesOrNo.equals("J")) {
 				
-						addressDao.deleteAddressByPersonId(person.getPersonId());
-						accountDao.deleteAccount(person.getAccount());
-						personDao.deletePerson(person);
+					addressDao.deleteAddressByPersonId(person.getPersonId());
+					accountDao.deleteAccount(person.getAccount());
+					personDao.deletePerson(person);
 				
-					} else {
-						//implementation for when answer is No
-						
-					}
+				} else {
 
-					break;
+					runView();
+						
+				}
+
+				break;
 					
 			case 0: //back to previous menu
-				
-					break;
+
+
+				break;
 					
 			default:
-					break;
+				break;
 		}
 	}
 

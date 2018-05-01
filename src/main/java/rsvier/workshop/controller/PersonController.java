@@ -59,14 +59,16 @@ public class PersonController extends Controller {
 		}
 	}
 	
-	public void doCreatePerson(Account account) {
+	public Person doCreatePerson(Account account) {
+
 		PersonBuilder personBuilder = new PersonBuilder();
 		personBuilder.account(account);
 		personBuilder.name(personUpdateName());
 		personBuilder.lastName(personUpdateLastName());
 		personBuilder.middleName(personUpdateMiddleName());
 		Person person = personBuilder.build();
-		personDAO.createPerson(person);
+		person.setPersonId(personDAO.createPerson(person));
+		return person;
 	}
 
 	//Methods for obtaining Strings from users

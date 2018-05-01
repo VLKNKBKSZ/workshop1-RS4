@@ -55,7 +55,8 @@ public class CustomerController extends Controller {
 			case 2:	//add customer
 				AccountView.printMakeCustomerAccount();
 				Account account = accountController.doCreateAccount();
-				personController.doCreatePerson(account);
+				person = personController.doCreatePerson(account);
+
 				runView();
 					
 				break;
@@ -99,6 +100,7 @@ public class CustomerController extends Controller {
 					
 			case 0: //back to previous menu
 
+				runView();
 
 				break;
 					

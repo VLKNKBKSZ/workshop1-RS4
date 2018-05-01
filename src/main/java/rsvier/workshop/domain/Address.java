@@ -152,7 +152,11 @@ public class Address {
 		return country;
 	}
 
-	/* Override the toString method that is inherited from the Object class.
+	public void setAddressType(String addressType) {
+		this.addressType = addressType;
+	}
+
+/* Override the toString method that is inherited from the Object class.
 	 * Not print addressId in toString()
 	 */
 	

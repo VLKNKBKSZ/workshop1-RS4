@@ -2,21 +2,25 @@ package rsvier.workshop.controller;
 
 public class MainController {
 
+    public enum TypeOfController {PERSON, EMPLOYEE, CUSTOMER, MAINMENU, ACCOUNT};
+
+    private TypeOfController controllerType;
     private static PersonController personController = new PersonController();
     private static EmployeeController employeeController = new EmployeeController();
     private static CustomerController customerController = new CustomerController();
 
     private static Controller currentController;
 
-    public static void setController(int choice) {
-        switch (choice) {
-            case 1:
+    //changes currentController and calls the runView method of that controller
+    public static void setController(TypeOfController controllerType) {
+        switch (controllerType) {
+            case PERSON:
                 currentController = personController;
                 break;
-            case 2:
+            case EMPLOYEE:
                 currentController = employeeController;
                 break;
-            case 3:
+            case CUSTOMER:
                 currentController = customerController;
                 break;
         }

@@ -6,7 +6,6 @@ import rsvier.workshop.view.EmployeeView;
 public class EmployeeController extends Controller{
 	
 	private EmployeeView employeeView = new EmployeeView();
-	private CustomerController customerController = new CustomerController();
 	
 	
 	@Override
@@ -29,8 +28,8 @@ public class EmployeeController extends Controller{
 				break;
 			
 			case 1:	//Klanten beheren
-				customerController.runView();
-				
+
+				MainController.setController(MainController.TypeOfController.CUSTOMER);
 				break;
 
 			case 2: //producten beheren

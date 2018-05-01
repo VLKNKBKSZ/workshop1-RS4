@@ -2,6 +2,7 @@ package rsvier.workshop.controller;
 
 import rsvier.workshop.domain.*;
 import rsvier.workshop.view.EmployeeView;
+import rsvier.workshop.controller.MainController.TypeOfController;
 
 public class EmployeeController extends Controller{
 	
@@ -29,7 +30,7 @@ public class EmployeeController extends Controller{
 			
 			case 1:	//Klanten beheren
 
-				MainController.setController(MainController.TypeOfController.CUSTOMER);
+				MainController.setController(TypeOfController.CUSTOMER);
 				break;
 
 			case 2: //producten beheren
@@ -46,6 +47,4 @@ public class EmployeeController extends Controller{
 				break;
 		}
 	}
-
-	
 }

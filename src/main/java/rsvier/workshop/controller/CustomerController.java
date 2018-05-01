@@ -7,6 +7,7 @@ import rsvier.workshop.controller.*;
 import rsvier.workshop.domain.Person;
 import rsvier.workshop.view.*;
 import rsvier.workshop.view.View;
+import rsvier.workshop.controller.MainController.TypeOfController;
 
 public class CustomerController extends Controller {
 
@@ -32,7 +33,7 @@ public class CustomerController extends Controller {
 			case 0:	//Go back to employee-menu
 			
 					customerView.printExitApplicationMessage();
-					MainController.setController(MainController.TypeOfController.EMPLOYEE);
+					MainController.setController(TypeOfController.EMPLOYEE);
 					break;
 
 			case 1:	//search customer by last name
@@ -135,9 +136,7 @@ public class CustomerController extends Controller {
 	public int selectCustomer() {
 		
 		customerView.printAskNumberOfCustomer();
-		int chosenCustomerNumber = customerView.getIntInput();
-
-		return chosenCustomerNumber;
+		return customerView.getIntInput();
 		
 	}
 

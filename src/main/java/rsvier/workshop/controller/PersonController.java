@@ -5,11 +5,12 @@ import rsvier.workshop.dao.PersonDAOImp;
 import rsvier.workshop.domain.Person;
 import rsvier.workshop.domain.Person.PersonBuilder;
 import rsvier.workshop.view.*;
+import rsvier.workshop.controller.MainController.TypeOfController;
 
 public class PersonController extends Controller {
 
-	PersonView personView = new PersonView();
-	PersonDAO personDAO = new PersonDAOImp();
+	private PersonView personView = new PersonView();
+	private PersonDAO personDAO = new PersonDAOImp();
 	
 	
 	@Override
@@ -32,19 +33,22 @@ public class PersonController extends Controller {
 		
 			case 0: //exit and go back to employee menu
 
-				MainController.setController(MainController.TypeOfController.EMPLOYEE);
+				MainController.setController(TypeOfController.EMPLOYEE);
 				break;
 		
 			case 1:
 				updatePersonName(personUpdateName(), person);
+				runView();
 				break;
 			
 			case 2:	
 				updatePersonLastName(personUpdateLastName(), person);
+				runView();
 				break;
 		
 			case 3:	
-				updatePersondMiddleName(personUpdateMiddleName(), person);
+				updatePersonMiddleName(personUpdateMiddleName(), person);
+				runView();
 				break;
 			
 			case 4:
@@ -60,22 +64,19 @@ public class PersonController extends Controller {
 	public String personUpdateName() {
 		
 		personView.printAskUserForNewName();
-		String newName = personView.getStringInput();	
-		return newName;
+		return personView.getStringInput();
 	}
 	
 	public String personUpdateLastName() {
 		
 		personView.printAskUserForNewLastName();
-		String lastName = personView.getStringInput();	
-		return lastName;
+		return personView.getStringInput();
 	}
 	
 	public String personUpdateMiddleName() {
 		
 		personView.printAskUserForMiddleName();
-		String additonalName = personView.getStringInput();	
-		return additonalName;
+		return personView.getStringInput();
 	}
 	
 	//Methods fo updating the personal data with the obtained Strings
@@ -97,7 +98,7 @@ public class PersonController extends Controller {
 		personDAO.updatePerson(newPersonWithNewName);			
 	}
 	
-	public void updatePersondMiddleName(String middleName, Person person) {
+	public void updatePersonMiddleName(String middleName, Person person) {
 		
 		PersonBuilder personBuilder = new PersonBuilder(person);
 		personBuilder.middleName(middleName);

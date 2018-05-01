@@ -22,7 +22,7 @@ public class PersonController extends Controller {
 	}
 	
 
-	public void personUpdateMenuSwitch(int menuNumber, Person person) {
+	public void personUpdateMenuSwitch(Person person) {
 		
 		//Switch menu for updating personal data like name and address
 		

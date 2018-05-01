@@ -16,9 +16,7 @@ public class CustomerController extends Controller {
 	private AccountDAO accountDao = new AccountDAOImp();
 	private AddressDAO addressDao = new AddressDAOImp();
 	private AccountController accountController = new AccountController();
-	
-	
-	
+
 
 	
 	@Override
@@ -36,9 +34,7 @@ public class CustomerController extends Controller {
 			case 0:	//Go back to employee-menu
 			
 					customerView.printExitApplicationMessage();
-					EmployeeController employeeController = new EmployeeController();
-					employeeController.runView();
-					
+					MainController.setController(2);
 					break;
 
 			case 1:	//search customer by last name
@@ -80,7 +76,7 @@ public class CustomerController extends Controller {
 
 		switch (choice) {
 			case 1:	//update person 
-					personController.personUpdateMenuSwitch(choice, person);
+					personController.personUpdateMenuSwitch(person);
 					
 					break;
 					

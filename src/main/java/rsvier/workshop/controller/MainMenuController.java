@@ -4,6 +4,7 @@ package rsvier.workshop.controller;
 import rsvier.workshop.service.LoginValidation;
 
 import rsvier.workshop.view.MainMenuView;
+import rsvier.workshop.view.View;
 
 public class MainMenuController extends Controller{
 
@@ -17,7 +18,7 @@ public class MainMenuController extends Controller{
 		
 		mainMenuView.printHeaderMessage();
 		mainMenuView.printMenuMessage();
-		loginMainMenuSwitch(mainMenuView.getIntInput());	
+		loginMainMenuSwitch(View.getIntInput());
 		
 	}
 

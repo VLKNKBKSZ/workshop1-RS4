@@ -44,7 +44,7 @@ public class Person {
 			this.middleName = person.lastName;
 			
 		}
-		
+
 		public PersonBuilder personId(int id) {
 			this.personId = id;
 			return this;
@@ -87,7 +87,10 @@ public class Person {
 	public int getPersonId() {
 		return personId;
 	}
-	
+
+	public void setPersonId(int personId) {
+		this.personId = personId;
+	}
 
 	public String getName() {
 		return name;

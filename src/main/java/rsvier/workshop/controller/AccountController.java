@@ -6,6 +6,7 @@ import rsvier.workshop.domain.Account;
 import rsvier.workshop.service.Validator;
 import rsvier.workshop.view.AccountView;
 import rsvier.workshop.controller.MainController.TypeOfController;
+import rsvier.workshop.view.View;
 
 public class AccountController extends Controller{
 
@@ -32,7 +33,7 @@ public class AccountController extends Controller{
 		
 		accountView.printHeaderMessage();
 		accountView.printMenuMessage();
-		accountMenuSwitch(accountView.getIntInput());
+		accountMenuSwitch(View.getIntInput());
 		
 	}
 
@@ -61,7 +62,7 @@ public class AccountController extends Controller{
 		
 		do {
 			accountView.printRequestEmailInput();
-			email = accountView.getStringInput();
+			email = View.getStringInput();
 		
 		} while (!validator.validateEmail(email));
 
@@ -75,7 +76,7 @@ public class AccountController extends Controller{
 		
 		do {
 			accountView.printRequestPasswordInput();
-			password = accountView.getStringInput();
+			password = View.getStringInput();
 		
 		} while (!validator.validatePassword(password));
 

@@ -20,42 +20,42 @@ public class PersonController extends Controller {
 		personView.printUpdateUserDetailsMenu();
 		//
 	}
-	
+
 
 	public void personUpdateMenuSwitch(Person person) {
-		
-		//Switch menu for updating personal data like name and address
-		
-		personView.printUpdateUserDetailsMenu();
-		int choice = personView.getIntInput();
-		
-		switch(choice) {
-		
-			case 0: //exit and go back to employee menu
 
-				MainController.setController(TypeOfController.EMPLOYEE);
-				break;
-		
-			case 1:
-				updatePersonName(personUpdateName(), person);
-				runView();
-				break;
+		//Switch menu for updating personal data like name and address
+		boolean updating = true;
+
+		while (updating) {
+			personView.printUpdateUserDetailsMenu();
+			int choice = personView.getIntInput();
 			
-			case 2:	
-				updatePersonLastName(personUpdateLastName(), person);
-				runView();
-				break;
-		
-			case 3:	
-				updatePersonMiddleName(personUpdateMiddleName(), person);
-				runView();
-				break;
-			
-			case 4:
-				//Update address
-				break;
+			switch (choice) {
+
+				case 0: //exit and go back to employee menu
+
+					MainController.setController(TypeOfController.EMPLOYEE);
+					updating = false;
+					break;
+
+				case 1:
+					updatePersonName(personUpdateName(), person);
+					break;
+
+				case 2:
+					updatePersonLastName(personUpdateLastName(), person);
+					break;
+
+				case 3:
+					updatePersonMiddleName(personUpdateMiddleName(), person);
+					break;
+
+				case 4:
+					//Update address
+					break;
+			}
 		}
-		
 	}
 	
 	

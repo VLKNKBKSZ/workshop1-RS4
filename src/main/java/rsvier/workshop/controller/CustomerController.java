@@ -31,8 +31,7 @@ public class CustomerController extends Controller {
 		
 		switch (menuNumber) {
 			case 0:	//Go back to employee-menu
-			
-					customerView.printExitApplicationMessage();
+
 					MainController.setController(TypeOfController.EMPLOYEE);
 					break;
 

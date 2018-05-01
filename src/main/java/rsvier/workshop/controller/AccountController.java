@@ -83,14 +83,12 @@ public class AccountController extends Controller{
 	}
 
 	
-	public void doCreateAccount() {
+	public Account doCreateAccount() {
 		
 		String email = requestAndValidateEmail();
 		String password = requestAndValidatePassword();
 		account = new Account(email, password);
-		accountDAO.createAccount(account);
-		
+		account.setAccountId(accountDAO.createAccount(account));
+		return account;
 	}
-
-
 }

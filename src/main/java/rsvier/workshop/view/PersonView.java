@@ -20,15 +20,15 @@ public class PersonView extends View {
 	
 	
 	public void printAskUserForNewName() {
-		System.out.println("Wat is de nieuwe naam van de gebruiker?");
+		System.out.print("Vul je (nieuwe) naam in: ");
 	}
 	
 	public void printAskUserForNewLastName() {
-		System.out.println("Wat is de nieuwe achternaam van de gebruiker?");
+		System.out.print("Vul je (nieuwe) achternaam in: ");
 	}
 	
 	public void printAskUserForMiddleName() {
-		System.out.println("Wat is het nieuwe tussenvoegsel van de gebruiker?");
+		System.out.print("Vul je (nieuwe) tussenvoegsel in: ");
 	}
 
 }

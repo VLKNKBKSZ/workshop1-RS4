@@ -16,7 +16,6 @@ public class CustomerController extends Controller {
 	private AddressDAO addressDao = new AddressDAOImp();
 	private AccountController accountController = new AccountController();
 
-
 	
 	@Override
 	public void runView() {
@@ -33,7 +32,7 @@ public class CustomerController extends Controller {
 			case 0:	//Go back to employee-menu
 			
 					customerView.printExitApplicationMessage();
-					MainController.setController(2);
+					MainController.setController(MainController.TypeOfController.EMPLOYEE);
 					break;
 
 			case 1:	//search customer by last name

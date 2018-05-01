@@ -32,7 +32,7 @@ public class PersonController extends Controller {
 		
 			case 0: //exit and go back to employee menu
 
-				MainController.setController(2);
+				MainController.setController(MainController.TypeOfController.EMPLOYEE);
 				break;
 		
 			case 1:

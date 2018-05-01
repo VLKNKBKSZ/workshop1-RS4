@@ -72,7 +72,7 @@ public class AccountController extends Controller{
 		String password;
 		
 		do {
-			accountView.printRequestPasswordInput();;
+			accountView.printRequestPasswordInput();
 			password = accountView.getStringInput();
 		
 		} while (!validator.validatePassword(password));

@@ -24,28 +24,27 @@ public class EmployeeController extends Controller{
 		
 		switch (menuNumber) {
 
-			case 0://Exit Menu
-				employeeView.printExitApplicationMessage();
-			
-				break;
-			
 			case 1:	//Klanten beheren
 
-				MainController.setController(TypeOfController.CUSTOMER);
-				break;
+					MainController.setController(TypeOfController.CUSTOMER);
+					break;
 
 			case 2: //producten beheren
 				
-				break;
+					break;
 			
 			case 3:	//bestellingen beheren
 				
-				break;
+					break;
+			case 0:	//Exit Menu
+					employeeView.printExitApplicationMessage();
+			
+					break;
 			
 			default:
-				employeeView.printMenuInputIsWrong();
+					employeeView.printMenuInputIsWrong();
 				
-				break;
+					break;
 		}
 	}
 }

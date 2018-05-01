@@ -12,12 +12,16 @@ public class AddressController {
     private AddressView addressView = new AddressView();
     private AddressDAO addressDAO = new AddressDAOImp();
 
+    
     public void doCreateAddresses(Person person) {
 
-        Address address = createAddress("mail", person);
+        Address address = createNewAddress("mail", person);
         Address addressDelivery;
         addressDAO.createAddress(address);
 
+        
+        //Setting the types of addresses (mail/invoice/delivery):
+        
         addressView.printAskMailAndDeliverySame();
 
         if (addressView.confirmYesOrNo().equals("J")) {
@@ -28,7 +32,7 @@ public class AddressController {
 
         } else {
 
-            addressDelivery = createAddress("delivery", person);
+            addressDelivery = createNewAddress("delivery", person);
             addressDAO.createAddress(addressDelivery);
 
         }
@@ -51,12 +55,14 @@ public class AddressController {
 
         } else {
 
-            addressDAO.createAddress(createAddress("invoice", person));
+            addressDAO.createAddress(createNewAddress("invoice", person));
 
         }
     }
+    
 
-    private Address createAddress(String addressType, Person person) {
+    private Address createNewAddress(String addressType, Person person) {
+    	
         Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
         addressBuilder.person(person);
         addressBuilder.addressType(addressType);
@@ -69,6 +75,9 @@ public class AddressController {
 
         return addressBuilder.build();
     }
+    
+    
+    //Methods for updating address:
 
     public String addressUpdateStreetName () {
 
@@ -76,34 +85,40 @@ public class AddressController {
         return View.getStringInput();
     }
 
+    
     public int addressUpdateHouseNumber () {
 
         addressView.printAskUserForHouseNumber();
         return View.getIntInput();
     }
 
+    
     public String addressUpdateAdditionalHouseNumber () {
 
         addressView.printAskUserForAdditionalHouseNumber();
         return View.getStringInput();
     }
 
+    
     public String addressUpdatePostalCode () {
 
         addressView.printAskUserForPostalCode();
         return View.getStringInput();
     }
 
+    
     public String addressUpdateCity () {
 
         addressView.printAskUserForCity();
         return View.getStringInput();
     }
 
+    
     public String addressUpdateCountry () {
 
         addressView.printAskUserForCountry();
         return View.getStringInput();
     }
+    
 }
 

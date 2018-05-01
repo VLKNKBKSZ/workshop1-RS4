@@ -10,7 +10,6 @@ public class PersonController extends Controller {
 
 	PersonView personView = new PersonView();
 	PersonDAO personDAO = new PersonDAOImp();
-	EmployeeController employeeController = new EmployeeController();
 	
 	
 	@Override
@@ -32,29 +31,25 @@ public class PersonController extends Controller {
 		switch(choice) {
 		
 			case 0: //exit and go back to employee menu
-					employeeController.runView();
-				
-					break;
+
+				MainController.setController(2);
+				break;
 		
 			case 1:
-					updatePersonName(personUpdateName(), person);
-				
-					break;
+				updatePersonName(personUpdateName(), person);
+				break;
 			
 			case 2:	
-					updatePersonLastName(personUpdateLastName(), person);
-			
-					break;
+				updatePersonLastName(personUpdateLastName(), person);
+				break;
 		
 			case 3:	
-					updatePersondMiddleName(personUpdateMiddleName(), person);
-					
-					break;
+				updatePersondMiddleName(personUpdateMiddleName(), person);
+				break;
 			
 			case 4:
-					//Update address
-					
-					break;
+				//Update address
+				break;
 		}
 		
 	}

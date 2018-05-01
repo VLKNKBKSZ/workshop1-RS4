@@ -8,6 +8,9 @@ public class MainController {
 
     private static Controller currentController;
 
+    //TODO make it use enum type
+
+    //changes currentController and calls the runView method of that controller
     public static void setController(int choice) {
         switch (choice) {
             case 1:

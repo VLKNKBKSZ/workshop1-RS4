@@ -25,7 +25,7 @@ public class CustomerController extends Controller {
 		
 		customerView.printHeaderMessage();
 		customerView.printMenuMessage();
-		searchOrAddCustomerMenuSwitch(customerView.getIntInput());
+		searchOrAddCustomerMenuSwitch(View.getIntInput());
 
 	}
 	
@@ -73,7 +73,7 @@ public class CustomerController extends Controller {
 		PersonController personController = new PersonController();
 
 		customerView.printAskDeleteOrUpdateCustomer();
-		int choice = customerView.getIntInput();
+		int choice = View.getIntInput();
 
 		switch (choice) {
 			case 1:	//update person 
@@ -113,7 +113,7 @@ public class CustomerController extends Controller {
 	public Person searchCustomerByLastName() {
 
 		customerView.printAskCustomerLastName();
-		String customerLastName = customerView.getStringInput();
+		String customerLastName = View.getStringInput();
 		List<Person> customerList = personDao.getCustomerByLastName(customerLastName);
 
 
@@ -141,7 +141,7 @@ public class CustomerController extends Controller {
 	public int selectCustomer() {
 		
 		customerView.printAskNumberOfCustomer();
-		return customerView.getIntInput();
+		return View.getIntInput();
 		
 	}
 

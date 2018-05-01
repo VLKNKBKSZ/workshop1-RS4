@@ -4,7 +4,6 @@ public class Person {
 	
 	private int personId;
 	private Account account;
-	private int personType;
 	private String name;
 	private String lastName;
 	private String middleName;
@@ -114,7 +113,8 @@ public class Person {
 	@Override
 
 	public String toString() {
-		return "ID : " + getPersonId() + " " + "Last name: " + getLastName() + " " + "Name : "+ getName() + " " + "Middle name: " + getMiddleName() + " " ;
+		return "\nId: " + getPersonId() + " " + ", Voornaam: " + getName() + " " + ", Achternaam : " + 
+				getLastName() + " " + ", Tussenvoegsel: " + getMiddleName() + " \n" ;
 	}
 	
 	@Override

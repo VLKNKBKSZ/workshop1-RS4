@@ -1,3 +1,4 @@
+
 package rsvier.workshop.controller;
 
 import java.util.List;
@@ -5,7 +6,8 @@ import java.util.List;
 import rsvier.workshop.dao.*;
 import rsvier.workshop.controller.*;
 import rsvier.workshop.domain.Person;
-import rsvier.workshop.view.CustomerView;
+import rsvier.workshop.view.*;
+import rsvier.workshop.view.View;
 
 public class CustomerController extends Controller {
 
@@ -14,6 +16,9 @@ public class CustomerController extends Controller {
 	private AccountDAO accountDao = new AccountDAOImp();
 	private AddressDAO addressDao = new AddressDAOImp();
 	private AccountController accountController = new AccountController();
+	
+	
+	
 
 	
 	@Override
@@ -21,73 +26,106 @@ public class CustomerController extends Controller {
 		
 		customerView.printHeaderMessage();
 		customerView.printMenuMessage();
-		customerMenuSwitch(customerView.getIntInput());
+		searchOrAddCustomerMenuSwitch(customerView.getIntInput());
 
 	}
 	
-	public void customerMenuSwitch(int menuNumber) {
-
+	public void searchOrAddCustomerMenuSwitch(int menuNumber) {
+		
 		switch (menuNumber) {
+			case 0:	//Go back to employee-menu
+			
+					customerView.printExitApplicationMessage();
+					EmployeeController employeeController = new EmployeeController();
+					employeeController.runView();
+					
+					break;
 
-		case 0://leave and go back to previous menu
-			customerView.printExitApplicationMessage();
-			break;
+			case 1:	//search customer by last name
+					Person person = searchCustomerByLastName();
+					
+					if (person != null) {
+						
+						updateOrDeleteCustomerSwitch(person);
+						
+					} else {
+						
+					runView();
+					
+					}
+					
+					break;
 
-		case 1://search customer by lastname
-			Person person = searchCustomer();
-			updateOrDeleteCustomerSwitch(person);
-			break;
+			case 2:	//add customer
+					AccountView.printMakeCustomerAccount();
+					accountController.doCreateAccount(); 
+												
+					runView();
+					
+					break;
 
-		case 2:
-			//add customer
-			accountController.doCreateAccount();
-			runView();
-			break;
-
-		default:
-			customerView.printMenuInputIsWrong();
+			default:
+					customerView.printMenuInputIsWrong();
 
 		}
 	}
 	
 	
 	public void updateOrDeleteCustomerSwitch(Person person) {
+		
+		PersonController personController = new PersonController();
 
 		customerView.printAskDeleteOrUpdateCustomer();
 		int choice = customerView.getIntInput();
 
 		switch (choice) {
-		case 1:
-			//update customer
-			break;
-		case 2:
-			//delete customer
-			String yesOrNo = customerView.confirmYesOrNo();
-			if (yesOrNo.equals("J")) {
+			case 1:	//update person 
+					personController.personUpdateMenuSwitch(choice, person);
+					
+					break;
+					
+			case 2:	//delete person
+					String yesOrNo = customerView.confirmYesOrNo();
+					
+					if (yesOrNo.equals("J")) {
+				
+						addressDao.deleteAddressByPersonId(person.getPersonId());
+						accountDao.deleteAccount(person.getAccount());
+						personDao.deletePerson(person);
+				
+					} else {
+						//implementation for when answer is No
+						
+					}
 
-				addressDao.deleteAddressByPersonId(person.getPersonId());
-				accountDao.deleteAccount(person.getAccount());
-				personDao.deletePerson(person);
-			} else {
-
-			}
-
-			break;
-		case 0: //back to previous menu
-			break;
-		default:
-			break;
+					break;
+					
+			case 0: //back to previous menu
+				
+					break;
+					
+			default:
+					break;
 		}
 	}
 
-	public Person searchCustomer() {
+
+	public Person searchCustomerByLastName() {
 
 		customerView.printAskCustomerLastName();
 		String customerLastName = customerView.getStringInput();
 		List<Person> customerList = personDao.getCustomerByLastName(customerLastName);
 
+
+		if (customerList.size() == 0){
+			customerView.printCustomerNotFound();
+			return null;
+		}
+
 		if (customerList.size() == 1) {
 			System.out.println(customerList.get(0).toString());
+			return customerList.get(0);
+			
 		} else {
 
 			for (int i = 1; i < customerList.size(); i++) {
@@ -95,12 +133,13 @@ public class CustomerController extends Controller {
 			}
 
 		}
+		//Let user select specific person in case there are more than one
 		return customerList.get(selectCustomer() - 1);
 	}
 	
 
 	public int selectCustomer() {
-
+		
 		customerView.printAskNumberOfCustomer();
 		int chosenCustomerNumber = customerView.getIntInput();
 
@@ -110,3 +149,4 @@ public class CustomerController extends Controller {
 
 
 }
+

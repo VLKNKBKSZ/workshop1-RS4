@@ -13,21 +13,29 @@ public class MainController {
 
     private static Controller currentController;
 
-    //changes currentController and calls the runView method of that controller
+    
+    //Switch method for setting currentController and calling the runView method of that controller
+    
     public static void setController(TypeOfController controllerType) {
-        switch (controllerType) {
-            case PERSON:
-                currentController = personController;
-                break;
+       
+    		switch (controllerType) {
+    		
+    			case PERSON:
+    				currentController = personController;
+    				break;
+    				
             case EMPLOYEE:
                 currentController = employeeController;
                 break;
+                
             case CUSTOMER:
                 currentController = customerController;
                 break;
+                
             case MAINMENU:
                 currentController = mainMenuController;
                 break;
+                
             case ACCOUNT:
                 currentController = accountController;
         }

@@ -33,38 +33,40 @@ public class CustomerController extends Controller {
 	public void searchOrAddCustomerMenuSwitch(int menuNumber) {
 		
 		switch (menuNumber) {
+
+			case 1:	//Search customer by last name
+					Person person = searchCustomerByLastName();
+					
+					if (person != null) {
+						
+						updateOrDeleteCustomerSwitch(person);
+						
+					} else {
+						
+						runView();
+					
+					}
+					
+					break;
+
+			case 2:	//Add customer
+					AccountView.printMakeCustomerAccount();
+					Account account = accountController.doCreateAccount();
+					person = personController.doCreatePerson(account);
+					addressController.doCreateAddresses(person);
+
+					runView();
+					
+					break;
+				
 			case 0:	//Go back to employee-menu
 
-				MainController.setController(TypeOfController.EMPLOYEE);
-				break;
-
-			case 1:	//search customer by last name
-				Person person = searchCustomerByLastName();
+					MainController.setController(TypeOfController.EMPLOYEE);
 					
-				if (person != null) {
-						
-					updateOrDeleteCustomerSwitch(person);
-						
-				} else {
-						
-				runView();
-					
-				}
-					
-				break;
-
-			case 2:	//add customer
-				AccountView.printMakeCustomerAccount();
-				Account account = accountController.doCreateAccount();
-				person = personController.doCreatePerson(account);
-				addressController.doCreateAddresses(person);
-
-				runView();
-					
-				break;
+					break;
 
 			default:
-				customerView.printMenuInputIsWrong();
+					customerView.printMenuInputIsWrong();
 
 		}
 	}
@@ -78,36 +80,37 @@ public class CustomerController extends Controller {
 		int choice = View.getIntInput();
 
 		switch (choice) {
-			case 1:	//update person 
-				personController.personUpdateMenuSwitch(person);
+			
+			case 1:	//Update person 
+					personController.personUpdateMenuSwitch(person);
 					
-				break;
+					break;
 					
-			case 2:	//delete person
-				String yesOrNo = customerView.confirmYesOrNo();
+			case 2:	//Delete person
+					String yesOrNo = customerView.confirmYesOrNo();
 					
-				if (yesOrNo.equals("J")) {
+					if (yesOrNo.equals("J")) {
 				
-					addressDao.deleteAddressByPersonId(person.getPersonId());
-					accountDao.deleteAccount(person.getAccount());
-					personDao.deletePerson(person);
-				
-				} else {
+						addressDao.deleteAddressByPersonId(person.getPersonId());
+						accountDao.deleteAccount(person.getAccount());
+						personDao.deletePerson(person);
+					
+					} else {
 
 					runView();
 						
-				}
+					}
 
-				break;
+					break;
 					
 			case 0: //back to previous menu
 
-				runView();
+					runView();
 
-				break;
+					break;
 					
 			default:
-				break;
+					break;
 		}
 	}
 
@@ -119,13 +122,15 @@ public class CustomerController extends Controller {
 		List<Person> customerList = personDao.getCustomerByLastName(customerLastName);
 
 
-		if (customerList.size() == 0){
+		if (customerList.size() == 0)	{
 			customerView.printCustomerNotFound();
+			
 			return null;
 		}
 
 		if (customerList.size() == 1) {
 			System.out.println(customerList.get(0).toString());
+			
 			return customerList.get(0);
 			
 		} else {
@@ -135,7 +140,10 @@ public class CustomerController extends Controller {
 			}
 
 		}
-		//Let user select specific person in case there are more than one
+		
+		//Let user select specific person in case there is more than one persons with 
+		//the same last name
+		
 		return customerList.get(selectCustomer() - 1);
 	}
 	

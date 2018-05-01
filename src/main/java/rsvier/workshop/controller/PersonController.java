@@ -28,33 +28,41 @@ public class PersonController extends Controller {
 		//Switch menu for updating personal data like name and address
 		boolean updating = true;
 
+		
+		//Presenting updating options until users chooses '0' for exit
+		
 		while (updating) {
 			personView.printUpdateUserDetailsMenu();
 			int choice = View.getIntInput();
 
 			switch (choice) {
 
-				case 0: //exit and go back to employee menu
-
-					MainController.setController(TypeOfController.EMPLOYEE);
-					updating = false;
-					break;
-
 				case 1:
-					updatePersonName(personUpdateName(), person);
-					break;
+						updatePersonName(personUpdateName(), person);
+						
+						break;
 
 				case 2:
-					updatePersonLastName(personUpdateLastName(), person);
-					break;
+						updatePersonLastName(personUpdateLastName(), person);
+						
+						break;
 
 				case 3:
-					updatePersonMiddleName(personUpdateMiddleName(), person);
-					break;
+						updatePersonMiddleName(personUpdateMiddleName(), person);
+						
+						break;
 
 				case 4:
-					//Update address
-					break;
+						//Update address
+						
+						break;
+					
+				case 0: //exit and go back to employee menu
+
+						MainController.setController(TypeOfController.EMPLOYEE);
+						updating = false;
+					
+						break;
 			}
 		}
 	}
@@ -68,6 +76,7 @@ public class PersonController extends Controller {
 		personBuilder.middleName(personUpdateMiddleName());
 		Person person = personBuilder.build();
 		person.setPersonId(personDAO.createPerson(person));
+		
 		return person;
 	}
 
@@ -91,7 +100,8 @@ public class PersonController extends Controller {
 		return View.getStringInput();
 	}
 	
-	//Methods fo updating the personal data with the obtained Strings
+	
+	//Methods for updating the personal data with the obtained Strings
 	
 	
 	public void updatePersonName(String name, Person person) {

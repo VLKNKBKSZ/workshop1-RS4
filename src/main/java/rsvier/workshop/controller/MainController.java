@@ -8,6 +8,8 @@ public class MainController {
     private static PersonController personController = new PersonController();
     private static EmployeeController employeeController = new EmployeeController();
     private static CustomerController customerController = new CustomerController();
+    private static MainMenuController mainMenuController = new MainMenuController();
+    private static AccountController accountController = new AccountController();
 
     private static Controller currentController;
 
@@ -23,6 +25,11 @@ public class MainController {
             case CUSTOMER:
                 currentController = customerController;
                 break;
+            case MAINMENU:
+                currentController = mainMenuController;
+                break;
+            case ACCOUNT:
+                currentController = accountController;
         }
 
         currentController.runView();

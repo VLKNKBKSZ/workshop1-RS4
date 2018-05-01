@@ -19,6 +19,7 @@ public class CustomerController extends Controller {
 	private AddressDAO addressDao = new AddressDAOImp();
 	private AccountController accountController = new AccountController();
 	private PersonController personController = new PersonController();
+	private AddressController addressController = new AddressController();
 
 	
 	@Override
@@ -57,6 +58,7 @@ public class CustomerController extends Controller {
 				AccountView.printMakeCustomerAccount();
 				Account account = accountController.doCreateAccount();
 				person = personController.doCreatePerson(account);
+				addressController.doCreateAddresses(person);
 
 				runView();
 					

@@ -26,27 +26,27 @@ public class TestEvy {
 
 		// person 1
 
-/*
+
 		Account account1 = new Account("evy@gmail.com", "123456");
-		Address address1 = new Address.AddressBuilder().streetName("Bakemakade").houseNumber(108).postalCode("3000ME")
-				.city("Rotterdam").country("Netherlands").build();
+		//Address address1 = new Address.AddressBuilder().streetName("Bakemakade").houseNumber(108).postalCode("3000ME")
+			//	.city("Rotterdam").country("Netherlands").build();
 
-		accountDao.createAccount(account1);
+	//	accountDao.createAccount(account1);
 
-		Account accountDatabse1 = accountDao.getAccount(account1.getEmail(), account1.getPassword());
+		Account accountDatabse1 = accountDao.getAccountByEmail(account1.getEmail());
 
-		Person person1 = (Person) new Person.PersonBuilder().accountId(accountDatabse1.getAccountId()).personType("customer")
+		Person person1 = (Person) new Person.PersonBuilder().account(accountDatabse1)
 				.name("Evy").lastName("Wetch").middleName("Evyvy").build();
 
 		personDao.createPerson(person1);
-		Person person = personDao.getPersonByLastName(person1.getLastName());
+	//	Person person = personDao.getPersonByLastName(person1.getLastName());
 
-		addressDao.createAddress(address1, person);
+	//	addressDao.createAddress(address1, person);
 		
-		*/
 		
-		/*
-		Account account1 = new Account("hippo@gmail.com", "123456");
+		
+		
+	/*	Account account1 = new Account("hippo@gmail.com", "123456");
 		int generatedAccountId = accountDao.createAccount(account1);
 		Account accountDatabase = accountDao.getAccountById(generatedAccountId);
 		System.out.println(accountDatabase == null);
@@ -61,7 +61,7 @@ public class TestEvy {
 		
 		addressDao.createAddress(address);
 		
-*/
+
 		// Person 2
 
 

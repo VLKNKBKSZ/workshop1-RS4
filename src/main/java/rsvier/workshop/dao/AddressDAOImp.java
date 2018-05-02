@@ -72,7 +72,7 @@ public class AddressDAOImp implements AddressDAO {
 
 			try (ResultSet resultSet = preparedStatement.executeQuery();) {
 
-				if (resultSet.next()) {
+				while (resultSet.next()) {
 					Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 					addressBuilder.addressId(resultSet.getInt(1));
 					addressBuilder.person(personDao.getPersonById(resultSet.getInt(2)));

@@ -17,6 +17,13 @@ public class AddressController extends Controller{
 	private AddressView addressView = new AddressView();
 	private AddressDAO addressDAO = new AddressDAOImp();
 
+	
+	public void runView() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 	public void doCreateAddresses(Person person) {
 
 		addressView.printHeaderOfMailAddressInput();
@@ -65,6 +72,7 @@ public class AddressController extends Controller{
 		}
 	}
 
+	
 	public void updateAddressTypeSwitch(Person person) {
 
 		boolean updating = true;
@@ -76,40 +84,40 @@ public class AddressController extends Controller{
 
 			switch (choice) {
 
-			case 1:
-				updateAddress(person, "mail");
-
-				break;
-
-			case 2:
-				updateAddress(person, "delivery");
-				break;
-
-			case 3:
-				updateAddress(person, "invoice");
-				break;
-
-			case 0:
-				updating = false;
-				MainController.setController(TypeOfController.CUSTOMER);
-				break;
-				
-			default:
-				addressView.printMenuInputIsWrong();
-				updateAddressTypeSwitch( person);
-				break;
+				case 1:
+						updateAddress(person, "mail");
+						break;
+				case 2:
+						updateAddress(person, "delivery");
+						break;
+				case 3:
+						updateAddress(person, "invoice");
+						break;
+				case 0:
+						updating = false;
+						MainController.setController(TypeOfController.CUSTOMER);
+						break;
+				default:
+						addressView.printMenuInputIsWrong();
+						updateAddressTypeSwitch( person);
+						break;
 
 			}
 		}
 	}
 
+	
 	public void updateAddress(Person person, String addressType) {
 
 		List<Address> addressList = addressDAO.getAllAddressesForPerson(person.getPersonId());
 		Address oldAddress;
+		
 		for (Address address : addressList) {
+			
 			if (address.getAddressType().equals(addressType)) {
+				
 				oldAddress = address;
+			
 				AddressBuilder addressBuilder = new AddressBuilder(oldAddress);
 				addressBuilder.person(person);
 				addressBuilder.addressType(addressType);
@@ -120,11 +128,13 @@ public class AddressController extends Controller{
 				addressBuilder.city(addressUpdateCity());
 				addressBuilder.country(addressUpdateCountry());
 				Address updatedAddress = addressBuilder.build();
+				
 				addressDAO.updateAddress(updatedAddress);
 			}
 
 		}
 	}
+	
 
 	public Address createNewAddress(String addressType, Person person) {
 
@@ -141,6 +151,7 @@ public class AddressController extends Controller{
 		return addressBuilder.build();
 	}
 
+	
 	// Methods for updating address:
 
 	public String addressUpdateStreetName() {
@@ -179,11 +190,6 @@ public class AddressController extends Controller{
 		return View.getStringInput();
 	}
 
-	
-	public void runView() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
 

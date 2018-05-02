@@ -29,7 +29,7 @@ public class AccountView extends View{
     }
 	
 	public void printLoginAccountIsSuccessful() {
-		System.out.println("U bent nu ingelogd in uw account.");
+		System.out.println("\nU bent nu ingelogd in uw account.");
 	}
 	
 	

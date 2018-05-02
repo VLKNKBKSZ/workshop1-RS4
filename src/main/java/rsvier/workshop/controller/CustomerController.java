@@ -21,6 +21,7 @@ public class CustomerController extends Controller {
 	private PersonController personController = new PersonController();
 	private AddressController addressController = new AddressController();
 
+	
 	@Override
 	public void runView() {
 
@@ -30,49 +31,44 @@ public class CustomerController extends Controller {
 
 	}
 
+	
 	public void searchOrAddCustomerMenuSwitch(int menuNumber) {
 
 		switch (menuNumber) {
 
-		case 1: // Search customer by last name
-			Person person = searchCustomerByLastName();
+			case 1: // Search customer by last name
+					Person person = searchCustomerByLastName();
 
-			if (person != null) {
+						if (person != null) {
 
-				updateOrDeleteCustomerSwitch(person);
+							updateOrDeleteCustomerSwitch(person);
 
-			} else {
+						} else {
 
-				runView();
+						runView();
+						}
+					break;
+			case 2: // Add customer
+					AccountView.printMakeCustomerAccount();
+					Account account = accountController.doCreateAccount();
+					person = personController.doCreatePerson(account);
+					addressController.doCreateAddresses(person);
 
-			}
+					runView();
+					break;
+			case 0: // Go back to employee-menu
 
-			break;
-
-		case 2: // Add customer
-			AccountView.printMakeCustomerAccount();
-			Account account = accountController.doCreateAccount();
-			person = personController.doCreatePerson(account);
-			addressController.doCreateAddresses(person);
-
-			runView();
-
-			break;
-
-		case 0: // Go back to employee-menu
-
-			MainController.setController(TypeOfController.EMPLOYEE);
-
-			break;
-
-		default:
-			customerView.printMenuInputIsWrong();
-			runView();
-			break;
+					MainController.setController(TypeOfController.EMPLOYEE);
+					break;
+			default:
+					customerView.printMenuInputIsWrong();
+					runView();
+					break;
 
 		}
 	}
 
+	
 	public void updateOrDeleteCustomerSwitch(Person person) {
 
 		PersonController personController = new PersonController();
@@ -82,38 +78,29 @@ public class CustomerController extends Controller {
 
 		switch (choice) {
 
-		case 1: // Update person
-			personController.personUpdateMenuSwitch(person);
+			case 1: // Update person
+					personController.personUpdateMenuSwitch(person);
+					break;
+			case 2: // Delete person
+					String yesOrNo = customerView.confirmYesOrNo();
 
-			break;
+						if (yesOrNo.equalsIgnoreCase("J")) {
 
-		case 2: // Delete person
-			String yesOrNo = customerView.confirmYesOrNo();
+							addressDao.deleteAddressByPersonId(person.getPersonId());
+							accountDao.deleteAccount(person.getAccount());
+							personDao.deletePerson(person);
 
-			if (yesOrNo.equals("J")) {
-
-				addressDao.deleteAddressByPersonId(person.getPersonId());
-				accountDao.deleteAccount(person.getAccount());
-				personDao.deletePerson(person);
-
-			} else {
-
-				runView();
-
-			}
-
-			break;
-
-		case 0: // back to previous menu
-
-			runView();
-
-			break;
-
-		default:  // back to previous menu
-			customerView.printMenuInputIsWrong();
-			runView();
-			break;
+						} else {
+						runView();
+						}
+					break;
+			case 0: // back to previous menu
+					runView();
+					break;
+			default: // back to previous menu
+					customerView.printMenuInputIsWrong();
+					runView();
+					break;
 		}
 	}
 

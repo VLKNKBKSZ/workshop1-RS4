@@ -37,10 +37,26 @@ public class AddressView extends View {
     public void printAskDeliveryAndInvoiceSame() {
         System.out.print("Is het factuuradres hetzelfde als het het leveradres(vul 'J' in voor ja): ");
     }
+    
+    public void printHeaderOfMailAddressInput() {
+    	System.out.println("Vul a.u.b uw postadres gegevens in");
+    }
+    
+    public void printHeaderOfDeliveryAddressInput() {
+    	System.out.println("Vul a.u.b uw bezorg gegevens in");
+    }
 
+    public void printHeaderOfInvoiceInput() {
+    	System.out.println("Vul a.u.b uw factuur gegevens in");
+    }
+    
+    public void printAddressAreSuccesFullyCreatedAndSaved() {
+    	System.out.println("Al uw adresgegevens zijn succesvol aangemaakt en opgeslagen.");
+    }
+    
     @Override
     public void printHeaderMessage() {
-
+    	
     }
 
     @Override

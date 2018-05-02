@@ -1,126 +1,173 @@
 package rsvier.workshop.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import rsvier.workshop.controller.MainController.TypeOfController;
 import rsvier.workshop.dao.AddressDAO;
 import rsvier.workshop.dao.AddressDAOImp;
 import rsvier.workshop.domain.Address;
 import rsvier.workshop.domain.Person;
+import rsvier.workshop.domain.Address.AddressBuilder;
 import rsvier.workshop.view.AddressView;
 import rsvier.workshop.view.View;
 
 public class AddressController {
 
-    private AddressView addressView = new AddressView();
-    private AddressDAO addressDAO = new AddressDAOImp();
+	private AddressView addressView = new AddressView();
+	private AddressDAO addressDAO = new AddressDAOImp();
 
-    
-    public void doCreateAddresses(Person person) {
-    	
-    	addressView.printHeaderOfMailAddressInput();
-        Address address = createNewAddress("mail", person);
-        Address addressDelivery;
-        addressDAO.createAddress(address);
+	public void doCreateAddresses(Person person) {
 
-        
-        //Setting the types of addresses (mail/invoice/delivery):
-        
-        addressView.printAskMailAndDeliverySame();
+		addressView.printHeaderOfMailAddressInput();
+		Address address = createNewAddress("mail", person);
+		Address addressDelivery;
+		addressDAO.createAddress(address);
 
-        if (addressView.confirmYesOrNo().equalsIgnoreCase("J")) {
+		// Setting the types of addresses (mail/invoice/delivery):
 
-            address.setAddressType("delivery");
-            addressDAO.createAddress(address);
-            addressDelivery = address;
+		addressView.printAskMailAndDeliverySame();
 
-        } else {
-        	addressView.printHeaderOfDeliveryAddressInput();
-            addressDelivery = createNewAddress("delivery", person);
-            addressDAO.createAddress(addressDelivery);
+		if (addressView.confirmYesOrNo().equalsIgnoreCase("J")) {
 
-        }
+			address.setAddressType("delivery");
+			addressDAO.createAddress(address);
+			addressDelivery = address;
 
-        addressView.printAskMailAndInvoiceSame();
+		} else {
+			addressView.printHeaderOfDeliveryAddressInput();
+			addressDelivery = createNewAddress("delivery", person);
+			addressDAO.createAddress(addressDelivery);
 
-        if (addressView.confirmYesOrNo().equalsIgnoreCase("J")) {
+		}
 
-            address.setAddressType("invoice");
-            addressDAO.createAddress(address);
-            addressView.printAddressAreSuccesFullyCreatedAndSaved();
-            return;
-        }
+		addressView.printAskMailAndInvoiceSame();
 
-        addressView.printAskDeliveryAndInvoiceSame();
+		if (addressView.confirmYesOrNo().equalsIgnoreCase("J")) {
 
-        if (addressView.confirmYesOrNo().equalsIgnoreCase("J")){
+			address.setAddressType("invoice");
+			addressDAO.createAddress(address);
+			addressView.printAddressAreSuccesFullyCreatedAndSaved();
+			return;
+		}
 
-            addressDelivery.setAddressType("invoice");
-            addressDAO.createAddress(addressDelivery);
+		addressView.printAskDeliveryAndInvoiceSame();
 
-        } else {
-        	addressView.printHeaderOfInvoiceInput();
-            addressDAO.createAddress(createNewAddress("invoice", person));
+		if (addressView.confirmYesOrNo().equalsIgnoreCase("J")) {
 
-        }
-    }
-    
+			addressDelivery.setAddressType("invoice");
+			addressDAO.createAddress(addressDelivery);
 
-    private Address createNewAddress(String addressType, Person person) {
-    	
-        Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
-        addressBuilder.person(person);
-        addressBuilder.addressType(addressType);
-        addressBuilder.streetName(addressUpdateStreetName());
-        addressBuilder.houseNumber(addressUpdateHouseNumber());
-        addressBuilder.additionalHouseNumber(addressUpdateAdditionalHouseNumber());
-        addressBuilder.postalCode(addressUpdatePostalCode());
-        addressBuilder.city(addressUpdateCity());
-        addressBuilder.country(addressUpdateCountry());
+		} else {
+			addressView.printHeaderOfInvoiceInput();
+			addressDAO.createAddress(createNewAddress("invoice", person));
 
-        return addressBuilder.build();
-    }
-    
-    
-    //Methods for updating address:
+		}
+	}
 
-    public String addressUpdateStreetName () {
+	public void updateAddressTypeSwitch(Person person) {
 
-        addressView.printAskUserForStreetName();
-        return View.getStringInput();
-    }
+		boolean updating = true;
 
-    
-    public int addressUpdateHouseNumber () {
+		while (updating) {
+			int choice = View.getIntInput();
+			addressView.printUpdateAddressType();
 
-        addressView.printAskUserForHouseNumber();
-        return View.getIntInput();
-    }
+			switch (choice) {
 
-    
-    public String addressUpdateAdditionalHouseNumber () {
+			case 1:updateAddress(person,"mail");
 
-        addressView.printAskUserForAdditionalHouseNumber();
-        return View.getStringInput();
-    }
+				break;
 
-    
-    public String addressUpdatePostalCode () {
+			case 2:updateAddress(person,"delivery");
+				break;
 
-        addressView.printAskUserForPostalCode();
-        return View.getStringInput();
-    }
+			case 3:updateAddress(person,"invoice");
+				break;
 
-    
-    public String addressUpdateCity () {
+			case 0:
+				updating = false;
+				MainController.setController(TypeOfController.CUSTOMER);
+				break;
 
-        addressView.printAskUserForCity();
-        return View.getStringInput();
-    }
+			}
+		}
+	}
 
-    
-    public String addressUpdateCountry () {
+	public void updateAddress(Person person, String addressType) {
 
-        addressView.printAskUserForCountry();
-        return View.getStringInput();
-    }
-    
+		List<Address> addressList = addressDAO.getAllAddressesForPerson(person.getPersonId());
+		Address oldAddress;
+		for (Address address : addressList) {
+			if (address.getAddressType().equals(addressType)) {
+				oldAddress = address;
+				AddressBuilder addressBuilder = new AddressBuilder(oldAddress);
+				addressBuilder.person(person);
+				addressBuilder.addressType(addressType);
+				addressBuilder.streetName(addressUpdateStreetName());
+				addressBuilder.houseNumber(addressUpdateHouseNumber());
+				addressBuilder.additionalHouseNumber(addressUpdateAdditionalHouseNumber());
+				addressBuilder.postalCode(addressUpdatePostalCode());
+				addressBuilder.city(addressUpdateCity());
+				addressBuilder.country(addressUpdateCountry());
+				Address updatedAddress = addressBuilder.build();
+				addressDAO.updateAddress(updatedAddress);
+			}
+
+		}
+	}
+
+	public Address createNewAddress(String addressType, Person person) {
+
+		Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
+		addressBuilder.person(person);
+		addressBuilder.addressType(addressType);
+		addressBuilder.streetName(addressUpdateStreetName());
+		addressBuilder.houseNumber(addressUpdateHouseNumber());
+		addressBuilder.additionalHouseNumber(addressUpdateAdditionalHouseNumber());
+		addressBuilder.postalCode(addressUpdatePostalCode());
+		addressBuilder.city(addressUpdateCity());
+		addressBuilder.country(addressUpdateCountry());
+
+		return addressBuilder.build();
+	}
+
+	// Methods for updating address:
+
+	public String addressUpdateStreetName() {
+
+		addressView.printAskUserForStreetName();
+		return View.getStringInput();
+	}
+
+	public int addressUpdateHouseNumber() {
+
+		addressView.printAskUserForHouseNumber();
+		return View.getIntInput();
+	}
+
+	public String addressUpdateAdditionalHouseNumber() {
+
+		addressView.printAskUserForAdditionalHouseNumber();
+		return View.getStringInput();
+	}
+
+	public String addressUpdatePostalCode() {
+
+		addressView.printAskUserForPostalCode();
+		return View.getStringInput();
+	}
+
+	public String addressUpdateCity() {
+
+		addressView.printAskUserForCity();
+		return View.getStringInput();
+	}
+
+	public String addressUpdateCountry() {
+
+		addressView.printAskUserForCountry();
+		return View.getStringInput();
+	}
+
 }
-

@@ -70,19 +70,23 @@ public class AddressController {
 		boolean updating = true;
 
 		while (updating) {
-			int choice = View.getIntInput();
+
 			addressView.printUpdateAddressType();
+			int choice = View.getIntInput();
 
 			switch (choice) {
 
-			case 1:updateAddress(person,"mail");
+			case 1:
+				updateAddress(person, "mail");
 
 				break;
 
-			case 2:updateAddress(person,"delivery");
+			case 2:
+				updateAddress(person, "delivery");
 				break;
 
-			case 3:updateAddress(person,"invoice");
+			case 3:
+				updateAddress(person, "invoice");
 				break;
 
 			case 0:

@@ -26,11 +26,6 @@ public class MainMenuController extends Controller{
 	public void loginMainMenuSwitch(int menuNumber) {
 		
 		switch (menuNumber) {
-
-			case 0:
-					mainMenuView.printExitApplicationMessage();
-					
-					break;
 			
 			case 1://Login into account
 					loginValidation.loginCheckAccountValidation();
@@ -42,6 +37,11 @@ public class MainMenuController extends Controller{
 					accountController.doCreateAccount();
 					runView();
 		
+					break;
+					
+			case 0:
+					mainMenuView.printExitApplicationMessage();
+				
 					break;
 			
 			default:

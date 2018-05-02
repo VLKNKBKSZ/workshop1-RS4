@@ -41,16 +41,17 @@ public class AccountController extends Controller{
 		
 		switch (menuNumber) {
 
-		case 0:
-			accountView.printExitApplicationMessage();
-			break;
-		case 1:
-			//maak nieuw account
-			break;
-		case 2:
-			//terug naar hoofdmenu
-			break;
-		default:
+			case 1:	//Make new account
+					
+					break;
+			case 2:	//Back to main menu
+					
+					break;
+			case 0:
+					accountView.printExitApplicationMessage();
+					break;		
+		
+			default:
 
 		}
 	}

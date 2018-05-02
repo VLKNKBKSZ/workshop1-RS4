@@ -62,3 +62,179 @@ mei 01, 2018 2:34:44 PM rsvier.workshop.dao.PersonDAOImp createPerson
 INFO: Person succesfully created
 mei 01, 2018 2:34:44 PM rsvier.workshop.dao.PersonDAOImp createPerson
 INFO: Key succesfully generated
+mei 02, 2018 11:26:18 AM rsvier.workshop.utility.DatabaseConnectionXML initializeXml
+CONFIG: Xml file exist, parsing is succesfull.
+mei 02, 2018 11:26:18 AM rsvier.workshop.utility.DatabaseConnectionXML getConnection
+INFO: Connected to Database
+mei 02, 2018 11:26:18 AM rsvier.workshop.dao.AccountDAOImp getAccountByEmail
+WARNING: Account successfully returned
+mei 02, 2018 11:26:29 AM rsvier.workshop.utility.DatabaseConnectionXML getConnection
+INFO: Connected to Database
+mei 02, 2018 11:26:29 AM rsvier.workshop.dao.AccountDAOImp createAccount
+WARNING: SQL exception occurred 
+com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry 'hans@gmail.com' for key 'email_UNIQUE'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.Util.getInstance(Util.java:408)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:936)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2486)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2079)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2013)
+	at com.mysql.jdbc.PreparedStatement.executeLargeUpdate(PreparedStatement.java:5104)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1998)
+	at rsvier.workshop.dao.AccountDAOImp.createAccount(AccountDAOImp.java:61)
+	at rsvier.workshop.controller.AccountController.doCreateAccount(AccountController.java:93)
+	at rsvier.workshop.controller.CustomerController.searchOrAddCustomerMenuSwitch(CustomerController.java:54)
+	at rsvier.workshop.controller.CustomerController.runView(CustomerController.java:29)
+	at rsvier.workshop.controller.MainController.setController(MainController.java:43)
+	at rsvier.workshop.controller.EmployeeController.employeeMenuSwitch(EmployeeController.java:29)
+	at rsvier.workshop.controller.EmployeeController.runView(EmployeeController.java:18)
+	at rsvier.workshop.service.LoginValidation.loginCheckAccountValidation(LoginValidation.java:29)
+	at rsvier.workshop.controller.MainMenuController.loginMainMenuSwitch(MainMenuController.java:31)
+	at rsvier.workshop.controller.MainMenuController.runView(MainMenuController.java:21)
+	at rsvier.workshop.App.main(App.java:9)
+
+mei 02, 2018 11:26:34 AM rsvier.workshop.utility.DatabaseConnectionXML getConnection
+INFO: Connected to Database
+mei 02, 2018 11:26:34 AM rsvier.workshop.dao.PersonDAOImp createPerson
+WARNING: SQL exception occured
+com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`evvo`.`person`, CONSTRAINT `fk_person_account1` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE NO ACTION)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.Util.getInstance(Util.java:408)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:936)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2486)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2079)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2013)
+	at com.mysql.jdbc.PreparedStatement.executeLargeUpdate(PreparedStatement.java:5104)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1998)
+	at rsvier.workshop.dao.PersonDAOImp.createPerson(PersonDAOImp.java:100)
+	at rsvier.workshop.controller.PersonController.doCreatePerson(PersonController.java:70)
+	at rsvier.workshop.controller.CustomerController.searchOrAddCustomerMenuSwitch(CustomerController.java:55)
+	at rsvier.workshop.controller.CustomerController.runView(CustomerController.java:29)
+	at rsvier.workshop.controller.MainController.setController(MainController.java:43)
+	at rsvier.workshop.controller.EmployeeController.employeeMenuSwitch(EmployeeController.java:29)
+	at rsvier.workshop.controller.EmployeeController.runView(EmployeeController.java:18)
+	at rsvier.workshop.service.LoginValidation.loginCheckAccountValidation(LoginValidation.java:29)
+	at rsvier.workshop.controller.MainMenuController.loginMainMenuSwitch(MainMenuController.java:31)
+	at rsvier.workshop.controller.MainMenuController.runView(MainMenuController.java:21)
+	at rsvier.workshop.App.main(App.java:9)
+
+mei 02, 2018 11:26:53 AM rsvier.workshop.utility.DatabaseConnectionXML getConnection
+INFO: Connected to Database
+mei 02, 2018 11:26:53 AM rsvier.workshop.dao.AddressDAOImp createAddress
+WARNING: SQL exception occured
+com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`evvo`.`address`, CONSTRAINT `fk_address_person` FOREIGN KEY (`person_id`) REFERENCES `person` (`person_id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.Util.getInstance(Util.java:408)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:936)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2486)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2079)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2013)
+	at com.mysql.jdbc.PreparedStatement.executeLargeUpdate(PreparedStatement.java:5104)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1998)
+	at rsvier.workshop.dao.AddressDAOImp.createAddress(AddressDAOImp.java:122)
+	at rsvier.workshop.controller.AddressController.doCreateAddresses(AddressController.java:21)
+	at rsvier.workshop.controller.CustomerController.searchOrAddCustomerMenuSwitch(CustomerController.java:56)
+	at rsvier.workshop.controller.CustomerController.runView(CustomerController.java:29)
+	at rsvier.workshop.controller.MainController.setController(MainController.java:43)
+	at rsvier.workshop.controller.EmployeeController.employeeMenuSwitch(EmployeeController.java:29)
+	at rsvier.workshop.controller.EmployeeController.runView(EmployeeController.java:18)
+	at rsvier.workshop.service.LoginValidation.loginCheckAccountValidation(LoginValidation.java:29)
+	at rsvier.workshop.controller.MainMenuController.loginMainMenuSwitch(MainMenuController.java:31)
+	at rsvier.workshop.controller.MainMenuController.runView(MainMenuController.java:21)
+	at rsvier.workshop.App.main(App.java:9)
+
+mei 02, 2018 11:27:04 AM rsvier.workshop.utility.DatabaseConnectionXML getConnection
+INFO: Connected to Database
+mei 02, 2018 11:27:04 AM rsvier.workshop.dao.AddressDAOImp createAddress
+WARNING: SQL exception occured
+com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`evvo`.`address`, CONSTRAINT `fk_address_person` FOREIGN KEY (`person_id`) REFERENCES `person` (`person_id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.Util.getInstance(Util.java:408)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:936)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2486)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2079)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2013)
+	at com.mysql.jdbc.PreparedStatement.executeLargeUpdate(PreparedStatement.java:5104)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1998)
+	at rsvier.workshop.dao.AddressDAOImp.createAddress(AddressDAOImp.java:122)
+	at rsvier.workshop.controller.AddressController.doCreateAddresses(AddressController.java:31)
+	at rsvier.workshop.controller.CustomerController.searchOrAddCustomerMenuSwitch(CustomerController.java:56)
+	at rsvier.workshop.controller.CustomerController.runView(CustomerController.java:29)
+	at rsvier.workshop.controller.MainController.setController(MainController.java:43)
+	at rsvier.workshop.controller.EmployeeController.employeeMenuSwitch(EmployeeController.java:29)
+	at rsvier.workshop.controller.EmployeeController.runView(EmployeeController.java:18)
+	at rsvier.workshop.service.LoginValidation.loginCheckAccountValidation(LoginValidation.java:29)
+	at rsvier.workshop.controller.MainMenuController.loginMainMenuSwitch(MainMenuController.java:31)
+	at rsvier.workshop.controller.MainMenuController.runView(MainMenuController.java:21)
+	at rsvier.workshop.App.main(App.java:9)
+
+mei 02, 2018 11:27:10 AM rsvier.workshop.utility.DatabaseConnectionXML getConnection
+INFO: Connected to Database
+mei 02, 2018 11:27:10 AM rsvier.workshop.dao.AddressDAOImp createAddress
+WARNING: SQL exception occured
+com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`evvo`.`address`, CONSTRAINT `fk_address_person` FOREIGN KEY (`person_id`) REFERENCES `person` (`person_id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.Util.getInstance(Util.java:408)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:936)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2486)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2079)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2013)
+	at com.mysql.jdbc.PreparedStatement.executeLargeUpdate(PreparedStatement.java:5104)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1998)
+	at rsvier.workshop.dao.AddressDAOImp.createAddress(AddressDAOImp.java:122)
+	at rsvier.workshop.controller.AddressController.doCreateAddresses(AddressController.java:46)
+	at rsvier.workshop.controller.CustomerController.searchOrAddCustomerMenuSwitch(CustomerController.java:56)
+	at rsvier.workshop.controller.CustomerController.runView(CustomerController.java:29)
+	at rsvier.workshop.controller.MainController.setController(MainController.java:43)
+	at rsvier.workshop.controller.EmployeeController.employeeMenuSwitch(EmployeeController.java:29)
+	at rsvier.workshop.controller.EmployeeController.runView(EmployeeController.java:18)
+	at rsvier.workshop.service.LoginValidation.loginCheckAccountValidation(LoginValidation.java:29)
+	at rsvier.workshop.controller.MainMenuController.loginMainMenuSwitch(MainMenuController.java:31)
+	at rsvier.workshop.controller.MainMenuController.runView(MainMenuController.java:21)
+	at rsvier.workshop.App.main(App.java:9)
+

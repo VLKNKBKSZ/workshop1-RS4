@@ -14,7 +14,8 @@ public class AddressController {
 
     
     public void doCreateAddresses(Person person) {
-
+    	
+    	addressView.printHeaderOfMailAddressInput();
         Address address = createNewAddress("mail", person);
         Address addressDelivery;
         addressDAO.createAddress(address);
@@ -24,14 +25,14 @@ public class AddressController {
         
         addressView.printAskMailAndDeliverySame();
 
-        if (addressView.confirmYesOrNo().equals("J")) {
+        if (addressView.confirmYesOrNo().equalsIgnoreCase("J")) {
 
             address.setAddressType("delivery");
             addressDAO.createAddress(address);
             addressDelivery = address;
 
         } else {
-
+        	addressView.printHeaderOfDeliveryAddressInput();
             addressDelivery = createNewAddress("delivery", person);
             addressDAO.createAddress(addressDelivery);
 
@@ -39,22 +40,23 @@ public class AddressController {
 
         addressView.printAskMailAndInvoiceSame();
 
-        if (addressView.confirmYesOrNo().equals("J")) {
+        if (addressView.confirmYesOrNo().equalsIgnoreCase("J")) {
 
             address.setAddressType("invoice");
             addressDAO.createAddress(address);
+            addressView.printAddressAreSuccesFullyCreatedAndSaved();
             return;
         }
 
         addressView.printAskDeliveryAndInvoiceSame();
 
-        if (addressView.confirmYesOrNo().equals("J")){
+        if (addressView.confirmYesOrNo().equalsIgnoreCase("J")){
 
             addressDelivery.setAddressType("invoice");
             addressDAO.createAddress(addressDelivery);
 
         } else {
-
+        	addressView.printHeaderOfInvoiceInput();
             addressDAO.createAddress(createNewAddress("invoice", person));
 
         }

@@ -95,6 +95,7 @@ public class AddressController extends Controller{
 				break;
 				
 			default:
+				addressView.printMenuInputIsWrong();
 				updateAddressTypeSwitch( person);
 				break;
 

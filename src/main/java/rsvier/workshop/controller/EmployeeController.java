@@ -37,12 +37,14 @@ public class EmployeeController extends Controller{
 				
 					break;
 			case 0:	//Exit Menu
-					employeeView.printExitApplicationMessage();
+					
+					MainController.setController(TypeOfController.MAINMENU);
 			
 					break;
 			
 			default:
 					employeeView.printMenuInputIsWrong();
+					runView();
 				
 					break;
 		}

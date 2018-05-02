@@ -74,7 +74,7 @@ public class DatabaseConnectionXML {
 
 			conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			logger.log(Level.INFO, "Connected to Database");
-			System.out.println("Connected to the Database.");
+		
 
 		} catch (SQLException e) {
 			

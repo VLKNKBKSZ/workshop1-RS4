@@ -55,7 +55,7 @@ public class AddressView extends View {
     }
     
     public void printUpdateAddressType() {
-    	System.out.println("1- Postadres wijzigen\n 2- Bezorgadres wijzigen\n 3- Factuuradres wijzigen\n 0- V");
+    	System.out.println("1- Postadres wijzigen\n 2- Bezorgadres wijzigen\n 3- Factuuradres wijzigen\n 0- Terug naar vorige menu");
     }
     
     @Override

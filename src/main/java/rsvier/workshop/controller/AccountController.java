@@ -19,23 +19,19 @@ public class AccountController extends Controller{
 	
 	public AccountController() {
 	}
-
-	public AccountController(AccountDAO accountDAO, AccountView accountView) {
-		
-		this.accountDAO = accountDAO;
-		this.accountView = accountView;
-		
-	}
 	
+
 	
 	@Override
 	public void runView() {
 		
 		accountView.printHeaderMessage();
 		accountView.printMenuMessage();
-		accountMenuSwitch(View.getIntInput());
+	//	accountMenuSwitch(View.getIntInput());
 		
 	}
+	
+	/*
 
 	public void accountMenuSwitch(int menuNumber) {
 		
@@ -55,6 +51,9 @@ public class AccountController extends Controller{
 
 		}
 	}
+	
+	*/
+	
 	
 	
 	public String requestAndValidateEmail() {

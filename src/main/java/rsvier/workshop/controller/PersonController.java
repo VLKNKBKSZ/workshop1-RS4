@@ -38,22 +38,22 @@ public class PersonController extends Controller {
 
 			switch (choice) {
 
-			case 1:
+			case 1:  // update name
 				updatePersonName(personUpdateName(), person);
 
 				break;
 
-			case 2:
+			case 2: // update last name
 				updatePersonLastName(personUpdateLastName(), person);
 
 				break;
 
-			case 3:
+			case 3: // update middle name
 				updatePersonMiddleName(personUpdateMiddleName(), person);
 
 				break;
 
-			case 4:
+			case 4: // update address
 				addressController.updateAddressTypeSwitch(person);
 
 				break;
@@ -64,6 +64,11 @@ public class PersonController extends Controller {
 				updating = false;
 
 				break;
+				
+			default: // back to menu
+					personView.printMenuInputIsWrong();
+					MainController.setController(TypeOfController.CUSTOMER);
+					break;
 			}
 		}
 	}

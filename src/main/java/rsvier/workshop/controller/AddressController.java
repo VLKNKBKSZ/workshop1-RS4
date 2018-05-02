@@ -12,7 +12,7 @@ import rsvier.workshop.domain.Address.AddressBuilder;
 import rsvier.workshop.view.AddressView;
 import rsvier.workshop.view.View;
 
-public class AddressController {
+public class AddressController extends Controller{
 
 	private AddressView addressView = new AddressView();
 	private AddressDAO addressDAO = new AddressDAOImp();
@@ -93,6 +93,10 @@ public class AddressController {
 				updating = false;
 				MainController.setController(TypeOfController.CUSTOMER);
 				break;
+				
+			default:
+				updateAddressTypeSwitch( person);
+				break;
 
 			}
 		}
@@ -172,6 +176,12 @@ public class AddressController {
 
 		addressView.printAskUserForCountry();
 		return View.getStringInput();
+	}
+
+	
+	public void runView() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

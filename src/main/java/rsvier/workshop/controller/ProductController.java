@@ -1,11 +1,18 @@
 package rsvier.workshop.controller;
 
-import rsvier.workshop.view.ProductView;
-import rsvier.workshop.view.View;
+
+
+import java.util.List;
+
+import rsvier.workshop.dao.*;
+import rsvier.workshop.domain.*;
+import rsvier.workshop.view.*;
+
 
 public class ProductController extends Controller {
 	
 	private ProductView productView = new ProductView();
+	private ProductDAO productDAO = new ProductDAOImp();
 	
 	@Override
 	public void runView() {
@@ -19,13 +26,15 @@ public class ProductController extends Controller {
 		switch(menuNumber)	{
 			
 		case 1:	//search product
-				
+				productView.printAskForProductName();
+				searchProductByName(productView.getStringInput());
 				break;
 		case 2: //add product
 				break;
 		case 3:	//show product list
 				break;
-		case 0: //exit
+		case 0: //back to previous menu
+				runView();
 				break;
 		default://Goes back to this same menu
 				productView.printMenuInputIsWrong();
@@ -49,11 +58,24 @@ public class ProductController extends Controller {
 		case 2: //delete product
 				break;
 		case 0: //back to previous menu
+				runView();
 				break;
 		default: //error message
+				
 				break;
 		}
 			
+	}
+	
+	public void searchProductByName(String name) {
+	
+		productView.printAskForProductName();
+		String productName = productView.getStringInput();
+		Product retrievedProduct = productDAO.getProductByName(productName);
+		retrievedProduct.toString();
+		productView.printUpdateOrDeleteMenu();
+		updateOrDeleteProductSwitch(productView.getIntInput());
+		
 	}
 
 }

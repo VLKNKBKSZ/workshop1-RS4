@@ -19,5 +19,10 @@ public class ProductView extends View {
 		System.out.println("\n1- Product aanpassen\n" + "2- Product verwijderen\n" +
 				"0- Terug naar vorige menu");
 	}
+
+	public void printAskForProductName() {
+		System.out.println("Geef de naam van het product:");
+		
+	}
 	
 }

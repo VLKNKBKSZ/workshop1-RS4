@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public abstract class View {
 
-	private static Scanner userInput = new Scanner(System.in);
+	private Scanner userInput = new Scanner(System.in);
 
 
 	
@@ -34,7 +34,7 @@ public abstract class View {
 	}
 
 	
-	public static Integer getIntInput() {
+	public Integer getIntInput() {
 		
 		try {
 			return Integer.parseInt(userInput.nextLine());
@@ -45,7 +45,7 @@ public abstract class View {
 	}
 
 	
-	public static String getStringInput() {
+	public String getStringInput() {
 		
 		String s = userInput.nextLine();
 

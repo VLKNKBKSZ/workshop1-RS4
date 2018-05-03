@@ -80,7 +80,7 @@ public class AddressController extends Controller{
 		while (updating) {
 
 			addressView.printUpdateAddressType();
-			int choice = View.getIntInput();
+			int choice = addressView.getIntInput();
 
 			switch (choice) {
 
@@ -157,37 +157,37 @@ public class AddressController extends Controller{
 	public String addressUpdateStreetName() {
 
 		addressView.printAskUserForStreetName();
-		return View.getStringInput();
+		return addressView.getStringInput();
 	}
 
 	public int addressUpdateHouseNumber() {
 
 		addressView.printAskUserForHouseNumber();
-		return View.getIntInput();
+		return addressView.getIntInput();
 	}
 
 	public String addressUpdateAdditionalHouseNumber() {
 
 		addressView.printAskUserForAdditionalHouseNumber();
-		return View.getStringInput();
+		return addressView.getStringInput();
 	}
 
 	public String addressUpdatePostalCode() {
 
 		addressView.printAskUserForPostalCode();
-		return View.getStringInput();
+		return addressView.getStringInput();
 	}
 
 	public String addressUpdateCity() {
 
 		addressView.printAskUserForCity();
-		return View.getStringInput();
+		return addressView.getStringInput();
 	}
 
 	public String addressUpdateCountry() {
 
 		addressView.printAskUserForCountry();
-		return View.getStringInput();
+		return addressView.getStringInput();
 	}
 
 

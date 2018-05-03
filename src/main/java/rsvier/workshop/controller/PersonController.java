@@ -34,7 +34,7 @@ public class PersonController extends Controller {
 
 		while (updating) {
 			personView.printUpdateUserDetailsMenu();
-			int choice = View.getIntInput();
+			int choice = personView.getIntInput();
 
 			switch (choice) {
 
@@ -81,19 +81,19 @@ public class PersonController extends Controller {
 	public String personUpdateName() {
 
 		personView.printAskUserForNewName();
-		return View.getStringInput();
+		return personView.getStringInput();
 	}
 
 	public String personUpdateLastName() {
 
 		personView.printAskUserForNewLastName();
-		return View.getStringInput();
+		return personView.getStringInput();
 	}
 
 	public String personUpdateMiddleName() {
 
 		personView.printAskUserForMiddleName();
-		return View.getStringInput();
+		return personView.getStringInput();
 	}
 
 	// Methods for updating the personal data with the obtained Strings

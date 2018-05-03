@@ -61,8 +61,10 @@ public class ProductController extends Controller {
 		switch(choice) {
 			
 		case 1:	//update product
+				updateProductSwitch(product);
 				break;
 		case 2: //delete product
+				productDAO.deleteProduct(product);
 				break;
 		case 0: //back to previous menu
 				runView();
@@ -116,4 +118,19 @@ public class ProductController extends Controller {
 		}
 	}
 
+	public void updateProductSwitch(Product product) {
+
+		productView.printUpdateProduct();
+		int choice = productView.getIntInput();
+
+		switch(choice) {
+			case 1: break;
+			case 2: break;
+			case 3: break;
+			case 4: break;
+			case 0: break;
+			default:
+		}
+
+	}
 }

@@ -17,9 +17,9 @@ public class LoginValidation {
 public void loginCheckAccountValidation() {
 		
 		accountView.printRequestEmailInput();
-		String email = View.getStringInput();
+		String email = accountView.getStringInput();
 		accountView.printRequestPasswordInput();
-		String password = View.getStringInput();
+		String password = accountView.getStringInput();
 		Account account = accountDAOImp.getAccountByEmail(email);
 		
 		

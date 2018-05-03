@@ -21,11 +21,11 @@ public class ProductView extends View {
 	}
 
 	public void printAskForProductName() {
-		System.out.println("Geef de naam van het product:");
+		System.out.println("Geef de naam van het product: ");
 		
 	}
 	
-	public void printProdutNotFound() {
+	public void printProductNotFound() {
 		System.out.println("Product niet gevonden.");
 	}
 	

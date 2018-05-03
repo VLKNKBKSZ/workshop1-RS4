@@ -32,6 +32,8 @@ public class ProductController extends Controller {
 				runView();
 				break;
 		case 2: //add product
+				doCreateProduct();
+				runView();
 				break;
 		case 3:	//show product list
 				break;
@@ -92,7 +94,15 @@ public class ProductController extends Controller {
     }
 
     public void doCreateProduct () {
-
+		Product.ProductBuilder productBuilder = new Product.ProductBuilder();
+		productView.printAskForProductName();
+		productBuilder.name(productView.getStringInput());
+		productView.printAskForProductPrice();
+		productBuilder.price(productView.getBigDecimalInput());
+		productView.printAskForProductStock();
+		productBuilder.stock(productView.getIntInput());
+		Product product = productBuilder.build();
+		productDAO.createProduct(product);
 	}
 
 }

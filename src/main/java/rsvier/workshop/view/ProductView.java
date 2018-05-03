@@ -11,18 +11,26 @@ public class ProductView extends View {
 	@Override
 	public void printMenuMessage() {
 		System.out.println("---------------------------\n" + 
-				"1- Zoek product\n" + "2- Product toevoegen\r\n" +  
-				"3- Alle producten weergeven\n" + "0- Verlaat Medewerker - Productenbeheer");
+				"1- Zoek product\n2- Product toevoegen\r\n" +
+				"3- Alle producten weergeven\n0- Verlaat Medewerker - Productenbeheer");
 	}
 
 	public void printUpdateOrDeleteMenu() {
-		System.out.println("\n1- Product aanpassen\n" + "2- Product verwijderen\n" +
+		System.out.println("\n1- Product aanpassen\n2- Product verwijderen\n" +
 				"0- Terug naar vorige menu");
 	}
 
 	public void printAskForProductName() {
-		System.out.println("Geef de naam van het product: ");
+		System.out.print("Geef de naam van het product: ");
 		
+	}
+
+	public void printAskForProductPrice() {
+		System.out.print("Geef de prijs van het product: ");
+	}
+
+	public void printAskForProductStock() {
+		System.out.print("Geef de huidige voorraad van het product: ");
 	}
 	
 	public void printProductNotFound() {

@@ -79,11 +79,7 @@ public class ProductController extends Controller {
 		
         if (returnedProduct != null) {
         	
-<<<<<<< HEAD
-        		System.out.println(returnedProduct.toString());
-=======
         		System.out.println("\n" + returnedProduct.toString());
->>>>>>> 491b5ab9f0b2662bce1f97108c7ec27c70d362e5
         		return returnedProduct;
         		
         } else {

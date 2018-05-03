@@ -26,8 +26,9 @@ public class ProductController extends Controller {
 		switch(menuNumber)	{
 			
 		case 1:	//search product
-				productView.printAskForProductName();
-				searchProductByName(productView.getStringInput());
+				Product product = searchProductByName();
+				updateOrDeleteProductSwitch(product);
+				runView();
 				break;
 		case 2: //add product
 				break;
@@ -46,7 +47,7 @@ public class ProductController extends Controller {
 	}
 	
 	
-	public void updateOrDeleteProductSwitch(int menuNumber) {
+	public void updateOrDeleteProductSwitch(Product product) {
 		
 		productView.printUpdateOrDeleteMenu();	
 		int choice = View.getIntInput();
@@ -67,15 +68,24 @@ public class ProductController extends Controller {
 			
 	}
 	
-	public void searchProductByName(String name) {
+	public Product searchProductByName() {
 	
 		productView.printAskForProductName();
-		String productName = productView.getStringInput();
-		Product retrievedProduct = productDAO.getProductByName(productName);
-		retrievedProduct.toString();
-		productView.printUpdateOrDeleteMenu();
-		updateOrDeleteProductSwitch(productView.getIntInput());
+        String productName = View.getStringInput();
+        
+        Product returnedProduct = productDAO.getProductByName(productName);
 		
+        if (returnedProduct != null) {
+        		
+        		return returnedProduct;
+        		
+        } else {
+        		productView.printProdutNotFound();
+        		runView();
+        		return null;
+      
+        }
+        
 	}
 
 }

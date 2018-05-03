@@ -25,4 +25,8 @@ public class ProductView extends View {
 		
 	}
 	
+	public void printProdutNotFound() {
+		System.out.println("Product niet gevonden.");
+	}
+	
 }

@@ -19,6 +19,7 @@ public class ProductController extends Controller {
 		switch(menuNumber)	{
 			
 		case 1:	//search product
+				
 				break;
 		case 2: //add product
 				break;
@@ -26,7 +27,9 @@ public class ProductController extends Controller {
 				break;
 		case 0: //exit
 				break;
-		default:
+		default://Goes back to this same menu
+				productView.printMenuInputIsWrong();
+				runView();
 				break;
 				
 		}

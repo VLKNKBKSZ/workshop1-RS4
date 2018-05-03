@@ -4,7 +4,7 @@ public class PersonView extends View {
 
 	@Override
 	public void printHeaderMessage() {
-		System.out.println("\n=========== Person View ===========\n");
+		System.out.println("\n=========== Werknemer  |  Klantenbeheer ===========\n");
 		
 	}
 

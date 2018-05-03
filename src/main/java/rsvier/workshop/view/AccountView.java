@@ -4,7 +4,7 @@ public class AccountView extends View{
 
 	@Override
 	public void printHeaderMessage() {
-		System.out.println("\n=========== Account ===========\n");	
+		System.out.println("\n=========== Werknemer  |  Accountbeheer ===========\n");	
 	}
 	
 	

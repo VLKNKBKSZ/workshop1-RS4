@@ -25,12 +25,11 @@ public class EmployeeController extends Controller{
 		switch (menuNumber) {
 
 			case 1:	//Klanten beheren
-
 					MainController.setController(TypeOfController.CUSTOMER);
 					break;
 
 			case 2: //producten beheren
-				
+					
 					break;
 			
 			case 3:	//bestellingen beheren

@@ -2,6 +2,22 @@ package rsvier.workshop.view;
 
 public class AddressView extends View {
 
+    
+    
+    @Override
+    public void printHeaderMessage() {
+    		System.out.println("\n=========== Werknemer  |  Adresbeheer ===========\n");
+    }
+
+    @Override
+    public void printMenuMessage() {
+    		
+    }
+    
+    public void printUpdateAddressType() {
+    	System.out.println("\n1- Postadres wijzigen\n 2- Bezorgadres wijzigen\n 3- Factuuradres wijzigen\n 0- Terug naar vorige menu\n");
+    }
+    
     public void printAskUserForStreetName() {
         System.out.print("\nVul je (nieuwe) straatnaam in: ");
     }
@@ -54,17 +70,5 @@ public class AddressView extends View {
     	System.out.println("\nAl uw adresgegevens zijn succesvol aangemaakt en opgeslagen.\n");
     }
     
-    public void printUpdateAddressType() {
-    	System.out.println("\n1- Postadres wijzigen\n 2- Bezorgadres wijzigen\n 3- Factuuradres wijzigen\n 0- Terug naar vorige menu\n");
-    }
     
-    @Override
-    public void printHeaderMessage() {
-    	
-    }
-
-    @Override
-    public void printMenuMessage() {
-
-    }
 }

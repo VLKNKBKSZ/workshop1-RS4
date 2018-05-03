@@ -6,11 +6,13 @@ public class AccountView extends View{
 	public void printHeaderMessage() {
 		System.out.println("\n=========== Account ===========\n");	
 	}
-
+	
+	
+	//Not using the printMenuMessage now
 	@Override
 	public void printMenuMessage() {
-		System.out.println("1- Maak nieuw account\n2- Terug naar Hoofdmenu\n0- Verlaat Evvo Meubels");
-	}
+		System.out.println("1- Maak nieuw account\n2- Terug naar Hoofdmenu\n0- Verlaat Nevvo Meubels");
+	} 
 	
 	public static void printMakeCustomerAccount() {
 		System.out.println("Maak eerst een nieuw account aan voor de klant.");

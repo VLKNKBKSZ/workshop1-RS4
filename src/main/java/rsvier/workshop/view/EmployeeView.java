@@ -10,7 +10,7 @@ public class EmployeeView extends View {
 
 	@Override
 	public void printMenuMessage() {
-		System.out.println("1- Klanten beheren\n2- Producten beheren\n3- Bestellingen beheren\n0- Verlaat Evvo Meubels");
+		System.out.println("1- Klanten beheren\n2- Producten beheren\n3- Bestellingen beheren\n0- Terug naar hoofdmenu");
 		
 	}
 	

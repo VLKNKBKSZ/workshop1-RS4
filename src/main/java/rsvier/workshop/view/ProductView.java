@@ -10,10 +10,9 @@ public class ProductView extends View {
 
 	@Override
 	public void printMenuMessage() {
-		System.out.println("Werknemer|  Producten\r\n" + "---------------------------\r\n" + 
-				"1- Meubel Toevoegen\r\n" + "2- Meubel Aanpassen\r\n" + "3- Meubel Verwijderen\r\n" + 
-				"4- Totale Meubels\r\n" + "0- Verlaat Medewerker| Producten");
-		
+		System.out.println("---------------------------\n" + 
+				"1- Zoek product\n" + "2- Product toevoegen\r\n" +  
+				"3- Alle producten weergeven\n" + "0- Verlaat Medewerker - Productenbeheer");
 	}
 
 	

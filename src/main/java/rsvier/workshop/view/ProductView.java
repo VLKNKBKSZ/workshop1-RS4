@@ -22,7 +22,7 @@ public class ProductView extends View {
 
 	public void printUpdateProduct() {
 		System.out.println("1- Toon huidig product\n2- Productnaam aanpassen\n3- Productprijs aanpassen\n" +
-				"4- Productvoorraad aanpassen\n 0- Terug naar vorige menu");
+				"4- Productvoorraad aanpassen\n0- Terug naar vorige menu");
 	}
 
 	public void printAskForProductName() {

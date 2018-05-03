@@ -2,6 +2,7 @@ package rsvier.workshop.controller;
 
 
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,23 +132,25 @@ public class ProductController extends Controller {
 
 	public void updateProductSwitch(Product product) {
 
-		productView.printUpdateProduct();
-		int choice = productView.getIntInput();
-
 		boolean productNotFinished = true;
 
 		while(productNotFinished) {
+
+			productView.printUpdateProduct();
+			int choice = productView.getIntInput();
+
 			switch (choice) {
+
 				case 1: System.out.println(product.toString());
 						break;
 
-				case 2:
+				case 2: product.setName(updateProductName());
 						break;
 
-				case 3:
+				case 3: product.setPrice(updateProductPrice());
 						break;
 
-				case 4:
+				case 4:	product.setStock(updateProductStock());
 						break;
 
 				case 0: productNotFinished = false;
@@ -156,5 +159,20 @@ public class ProductController extends Controller {
 				default: productView.printMenuInputIsWrong();
 			}
 		}
+	}
+
+	public String updateProductName() {
+		productView.printAskForProductName();
+		return productView.getStringInput();
+	}
+
+	public BigDecimal updateProductPrice() {
+		productView.printAskForProductPrice();
+		return productView.getBigDecimalInput();
+	}
+
+	public int updateProductStock() {
+		productView.printAskForProductStock();
+		return productView.getIntInput();
 	}
 }

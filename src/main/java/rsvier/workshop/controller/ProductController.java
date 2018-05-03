@@ -64,13 +64,13 @@ public class ProductController extends Controller {
 				updateProductSwitch(product);
 				break;
 		case 2: //delete product
-				productDAO.deleteProduct(product);
+				doDeleteProduct(product);
 				break;
 		case 0: //back to previous menu
 				runView();
 				break;
 		default: //error message
-				
+				productView.printMenuInputIsWrong();
 				break;
 		}
 			
@@ -110,6 +110,17 @@ public class ProductController extends Controller {
 		productDAO.createProduct(product);
 	}
 
+	public void doDeleteProduct(Product product) {
+		productView.confirmYesOrNo();
+		String yesOrNo = productView.getStringInput();
+
+		if (yesOrNo.equalsIgnoreCase("J")) {
+			productDAO.deleteProduct(product);
+		} else {
+			runView();
+		}
+	}
+
 	public void showProductList() {
 		List<Product> products = productDAO.getAllProducts();
 
@@ -123,14 +134,27 @@ public class ProductController extends Controller {
 		productView.printUpdateProduct();
 		int choice = productView.getIntInput();
 
-		switch(choice) {
-			case 1: break;
-			case 2: break;
-			case 3: break;
-			case 4: break;
-			case 0: break;
-			default:
-		}
+		boolean productNotFinished = true;
 
+		while(productNotFinished) {
+			switch (choice) {
+				case 1: System.out.println(product.toString());
+						break;
+
+				case 2:
+						break;
+
+				case 3:
+						break;
+
+				case 4:
+						break;
+
+				case 0: productNotFinished = false;
+						break;
+
+				default: productView.printMenuInputIsWrong();
+			}
+		}
 	}
 }

@@ -36,6 +36,7 @@ public class ProductController extends Controller {
 				runView();
 				break;
 		case 3:	//show product list
+
 				break;
 		case 0: //back to previous menu
 				MainController.setController(TypeOfController.EMPLOYEE);

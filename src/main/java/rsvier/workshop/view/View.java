@@ -1,6 +1,7 @@
 package rsvier.workshop.view;
 
 import java.math.BigDecimal;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class View {
@@ -59,14 +60,22 @@ public abstract class View {
 	}
 
 	public BigDecimal getBigDecimalInput() {
-		BigDecimal bigDecimal = userInput.nextBigDecimal();
+
+
+		try {
+			BigDecimal bigDecimal = userInput.nextBigDecimal();
+			userInput.nextLine();
 
 		if (bigDecimal == null) {
 			System.out.print("U kunt dit gedeelte niet leeg laten. Vul aub iets in: ");
 			return getBigDecimalInput();
 		}
+			return bigDecimal;
+		} catch (InputMismatchException ex) {
+			System.out.print("Verkeerde input.");
+			return getBigDecimalInput();
+		}
 
-		return bigDecimal;
 	}
 	
 	public String confirmYesOrNo() {

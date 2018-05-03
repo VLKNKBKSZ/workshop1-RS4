@@ -12,7 +12,8 @@ public class AccountView extends View{
 	@Override
 	public void printMenuMessage() {
 		System.out.println("1- Maak nieuw account\n2- Terug naar Hoofdmenu\n0- Verlaat Nevvo Meubels");
-	} 
+	}
+		
 	
 	public static void printMakeCustomerAccount() {
 		System.out.println("Maak eerst een nieuw account aan voor de klant.");

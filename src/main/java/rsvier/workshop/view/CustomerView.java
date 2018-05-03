@@ -16,7 +16,7 @@ public class CustomerView extends View {
 
 	public void printAskDeleteOrUpdateCustomer() {
 
-		System.out.println("1- Klantgegevens aanpassen\n2- Klant verwijderen\n0- Terug naar naar vorige menu");
+		System.out.println("1- Klantgegevens aanpassen\n2- Klant verwijderen\n0- Terug naar vorige menu");
 	}
 	
 	

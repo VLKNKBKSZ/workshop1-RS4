@@ -153,6 +153,9 @@ public class ProductController extends Controller {
 				case 4:	product.setStock(updateProductStock());
 						break;
 
+				case 5: productDAO.updateProduct(product);
+						break;
+
 				case 0: productNotFinished = false;
 						break;
 

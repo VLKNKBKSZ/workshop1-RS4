@@ -94,13 +94,24 @@ public class Product {
 		return stock;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 
 	// Override the toString inherited from the Object class
 
 	@Override
 	public String toString() {
 
-		return "Id:" + getProductId() + " Naam:" + getName() + " Prijs:" + getPrice() + " Voorraad:" + getStock();
+		return "Id: " + getProductId() + " Naam: " + getName() + " Prijs: " + getPrice() + " Voorraad: " + getStock();
 
 	}
 

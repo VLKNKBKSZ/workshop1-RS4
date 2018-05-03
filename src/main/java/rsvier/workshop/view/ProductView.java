@@ -20,6 +20,11 @@ public class ProductView extends View {
 				"0- Terug naar vorige menu");
 	}
 
+	public void printUpdateProduct() {
+		System.out.println("\n1- Productnaam aanpassen\n2- Productprijs aanpassen\n" +
+				"3- Productvoorraad aanpassen\n 0- Terug naar vorige menu");
+	}
+
 	public void printAskForProductName() {
 		System.out.print("Geef de naam van het product: ");
 		

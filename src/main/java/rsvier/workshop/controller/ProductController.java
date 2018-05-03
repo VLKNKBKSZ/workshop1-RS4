@@ -75,10 +75,11 @@ public class ProductController extends Controller {
         String productName = View.getStringInput();
         
         Product returnedProduct = productDAO.getProductByName(productName);
-        returnedProduct.toString();
+        
 		
         if (returnedProduct != null) {
-        		
+        	
+        		returnedProduct.toString();
         		return returnedProduct;
         		
         } else {
@@ -87,7 +88,8 @@ public class ProductController extends Controller {
         		return null;
       
         }
-        
-	}
+	
+	
+    }
 
 }

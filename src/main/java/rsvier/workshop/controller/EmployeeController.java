@@ -29,7 +29,7 @@ public class EmployeeController extends Controller{
 					break;
 
 			case 2: //producten beheren
-					
+					MainController.setController(TypeOfController.PRODUCT);
 					break;
 			
 			case 3:	//bestellingen beheren

@@ -15,5 +15,9 @@ public class ProductView extends View {
 				"3- Alle producten weergeven\n" + "0- Verlaat Medewerker - Productenbeheer");
 	}
 
+	public void printUpdateOrDeleteMenu() {
+		System.out.println("\n1- Product aanpassen\n" + "2- Product verwijderen\n" +
+				"0- Terug naar vorige menu");
+	}
 	
 }

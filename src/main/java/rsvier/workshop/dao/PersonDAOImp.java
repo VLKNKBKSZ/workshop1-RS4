@@ -134,7 +134,7 @@ public class PersonDAOImp implements PersonDAO {
 
 			preparedStatement.executeUpdate();
 			logger.log(Level.INFO, "Person succesfully updated");
-			System.out.println("Person succesfully updated");
+			
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 

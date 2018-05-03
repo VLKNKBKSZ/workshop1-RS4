@@ -17,6 +17,7 @@ public class ProductController extends Controller {
 	private ProductView productView = new ProductView();
 	private ProductDAO productDAO = new ProductDAOImp();
 	
+	
 	@Override
 	public void runView() {
 		productView.printHeaderMessage();
@@ -77,6 +78,9 @@ public class ProductController extends Controller {
 			
 	}
 	
+	
+	//Method asks user for product name and returns product from the database:
+	
 	public Product searchProductByName() {
 	
 		productView.printAskForProductName();
@@ -84,7 +88,6 @@ public class ProductController extends Controller {
         
         Product returnedProduct = productDAO.getProductByName(productName);
         
-		
         if (returnedProduct != null) {
         	
         		System.out.println("\n" + returnedProduct.toString());
@@ -132,9 +135,9 @@ public class ProductController extends Controller {
 
 	public void updateProductSwitch(Product product) {
 
-		boolean productNotFinished = true;
+		boolean updatingProduct = true;
 
-		while(productNotFinished) {
+		while(updatingProduct) {
 
 			productView.printUpdateProduct();
 			int choice = productView.getIntInput();
@@ -156,7 +159,7 @@ public class ProductController extends Controller {
 				case 5: productDAO.updateProduct(product);
 						break;
 
-				case 0: productNotFinished = false;
+				case 0: updatingProduct = false;
 						break;
 
 				default: productView.printMenuInputIsWrong();

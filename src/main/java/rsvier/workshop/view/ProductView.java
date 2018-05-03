@@ -31,7 +31,7 @@ public class ProductView extends View {
 	}
 
 	public void printAskForProductPrice() {
-		System.out.print("Geef de prijs van het product: ");
+		System.out.print("Geef de prijs van het product: € ");
 	}
 
 	public void printAskForProductStock() {

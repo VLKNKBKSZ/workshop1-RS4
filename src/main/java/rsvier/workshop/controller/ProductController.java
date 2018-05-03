@@ -19,7 +19,7 @@ public class ProductController extends Controller {
 	public void runView() {
 		productView.printHeaderMessage();
 		productView.printMenuMessage();
-		searchOrAddProductMenuSwitch(View.getIntInput());
+		searchOrAddProductMenuSwitch(productView.getIntInput());
 	}
 	
 	public void searchOrAddProductMenuSwitch(int menuNumber) {
@@ -51,7 +51,7 @@ public class ProductController extends Controller {
 	public void updateOrDeleteProductSwitch(Product product) {
 		
 		productView.printUpdateOrDeleteMenu();	
-		int choice = View.getIntInput();
+		int choice = productView.getIntInput();
 		
 		switch(choice) {
 			
@@ -72,7 +72,7 @@ public class ProductController extends Controller {
 	public Product searchProductByName() {
 	
 		productView.printAskForProductName();
-        String productName = View.getStringInput();
+        String productName = productView.getStringInput();
         
         Product returnedProduct = productDAO.getProductByName(productName);
         

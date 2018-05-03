@@ -18,7 +18,7 @@ public class MainMenuController extends Controller{
 		
 		mainMenuView.printHeaderMessage();
 		mainMenuView.printMenuMessage();
-		loginMainMenuSwitch(View.getIntInput());
+		loginMainMenuSwitch(mainMenuView.getIntInput());
 		
 	}
 

@@ -15,7 +15,7 @@ public class EmployeeController extends Controller{
 		
 		employeeView.printHeaderMessage();
 		employeeView.printMenuMessage();
-		employeeMenuSwitch(View.getIntInput());
+		employeeMenuSwitch(employeeView.getIntInput());
 		
 	}
 

@@ -62,7 +62,7 @@ public class AccountController extends Controller{
 		
 		do {
 			accountView.printRequestEmailInput();
-			email = View.getStringInput();
+			email = accountView.getStringInput();
 		
 		} while (!validator.validateEmail(email));
 
@@ -76,7 +76,7 @@ public class AccountController extends Controller{
 		
 		do {
 			accountView.printRequestPasswordInput();
-			password = View.getStringInput();
+			password = accountView.getStringInput();
 		
 		} while (!validator.validatePassword(password));
 

@@ -54,9 +54,10 @@ public class PersonController extends Controller {
 					MainController.setController(TypeOfController.EMPLOYEE);
 					updating = false;
 					break;
-			default: // back to menu
+			default: // back to this menu again
 					personView.printMenuInputIsWrong();
-					MainController.setController(TypeOfController.CUSTOMER);
+					personUpdateMenuSwitch(person);
+					
 					break;
 			}
 		}

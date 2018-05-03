@@ -84,20 +84,20 @@ public class AddressController extends Controller{
 
 			switch (choice) {
 
-				case 1:
+				case 1: // update mail address
 						updateAddress(person, "mail");
 						break;
-				case 2:
+				case 2: // update delivery address
 						updateAddress(person, "delivery");
 						break;
-				case 3:
+				case 3: // update invoice address
 						updateAddress(person, "invoice");
 						break;
-				case 0:
+				case 0: // back to previous menu
 						updating = false;
 						MainController.setController(TypeOfController.CUSTOMER);
 						break;
-				default:
+				default: // back to this menu again
 						addressView.printMenuInputIsWrong();
 						updateAddressTypeSwitch( person);
 						break;

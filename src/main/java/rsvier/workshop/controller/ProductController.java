@@ -2,6 +2,7 @@ package rsvier.workshop.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rsvier.workshop.controller.MainController.TypeOfController;
@@ -36,7 +37,7 @@ public class ProductController extends Controller {
 				runView();
 				break;
 		case 3:	//show product list
-
+				showProductList();
 				break;
 		case 0: //back to previous menu
 				MainController.setController(TypeOfController.EMPLOYEE);
@@ -104,6 +105,14 @@ public class ProductController extends Controller {
 		productBuilder.stock(productView.getIntInput());
 		Product product = productBuilder.build();
 		productDAO.createProduct(product);
+	}
+
+	public void showProductList() {
+		List<Product> products = productDAO.getAllProducts();
+
+		for (Product product : products) {
+			System.out.println(product.toString());
+		}
 	}
 
 }

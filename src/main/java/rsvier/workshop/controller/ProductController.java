@@ -4,6 +4,7 @@ package rsvier.workshop.controller;
 
 import java.util.List;
 
+import rsvier.workshop.controller.MainController.TypeOfController;
 import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.view.*;
@@ -35,7 +36,7 @@ public class ProductController extends Controller {
 		case 3:	//show product list
 				break;
 		case 0: //back to previous menu
-				runView();
+				MainController.setController(TypeOfController.EMPLOYEE);
 				break;
 		default://Goes back to this same menu
 				productView.printMenuInputIsWrong();
@@ -74,6 +75,7 @@ public class ProductController extends Controller {
         String productName = View.getStringInput();
         
         Product returnedProduct = productDAO.getProductByName(productName);
+        returnedProduct.toString();
 		
         if (returnedProduct != null) {
         		

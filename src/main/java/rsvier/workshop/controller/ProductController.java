@@ -115,10 +115,8 @@ public class ProductController extends Controller {
 	}
 
 	public void doDeleteProduct(Product product) {
-		productView.confirmYesOrNo();
-		String yesOrNo = productView.getStringInput();
 
-		if (yesOrNo.equalsIgnoreCase("J")) {
+		if (productView.confirmYesOrNo().equalsIgnoreCase("J")) {
 			productDAO.deleteProduct(product);
 		} else {
 			runView();

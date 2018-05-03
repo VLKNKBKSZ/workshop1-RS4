@@ -83,13 +83,16 @@ public class ProductController extends Controller {
         		return returnedProduct;
         		
         } else {
-        		productView.printProdutNotFound();
+        		productView.printProductNotFound();
         		runView();
         		return null;
       
         }
-	
-	
+
     }
+
+    public void doCreateProduct () {
+
+	}
 
 }

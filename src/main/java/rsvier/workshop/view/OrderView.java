@@ -13,7 +13,15 @@ public class OrderView extends View {
 	}
 
 	public void printAskUserToUpdateOrDeleteProduct() {
-		System.out.println("1- Order aanpassen\n2- Order verwijderen\n0- Terug naar vorige menu");
+		System.out.println("1- Bestelling aanpassen\n2- Bestelling verwijderen\n0- Terug naar vorige menu");
+		
+	}
+	
+	public void printHeaderSelectSearchOption() {
+		System.out.println("=========== Werknemer    | Bestellingzoeken ===========");
+	}
+	public void printAskSelectSeachOrder() {
+		System.out.println("1- Zoek  met bestelnummer\n2- Zoek met klant achternaam\n0- Terug naar vorige menu");
 	}
 	
 	public void printOrderNotFound() {
@@ -26,4 +34,5 @@ public class OrderView extends View {
 	public void printAskOrderId() {
 		System.out.println("Vul het bestelnummer in: ");	
 	}
+	
 }

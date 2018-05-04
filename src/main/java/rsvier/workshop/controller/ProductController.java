@@ -111,6 +111,7 @@ public class ProductController extends Controller {
 		productBuilder.stock(productView.getIntInput());
 		Product product = productBuilder.build();
 		productDAO.createProduct(product);
+		productView.printProductIsSuccesfullyCreated();
 	}
 
 	public void doDeleteProduct(Product product) {

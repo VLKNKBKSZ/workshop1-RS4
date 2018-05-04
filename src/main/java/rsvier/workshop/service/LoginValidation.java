@@ -22,7 +22,6 @@ public class LoginValidation {
 
 		if (account.getEmail() == null || (!account.getPassword().equals(password))) {
 			accountView.printLoginDetailsWrong();
-			mainMenuController.runView();
 		} else {
 			accountView.printLoginAccountIsSuccessful();
 			employeeController.runView();

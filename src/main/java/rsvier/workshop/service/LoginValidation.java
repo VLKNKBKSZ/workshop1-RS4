@@ -13,7 +13,7 @@ public class LoginValidation {
 	private Controller employeeController = new EmployeeController();
 
 	public void loginCheckAccountValidation() {
-		MainController.setController(TypeOfController.MAINMENU);
+
 		accountView.printRequestEmailInput();
 		String email = accountView.getStringInput();
 		accountView.printRequestPasswordInput();
@@ -21,7 +21,9 @@ public class LoginValidation {
 		Account account = accountDAOImp.getAccountByEmail(email);
 
 		if (account.getEmail() == null || (!account.getPassword().equals(password))) {
+
 			accountView.printLoginDetailsWrong();
+			MainController.setController(TypeOfController.MAINMENU);
 		} else {
 			accountView.printLoginAccountIsSuccessful();
 			employeeController.runView();

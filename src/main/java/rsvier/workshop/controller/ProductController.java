@@ -102,7 +102,6 @@ public class ProductController extends Controller {
 		String nameOfNewProduct = productView.getStringInput();
 		if(checkIfProductAlreadyExists(nameOfNewProduct)) {
 			productView.printGivenNameForNewProductAlreadyExists();
-			runView();
 			return;
 		}
 		productBuilder.name(nameOfNewProduct);

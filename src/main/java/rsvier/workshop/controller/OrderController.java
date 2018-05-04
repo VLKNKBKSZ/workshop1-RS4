@@ -53,30 +53,49 @@ public class OrderController extends Controller {
 
 		}
 	}
-	
+
 	// Search order by Lastname
-	public void searchOrderByLastname(Person person) {
-		
-		if( person == null ) {
+	public Order searchOrderByLastname(Person person) {
+		List<Order> orderList = null;
+
+		if (person == null) {
 			runView();
-		}else {
-			List<Order> orderList = orderDao.getAllOrdersFromPerson(person);
-			for(Order order : orderList) {
-				System.out.println(order.toString());
+		} else {
+
+			
+
+				orderList = orderDao.getAllOrdersFromPerson(person);
+
+				if (orderList.size() == 0) {
+					orderView.printOrderNotFound();
+					runView();
+				}
+
+				if (orderList.size() == 1) {
+					System.out.println(orderList.get(0).toString());
+
+				} else {
+
+					for (int i = 1; i < orderList.size(); i++) {
+						System.out.println("No. " + i + " : " + orderList.get(i - 1).toString());
+					}
+				}
+
 			}
-		}
 		
-		
-		
-		
-		
-		
-		
+		return orderList.get(selectOrder() - 1);
 	}
-	
+
+	public int selectOrder() {
+
+		orderView.printAskSelectOrder();
+
+		return orderView.getIntInput();
+	}
+
 	// Search order by OrderId
 	public void searchOrderByOrderId(Order order) {
-		
+
 	}
 
 }

@@ -20,6 +20,9 @@ public class ProductView extends View {
 				"0- Terug naar vorige menu");
 	}
 
+	public void printProductIsSuccesfullyCreated() {
+		System.out.println("Product is succesvol aangemaakt en opgeslagen");
+	}
 	public void printUpdateProduct() {
 		System.out.println("1- Toon huidig product\n2- Productnaam aanpassen\n3- Productprijs aanpassen\n" +
 				"4- Productvoorraad aanpassen\n5- Veranderingen opslaan\n0- Terug naar vorige menu");

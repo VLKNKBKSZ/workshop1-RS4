@@ -26,8 +26,7 @@ public class ProductController extends Controller {
 		switch (menuNumber) {
 
 		case 1: // search product
-			Product product = searchProductByName();
-			updateOrDeleteProductSwitch(product);
+			searchProductByName();
 			runView();
 			break;
 		case 2: // add product
@@ -75,7 +74,7 @@ public class ProductController extends Controller {
 
 	// Method asks user for product name and returns product from the database:
 
-	public Product searchProductByName() {
+	public void searchProductByName() {
 
 		productView.printAskForProductName();
 		String productName = productView.getStringInput();
@@ -85,13 +84,10 @@ public class ProductController extends Controller {
 		if (returnedProduct != null) {
 
 			System.out.println("\n" + returnedProduct.toString());
-			return returnedProduct;
+			updateOrDeleteProductSwitch(returnedProduct);
 
 		} else {
 			productView.printProductNotFound();
-			runView();
-			return null;
-
 		}
 
 	}
@@ -100,7 +96,7 @@ public class ProductController extends Controller {
 		Product.ProductBuilder productBuilder = new Product.ProductBuilder();
 		productView.printAskForProductName();
 		String nameOfNewProduct = productView.getStringInput();
-		if(checkIfProductAlreadyExists(nameOfNewProduct)) {
+		if (checkIfProductAlreadyExists(nameOfNewProduct)) {
 			productView.printGivenNameForNewProductAlreadyExists();
 			return;
 		}

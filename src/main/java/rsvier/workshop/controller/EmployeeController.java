@@ -33,7 +33,7 @@ public class EmployeeController extends Controller{
 					break;
 			
 			case 3:	//bestellingen beheren
-				
+				MainController.setController(TypeOfController.ORDER);
 					break;
 			case 0:	//Exit Menu
 					

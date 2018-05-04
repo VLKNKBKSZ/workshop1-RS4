@@ -39,17 +39,21 @@ public class PersonController extends Controller {
 			switch (choice) {
 
 			case 1:  // update name
-					updatePersonName(personUpdateName(), person);
+					person.setName(personUpdateName());
 					break;
 			case 2: // update last name
-					updatePersonLastName(personUpdateLastName(), person);
+					person.setLastName(personUpdateLastName());
 					break;
 			case 3: // update middle name
-					updatePersonMiddleName(personUpdateMiddleName(), person);
+					person.setMiddleName(personUpdateMiddleName());
 					break;
 			case 4: // update address
 					addressController.updateAddressTypeSwitch(person);
 					break;
+					
+			case 5: personDAO.updatePerson(person);
+					personView.printPersonUserDetailsAreSuccesfullyUpdated();
+					
 			case 0: // exit and go back to employee menu
 					MainController.setController(TypeOfController.EMPLOYEE);
 					updating = false;
@@ -96,33 +100,5 @@ public class PersonController extends Controller {
 		return personView.getStringInput();
 	}
 
-	// Methods for updating the personal data with the obtained Strings
-
-	public void updatePersonName(String name, Person person) {
-
-		PersonBuilder personBuilder = new PersonBuilder(person);
-		personBuilder.name(name);
-		Person newPersonWithNewName = personBuilder.build();
-		personDAO.updatePerson(newPersonWithNewName);
-		personView.printNameHasBeenUpdated();
-	}
-
-	public void updatePersonLastName(String lastName, Person person) {
-
-		PersonBuilder personBuilder = new PersonBuilder(person);
-		personBuilder.lastName(lastName);
-		Person newPersonWithNewName = personBuilder.build();
-		personDAO.updatePerson(newPersonWithNewName);
-		personView.printLastNameHasBeenUpdated();
-	}
-
-	public void updatePersonMiddleName(String middleName, Person person) {
-
-		PersonBuilder personBuilder = new PersonBuilder(person);
-		personBuilder.middleName(middleName);
-		Person newPersonWithNewName = personBuilder.build();
-		personDAO.updatePerson(newPersonWithNewName);
-		personView.printMiddleNameHasBeenUpdated();
-	}
 
 }

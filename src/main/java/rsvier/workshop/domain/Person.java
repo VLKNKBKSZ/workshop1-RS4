@@ -134,4 +134,20 @@ public class Person {
 		return true;
 	}
 
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
 }

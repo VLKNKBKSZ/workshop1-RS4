@@ -15,7 +15,7 @@ public class PersonView extends View {
 	
 	public void printUpdateUserDetailsMenu() {
 		System.out.println("Welke gegevens wilt u veranderen?\n"
-				+ "\n1- Naam\n2- Achternaam\n3- Tussenvoegsel\n4- Adresgegevens\n0- Terug naar vorige menu");
+				+ "\n1- Naam\n2- Achternaam\n3- Tussenvoegsel\n4- Adresgegevens\n5- Veranderingen Opslaan\n0- Terug naar vorige menu");
 	}
 	
 	
@@ -41,6 +41,10 @@ public class PersonView extends View {
 	
 	public void printMiddleNameHasBeenUpdated() {
 		System.out.println("\nUw tussenvoegsel is aangepast.\n");
+	}
+	
+	public void printPersonUserDetailsAreSuccesfullyUpdated() {
+		System.out.println("De gegevens van de gebruiker zijn succesvol aangepast");
 	}
 
 }

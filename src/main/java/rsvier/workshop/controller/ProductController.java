@@ -2,6 +2,7 @@ package rsvier.workshop.controller;
 
 
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class ProductController extends Controller {
 	
 	private ProductView productView = new ProductView();
 	private ProductDAO productDAO = new ProductDAOImp();
+	
 	
 	@Override
 	public void runView() {
@@ -76,6 +78,9 @@ public class ProductController extends Controller {
 			
 	}
 	
+	
+	//Method asks user for product name and returns product from the database:
+	
 	public Product searchProductByName() {
 	
 		productView.printAskForProductName();
@@ -83,7 +88,6 @@ public class ProductController extends Controller {
         
         Product returnedProduct = productDAO.getProductByName(productName);
         
-		
         if (returnedProduct != null) {
         	
         		System.out.println("\n" + returnedProduct.toString());
@@ -111,10 +115,8 @@ public class ProductController extends Controller {
 	}
 
 	public void doDeleteProduct(Product product) {
-		productView.confirmYesOrNo();
-		String yesOrNo = productView.getStringInput();
 
-		if (yesOrNo.equalsIgnoreCase("J")) {
+		if (productView.confirmYesOrNo().equalsIgnoreCase("J")) {
 			productDAO.deleteProduct(product);
 		} else {
 			runView();
@@ -131,30 +133,50 @@ public class ProductController extends Controller {
 
 	public void updateProductSwitch(Product product) {
 
-		productView.printUpdateProduct();
-		int choice = productView.getIntInput();
+		boolean updatingProduct = true;
 
-		boolean productNotFinished = true;
+		while(updatingProduct) {
 
-		while(productNotFinished) {
+			productView.printUpdateProduct();
+			int choice = productView.getIntInput();
+
 			switch (choice) {
+
 				case 1: System.out.println(product.toString());
 						break;
 
-				case 2:
+				case 2: product.setName(updateProductName());
 						break;
 
-				case 3:
+				case 3: product.setPrice(updateProductPrice());
 						break;
 
-				case 4:
+				case 4:	product.setStock(updateProductStock());
 						break;
 
-				case 0: productNotFinished = false;
+				case 5: productDAO.updateProduct(product);
+						break;
+
+				case 0: updatingProduct = false;
 						break;
 
 				default: productView.printMenuInputIsWrong();
 			}
 		}
+	}
+
+	public String updateProductName() {
+		productView.printAskForProductName();
+		return productView.getStringInput();
+	}
+
+	public BigDecimal updateProductPrice() {
+		productView.printAskForProductPrice();
+		return productView.getBigDecimalInput();
+	}
+
+	public int updateProductStock() {
+		productView.printAskForProductStock();
+		return productView.getIntInput();
 	}
 }

@@ -104,6 +104,7 @@ public class PersonController extends Controller {
 		personBuilder.name(name);
 		Person newPersonWithNewName = personBuilder.build();
 		personDAO.updatePerson(newPersonWithNewName);
+		personView.printNameHasBeenUpdated();
 	}
 
 	public void updatePersonLastName(String lastName, Person person) {
@@ -112,6 +113,7 @@ public class PersonController extends Controller {
 		personBuilder.lastName(lastName);
 		Person newPersonWithNewName = personBuilder.build();
 		personDAO.updatePerson(newPersonWithNewName);
+		personView.printLastNameHasBeenUpdated();
 	}
 
 	public void updatePersonMiddleName(String middleName, Person person) {
@@ -120,6 +122,7 @@ public class PersonController extends Controller {
 		personBuilder.middleName(middleName);
 		Person newPersonWithNewName = personBuilder.build();
 		personDAO.updatePerson(newPersonWithNewName);
+		personView.printMiddleNameHasBeenUpdated();
 	}
 
 }

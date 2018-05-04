@@ -8,7 +8,6 @@ public abstract class View {
 
 	private Scanner userInput = new Scanner(System.in);
 
-
 	
 	public abstract void printHeaderMessage();
 
@@ -61,16 +60,17 @@ public abstract class View {
 
 	public BigDecimal getBigDecimalInput() {
 
-
 		try {
 			BigDecimal bigDecimal = userInput.nextBigDecimal();
 			userInput.nextLine();
 
-		if (bigDecimal == null) {
-			System.out.print("U kunt dit gedeelte niet leeg laten. Vul aub iets in: ");
-			return getBigDecimalInput();
-		}
+			if (bigDecimal == null) {
+				System.out.print("U kunt dit gedeelte niet leeg laten. Vul aub iets in: ");
+				return getBigDecimalInput();
+			}
+			
 			return bigDecimal;
+			
 		} catch (InputMismatchException ex) {
 			System.out.print("Verkeerde input.");
 			return getBigDecimalInput();

@@ -34,6 +34,10 @@ public class ProductView extends View {
 		System.out.print("Geef de prijs van het product: € ");
 	}
 
+	public void printGivenNameForNewProductAlreadyExists() {
+		System.out.println("\nDe opgegeven naam voor het nieuwe product bestaat al. Probeer het opnieuw.");
+	}
+	
 	public void printAskForProductStock() {
 		System.out.print("Geef de huidige voorraad van het product: ");
 	}

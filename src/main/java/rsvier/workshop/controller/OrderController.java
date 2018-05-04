@@ -11,7 +11,7 @@ public class OrderController extends Controller {
 
 	private OrderView orderView = new OrderView();
 	private OrderDAO orderDao = new OrderDAOImp();
-	private Controller customerController = new CustomerController();
+	private CustomerController customerController = new CustomerController();
 
 	@Override
 	public void runView() {
@@ -26,6 +26,7 @@ public class OrderController extends Controller {
 
 		case 1: // Search Bestelling
 			updateOrDeleteOrderSwitch(searchOrderByLastname(customerController.searchCustomerByLastName()));
+
 			break;
 		case 2: // Place Bestelling
 			break;

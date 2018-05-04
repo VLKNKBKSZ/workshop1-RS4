@@ -23,4 +23,7 @@ public class OrderView extends View {
 	public void printAskSelectOrder() {
 		System.out.println("Kies het nummer van de bestelling die u wilt bekijken");	
 	}
+	public void printAskOrderId() {
+		System.out.println("Vul het bestelnummer in: ");	
+	}
 }

@@ -2,7 +2,7 @@ package rsvier.workshop.controller;
 
 public class MainController {
 
-    public enum TypeOfController {PERSON, EMPLOYEE, CUSTOMER, MAINMENU, ACCOUNT, PRODUCT};
+    public enum TypeOfController {PERSON, EMPLOYEE, CUSTOMER, MAINMENU, ACCOUNT, PRODUCT,ORDER};
 
     private TypeOfController controllerType;
     private static PersonController personController = new PersonController();
@@ -11,6 +11,7 @@ public class MainController {
     private static MainMenuController mainMenuController = new MainMenuController();
     private static AccountController accountController = new AccountController();
     private static ProductController productController = new ProductController();
+    private static OrderController orderController = new OrderController();
 
     private static Controller currentController;
 
@@ -42,6 +43,9 @@ public class MainController {
                 
             case PRODUCT:
             		currentController = productController;
+            case ORDER:
+            	currentController = orderController;
+            	
         }
 
         currentController.runView();

@@ -4,7 +4,7 @@ public class OrderView extends View {
 
 	@Override
 	public void printHeaderMessage() {
-		System.out.println("\n=========== Werknemer	| Bestellingbeheer ===========");
+		System.out.println("\n=========== Werknemer | Bestellingbeheer ===========\n");
 	}
 
 	@Override
@@ -18,10 +18,10 @@ public class OrderView extends View {
 	}
 	
 	public void printHeaderSelectSearchOption() {
-		System.out.println("=========== Werknemer    | Bestellingzoeken ===========");
+		System.out.println("\n=========== Werknemer | Bestelling zoeken ===========\n");
 	}
 	public void printAskSelectSeachOrder() {
-		System.out.println("1- Zoek  met bestelnummer\n2- Zoek met klant achternaam\n0- Terug naar vorige menu");
+		System.out.println("1- Zoek met bestelnummer\n2- Zoek met klant achternaam\n0- Terug naar vorige menu");
 	}
 	
 	public void printOrderNotFound() {
@@ -36,3 +36,5 @@ public class OrderView extends View {
 	}
 	
 }
+
+

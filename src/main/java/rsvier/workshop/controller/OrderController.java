@@ -6,7 +6,6 @@ import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.view.*;
 
-
 public class OrderController extends Controller {
 
 	private OrderView orderView = new OrderView();
@@ -58,6 +57,20 @@ public class OrderController extends Controller {
 		}
 	}
 
+	public void selectOrderSearchMenuSwitch(int menuNumber) {
+
+		switch (menuNumber) {
+		case 1:// search by order ID
+			break;
+		case 2:// search by customer last name
+			break;
+		case 0: // back to previous menu
+			break;
+		default: // back to this same menu
+			break;
+		}
+	}
+
 	// Search order by Lastname
 	public Order searchOrderByLastname(Person person) {
 
@@ -100,7 +113,7 @@ public class OrderController extends Controller {
 
 	// Search order by OrderId
 	public Order searchOrderByOrderId() {
-		
+
 		orderView.printAskOrderId();
 		int orderId = orderView.getIntInput();
 		Order order = orderDao.getOrderById(orderId);

@@ -1,10 +1,15 @@
 package rsvier.workshop.controller;
 
-import rsvier.workshop.view.OrderView;
+import java.util.*;
+
+import rsvier.workshop.dao.*;
+import rsvier.workshop.domain.*;
+import rsvier.workshop.view.*;
 
 public class OrderController extends Controller {
 
-	OrderView orderView = new OrderView();
+	private OrderView orderView = new OrderView();
+	private OrderDAO orderDao = new OrderDAOImp();
 
 	@Override
 	public void runView() {
@@ -49,15 +54,28 @@ public class OrderController extends Controller {
 		}
 	}
 	
-	// Search product by Lastname
-	public void searchProductByLastname() {
+	// Search order by Lastname
+	public void searchOrderByLastname(Person person) {
+		
+		if( person == null ) {
+			runView();
+		}else {
+			List<Order> orderList = orderDao.getAllOrdersFromPerson(person);
+			for(Order order : orderList) {
+				System.out.println(order.toString());
+			}
+		}
+		
+		
+		
+		
 		
 		
 		
 	}
 	
-	// Search product by OrderId
-	public void searchProductByOrderId() {
+	// Search order by OrderId
+	public void searchOrderByOrderId(Order order) {
 		
 	}
 

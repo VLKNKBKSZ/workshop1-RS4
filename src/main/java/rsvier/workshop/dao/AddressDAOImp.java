@@ -121,7 +121,6 @@ public class AddressDAOImp implements AddressDAO {
 
 			preparedStatement.executeUpdate();
 
-			System.out.println("Adress succesfully created");
 			logger.log(Level.INFO, "Address succesfully created");
 
 		} catch (SQLException e) {
@@ -152,7 +151,6 @@ public class AddressDAOImp implements AddressDAO {
 
 			preparedStatement.executeUpdate();
 
-			System.out.println("Address succesfully updated");
 			logger.log(Level.INFO, "Address succesfully updated");
 
 		} catch (SQLException e) {
@@ -175,7 +173,6 @@ public class AddressDAOImp implements AddressDAO {
 
 			preparedStatement.executeUpdate();
 
-			System.out.println("Address succesfully deleted");
 			logger.log(Level.INFO, "Address succesfully deleted");
 
 		} catch (SQLException e) {
@@ -195,7 +192,6 @@ public class AddressDAOImp implements AddressDAO {
 			preparedStatement.setInt(1, address.getAddressId());
 			preparedStatement.executeUpdate();
 
-			System.out.println("Address succesfully deleted");
 			logger.log(Level.INFO, "Address succesfully deleted");
 
 		} catch (SQLException e) {

@@ -48,13 +48,13 @@ public abstract class View {
 	
 	public String getStringInput() {
 		
-		String s = userInput.nextLine();
+		String strng = userInput.nextLine();
 
-		if (s == null || (s.trim().isEmpty())) {
+		if (strng == null || (strng.trim().isEmpty())) {
 			System.out.print("U kunt dit gedeelte niet leeg laten. Vul aub iets in: ");
 			return getStringInput();
 		} else {
-			return s;
+			return strng;
 		}
 	}
 

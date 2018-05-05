@@ -14,8 +14,8 @@ public class AddressView extends View {
     		
     }
     
-    public void printUpdateAddressType() {
-    	System.out.println("\n1- Postadres wijzigen\n 2- Bezorgadres wijzigen\n 3- Factuuradres wijzigen\n 0- Terug naar vorige menu\n");
+    public void printUpdateAddressTypeMenu() {
+    	System.out.println("\n1- Postadres wijzigen\n2- Bezorgadres wijzigen\n3- Factuuradres wijzigen\n0- Terug naar vorige menu\n");
     }
     
     public void printAskUserForStreetName() {
@@ -54,21 +54,28 @@ public class AddressView extends View {
         System.out.print("\nIs het factuuradres hetzelfde als het het bezorgadres?\n");
     }
     
-    public void printHeaderOfMailAddressInput() {
-    	System.out.println("\nVul a.u.b uw postadres gegevens in.\n");
+    public void printRequestMailAddressInput() {
+    		System.out.println("\nVul a.u.b uw postadres gegevens in.\n");
     }
     
-    public void printHeaderOfDeliveryAddressInput() {
-    	System.out.println("\nVul a.u.b uw bezorg gegevens in.\n");
+    public void printRequestDeliveryAddressInput() {
+    		System.out.println("\nVul a.u.b uw bezorg gegevens in.\n");
     }
 
-    public void printHeaderOfInvoiceInput() {
-    	System.out.println("\nVul a.u.b uw factuur gegevens in.\n");
+    public void printRequestInvoiceAddressInput() {
+    		System.out.println("\nVul a.u.b uw factuur gegevens in.\n");
     }
     
     public void printAddressAreSuccesFullyCreatedAndSaved() {
-    	System.out.println("\nAl uw adresgegevens zijn succesvol aangemaakt en opgeslagen.\n");
+    		System.out.println("\nAl uw adresgegevens zijn succesvol aangemaakt en opgeslagen.\n");
     }
     
+    public void printAddressSuccessfullyUpdated() {
+    		System.out.println("\nDe gewijzigde gegevens zijn opgeslagen.");
+    }
+    
+    public void printAddressSuccessfullyDeleted() {
+		System.out.println("\nHet adres is verwijderd");
+}
     
 }

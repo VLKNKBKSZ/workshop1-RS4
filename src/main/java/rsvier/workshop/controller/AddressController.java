@@ -26,11 +26,14 @@ public class AddressController extends Controller{
 	
 	public void doCreateAddresses(Person person) {
 
-		addressView.printHeaderOfMailAddressInput();
+		//First create mail address
+		
+		addressView.printRequestMailAddressInput();
 		Address address = createNewAddress("mail", person);
 		Address addressDelivery;
 		addressDAO.createAddress(address);
-
+		addressView.printAddressAreSuccesFullyCreatedAndSaved();
+		
 		// Setting the types of addresses (mail/invoice/delivery):
 
 		addressView.printAskMailAndDeliverySame();
@@ -39,13 +42,14 @@ public class AddressController extends Controller{
 
 			address.setAddressType("delivery");
 			addressDAO.createAddress(address);
+			addressView.printAddressAreSuccesFullyCreatedAndSaved();
 			addressDelivery = address;
 
 		} else {
-			addressView.printHeaderOfDeliveryAddressInput();
+			addressView.printRequestDeliveryAddressInput();
 			addressDelivery = createNewAddress("delivery", person);
 			addressDAO.createAddress(addressDelivery);
-
+			addressView.printAddressAreSuccesFullyCreatedAndSaved();
 		}
 
 		addressView.printAskMailAndInvoiceSame();
@@ -64,11 +68,12 @@ public class AddressController extends Controller{
 
 			addressDelivery.setAddressType("invoice");
 			addressDAO.createAddress(addressDelivery);
-
+			addressView.printAddressAreSuccesFullyCreatedAndSaved();
+			
 		} else {
-			addressView.printHeaderOfInvoiceInput();
+			addressView.printRequestInvoiceAddressInput();
 			addressDAO.createAddress(createNewAddress("invoice", person));
-
+			addressView.printAddressAreSuccesFullyCreatedAndSaved();
 		}
 	}
 
@@ -79,7 +84,7 @@ public class AddressController extends Controller{
 
 		while (updating) {
 
-			addressView.printUpdateAddressType();
+			addressView.printUpdateAddressTypeMenu();
 			int choice = addressView.getIntInput();
 
 			switch (choice) {
@@ -130,6 +135,7 @@ public class AddressController extends Controller{
 				Address updatedAddress = addressBuilder.build();
 				
 				addressDAO.updateAddress(updatedAddress);
+				addressView.printAddressSuccessfullyUpdated();
 			}
 
 		}
@@ -152,7 +158,7 @@ public class AddressController extends Controller{
 	}
 
 	
-	// Methods for updating address:
+	// Methods for input request for updating address:
 
 	public String addressUpdateStreetName() {
 

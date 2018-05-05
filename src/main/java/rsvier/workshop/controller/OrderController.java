@@ -23,13 +23,13 @@ public class OrderController extends Controller {
 
 		switch (menuNumber) {
 
-		case 1: // Search Bestelling
+		case 1: // Search order
 			updateOrDeleteOrderSwitch(searchOrderByLastname(customerController.searchCustomerByLastName()));
 
 			break;
-		case 2: // Place Bestelling
+		case 2: // Place order
 			break;
-		case 0: // Go back to previous
+		case 0: // Go back to previous menu
 
 		default:
 			orderView.printMenuInputIsWrong();

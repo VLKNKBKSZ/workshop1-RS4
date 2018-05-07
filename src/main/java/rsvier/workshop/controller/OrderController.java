@@ -24,7 +24,8 @@ public class OrderController extends Controller {
 		switch (menuNumber) {
 
 		case 1: // Search order
-			updateOrDeleteOrderSwitch(searchOrderByLastname(customerController.searchCustomerByLastName()));
+
+			selectOrderSearchMenuSwitch();
 
 			break;
 		case 2: // Place order
@@ -39,30 +40,42 @@ public class OrderController extends Controller {
 
 	public void updateOrDeleteOrderSwitch(Order order) {
 
-		orderView.printAskUserToUpdateOrDeleteProduct();
-		int menuNumber = orderView.getIntInput();
-
-		switch (menuNumber) {
-
-		case 1:// Update order
-
-		case 2: // Delete order
-
-		case 0:// Go back to previos Menu
-
-		default:
-			orderView.printMenuInputIsWrong();
+		if(order == null) {
+			orderView.printOrderNotFound();
 			runView();
 
+		}	else {
+
+			orderView.printAskUserToUpdateOrDeleteProduct();
+			int menuNumber = orderView.getIntInput();
+
+			switch (menuNumber) {
+
+				case 1:// Update order
+
+				case 2: // Delete order
+
+				case 0:// Go back to previous Menu
+
+				default:
+					orderView.printMenuInputIsWrong();
+					runView();
+
+			}
 		}
 	}
 
-	public void selectOrderSearchMenuSwitch(int menuNumber) {
+	public void selectOrderSearchMenuSwitch() {
+
+		orderView.printAskSelectOrder();
+		int menuNumber = orderView.getIntInput();
 
 		switch (menuNumber) {
 		case 1:// search by order ID
+			updateOrDeleteOrderSwitch(searchOrderByOrderId());
 			break;
 		case 2:// search by customer last name
+			updateOrDeleteOrderSwitch(searchOrderByLastName(customerController.searchCustomerByLastName()));
 			break;
 		case 0: // back to previous menu
 			break;
@@ -72,7 +85,7 @@ public class OrderController extends Controller {
 	}
 
 	// Search order by Lastname
-	public Order searchOrderByLastname(Person person) {
+	public Order searchOrderByLastName(Person person) {
 
 		List<Order> orderList = null;
 
@@ -83,7 +96,6 @@ public class OrderController extends Controller {
 			orderList = orderDao.getAllOrdersFromPerson(person);
 
 			if (orderList.size() == 0) {
-				orderView.printOrderNotFound();
 				return null;
 			}
 
@@ -115,13 +127,8 @@ public class OrderController extends Controller {
 	public Order searchOrderByOrderId() {
 
 		orderView.printAskOrderId();
-		int orderId = orderView.getIntInput();
-		Order order = orderDao.getOrderById(orderId);
-		if (order == null) {
-			orderView.printOrderNotFound();
-			return null;
-		}
-		return order;
+
+		return orderDao.getOrderById(orderView.getIntInput());
 	}
 
 }

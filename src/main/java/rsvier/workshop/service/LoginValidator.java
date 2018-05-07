@@ -6,7 +6,7 @@ import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.view.*;
 
-public class LoginValidation {
+public class LoginValidator {
 
 	private AccountView accountView = new AccountView();
 	private AccountDAO accountDAOImp = new AccountDAOImp();

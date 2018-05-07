@@ -1,7 +1,7 @@
 package rsvier.workshop.controller;
 
 
-import rsvier.workshop.service.LoginValidation;
+import rsvier.workshop.service.LoginValidator;
 
 import rsvier.workshop.view.MainMenuView;
 import rsvier.workshop.view.View;
@@ -10,7 +10,7 @@ public class MainMenuController extends Controller{
 
 	private MainMenuView mainMenuView = new MainMenuView();
 	private AccountController accountController = new AccountController();
-	private LoginValidation loginValidation = new LoginValidation();
+	private LoginValidator loginValidation = new LoginValidator();
 	
 	
 	@Override

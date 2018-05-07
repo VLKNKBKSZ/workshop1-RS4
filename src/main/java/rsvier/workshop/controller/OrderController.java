@@ -25,20 +25,20 @@ public class OrderController extends Controller {
 		switch (menuNumber) {
 
 		case 1: // Search order
+				selectOrderSearchMenuSwitch();
 
-			selectOrderSearchMenuSwitch();
-
-			break;
+				break;
 		case 2: // Create order 
 
-			doCreateOrder((customerController.searchCustomerByLastName()));
+				doCreateOrder((customerController.searchCustomerByLastName()));
 			
-			break;
+				break;
+				
 		case 0: // Go back to previous menu
-
-		default:
-			orderView.printMenuInputIsWrong();
-			runView();
+				runView();
+				
+		default:	orderView.printMenuInputIsWrong();
+				runView();
 		}
 	}
 
@@ -76,19 +76,22 @@ public class OrderController extends Controller {
 		int menuNumber = orderView.getIntInput();
 
 		switch (menuNumber) {
-		case 1:// search by order ID
-			updateOrDeleteOrderSwitch(searchOrderByOrderId());
-			break;
-		case 2:// search by customer last name
-			updateOrDeleteOrderSwitch(searchOrderByLastName(customerController.searchCustomerByLastName()));
-			break;
-		case 0: // back to previous menu
-			runView();
-			break;
-		default: // back to this same menu
-			orderView.printMenuInputIsWrong();
-			selectOrderSearchMenuSwitch();
-			break;
+		case 1:// Search order by order ID
+				updateOrDeleteOrderSwitch(searchOrderByOrderId());
+				break;
+				
+		case 2:// Search order by customer last name
+				updateOrDeleteOrderSwitch(searchOrderByLastName(customerController.searchCustomerByLastName()));
+				break;
+				
+		case 0: // Back to previous menu
+				runView();
+				break;
+				
+		default: // Back to this same menu
+				orderView.printMenuInputIsWrong();
+				selectOrderSearchMenuSwitch();
+				break;
 		}
 	}
 
@@ -139,6 +142,8 @@ public class OrderController extends Controller {
 		return orderDao.getOrderById(orderView.getIntInput());
 	}
 
+	
+	
 	public void doCreateOrder(Person person) {
 
 		//check if person was found
@@ -146,14 +151,12 @@ public class OrderController extends Controller {
 			runView();
 		} else {
 
-			//create an order with the person object
+			//Build an order object with the person object
 			Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 			orderBuilder.person(person);
 			Order order = orderBuilder.build();
 			
-			//an order object has been created
-			
-			//give the order to the switch
+			//Pass the order to the switch in the orderLineController
 			orderLineController.orderLineMenuSwitch(order);
 			
 

@@ -1,5 +1,7 @@
 package rsvier.workshop.controller;
 
+import java.math.BigDecimal;
+
 import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.view.*;
@@ -28,20 +30,19 @@ public class OrderLineController extends Controller {
     		
     		while(placeOrderOrCancelOrder){
     			
-    			orderLineView.printHeaderMessage();
+    			orderLineView.printMenuMessage();
             int menuChoice = orderLineView.getIntInput();
     			
     			switch(menuChoice) {
     			
-    			case 1: //Add orderline (product and amount of products) to order
+    			case 1: //Add orderline(s) (i.e. product and amount of products) to order object
     					addOrderLineToOrder(order);
     					
-    					//what product do you want to add?
     					break;
     		
     			case 2: //View current order
-    					viewAllOrderlinesInCurrentOrder();
-    					showTotalPriceOfCurrentOrder();
+    					viewAllOrderlinesInCurrentOrder(order);
+    					showTotalPriceOfCurrentOrder(order);
     					break;
     					
     			case 3: //Place order. Method to place the order in the database
@@ -73,11 +74,14 @@ public class OrderLineController extends Controller {
     		if (retrievedProduct != null) {
     			System.out.println("\n" + retrievedProduct.toString() + "\n");
     			
-    			//Create an orderline (products and how many of them)
-    			OrderLine.OrderLineBuilder orderLine = new OrderLine.OrderLineBuilder().product(retrievedProduct);
-    			orderLine.numberOfProducts(requestAmountOfProducts());
+    			//Create an orderline object with the product and the amount of products chosen
+    			OrderLine orderLine = new OrderLine.OrderLineBuilder().product(retrievedProduct)
+    			.numberOfProducts(requestAmountOfProducts()).build();
     			
-    			order.getOrderLine().add(orderLine.build());
+    			
+    			//Add the created orderline to the order
+    			//GETTING A NULL POINTER HERE NOW
+    			order.getOrderLine().add(orderLine);
     			
     		}
     		
@@ -87,7 +91,7 @@ public class OrderLineController extends Controller {
     		}
     }
     		
-    //method for asking how many of the product
+    //Method for asking how many copies of the product
     public int requestAmountOfProducts() {
     		
     		orderLineView.printRequestAmountOfProducts();
@@ -97,7 +101,12 @@ public class OrderLineController extends Controller {
     }
     
     //Method for viewing all the orderlines in the current order
-    public void viewAllOrderlinesInCurrentOrder() {
+    public void viewAllOrderlinesInCurrentOrder(Order order) {
+    		
+    		if (order.getOrderLine().isEmpty()) {
+    			orderLineView.printOrderIsEmpty();
+    			runView();
+    		}
     		
     		for (OrderLine orderLine: order.getOrderLine()) {
 			System.out.println("\n" + orderLine.toString());
@@ -105,8 +114,17 @@ public class OrderLineController extends Controller {
     }
     
     //Method for showing total price
-    public void showTotalPriceOfCurrentOrder() {
-    	
+    public void showTotalPriceOfCurrentOrder(Order order) {
+    		
+    		BigDecimal totalPrice = new BigDecimal(0);
+    		
+    		for (OrderLine orderLine: order.getOrderLine()) {
+    			
+    			BigDecimal numberOfProductsInBigDecimal = (BigDecimal.valueOf(orderLine.getNumberOfProducts()));
+    			totalPrice = (totalPrice.add((orderLine.getProduct().getPrice())) . multiply(numberOfProductsInBigDecimal));
+   			
+    			System.out.println("The total price is now € " + totalPrice);
+    		}
     }
     
 }

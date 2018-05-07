@@ -75,7 +75,7 @@ public class OrderLine {
 		return product;
 	}
 
-	public int getNumber() {
+	public int getNumberOfProducts() {
 		
 		return numberOfProducts;
 	}
@@ -86,7 +86,7 @@ public class OrderLine {
 	public String toString() {
 		return "Id:" + getOrderLineId() + " Name:" + product.getName() + " Price:" + getProduct().getPrice()
 		/* + " OrderId " + order.getOrderId() */ + " Total Price:"
-				+ getProduct().getPrice().multiply(new BigDecimal(getNumber()));
+				+ getProduct().getPrice().multiply(new BigDecimal(getNumberOfProducts()));
 	}
 
 }

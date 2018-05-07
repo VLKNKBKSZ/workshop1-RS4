@@ -23,6 +23,7 @@ public class ProductView extends View {
 	public void printProductIsSuccesfullyCreated() {
 		System.out.println("Product is succesvol aangemaakt en opgeslagen");
 	}
+	
 	public void printUpdateProduct() {
 		System.out.println("1- Toon huidig product\n2- Productnaam aanpassen\n3- Productprijs aanpassen\n" +
 				"4- Productvoorraad aanpassen\n5- Veranderingen opslaan\n0- Terug naar vorige menu");
@@ -37,7 +38,7 @@ public class ProductView extends View {
 		System.out.print("Geef de prijs van het product: € ");
 	}
 
-	public void printGivenNameForNewProductAlreadyExists() {
+	public void printProductNameAlreadyExists() {
 		System.out.println("\nDe opgegeven naam voor het nieuwe product bestaat al. Probeer het opnieuw.");
 	}
 	

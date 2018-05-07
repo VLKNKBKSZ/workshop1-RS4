@@ -20,5 +20,8 @@ public class OrderLineView extends View {
 		System.out.println("Voer het aantal producten in dat u wilt bestellen.");
     }
     
+    public void printOrderIsEmpty() {
+    		System.out.println("Uw bestellinglijst is leeg.");
+    }
     
 }

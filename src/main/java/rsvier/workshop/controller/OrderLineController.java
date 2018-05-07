@@ -1,19 +1,17 @@
 package rsvier.workshop.controller;
 
 import rsvier.workshop.dao.*;
-import rsvier.workshop.domain.Order;
-import rsvier.workshop.domain.OrderLine;
-import rsvier.workshop.domain.OrderLine.OrderLineBuilder;
-import rsvier.workshop.domain.Product;
-import rsvier.workshop.view.OrderLineView;
-import rsvier.workshop.view.ProductView;
+import rsvier.workshop.domain.*;
+import rsvier.workshop.view.*;
 
 public class OrderLineController extends Controller {
     private OrderLineView orderLineView = new OrderLineView();
     private ProductDAO productDAO = new ProductDAOImp();
     private ProductView productView = new ProductView();
+    private OrderView orderView = new OrderView();
     private OrderLine orderLine;
     private Order order;
+    private OrderDAO orderDAO = new OrderDAOImp();
   
     
 
@@ -29,8 +27,9 @@ public class OrderLineController extends Controller {
     		orderLineView.printHeaderMessage();
     		int menuChoice = orderLineView.getIntInput();
     		
+    		boolean placeOrderOrCancelOrder = true;
     		
-    		while(menuChoice != 3 && menuChoice != 4){
+    		while(placeOrderOrCancelOrder){
     			
     			switch(menuChoice) {
     			
@@ -42,11 +41,21 @@ public class OrderLineController extends Controller {
     					break;
     		
     			case 2: //View current order
+    					
+    					for (OrderLine orderLine: order.getOrderLine()) {
+    						System.out.println("\n" + orderLine.toString());
+    					}
     					break;
     					
     			case 3: //Place order
+    					//method to place the order
+    					orderDAO.createOrder(order);
+    					orderView.printOrderHasBeenPlaced();
+    					placeOrderOrCancelOrder = false;
     					break;
+    					
     			case 4: //Cancel order
+    					placeOrderOrCancelOrder = false;
     					break;
     			}
     		}
@@ -57,14 +66,18 @@ public class OrderLineController extends Controller {
     //search based on name
     public void addOrderLineToOrder(Order order) {
     		
+    		//First ask the user for the product he wants to see/order
     		orderLineView.printRequestNameOfProductToView();
     		String productName = orderLineView.getStringInput();
+    		
+    		//Get the product from the database and store it in a product object
     		Product retrievedProduct = productDAO.getProductByName(productName);
     		
     		if (retrievedProduct != null) {
-    			System.out.println("\n" + retrievedProduct.toString());
+    			System.out.println("\n" + retrievedProduct.toString() + "\n");
     			
-    			OrderLine.OrderLineBuilder orderLine = new OrderLine.OrderLineBuilder();
+    			//create an orderline 
+    			OrderLine.OrderLineBuilder orderLine = new OrderLine.OrderLineBuilder().product(retrievedProduct);
     			orderLine.numberOfProducts(requestAmountOfProducts());
     			
     			order.getOrderLine().add(orderLine.build());

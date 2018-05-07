@@ -9,7 +9,7 @@ public interface OrderDAO {
 	public List<Order> getAllOrders();
 	public List<Order> getAllOrdersFromPerson(Person person);
 	public Order getOrderById(int orderId);
-	public int createOrder(Order order, Person person);
+	public int createOrder(Order order);
 	public void updateOrder(Order order);
 	public void deleteOrder(Order order);
 }

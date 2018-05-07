@@ -11,6 +11,7 @@ public class OrderController extends Controller {
 	private OrderView orderView = new OrderView();
 	private OrderDAO orderDao = new OrderDAOImp();
 	private CustomerController customerController = new CustomerController();
+	private OrderLineController orderLineController = new OrderLineController();
 
 	@Override
 	public void runView() {
@@ -31,7 +32,7 @@ public class OrderController extends Controller {
 		case 2: // Create order 
 
 			doCreateOrder((customerController.searchCustomerByLastName()));
-
+			
 			break;
 		case 0: // Go back to previous menu
 
@@ -148,11 +149,13 @@ public class OrderController extends Controller {
 			//create an order with the person object
 			Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 			orderBuilder.person(person);
-			orderBuilder.build();
+			Order order = orderBuilder.build();
 			
 			//an order object has been created
 			
-			//create orderline with order and person
+			//give the order to the switch
+			orderLineController.orderLineMenuSwitch(order);
+			
 
 		}
 

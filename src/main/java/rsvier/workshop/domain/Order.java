@@ -9,7 +9,7 @@ import java.util.*;
 public class Order {
 
 	private int orderId;
-	private List<OrderLine> totalOrderLines;
+	private List<OrderLine> listOfTotalOrderLines;
 	private Person person;
 	private BigDecimal totalPrice;;
 	private LocalDate orderDate;
@@ -17,7 +17,7 @@ public class Order {
 	private Order(OrderBuilder builder) {
 		
 		this.orderId = builder.orderId;
-		this.totalOrderLines = builder.totalOrderLines;
+		this.listOfTotalOrderLines = builder.totalOrderLines;
 		this.person = builder.person;
 		this.totalPrice = builder.totalPrice;
 		this.orderDate = builder.orderDate;
@@ -88,12 +88,12 @@ public class Order {
 
 	public List<OrderLine> getOrderLine() {
 		
-		return totalOrderLines;
+		return listOfTotalOrderLines;
 	}
 
 	public List<OrderLine> getTotalOrderLines() {
 		
-		return totalOrderLines;
+		return listOfTotalOrderLines;
 	}
 
 	public Person getPerson() {

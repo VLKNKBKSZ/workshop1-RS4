@@ -93,9 +93,11 @@ public class ProductController extends Controller {
 	}
 
 	public void doCreateProduct() {
+		
 		Product.ProductBuilder productBuilder = new Product.ProductBuilder();
 		productView.printAskForProductName();
 		String nameOfNewProduct = productView.getStringInput();
+		
 		if (checkIfProductAlreadyExists(nameOfNewProduct)) {
 			productView.printGivenNameForNewProductAlreadyExists();
 			return;
@@ -106,6 +108,7 @@ public class ProductController extends Controller {
 		productView.printAskForProductStock();
 		productBuilder.stock(productView.getIntInput());
 		Product product = productBuilder.build();
+		
 		productDAO.createProduct(product);
 		productView.printProductIsSuccesfullyCreated();
 	}
@@ -113,7 +116,9 @@ public class ProductController extends Controller {
 	public void doDeleteProduct(Product product) {
 
 		if (productView.confirmYesOrNo().equalsIgnoreCase("J")) {
+			
 			productDAO.deleteProduct(product);
+		
 		} else {
 			runView();
 		}

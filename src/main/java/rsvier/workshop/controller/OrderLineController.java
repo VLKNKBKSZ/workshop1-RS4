@@ -29,8 +29,9 @@ public class OrderLineController extends Controller {
     		orderLineView.printHeaderMessage();
     		int menuChoice = orderLineView.getIntInput();
     		
+    		boolean placeOrderOrCancelOrder = true;
     		
-    		while(menuChoice != 3 && menuChoice != 4){
+    		while(menuChoice != 3 || menuChoice != 4){
     			
     			switch(menuChoice) {
     			
@@ -42,11 +43,19 @@ public class OrderLineController extends Controller {
     					break;
     		
     			case 2: //View current order
+    				
+    					for (OrderLine orderLine: order.getOrderLine()) {
+    						System.out.println("\n" + orderLine.toString());
+    					}
     					break;
     					
     			case 3: //Place order
+    					//method to place the order
+    					placeOrderOrCancelOrder = false;
     					break;
+    					
     			case 4: //Cancel order
+    					placeOrderOrCancelOrder = false;
     					break;
     			}
     		}
@@ -56,14 +65,18 @@ public class OrderLineController extends Controller {
     //search based on name
     public void addOrderLineToOrder(Order order) {
     		
+    		//First ask the user for the product he wants to see/order
     		orderLineView.printRequestNameOfProductToView();
     		String productName = orderLineView.getStringInput();
+    		
+    		//Get the product from the database and store it in a product object
     		Product retrievedProduct = productDAO.getProductByName(productName);
     		
     		if (retrievedProduct != null) {
-    			System.out.println("\n" + retrievedProduct.toString());
+    			System.out.println("\n" + retrievedProduct.toString() + "\n");
     			
-    			OrderLine.OrderLineBuilder orderLine = new OrderLine.OrderLineBuilder();
+    			//create an orderline 
+    			OrderLine.OrderLineBuilder orderLine = new OrderLine.OrderLineBuilder().product(retrievedProduct);
     			orderLine.numberOfProducts(requestAmountOfProducts());
     			
     			order.getOrderLine().add(orderLine.build());

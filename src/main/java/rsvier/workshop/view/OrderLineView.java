@@ -8,6 +8,11 @@ public class OrderLineView extends View {
 
     @Override
     public void printMenuMessage() {
-        System.out.println("1- Voeg product toe aan bestelling\n2- Bekijk huidige bestelling\n3- Bestelling plaatsen\n4- Annuleer bestelling\n");
+        System.out.println("1- Voeg product toe aan bestelling"
+        		+ "\n2- Bekijk huidige bestelling\n3- Bestelling plaatsen\n4- Annuleer bestelling\n");
+    }
+    
+    public void printRequestNameOfProductToView() {
+    		System.out.println("Voer de naam in van het product dat u wilt bestellen.");
     }
 }

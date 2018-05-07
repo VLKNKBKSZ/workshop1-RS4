@@ -28,7 +28,7 @@ public class OrderController extends Controller {
 			selectOrderSearchMenuSwitch();
 
 			break;
-		case 2: // Place order
+		case 2: // Create order 
 
 			doCreateOrder((customerController.searchCustomerByLastName()));
 
@@ -149,7 +149,10 @@ public class OrderController extends Controller {
 			Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 			orderBuilder.person(person);
 			orderBuilder.build();
-
+			
+			//an order object has been created
+			
+			//create orderline with order and person
 
 		}
 

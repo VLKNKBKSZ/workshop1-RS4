@@ -166,7 +166,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 
 				preparedStatement.setInt(1, orderId);
 				preparedStatement.setInt(2, orderLine.getProduct().getProductId());
-				preparedStatement.setInt(3, orderLine.getNumber());
+				preparedStatement.setInt(3, orderLine.getNumberOfProducts());
 
 				preparedStatement.executeUpdate();
 
@@ -211,7 +211,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
-			preparedStatement.setInt(1, orderLine.getNumber());
+			preparedStatement.setInt(1, orderLine.getNumberOfProducts());
 			preparedStatement.setInt(2, orderLine.getOrderLineId());
 			preparedStatement.executeUpdate();
 

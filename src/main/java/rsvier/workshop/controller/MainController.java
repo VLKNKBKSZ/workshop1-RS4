@@ -40,11 +40,15 @@ public class MainController {
                 
             case ACCOUNT:
                 currentController = accountController;
+                break;
                 
             case PRODUCT:
             		currentController = productController;
+            		break;
+            		
             case ORDER:
-            	currentController = orderController;
+            		currentController = orderController;
+            		break;
             	
         }
 

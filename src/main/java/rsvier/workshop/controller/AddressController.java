@@ -175,7 +175,7 @@ public class AddressController extends Controller{
 	public String addressUpdateAdditionalHouseNumber() {
 
 		addressView.printAskUserForAdditionalHouseNumber();
-		return addressView.getStringInput();
+		return addressView.getStringInputCanBeNull();
 	}
 
 	public String addressUpdatePostalCode() {

@@ -48,14 +48,18 @@ public abstract class View {
 	
 	public String getStringInput() {
 		
-		String strng = userInput.nextLine();
+		String string = userInput.nextLine();
 
-		if (strng == null || (strng.trim().isEmpty())) {
+		if (string == null || (string.trim().isEmpty())) {
 			System.out.print("U kunt dit gedeelte niet leeg laten. Vul aub iets in: ");
 			return getStringInput();
 		} else {
-			return strng;
+			return string;
 		}
+	}
+
+	public String getStringInputCanBeNull() {
+		return userInput.nextLine();
 	}
 
 	public BigDecimal getBigDecimalInput() {

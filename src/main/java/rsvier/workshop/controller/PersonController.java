@@ -97,7 +97,7 @@ public class PersonController extends Controller {
 	public String personUpdateMiddleName() {
 
 		personView.printAskUserForMiddleName();
-		return personView.getStringInput();
+		return personView.getStringInputCanBeNull();
 	}
 
 

@@ -17,7 +17,7 @@ public class OrderLineView extends View {
     }
     
     public void printRequestAmountOfProducts() {
-		System.out.println("Voer het aantal producte in dat u wilt bestellen.");
+		System.out.println("Voer het aantal producten in dat u wilt bestellen.");
     }
     
     

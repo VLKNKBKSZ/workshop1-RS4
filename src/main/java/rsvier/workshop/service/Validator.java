@@ -37,4 +37,41 @@ public class Validator {
 
 		return true;
 	}
+	
+	public boolean validatePostalCode(String inputPostalCode) {
+		
+		String postalCode = inputPostalCode;
+		char[] postalCodeArray = postalCode.toCharArray();
+		
+		int i;
+		
+		//check if input is made of 6 characters
+		if (postalCodeArray.length != 0) {
+			return false;
+		}
+		
+		//check if first four characters are a lower case letter, and if so, convert to upper case
+		for (i=0 ; i<=3 ; i++) {
+			if (postalCodeArray[i] >= 'a' && postalCodeArray[i]<='z') {
+				Character.toUpperCase(postalCodeArray[i]);
+			}
+		}
+		
+		//check if first four characters are a letter
+		for (i=0 ; i <= 3 ; i++) {
+			if (!(postalCodeArray[i] >= 'A' && postalCodeArray[i]<='Z')) {
+				return false;
+			}
+		}
+		
+		//check if last two characters are a number
+		for (i= 4 ; i <= 5 ; i++) {
+			if (!(postalCodeArray[i] >= '0' && postalCodeArray[i]<='9')) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 }

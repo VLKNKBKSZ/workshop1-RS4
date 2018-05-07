@@ -143,7 +143,7 @@ public class OrderDAOImp implements OrderDAO {
 	}
 
 	@Override
-	public int createOrder(Order order, Person person) {
+	public int createOrder(Order order) {
 
 		int generatedId = 0;
 
@@ -152,7 +152,7 @@ public class OrderDAOImp implements OrderDAO {
 				PreparedStatement preparedStatement = conn.prepareStatement(query,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 
-			preparedStatement.setInt(1, person.getPersonId());
+			preparedStatement.setInt(1, order.getPerson().getPersonId());
 			preparedStatement.setBigDecimal(2, order.getTotalPrice());
 			preparedStatement.setString(3, order.getOrderDate().toString());
 			preparedStatement.executeUpdate();

@@ -36,6 +36,9 @@ public class OrderView extends View {
 		System.out.println("Vul het bestelnummer in: ");	
 	}
 	
+	public void printOrderHasBeenPlaced() {
+		System.out.println("Uw bestelling is geplaatst.");
+	}
 
 }
 

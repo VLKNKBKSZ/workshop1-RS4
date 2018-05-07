@@ -29,6 +29,9 @@ public class OrderController extends Controller {
 
 			break;
 		case 2: // Place order
+
+			doCreateOrder((customerController.searchCustomerByLastName()));
+
 			break;
 		case 0: // Go back to previous menu
 
@@ -54,6 +57,7 @@ public class OrderController extends Controller {
 				case 1:// Update order
 
 				case 2: // Delete order
+					orderDao.deleteOrder(order);
 
 				case 0:// Go back to previous Menu
 
@@ -78,8 +82,11 @@ public class OrderController extends Controller {
 			updateOrDeleteOrderSwitch(searchOrderByLastName(customerController.searchCustomerByLastName()));
 			break;
 		case 0: // back to previous menu
+			runView();
 			break;
 		default: // back to this same menu
+			orderView.printMenuInputIsWrong();
+			selectOrderSearchMenuSwitch();
 			break;
 		}
 	}
@@ -129,6 +136,23 @@ public class OrderController extends Controller {
 		orderView.printAskOrderId();
 
 		return orderDao.getOrderById(orderView.getIntInput());
+	}
+
+	public void doCreateOrder(Person person) {
+
+		//check if person was found
+		if (person == null) {
+			runView();
+		} else {
+
+			//create an order with the person object
+			Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
+			orderBuilder.person(person);
+			orderBuilder.build();
+
+
+		}
+
 	}
 
 }

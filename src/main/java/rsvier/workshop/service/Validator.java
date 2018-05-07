@@ -46,7 +46,7 @@ public class Validator {
 		int i;
 		
 		//check if input is made of 6 characters
-		if (postalCodeArray.length != 0) {
+		if (postalCodeArray.length != 6) {
 			return false;
 		}
 		

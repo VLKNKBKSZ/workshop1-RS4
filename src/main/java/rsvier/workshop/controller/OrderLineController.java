@@ -121,18 +121,18 @@ public class OrderLineController extends Controller {
 	// Method for showing total price
 	public void showTotalPriceOfCurrentOrder(Order order) {
 
-		BigDecimal totalPriceOfOrderLine = new BigDecimal(0);
+		
 		BigDecimal totalPriceOfOrder = new BigDecimal(0);
 
 		for (OrderLine orderLine : order.getTotalOrderLines()) {
-
+			
+			BigDecimal totalPriceOfOrderLine = new BigDecimal(0);
 			BigDecimal numberOfProductsInBigDecimal = (BigDecimal.valueOf(orderLine.getNumberOfProducts()));
 			totalPriceOfOrderLine = (totalPriceOfOrderLine.add((orderLine.getProduct().getPrice()))
 					.multiply(numberOfProductsInBigDecimal));
-			totalPriceOfOrder.add(totalPriceOfOrderLine);
-			System.out.println("\nPrijs € " + totalPriceOfOrderLine);
+			totalPriceOfOrder = totalPriceOfOrder.add(totalPriceOfOrderLine);
 		}
-		System.out.println("\nTotale prijs van de bestelling:€" + totalPriceOfOrder);
+		System.out.println("\nTotale prijs van de bestelling: € " + totalPriceOfOrder);
 	}
 
 }

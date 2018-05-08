@@ -1,6 +1,7 @@
 package rsvier.workshop.controller;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import rsvier.workshop.controller.MainController.TypeOfController;
 import rsvier.workshop.dao.*;
@@ -94,6 +95,7 @@ public class OrderLineController extends Controller {
     		
     		else {
     			productView.printProductNotFound();
+    			System.out.println(" ");
     			runView();
     		}
     }

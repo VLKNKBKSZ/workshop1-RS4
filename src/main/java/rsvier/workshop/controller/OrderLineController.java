@@ -88,7 +88,7 @@ public class OrderLineController extends Controller {
     			
     			//Add the created orderline to the order
     			//GETTING A NULL POINTER HERE NOW
-    			order.getOrderLine().add(orderLine);
+    			order.getTotalOrderLines().add(orderLine);
     			
     		}
     		
@@ -110,12 +110,12 @@ public class OrderLineController extends Controller {
     //Method for viewing all the orderlines in the current order
     public void viewAllOrderlinesInCurrentOrder(Order order) {
     		
-    		if (order.getOrderLine().isEmpty()) {
+    		if (order.getTotalOrderLines().isEmpty()) {
     			orderLineView.printOrderIsEmpty();
     			runView();
     		}
     		
-    		for (OrderLine orderLine: order.getOrderLine()) {
+    		for (OrderLine orderLine: order.getTotalOrderLines()) {
 			System.out.println("\n" + orderLine.toString());
     		}
     }
@@ -125,7 +125,7 @@ public class OrderLineController extends Controller {
     		
     		BigDecimal totalPrice = new BigDecimal(0);
     		
-    		for (OrderLine orderLine: order.getOrderLine()) {
+    		for (OrderLine orderLine: order.getTotalOrderLines()) {
     			
     			BigDecimal numberOfProductsInBigDecimal = (BigDecimal.valueOf(orderLine.getNumberOfProducts()));
     			totalPrice = (totalPrice.add((orderLine.getProduct().getPrice())) . multiply(numberOfProductsInBigDecimal));

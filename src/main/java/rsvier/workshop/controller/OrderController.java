@@ -100,7 +100,7 @@ public class OrderController extends Controller {
 	// Search order by Last name
 	public Order searchOrderByLastName(Person person) {
 
-		List<Order> orderList = new ArrayList<>();;
+		List<Order> orderList = new ArrayList<>();
 
 		if (person == null) {
 			
@@ -110,6 +110,7 @@ public class OrderController extends Controller {
 		} else {
 
 			orderList = orderDao.getAllOrdersFromPerson(person);
+			
 
 			if (orderList.size() == 0) {
 				

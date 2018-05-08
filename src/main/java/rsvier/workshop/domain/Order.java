@@ -86,15 +86,11 @@ public class Order {
 		return orderId;
 	}
 
-	public List<OrderLine> getOrderLine() {
-		
-		return listOfTotalOrderLines;
-	}
-
 	public List<OrderLine> getTotalOrderLines() {
 		
 		return listOfTotalOrderLines;
 	}
+
 
 	public Person getPerson() {
 		
@@ -115,7 +111,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return getOrderId() + " " + getOrderLine() + getPerson().getLastName() + getPerson().getName() + " "
+		return getOrderId() + " " + getTotalOrderLines() + getPerson().getLastName() + getPerson().getName() + " "
 				+ getTotalPrice();
 	}
 

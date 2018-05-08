@@ -14,7 +14,7 @@ public class OrderDAOImp implements OrderDAO {
 
 	private Logger logger = LogConnection.getLogger();
 	private PersonDAOImp personDAO = new PersonDAOImp();
-	private DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");;
 
 	/*
 	 * Static LocalDate parse(CharSequence text, DateTimeFormatter formatter)

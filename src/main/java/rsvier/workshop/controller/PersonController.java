@@ -6,9 +6,6 @@ import rsvier.workshop.domain.Account;
 import rsvier.workshop.domain.Person;
 import rsvier.workshop.domain.Person.PersonBuilder;
 import rsvier.workshop.view.*;
-
-import javax.xml.ws.soap.AddressingFeature;
-
 import rsvier.workshop.controller.MainController.TypeOfController;
 
 public class PersonController extends Controller {

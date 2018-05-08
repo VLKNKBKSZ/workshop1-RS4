@@ -4,7 +4,6 @@ package rsvier.workshop.controller;
 import rsvier.workshop.service.LoginValidator;
 
 import rsvier.workshop.view.MainMenuView;
-import rsvier.workshop.view.View;
 
 public class MainMenuController extends Controller{
 

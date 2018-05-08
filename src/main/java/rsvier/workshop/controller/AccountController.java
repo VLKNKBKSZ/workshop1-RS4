@@ -5,8 +5,6 @@ import rsvier.workshop.dao.AccountDAOImp;
 import rsvier.workshop.domain.Account;
 import rsvier.workshop.service.Validator;
 import rsvier.workshop.view.AccountView;
-import rsvier.workshop.controller.MainController.TypeOfController;
-import rsvier.workshop.view.View;
 
 public class AccountController extends Controller{
 

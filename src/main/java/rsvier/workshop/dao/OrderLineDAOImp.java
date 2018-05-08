@@ -11,7 +11,6 @@ public class OrderLineDAOImp implements OrderLineDAO {
 
 	private Logger logger = LogConnection.getLogger();
 	private ProductDAOImp productDAO = new ProductDAOImp();
-	private OrderDAOImp orderDAO = new OrderDAOImp();
 
 	@Override
 	public List<OrderLine> getAllOrderLines() {

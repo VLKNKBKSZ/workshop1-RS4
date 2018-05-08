@@ -51,11 +51,10 @@ public class OrderLineController extends Controller {
 				break;
 
 			case 3: // Place order. Method to place the order in the database
-
-				
+				saveOrderAndOrderLinesInDatabase(order);
 				orderView.printOrderHasBeenPlaced();
-
 				placingOrder = false;
+				MainController.setController(TypeOfController.ORDER);
 				break;
 
 			case 4: // Cancel order

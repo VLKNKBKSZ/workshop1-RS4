@@ -163,6 +163,8 @@ public class OrderController extends Controller {
 			Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 			orderBuilder.person(person);
 			Order order = orderBuilder.build();
+			order.getPerson().toString();
+			order.toString();
 			
 			//Pass the order to the switch in the orderLineController
 			orderLineController.orderLineMenuSwitch(order);

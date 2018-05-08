@@ -2,6 +2,7 @@ package rsvier.workshop.controller;
 
 import java.util.*;
 
+import rsvier.workshop.controller.MainController.TypeOfController;
 import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.view.*;
@@ -34,7 +35,7 @@ public class OrderController extends Controller {
 				break;
 				
 		case 0: // Go back to previous menu
-				runView();
+				MainController.setController(TypeOfController.EMPLOYEE);
 				break;
 				
 		default:	orderView.printMenuInputIsWrong();

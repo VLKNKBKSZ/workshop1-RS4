@@ -91,7 +91,6 @@ public class OrderLineController extends Controller {
 
 		if (retrievedProduct != null) {
 			
-			
 			// Print product details
 			System.out.println("\n" + retrievedProduct.toString() + "\n");
 
@@ -183,6 +182,7 @@ public class OrderLineController extends Controller {
 		for (OrderLine orderLine : orderLineList) {
 
 			Product product = orderLine.getProduct();
+			// deduct numberOfProduct from product stock
 			product.setStock((product.getStock() - orderLine.getNumberOfProducts()));
 			productList.add(product);
 		}

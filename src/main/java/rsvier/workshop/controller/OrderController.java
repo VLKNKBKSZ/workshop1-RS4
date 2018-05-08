@@ -100,7 +100,7 @@ public class OrderController extends Controller {
 	// Search order by Last name
 	public Order searchOrderByLastName(Person person) {
 
-		List<Order> orderList = null;
+		List<Order> orderList = new ArrayList<>();;
 
 		if (person == null) {
 			

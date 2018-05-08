@@ -92,6 +92,26 @@ public class Order {
 	}
 
 
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+	public void setListOfTotalOrderLines(List<OrderLine> listOfTotalOrderLines) {
+		this.listOfTotalOrderLines = listOfTotalOrderLines;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public void setOrderDate(LocalDate orderDate) {
+		this.orderDate = orderDate;
+	}
+
 	public Person getPerson() {
 		
 		return person;

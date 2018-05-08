@@ -2,6 +2,7 @@
 package rsvier.workshop.controller;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import rsvier.workshop.controller.MainController.TypeOfController;
@@ -15,6 +16,7 @@ public class OrderLineController extends Controller {
 	private ProductView productView = new ProductView();
 	private OrderView orderView = new OrderView();
 	private OrderLine orderLine;
+	private OrderLineDAO orderLineDAO = new OrderLineDAOImp();
 	private Order order;
 	private OrderDAO orderDAO = new OrderDAOImp();
 
@@ -45,12 +47,12 @@ public class OrderLineController extends Controller {
 
 			case 2: // View current order
 				viewAllOrderlinesInCurrentOrder(order);
-				showTotalPriceOfCurrentOrder(order);
+				showTotalPriceOfCurrentOrder(getTotalPriceOfOrder(order));
 				break;
 
 			case 3: // Place order. Method to place the order in the database
 
-				orderDAO.createOrder(order);
+				
 				orderView.printOrderHasBeenPlaced();
 
 				placingOrder = false;
@@ -65,6 +67,16 @@ public class OrderLineController extends Controller {
 
 	}
 
+	public void saveOrderAndOrderLinesInDatabase(Order order) {
+		
+		
+		order.setOrderDate(LocalDate.now());
+		order.setTotalPrice(getTotalPriceOfOrder(order));
+		int orderId = orderDAO.createOrder(order);
+		orderLineDAO.createOrderLine(order.getTotalOrderLines(), orderId);
+		
+	}
+	
 	//
 	public void addOrderLineToOrder(Order order) {
 
@@ -120,8 +132,12 @@ public class OrderLineController extends Controller {
 	}
 
 	// Method for showing total price
-	public void showTotalPriceOfCurrentOrder(Order order) {
+	public void showTotalPriceOfCurrentOrder(BigDecimal totalPrice) {
 
+		System.out.println("\nTotale prijs van de bestelling: € " + totalPrice);
+	}
+	
+	public BigDecimal getTotalPriceOfOrder(Order order) {
 		
 		BigDecimal totalPriceOfOrder = new BigDecimal(0);
 
@@ -133,8 +149,10 @@ public class OrderLineController extends Controller {
 					.multiply(numberOfProductsInBigDecimal));
 			totalPriceOfOrder = totalPriceOfOrder.add(totalPriceOfOrderLine);
 		}
-		System.out.println("\nTotale prijs van de bestelling: € " + totalPriceOfOrder);
+		
+		return totalPriceOfOrder;
 	}
+
 
 }
 

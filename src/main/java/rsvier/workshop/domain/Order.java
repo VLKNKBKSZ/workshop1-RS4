@@ -1,9 +1,8 @@
 package rsvier.workshop.domain;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Order {
@@ -12,7 +11,7 @@ public class Order {
 	private List<OrderLine> listOfTotalOrderLines = new ArrayList<OrderLine>();
 	private Person person;
 	private BigDecimal totalPrice;;
-	private LocalDate orderDate;
+	private LocalDateTime orderDateTime;
 
 	private Order(OrderBuilder builder) {
 		
@@ -20,7 +19,7 @@ public class Order {
 		this.listOfTotalOrderLines = builder.listOfTotalOrderLines;
 		this.person = builder.person;
 		this.totalPrice = builder.totalPrice;
-		this.orderDate = builder.orderDate;
+		this.orderDateTime = builder.orderDateTime;
 
 	}
 
@@ -30,7 +29,7 @@ public class Order {
 		private List<OrderLine> listOfTotalOrderLines = new ArrayList<OrderLine>();
 		private Person person;
 		private BigDecimal totalPrice;
-		private LocalDate orderDate;
+		private LocalDateTime orderDateTime;
 
 		public OrderBuilder() {
 
@@ -42,7 +41,7 @@ public class Order {
 		    this.listOfTotalOrderLines = order.getTotalOrderLines();
 		    this.person = order.getPerson();
 		    this.totalPrice = order.getTotalPrice();
-		    this.orderDate = order.getOrderDate();
+		    this.orderDateTime = order.getOrderDateTime();
 		}
 
 		public OrderBuilder orderId(int orderId) {
@@ -69,9 +68,9 @@ public class Order {
 			return this;
 		}
 
-		public OrderBuilder getOrderDate(LocalDate orderDate) {
+		public OrderBuilder getOrderDateTime(LocalDateTime orderDateTime) {
 			
-			this.orderDate = orderDate;
+			this.orderDateTime = orderDateTime;
 			return this;
 		}
 
@@ -108,8 +107,8 @@ public class Order {
 		this.totalPrice = totalPrice;
 	}
 
-	public void setOrderDate(LocalDate orderDate) {
-		this.orderDate = orderDate;
+	public void setOrderDateTime(LocalDateTime orderDateTime) {
+		this.orderDateTime = orderDateTime;
 	}
 
 	public Person getPerson() {
@@ -117,9 +116,9 @@ public class Order {
 		return person;
 	}
 
-	public LocalDate getOrderDate() {
+	public LocalDateTime getOrderDateTime() {
 		
-		return orderDate;
+		return orderDateTime;
 	}
 
 	public BigDecimal getTotalPrice() {

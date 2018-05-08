@@ -1,7 +1,7 @@
 package rsvier.workshop.dao;
 
 import java.sql.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.*;
@@ -42,8 +42,8 @@ public class OrderDAOImp implements OrderDAO {
 				Person person = personDAO.getPersonById(resultSet.getInt(2));
 				orderBuilder.person(person);
 				orderBuilder.totalPrice(resultSet.getBigDecimal(3));
-				LocalDate parsedDate = LocalDate.parse(resultSet.getString(4), formatter);
-				orderBuilder.getOrderDate(parsedDate);
+				LocalDateTime parsedDate = LocalDateTime.parse(resultSet.getString(4), formatter);
+				orderBuilder.getOrderDateTime(parsedDate);
 				Order order = orderBuilder.build();
 				orderList.add(order);
 
@@ -83,8 +83,8 @@ public class OrderDAOImp implements OrderDAO {
 					orderBuilder.orderId(resultSet.getInt(1));
 					orderBuilder.person(personDAO.getPersonById(resultSet.getInt(2)));
 					orderBuilder.totalPrice(resultSet.getBigDecimal(3));
-					LocalDate parsedDate = LocalDate.parse(resultSet.getString(4), formatter);
-					orderBuilder.getOrderDate(parsedDate);
+					LocalDateTime parsedDate = LocalDateTime.parse(resultSet.getString(4), formatter);
+					orderBuilder.getOrderDateTime(parsedDate);
 					Order order = orderBuilder.build();
 					orderList.add(order);
 
@@ -126,8 +126,8 @@ public class OrderDAOImp implements OrderDAO {
 					Person person = personDAO.getPersonById(resultSet.getInt(2));
 					orderBuilder.person(person);
 					orderBuilder.totalPrice(resultSet.getBigDecimal(3));
-					LocalDate parsedDate = LocalDate.parse(resultSet.getString(4), formatter);
-					orderBuilder.getOrderDate(parsedDate);
+					LocalDateTime parsedDate = LocalDateTime.parse(resultSet.getString(4), formatter);
+					orderBuilder.getOrderDateTime(parsedDate);
 					order = orderBuilder.build();
 				}
 
@@ -154,7 +154,7 @@ public class OrderDAOImp implements OrderDAO {
 
 			preparedStatement.setInt(1, order.getPerson().getPersonId());
 			preparedStatement.setBigDecimal(2, order.getTotalPrice());
-			preparedStatement.setString(3, order.getOrderDate().toString());
+			preparedStatement.setString(3, order.getOrderDateTime().toString());
 			preparedStatement.executeUpdate();
 
 			try (ResultSet resultSet = preparedStatement.getGeneratedKeys();) {

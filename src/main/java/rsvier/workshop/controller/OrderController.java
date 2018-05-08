@@ -12,6 +12,7 @@ public class OrderController extends Controller {
 	private OrderDAO orderDao = new OrderDAOImp();
 	private CustomerController customerController = new CustomerController();
 	private OrderLineController orderLineController = new OrderLineController();
+	private CustomerView customerView = new CustomerView();
 
 	@Override
 	public void runView() {
@@ -26,19 +27,19 @@ public class OrderController extends Controller {
 
 		case 1: // Search order
 				selectOrderSearchMenuSwitch();
-
 				break;
-		case 2: // Create order 
-
+				
+		case 2: // Create order for a customer
 				doCreateOrder((customerController.searchCustomerByLastName()));
-			
 				break;
 				
 		case 0: // Go back to previous menu
 				runView();
+				break;
 				
 		default:	orderView.printMenuInputIsWrong();
 				runView();
+				break;
 		}
 	}
 
@@ -101,16 +102,22 @@ public class OrderController extends Controller {
 		List<Order> orderList = null;
 
 		if (person == null) {
+			
+			customerView.printCustomerNotFound();
 			runView();
+			
 		} else {
 
 			orderList = orderDao.getAllOrdersFromPerson(person);
 
 			if (orderList.size() == 0) {
+				
+				//print "Geen bestellingen gevonden"
 				return null;
 			}
 
 			if (orderList.size() == 1) {
+				
 				System.out.println(orderList.get(0).toString());
 
 				return orderList.get(0);

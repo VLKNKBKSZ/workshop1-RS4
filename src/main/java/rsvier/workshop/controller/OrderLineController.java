@@ -2,6 +2,7 @@ package rsvier.workshop.controller;
 
 import java.math.BigDecimal;
 
+import rsvier.workshop.controller.MainController.TypeOfController;
 import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.view.*;
@@ -20,15 +21,17 @@ public class OrderLineController extends Controller {
     @Override
     public void runView() {
         orderLineView.printHeaderMessage();
-        orderLineView.printMenuMessage();
+   //   orderLineView.printMenuMessage();
   //      orderLineMenuSwitch(orderLineView.getIntInput());
     }
+    
 
     public void orderLineMenuSwitch(Order order) {
     		
-    		boolean placeOrderOrCancelOrder = true;
+    		//As long as placingOrder is true, the orderlines are being created and added to the order
+    		boolean placingOrder = true;
     		
-    		while(placeOrderOrCancelOrder){
+    		while(placingOrder){
     			
     			orderLineView.printMenuMessage();
             int menuChoice = orderLineView.getIntInput();
@@ -50,18 +53,19 @@ public class OrderLineController extends Controller {
     					orderDAO.createOrder(order);
     					orderView.printOrderHasBeenPlaced();
     					
-    					placeOrderOrCancelOrder = false;
+    					placingOrder = false;
     					break;
     					
     			case 4: //Cancel order
-    					placeOrderOrCancelOrder = false;
+    					placingOrder = false;
+    					MainController.setController(TypeOfController.ORDER);
     					break;
     			}
     		}
 
     }
     
-    //search based on name
+    //
     public void addOrderLineToOrder(Order order) {
     		
     		//First ask the user for the product he wants to see/order
@@ -77,6 +81,9 @@ public class OrderLineController extends Controller {
     			//Create an orderline object with the product and the amount of products chosen
     			OrderLine orderLine = new OrderLine.OrderLineBuilder().product(retrievedProduct)
     			.numberOfProducts(requestAmountOfProducts()).build();
+    			
+    			System.out.println(orderLine.toString());
+    			
     			
     			
     			//Add the created orderline to the order

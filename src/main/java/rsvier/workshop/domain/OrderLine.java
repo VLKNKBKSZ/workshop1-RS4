@@ -42,41 +42,42 @@ public class OrderLine {
 		}
 
 		public OrderLineBuilder orderLineId(int orderLineId) {
-			
+
 			this.orderLineId = orderLineId;
 			return this;
 		}
 
 		public OrderLineBuilder product(Product product) {
-			
+
 			this.product = product;
 			return this;
 		}
 
 		public OrderLineBuilder numberOfProducts(int numberOfProducts) {
-			
+
 			this.numberOfProducts = numberOfProducts;
 			return this;
 		}
+
 		public OrderLine build() {
-			
+
 			return new OrderLine(this);
 		}
 
 	}
 
 	public int getOrderLineId() {
-		
+
 		return orderLineId;
 	}
 
 	public Product getProduct() {
-		
+
 		return product;
 	}
 
 	public int getNumberOfProducts() {
-		
+
 		return numberOfProducts;
 	}
 
@@ -84,8 +85,8 @@ public class OrderLine {
 
 	@Override
 	public String toString() {
-		return "Id:" + getOrderLineId() + " Name:" + product.getName() + " Price:" + getProduct().getPrice()
-		/* + " OrderId " + order.getOrderId() */ + " Total Price:"
+		return "Id: " + getOrderLineId() + " Naam: " + product.getName() + " Prijs: " + getProduct().getPrice()
+		/* + " OrderId " + order.getOrderId() */ + "Aantal: " + product.getStock() + " Total Price: "
 				+ getProduct().getPrice().multiply(new BigDecimal(getNumberOfProducts()));
 	}
 

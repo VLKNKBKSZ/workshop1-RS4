@@ -1,6 +1,8 @@
+
 package rsvier.workshop.controller;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import rsvier.workshop.controller.MainController.TypeOfController;
 import rsvier.workshop.dao.*;
@@ -65,9 +67,7 @@ public class OrderLineController extends Controller {
 
     }
     
-
     //
-
     public void addOrderLineToOrder(Order order) {
     		
     		//First ask the user for the product he wants to see/order
@@ -96,6 +96,7 @@ public class OrderLineController extends Controller {
     		
     		else {
     			productView.printProductNotFound();
+    			System.out.println(" ");
     			runView();
     		}
     }
@@ -136,5 +137,5 @@ public class OrderLineController extends Controller {
     		}
     }
     
-
 }
+

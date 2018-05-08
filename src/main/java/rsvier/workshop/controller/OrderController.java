@@ -72,7 +72,7 @@ public class OrderController extends Controller {
 
 	public void selectOrderSearchMenuSwitch() {
 
-		orderView.printAskSelectOrder();
+		orderView.printAskSearchOrderByNumberOrByName();
 		int menuNumber = orderView.getIntInput();
 
 		switch (menuNumber) {

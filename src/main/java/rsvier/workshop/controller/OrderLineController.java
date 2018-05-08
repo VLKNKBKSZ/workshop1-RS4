@@ -90,14 +90,16 @@ public class OrderLineController extends Controller {
 		Product retrievedProduct = productDAO.getProductByName(productName);
 
 		if (retrievedProduct != null) {
+			
+			
+			// Print product details
+			System.out.println("\n" + retrievedProduct.toString() + "\n");
 
 			// Ask how many products customer wants to order
 			int requestedProduct = requestAmountOfProducts();
 
 			// Check if the product stock is available
 			if (checkProductStock(requestedProduct, retrievedProduct)) {
-
-				System.out.println("\n" + retrievedProduct.toString() + "\n");
 
 				// Create an orderline object with the product and the amount of products chosen
 				OrderLine orderLine = new OrderLine.OrderLineBuilder().product(retrievedProduct)
@@ -173,7 +175,7 @@ public class OrderLineController extends Controller {
 		return false;
 	}
 
-	// This not finished yet
+	// Update product stock
 	public void updateProductInDatabase(List<OrderLine> orderLineList) {
 
 		List<Product> productList = new ArrayList<>();

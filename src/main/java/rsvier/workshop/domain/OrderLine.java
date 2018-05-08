@@ -1,8 +1,6 @@
 package rsvier.workshop.domain;
 
 import java.math.*;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 //Added this class to match the database EER diagram. Not sure how this will work with the database.
 

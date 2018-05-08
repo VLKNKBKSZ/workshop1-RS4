@@ -4,11 +4,9 @@ package rsvier.workshop.controller;
 import java.util.List;
 
 import rsvier.workshop.dao.*;
-import rsvier.workshop.controller.*;
 import rsvier.workshop.domain.Account;
 import rsvier.workshop.domain.Person;
 import rsvier.workshop.view.*;
-import rsvier.workshop.view.View;
 import rsvier.workshop.controller.MainController.TypeOfController;
 
 public class CustomerController extends Controller {

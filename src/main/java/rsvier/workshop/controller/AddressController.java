@@ -1,8 +1,7 @@
 package rsvier.workshop.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.List;
 import rsvier.workshop.controller.MainController.TypeOfController;
 import rsvier.workshop.dao.AddressDAO;
 import rsvier.workshop.dao.AddressDAOImp;
@@ -10,7 +9,6 @@ import rsvier.workshop.domain.Address;
 import rsvier.workshop.domain.Person;
 import rsvier.workshop.domain.Address.AddressBuilder;
 import rsvier.workshop.view.AddressView;
-import rsvier.workshop.view.View;
 
 public class AddressController extends Controller{
 

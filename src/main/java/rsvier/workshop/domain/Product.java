@@ -1,9 +1,6 @@
 package rsvier.workshop.domain;
 
 import java.math.BigDecimal;
-import java.sql.*;
-import java.text.*;
-import java.time.LocalDateTime;
 
 public class Product {
 

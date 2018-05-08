@@ -1,9 +1,7 @@
 package rsvier.workshop.controller;
 
-import rsvier.workshop.domain.*;
 import rsvier.workshop.view.EmployeeView;
 import rsvier.workshop.controller.MainController.TypeOfController;
-import rsvier.workshop.view.View;
 
 public class EmployeeController extends Controller{
 	

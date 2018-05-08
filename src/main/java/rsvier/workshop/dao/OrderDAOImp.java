@@ -83,7 +83,7 @@ public class OrderDAOImp implements OrderDAO {
 					orderBuilder.orderId(resultSet.getInt(1));
 					orderBuilder.person(personDAO.getPersonById(resultSet.getInt(2)));
 					orderBuilder.totalPrice(resultSet.getBigDecimal(3));
-					LocalDateTime parsedDate = LocalDateTime.parse(resultSet.getString(4), formatter);
+					LocalDateTime parsedDate = LocalDateTime.parse(resultSet.getString(4));
 					orderBuilder.getOrderDateTime(parsedDate);
 					Order order = orderBuilder.build();
 					orderList.add(order);

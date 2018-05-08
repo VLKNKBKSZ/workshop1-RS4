@@ -10,7 +10,7 @@ public class MainMenuController extends Controller{
 	private MainMenuView mainMenuView = new MainMenuView();
 	private AccountController accountController = new AccountController();
 	private LoginValidator loginValidation = new LoginValidator();
-	
+	private AddressController addressController = new AddressController();
 	
 	@Override
 	public void runView() {
@@ -39,7 +39,8 @@ public class MainMenuController extends Controller{
 			case 0:
 					mainMenuView.printExitApplicationMessage();
 					break;
-			
+	//SECRET CASE 7 FOR MORE EASILY TESTING POSTAL CODE REGEX		
+			case 7: addressController.requestAndValidatePostalCode();
 			default:
 					mainMenuView.printMenuInputIsWrong();
 					runView();

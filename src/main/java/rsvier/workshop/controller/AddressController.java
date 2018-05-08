@@ -7,6 +7,7 @@ import rsvier.workshop.dao.AddressDAO;
 import rsvier.workshop.dao.AddressDAOImp;
 import rsvier.workshop.domain.Address;
 import rsvier.workshop.domain.Person;
+import rsvier.workshop.service.Validator;
 import rsvier.workshop.domain.Address.AddressBuilder;
 import rsvier.workshop.view.AddressView;
 
@@ -14,6 +15,7 @@ public class AddressController extends Controller{
 
 	private AddressView addressView = new AddressView();
 	private AddressDAO addressDAO = new AddressDAOImp();
+	private Validator validator = new Validator();
 
 	
 	public void runView() {
@@ -178,8 +180,8 @@ public class AddressController extends Controller{
 
 	public String addressUpdatePostalCode() {
 
-		addressView.printAskUserForPostalCode();
-		return addressView.getStringInput();
+		return requestAndValidatePostalCode();
+
 	}
 
 	public String addressUpdateCity() {
@@ -192,6 +194,21 @@ public class AddressController extends Controller{
 
 		addressView.printAskUserForCountry();
 		return addressView.getStringInput();
+	}
+
+	public String requestAndValidatePostalCode() {
+		
+		String postalCode;
+		
+		do {
+			addressView.printAskUserForPostalCode();
+			postalCode = addressView.getStringInput();
+			}
+		
+		while(!validator.validatePostalCode(postalCode));	
+		
+		return postalCode;
+		
 	}
 
 

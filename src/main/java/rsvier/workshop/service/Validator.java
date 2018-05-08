@@ -38,7 +38,7 @@ public class Validator {
 
 		//check if postal code is correct
 		if (!inputPostalCode.matches("/^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i")) {
-			System.out.println("De ingevulde postcode is niet correct.");
+			System.out.println("De ingevulde postcode is ECHT HEUS niet correct.");
 			return false;
 		}
 

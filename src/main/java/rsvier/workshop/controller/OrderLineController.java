@@ -3,6 +3,7 @@ package rsvier.workshop.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.*;
 
 import rsvier.workshop.controller.MainController.TypeOfController;
 import rsvier.workshop.dao.*;
@@ -64,15 +65,15 @@ public class OrderLineController extends Controller {
 	}
 
 	public void saveOrderAndOrderLinesInDatabase(Order order) {
-		
-		
+
 		order.setOrderDateTime(LocalDateTime.now());
 		order.setTotalPrice(getTotalPriceOfOrder(order));
 		int orderId = orderDAO.createOrder(order);
 		orderLineDAO.createOrderLine(order.getTotalOrderLines(), orderId);
-		
+		updateProduct(order.getTotalOrderLines());
+
 	}
-	
+
 	//
 	public void addOrderLineToOrder(Order order) {
 
@@ -84,21 +85,29 @@ public class OrderLineController extends Controller {
 		Product retrievedProduct = productDAO.getProductByName(productName);
 
 		if (retrievedProduct != null) {
-			System.out.println("\n" + retrievedProduct.toString() + "\n");
 
-			// Create an orderline object with the product and the amount of products chosen
-			OrderLine orderLine = new OrderLine.OrderLineBuilder().product(retrievedProduct)
-					.numberOfProducts(requestAmountOfProducts()).build();
+			// Ask how many products customer wants to order
+			int requestedProduct = requestAmountOfProducts();
 
-			System.out.println(orderLine.toString());
+			// Check if the product stock is available
+			if (checkProductStock(requestedProduct, retrievedProduct)) {
 
-			// Add the created orderline to the order
-			// GETTING A NULL POINTER HERE NOW
-			order.getTotalOrderLines().add(orderLine);
+				System.out.println("\n" + retrievedProduct.toString() + "\n");
 
-		}
+				// Create an orderline object with the product and the amount of products chosen
+				OrderLine orderLine = new OrderLine.OrderLineBuilder().product(retrievedProduct)
+						.numberOfProducts(requestedProduct).build();
 
-		else {
+				System.out.println(orderLine.toString());
+
+				// Add the created orderline to the order
+
+				order.getTotalOrderLines().add(orderLine);
+
+			} else {
+				orderLineView.printProductStockIsNotAvailable(retrievedProduct.getStock(), requestedProduct);
+			}
+		} else {
 			productView.printProductNotFound();
 			System.out.println(" ");
 			runView();
@@ -132,23 +141,45 @@ public class OrderLineController extends Controller {
 
 		System.out.println("\nTotale prijs van de bestelling: € " + totalPrice);
 	}
-	
+
 	public BigDecimal getTotalPriceOfOrder(Order order) {
-		
+
 		BigDecimal totalPriceOfOrder = new BigDecimal(0);
 
 		for (OrderLine orderLine : order.getTotalOrderLines()) {
-			
+
 			BigDecimal totalPriceOfOrderLine = new BigDecimal(0);
 			BigDecimal numberOfProductsInBigDecimal = (BigDecimal.valueOf(orderLine.getNumberOfProducts()));
 			totalPriceOfOrderLine = (totalPriceOfOrderLine.add((orderLine.getProduct().getPrice()))
 					.multiply(numberOfProductsInBigDecimal));
 			totalPriceOfOrder = totalPriceOfOrder.add(totalPriceOfOrderLine);
 		}
-		
+
 		return totalPriceOfOrder;
 	}
 
+	// Method to check product stock
 
+	public boolean checkProductStock(int requestedAmpountOfProduct, Product product) {
+
+		if (requestedAmpountOfProduct <= product.getStock()) {
+			return true;
+		}
+		return false;
+	}
+
+	// This not finished yet
+	public void updateProduct(List<OrderLine> orderLineList) {
+
+		List<Product> productList = new ArrayList<>();
+
+		for (OrderLine orderLine : orderLineList) {
+
+			Product product = orderLine.getProduct();
+			productList.add(product);
+
+		}
+		productDAO.updateProduct(productList);
+
+	}
 }
-

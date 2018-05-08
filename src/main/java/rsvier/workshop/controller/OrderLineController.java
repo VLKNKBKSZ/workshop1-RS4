@@ -67,6 +67,7 @@ public class OrderLineController extends Controller {
 
 	}
 
+	// Save order, order lines and update product stocks in database
 	public void saveOrderAndOrderLinesInDatabase(Order order) {
 
 		order.setOrderDateTime(LocalDateTime.now());
@@ -76,13 +77,13 @@ public class OrderLineController extends Controller {
 
 		// Create orderLines
 		orderLineDAO.createOrderLine(order.getTotalOrderLines(), orderId);
-		// Update Products
 
+		// Update Products
 		updateProductInDatabase(order.getTotalOrderLines());
 
 	}
 
-	//
+	// Add order lines into order
 	public void addOrderLineToOrder(Order order) {
 
 		// First ask the user for the product he wants to see/order
@@ -93,7 +94,7 @@ public class OrderLineController extends Controller {
 		Product retrievedProduct = productDAO.getProductByName(productName);
 
 		if (retrievedProduct != null) {
-			
+
 			// Print product details
 			System.out.println("\n" + retrievedProduct.toString() + "\n");
 
@@ -107,10 +108,10 @@ public class OrderLineController extends Controller {
 				OrderLine orderLine = new OrderLine.OrderLineBuilder().product(retrievedProduct)
 						.numberOfProducts(requestedProduct).build();
 
-				System.out.println(orderLine.toString());
+				// Print order line details
+				System.out.println(orderLine.toString() + "\n");
 
 				// Add the created orderline to the order
-
 				order.getTotalOrderLines().add(orderLine);
 
 			} else {
@@ -146,9 +147,10 @@ public class OrderLineController extends Controller {
 	// Method for showing total price
 	public void showTotalPriceOfCurrentOrder(BigDecimal totalPrice) {
 
-		System.out.println("\nTotale prijs van de bestelling: € " + totalPrice);
+		System.out.println("\nTotale prijs van de bestelling: € " + totalPrice + "\n3");
 	}
 
+	// Method of getting total price of an order
 	public BigDecimal getTotalPriceOfOrder(Order order) {
 
 		BigDecimal totalPriceOfOrder = new BigDecimal(0);
@@ -178,12 +180,13 @@ public class OrderLineController extends Controller {
 	// Update product stock
 	public void updateProductInDatabase(List<OrderLine> orderLineList) {
 
+		// Declare an ArrayList to hold product that has been updated product stock
 		List<Product> productList = new ArrayList<>();
 
 		for (OrderLine orderLine : orderLineList) {
 
 			Product product = orderLine.getProduct();
-			// deduct numberOfProduct from product stock
+			// deduct numberOfProducts that customer ordered from product stock
 			product.setStock((product.getStock() - orderLine.getNumberOfProducts()));
 			productList.add(product);
 		}

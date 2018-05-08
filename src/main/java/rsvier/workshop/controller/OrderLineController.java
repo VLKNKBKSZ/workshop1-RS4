@@ -68,9 +68,14 @@ public class OrderLineController extends Controller {
 
 		order.setOrderDateTime(LocalDateTime.now());
 		order.setTotalPrice(getTotalPriceOfOrder(order));
+		// Create order
 		int orderId = orderDAO.createOrder(order);
+
+		// Create orderLines
 		orderLineDAO.createOrderLine(order.getTotalOrderLines(), orderId);
-		updateProduct(order.getTotalOrderLines());
+		// Update Products
+
+		updateProductInDatabase(order.getTotalOrderLines());
 
 	}
 
@@ -169,15 +174,15 @@ public class OrderLineController extends Controller {
 	}
 
 	// This not finished yet
-	public void updateProduct(List<OrderLine> orderLineList) {
+	public void updateProductInDatabase(List<OrderLine> orderLineList) {
 
 		List<Product> productList = new ArrayList<>();
 
 		for (OrderLine orderLine : orderLineList) {
 
 			Product product = orderLine.getProduct();
+			product.setStock((product.getStock() - orderLine.getNumberOfProducts()));
 			productList.add(product);
-
 		}
 		productDAO.updateProduct(productList);
 

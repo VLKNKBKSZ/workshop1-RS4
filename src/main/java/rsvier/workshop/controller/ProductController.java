@@ -1,6 +1,7 @@
 package rsvier.workshop.controller;
 
 import java.math.BigDecimal;
+import java.util.*;
 import java.util.List;
 
 import rsvier.workshop.controller.MainController.TypeOfController;
@@ -25,28 +26,28 @@ public class ProductController extends Controller {
 		switch (menuNumber) {
 
 		case 1: // search product
-				searchProductByName();
-				runView();
-				break;
-				
+			searchProductByName();
+			runView();
+			break;
+
 		case 2: // add product
-				doCreateProduct();
-				runView();
-				break;
-				
+			doCreateProduct();
+			runView();
+			break;
+
 		case 3: // show product list
-				showProductList();
-				runView();
-				break;
-				
+			showProductList();
+			runView();
+			break;
+
 		case 0: // back to previous menu
-				MainController.setController(TypeOfController.EMPLOYEE);
-				break;
-				
+			MainController.setController(TypeOfController.EMPLOYEE);
+			break;
+
 		default:// Goes back to this same menu
-				productView.printMenuInputIsWrong();
-				runView();
-				break;
+			productView.printMenuInputIsWrong();
+			runView();
+			break;
 
 		}
 
@@ -60,20 +61,20 @@ public class ProductController extends Controller {
 		switch (choice) {
 
 		case 1: // update product
-				updateProductSwitch(product);
-				break;
-				
+			updateProductSwitch(product);
+			break;
+
 		case 2: // delete product
-				doDeleteProduct(product);
-				break;
-				
+			doDeleteProduct(product);
+			break;
+
 		case 0: // back to previous menu
-				runView();
-				break;
-				
+			runView();
+			break;
+
 		default: // error message
-				productView.printMenuInputIsWrong();
-				break;
+			productView.printMenuInputIsWrong();
+			break;
 		}
 
 	}
@@ -98,43 +99,40 @@ public class ProductController extends Controller {
 
 	}
 
-	
 	public void doCreateProduct() {
-		
+
 		Product.ProductBuilder productBuilder = new Product.ProductBuilder();
 		productView.printAskForProductName();
 		String nameOfNewProduct = productView.getStringInput();
-		
+
 		if (checkIfProductAlreadyExists(nameOfNewProduct)) {
-			
+
 			productView.printProductNameAlreadyExists();
 			return;
 		}
-		
+
 		productBuilder.name(nameOfNewProduct);
 		productView.printAskForProductPrice();
 		productBuilder.price(productView.getBigDecimalInput());
 		productView.printAskForProductStock();
 		productBuilder.stock(productView.getIntInput());
 		Product product = productBuilder.build();
-		
+
 		productDAO.createProduct(product);
 		productView.printProductIsSuccesfullyCreated();
 	}
-	
 
 	public void doDeleteProduct(Product product) {
 
 		if (productView.confirmYesOrNo().equalsIgnoreCase("J")) {
-			
+
 			productDAO.deleteProduct(product);
-		
+
 		} else {
 			runView();
 		}
 	}
 
-	
 	public boolean checkIfProductAlreadyExists(String nameOfProduct) {
 
 		if (productDAO.getProductByName(nameOfProduct) != null) {
@@ -145,7 +143,6 @@ public class ProductController extends Controller {
 
 	}
 
-	
 	public void showProductList() {
 		List<Product> products = productDAO.getAllProducts();
 
@@ -154,7 +151,6 @@ public class ProductController extends Controller {
 		}
 	}
 
-	
 	public void updateProductSwitch(Product product) {
 
 		boolean updatingProduct = true;
@@ -166,38 +162,38 @@ public class ProductController extends Controller {
 
 			switch (choice) {
 
-			case 1: //Show current product
-					System.out.println(product.toString());
-					break;
+			case 1: // Show current product
+				System.out.println(product.toString());
+				break;
 
-			case 2: //Update product name
-					product.setName(updateProductName());
-					break;
+			case 2: // Update product name
+				product.setName(updateProductName());
+				break;
 
-			case 3:	//Update product price
-					product.setPrice(updateProductPrice());
-					break;
+			case 3: // Update product price
+				product.setPrice(updateProductPrice());
+				break;
 
-			case 4:	//Update product stock
-					product.setStock(updateProductStock());
-					break;
+			case 4: // Update product stock
+				product.setStock(updateProductStock());
+				break;
 
-			case 5:	//Save updates in database
-					productDAO.updateProduct(product);
-					break;
+			case 5: // Save updates in database
+				updateProduct(product);
+				break;
 
-			case 0:	//Go back to previous menu
-					updatingProduct = false;
-					break;
+			case 0: // Go back to previous menu
+				updatingProduct = false;
+				break;
 
 			default:
-					productView.printMenuInputIsWrong();
+				productView.printMenuInputIsWrong();
 			}
 		}
 	}
 
-	//Methods for updating product
-	
+	// Methods for updating each field of product
+
 	public String updateProductName() {
 		productView.printAskForProductName();
 		return productView.getStringInput();
@@ -211,5 +207,13 @@ public class ProductController extends Controller {
 	public int updateProductStock() {
 		productView.printAskForProductStock();
 		return productView.getIntInput();
+	}
+	
+	// Method for updating product
+
+	public void updateProduct(Product product) {
+		List<Product> productList = new ArrayList();
+		productList.add(product);
+		productDAO.updateProduct(productList);
 	}
 }

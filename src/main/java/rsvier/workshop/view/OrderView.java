@@ -9,7 +9,7 @@ public class OrderView extends View {
 
 	@Override
 	public void printMenuMessage() {
-		System.out.println("\n 1- Zoek bestelling\n 2- Plaats bestelling\n 0- Verlaat bestellingbeheer");	
+		System.out.println("\n1- Zoek bestelling\n2- Plaats bestelling\n0- Verlaat bestellingbeheer");
 	}
 
 	public void printAskUserToUpdateOrDeleteProduct() {

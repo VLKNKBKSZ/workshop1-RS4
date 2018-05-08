@@ -59,6 +59,9 @@ public class OrderLineController extends Controller {
 				placingOrder = false;
 				MainController.setController(TypeOfController.ORDER);
 				break;
+
+			default:
+				orderLineView.printMenuInputIsWrong();
 			}
 		}
 
@@ -124,9 +127,7 @@ public class OrderLineController extends Controller {
 	public int requestAmountOfProducts() {
 
 		orderLineView.printRequestAmountOfProducts();
-		int amountOfProducts = orderLineView.getIntInput();
-
-		return amountOfProducts;
+		return orderLineView.getIntInput();
 	}
 
 	// Method for viewing all the orderlines in the current order

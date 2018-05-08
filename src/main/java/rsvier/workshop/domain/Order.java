@@ -7,7 +7,7 @@ import java.util.*;
 public class Order {
 
 	private int orderId;
-	private List<OrderLine> listOfTotalOrderLines = new ArrayList<OrderLine>();
+	private List<OrderLine> listOfTotalOrderLines = new ArrayList<>();
 	private Person person;
 	private BigDecimal totalPrice;;
 	private LocalDateTime orderDateTime;
@@ -25,7 +25,7 @@ public class Order {
 	public static class OrderBuilder {
 
 		private int orderId;
-		private List<OrderLine> listOfTotalOrderLines = new ArrayList<OrderLine>();
+		private List<OrderLine> listOfTotalOrderLines = new ArrayList<>();
 		private Person person;
 		private BigDecimal totalPrice;
 		private LocalDateTime orderDateTime;

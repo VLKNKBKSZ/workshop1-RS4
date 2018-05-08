@@ -1,8 +1,7 @@
 package rsvier.workshop.controller;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
 
 import rsvier.workshop.controller.MainController.TypeOfController;
 import rsvier.workshop.dao.*;
@@ -14,9 +13,7 @@ public class OrderLineController extends Controller {
 	private ProductDAO productDAO = new ProductDAOImp();
 	private ProductView productView = new ProductView();
 	private OrderView orderView = new OrderView();
-	private OrderLine orderLine;
 	private OrderLineDAO orderLineDAO = new OrderLineDAOImp();
-	private Order order;
 	private OrderDAO orderDAO = new OrderDAOImp();
 
 	@Override
@@ -68,7 +65,7 @@ public class OrderLineController extends Controller {
 	public void saveOrderAndOrderLinesInDatabase(Order order) {
 		
 		
-		order.setOrderDate(LocalDate.now());
+		order.setOrderDateTime(LocalDateTime.now());
 		order.setTotalPrice(getTotalPriceOfOrder(order));
 		int orderId = orderDAO.createOrder(order);
 		orderLineDAO.createOrderLine(order.getTotalOrderLines(), orderId);

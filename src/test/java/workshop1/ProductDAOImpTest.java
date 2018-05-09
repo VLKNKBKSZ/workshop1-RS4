@@ -111,7 +111,7 @@ class ProductDAOImpTest {
 		Product updatedProduct = newProduct.name("Loungebank").build();
 		List<Product> productList = new ArrayList<>();
 		productList.add(updatedProduct);
-		productDAO.updateProduct(productList);
+		productDAO.updateProduct(product);
 		
 		assertEquals("Loungebank", productDAO.getProductByName("Loungebank").getName());
 	}

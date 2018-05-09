@@ -79,6 +79,10 @@ public class OrderLine {
 		return numberOfProducts;
 	}
 
+	public void setNumberOfProducts(int numberOfProducts) {
+		this.numberOfProducts = numberOfProducts;
+	}
+
 	// Override the toString method that is inherited from the Object class.
 
 	@Override

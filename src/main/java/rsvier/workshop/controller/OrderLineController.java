@@ -44,7 +44,7 @@ public class OrderLineController extends Controller {
 				break;
 
 			case 2: // View current order
-				viewAllOrderlinesInCurrentOrder(order);
+				viewAllOrderLinesInCurrentOrder(order);
 				showTotalPriceOfCurrentOrder(getTotalPriceOfOrder(order));
 				break;
 
@@ -113,14 +113,19 @@ public class OrderLineController extends Controller {
 			// Check if the product stock is available
 			if (checkProductStock(requestedProduct, retrievedProduct)) {
 
-				// Create an orderline object with the product and the amount of products chosen
+				// Check orderLines if product is already in the order
+				if(checkForDuplicateProductInOrderLines(order, requestedProduct,retrievedProduct)) {
+					return;
+				}
+
+				// Create an orderLine object with the product and the amount of products chosen
 				OrderLine orderLine = new OrderLine.OrderLineBuilder().product(retrievedProduct)
 						.numberOfProducts(requestedProduct).build();
 
 				// Print order line details
 				System.out.println(orderLine.toString() + "\n");
 
-				// Add the created orderline to the order
+				// Add the created orderLine to the order
 				order.getTotalOrderLines().add(orderLine);
 
 				// Update stock in database
@@ -136,6 +141,20 @@ public class OrderLineController extends Controller {
 		}
 	}
 
+	public boolean checkForDuplicateProductInOrderLines(Order order, int requestProduct, Product retrievedProduct) {
+		List<OrderLine> orderLines = order.getTotalOrderLines();
+
+		for (OrderLine orderLine: orderLines) {
+
+			if (retrievedProduct.getName().equalsIgnoreCase(orderLine.getProduct().getName())){
+				orderLine.setNumberOfProducts(orderLine.getNumberOfProducts() + requestProduct);
+				updateProductInDatabase(orderLine);
+				return true;
+			}
+		}
+		return false;
+	}
+
 	// Method for asking how many copies of the product
 	public int requestAmountOfProducts() {
 
@@ -143,8 +162,8 @@ public class OrderLineController extends Controller {
 		return orderLineView.getIntInput();
 	}
 
-	// Method for viewing all the orderlines in the current order
-	public void viewAllOrderlinesInCurrentOrder(Order order) {
+	// Method for viewing all the orderLines in the current order
+	public void viewAllOrderLinesInCurrentOrder(Order order) {
 
 		if (order.getTotalOrderLines().isEmpty()) {
 			orderLineView.printOrderIsEmpty();

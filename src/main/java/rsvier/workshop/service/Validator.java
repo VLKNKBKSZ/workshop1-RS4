@@ -18,7 +18,7 @@ public class Validator {
 			System.out.println("Uw wachtwoord mag geen spatie bevatten.");
 			return false;
 		}
-		if (!(password.matches("^[1-9][0-9]{3}\\\\s?[a-zA-Z]{2}$"))) {
+		if (!(password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{8,}$"))) {
 			System.out.println(
 				"Uw wachtwoord moet minstens een hoofdletter, een kleine letter, een getal \nen een speciaal "
 				+ "leesteken bevatten en uit minimaal 8 karakters bestaan.");

@@ -129,7 +129,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return getOrderId() + " " + getTotalOrderLines() + getPerson().getLastName() + getPerson().getName() + " "
+		return getOrderId() + " " + getTotalOrderLines() + getPerson().getName() + " " + getPerson().getLastName() + " "
 				+ getTotalPrice();
 	}
 

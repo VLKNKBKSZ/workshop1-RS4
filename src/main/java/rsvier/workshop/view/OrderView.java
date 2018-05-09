@@ -1,5 +1,7 @@
 package rsvier.workshop.view;
 
+import rsvier.workshop.domain.Order;
+
 public class OrderView extends View {
 
 	@Override
@@ -39,6 +41,10 @@ public class OrderView extends View {
 	
 	public void printOrderHasBeenPlaced() {
 		System.out.println("Uw bestelling is geplaatst.");
+	}
+
+	public void printOrdersFound(Order order) {
+		System.out.println(order.getPerson().getPersonId() + " " + order.getPerson().getName() + " " + order.getPerson().getLastName());
 	}
 
 }

@@ -52,6 +52,10 @@ public class OrderController extends Controller {
 
 		}	else {
 
+			for (OrderLine orderLine: order.getTotalOrderLines()) {
+				System.out.println(orderLine.toString());
+			}
+
 			orderView.printAskUserToUpdateOrDeleteProduct();
 			int menuNumber = orderView.getIntInput();
 
@@ -120,14 +124,14 @@ public class OrderController extends Controller {
 
 			if (orderList.size() == 1) {
 				
-				System.out.println(orderList.get(0).toString());
+				orderView.printOrdersFound(orderList.get(0));
 
 				return orderList.get(0);
 
 			} else {
 
 				for (int i = 1; i < orderList.size(); i++) {
-					System.out.println("No. " + i + " : " + orderList.get(i - 1).toString());
+					orderView.printOrdersFound(orderList.get(i - 1));
 				}
 			}
 

@@ -87,16 +87,8 @@ public class OrderController extends Controller {
 		switch(menuNumber) {
 		
 		case 1: //Go to orderLine
+				orderLineController.viewAllOrderLinesInCurrentOrder(order);
 				
-				for(OrderLine orderline: order.getTotalOrderLines())	{
-					
-					System.out.println("1-" + orderline.toString());
-				}
-			
-				orderView.printWhatOrderToUpdate();
-				int choice = orderView.getIntInput();
-				
-				editOrderLines(choice, order);
 				break;
 				
 		case 2: //Add orderLines to order
@@ -104,12 +96,25 @@ public class OrderController extends Controller {
 			
 		case 3: //Completely destroy order till eternity
 				break;
+		
+		case 4: //Save changes in the database
+				
+				break;
+		
 		default: 
 				break;
 		}
 				
 	}
 	
+	
+	
+	/*	orderView.printWhatOrderToUpdate();
+		int choice = orderView.getIntInput();
+		
+		editOrderLines(choice, order);
+}
+*/
 	
 	
 	
@@ -119,9 +124,10 @@ public class OrderController extends Controller {
 		//First print out the choosen orderline
 		System.out.println(order.getTotalOrderLines().get(choice - 1));
 		
-		orderView.print
+	//	orderView.print
 		
 	}
+	
 
 	public void selectOrderSearchMenuSwitch() {
 

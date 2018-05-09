@@ -147,8 +147,15 @@ public class OrderLineController extends Controller {
 		for (OrderLine orderLine: orderLines) {
 
 			if (retrievedProduct.getName().equalsIgnoreCase(orderLine.getProduct().getName())){
-				orderLine.setNumberOfProducts(orderLine.getNumberOfProducts() + requestProduct);
+				int previousNumberOfProducts = orderLine.getNumberOfProducts();
+
+				//set numberOfProducts to the new number and reduct this from database
+				orderLine.setNumberOfProducts(requestProduct);
 				updateProductInDatabase(orderLine);
+
+				//add both product numbers together in same orderline
+				orderLine.setNumberOfProducts(orderLine.getNumberOfProducts() + previousNumberOfProducts);
+				
 				return true;
 			}
 		}

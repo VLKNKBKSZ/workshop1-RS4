@@ -88,9 +88,9 @@ public class CustomerController extends Controller {
 							accountDao.deleteAccount(person.getAccount());
 							personDao.deletePerson(person);
 
-						} else {
-						runView();
 						}
+						runView();
+
 					break;
 			case 0: // back to previous menu
 					runView();

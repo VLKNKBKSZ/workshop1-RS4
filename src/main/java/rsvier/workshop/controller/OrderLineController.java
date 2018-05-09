@@ -56,6 +56,7 @@ public class OrderLineController extends Controller {
 				break;
 
 			case 4: // Cancel order
+
 				placingOrder = false;
 				MainController.setController(TypeOfController.ORDER);
 				break;
@@ -65,6 +66,17 @@ public class OrderLineController extends Controller {
 			}
 		}
 
+	}
+
+	public void cancelAllOrderLines(Order order) {
+		List<OrderLine> orderLines = order.getTotalOrderLines();
+
+		for (OrderLine orderLine: orderLines) {
+			Product product = productDAO.getProductByName(orderLine.getProduct().getName());
+
+			product.setStock(product.getStock() + orderLine.getNumberOfProducts());
+			productDAO.updateProduct(product);
+		}
 	}
 
 	// Save order and order lines
@@ -110,6 +122,9 @@ public class OrderLineController extends Controller {
 
 				// Add the created orderline to the order
 				order.getTotalOrderLines().add(orderLine);
+
+				// Update stock in database
+				updateProductInDatabase(orderLine);
 
 			} else {
 				orderLineView.printProductStockIsNotAvailable(retrievedProduct.getStock(), requestedProduct);

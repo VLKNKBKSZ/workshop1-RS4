@@ -147,7 +147,7 @@ public class OrderLineController extends Controller {
 	// Method for showing total price
 	public void showTotalPriceOfCurrentOrder(BigDecimal totalPrice) {
 
-		System.out.println("\nTotale prijs van de bestelling: € " + totalPrice + "\n3");
+		System.out.println("\nTotale prijs van de bestelling: € " + totalPrice + "\n");
 	}
 
 	// Method of getting total price of an order

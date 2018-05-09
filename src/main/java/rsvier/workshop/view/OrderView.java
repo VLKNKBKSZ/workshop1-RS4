@@ -44,7 +44,7 @@ public class OrderView extends View {
 	}
 
 	public void printOrdersFound(Order order) {
-		System.out.println(order.getPerson().getPersonId() + " " + order.getPerson().getName() + " " + order.getPerson().getLastName());
+		System.out.println(order.getOrderId() + " " + order.getOrderDateTime() + " " + order.getTotalPrice());
 	}
 
 }

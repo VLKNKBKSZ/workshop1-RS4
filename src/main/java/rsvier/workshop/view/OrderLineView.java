@@ -25,7 +25,7 @@ public class OrderLineView extends View {
 	}
 
 	public void printProductStockIsNotAvailable(int stockFromDatabase, int requestedAmountOfProducts) {
-		System.out.println("Het aantal wat u heeft ingevoerd is " + requestedAmountOfProducts + "De voorraad voor dit product is " + stockFromDatabase + " Probeer het nogmaals.\n");
+		System.out.println("Het aantal wat u heeft ingevoerd is " + requestedAmountOfProducts + ". De voorraad voor dit product is " + stockFromDatabase + ". Probeer het nogmaals.\n");
 	}
 	
 	

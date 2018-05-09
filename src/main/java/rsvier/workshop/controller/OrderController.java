@@ -62,9 +62,12 @@ public class OrderController extends Controller {
 			switch (menuNumber) {
 
 				case 1:// Update order
-
+						updateExistingOrder(order);
+						break;
+						
 				case 2: // Delete order
-					orderDao.deleteOrder(order);
+						orderDao.deleteOrder(order);
+						break;
 
 				case 0:// Go back to previous Menu
 
@@ -74,6 +77,26 @@ public class OrderController extends Controller {
 
 			}
 		}
+	}
+	
+	public void updateExistingOrder(Order order) {
+		
+		int menuNumber = orderView.getIntInput();
+		
+		switch(menuNumber) {
+		
+		case 1: //Change amount of products in existing orderline
+				break;
+				
+		case 2: //Add products to order
+				break;
+			
+		case 3: //Completely destroy order till eternity
+				break;
+		default: 
+				break;
+		}
+				
 	}
 
 	public void selectOrderSearchMenuSwitch() {

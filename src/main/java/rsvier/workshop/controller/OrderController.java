@@ -81,14 +81,25 @@ public class OrderController extends Controller {
 	
 	public void updateExistingOrder(Order order) {
 		
+		orderView.printUpdateExistingOrder();
 		int menuNumber = orderView.getIntInput();
 		
 		switch(menuNumber) {
 		
-		case 1: //Change amount of products in existing orderline
+		case 1: //Go to orderLine
+				
+				for(OrderLine orderline: order.getTotalOrderLines())	{
+					
+					System.out.println("1-" + orderline.toString());
+				}
+			
+				orderView.printWhatOrderToUpdate();
+				int choice = orderView.getIntInput();
+				
+				editOrderLines(choice, order);
 				break;
 				
-		case 2: //Add products to order
+		case 2: //Add orderLines to order
 				break;
 			
 		case 3: //Completely destroy order till eternity
@@ -97,6 +108,19 @@ public class OrderController extends Controller {
 				break;
 		}
 				
+	}
+	
+	
+	
+	
+	//with the number you pick the index in the arraylist you want to edit
+	public void editOrderLines(int choice, Order order)	{
+		
+		//First print out the choosen orderline
+		System.out.println(order.getTotalOrderLines().get(choice - 1));
+		
+		orderView.print
+		
 	}
 
 	public void selectOrderSearchMenuSwitch() {

@@ -47,6 +47,18 @@ public class OrderView extends View {
 		System.out.println(order.getOrderId() + " " + order.getOrderDateTime() + " " + order.getTotalPrice());
 	}
 
+	public void printUpdateExistingOrder() {
+		System.out.println("\n1- Ga naar bestelregel\n2- Bestelregels toevoegen\n3- Verwijder "
+				+ "de gehele bestelling");
+	}
+	
+	public void printUpdateExistingOrderLine() {
+		System.out.println("\n1- Pas bestelregel aan\n2- Verwijder bestelregel \n3- Terug naar vorig menu");
+	}
+	
+	public void printWhatOrderToUpdate() {
+		System.out.println("\nWelke bestelregel wilt u aanpassen?");
+	}
 }
 
 

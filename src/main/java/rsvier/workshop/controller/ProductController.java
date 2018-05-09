@@ -212,8 +212,6 @@ public class ProductController extends Controller {
 	// Method for updating product
 
 	public void updateProduct(Product product) {
-		List<Product> productList = new ArrayList<>();
-		productList.add(product);
-		productDAO.updateProduct(productList);
+		productDAO.updateProduct(product);
 	}
 }

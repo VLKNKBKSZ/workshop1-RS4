@@ -67,7 +67,7 @@ public class OrderLineController extends Controller {
 
 	}
 
-	// Save order, order lines and update product stocks in database
+	// Save order and order lines
 	public void saveOrderAndOrderLinesInDatabase(Order order) {
 
 		order.setOrderDateTime(LocalDateTime.now());
@@ -77,9 +77,6 @@ public class OrderLineController extends Controller {
 
 		// Create orderLines
 		orderLineDAO.createOrderLine(order.getTotalOrderLines(), orderId);
-
-		// Update Products
-		updateProductInDatabase(order.getTotalOrderLines());
 
 	}
 
@@ -169,28 +166,23 @@ public class OrderLineController extends Controller {
 
 	// Method to check product stock
 
-	public boolean checkProductStock(int requestedAmpountOfProduct, Product product) {
+	public boolean checkProductStock(int requestedAmountOfProduct, Product product) {
 
-		if (requestedAmpountOfProduct <= product.getStock()) {
+		if (requestedAmountOfProduct <= product.getStock()) {
 			return true;
 		}
+
 		return false;
 	}
 
 	// Update product stock
-	public void updateProductInDatabase(List<OrderLine> orderLineList) {
+	public void updateProductInDatabase(OrderLine orderLine) {
 
-		// Declare an ArrayList to hold product that has been updated product stock
-		List<Product> productList = new ArrayList<>();
+		Product product = orderLine.getProduct();
 
-		for (OrderLine orderLine : orderLineList) {
+		// deduct numberOfProducts that customer ordered from product stock
+		product.setStock((product.getStock() - orderLine.getNumberOfProducts()));
 
-			Product product = orderLine.getProduct();
-			// deduct numberOfProducts that customer ordered from product stock
-			product.setStock((product.getStock() - orderLine.getNumberOfProducts()));
-			productList.add(product);
-		}
-		productDAO.updateProduct(productList);
-
+		productDAO.updateProduct(product);
 	}
 }

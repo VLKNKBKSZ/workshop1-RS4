@@ -56,7 +56,7 @@ public class OrderLineController extends Controller {
 				break;
 
 			case 4: // Cancel order
-
+				cancelAllOrderLines(order);
 				placingOrder = false;
 				MainController.setController(TypeOfController.ORDER);
 				break;

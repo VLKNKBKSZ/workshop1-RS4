@@ -57,3 +57,10 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+/log.xml.1.lck
+/log.xml.1
+/log.xml.2
+/log.xml.2.lck
+/log.xml.lck
+/log.xml.3
+/log.xml.3.lck

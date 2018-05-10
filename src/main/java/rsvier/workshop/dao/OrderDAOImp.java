@@ -14,6 +14,7 @@ public class OrderDAOImp implements OrderDAO {
 
 	private Logger logger = LogConnection.getLogger();
 	private PersonDAOImp personDAO = new PersonDAOImp();
+	private OrderLineDAO orderLineDAO = new OrderLineDAOImp();
 
 	/*
 	 * Static LocalDate parse(CharSequence text, DateTimeFormatter formatter)
@@ -80,6 +81,7 @@ public class OrderDAOImp implements OrderDAO {
 
 					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 					orderBuilder.orderId(resultSet.getInt(1));
+					orderBuilder.totalOrderLines(orderLineDAO.getAllOrderLinesFromOrder(getOrderById(resultSet.getInt(1))));
 					orderBuilder.person(personDAO.getPersonById(resultSet.getInt(2)));
 					orderBuilder.totalPrice(resultSet.getBigDecimal(3));
 					LocalDateTime parsedDate = LocalDateTime.parse(resultSet.getString(4));

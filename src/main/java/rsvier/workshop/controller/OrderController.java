@@ -27,107 +27,94 @@ public class OrderController extends Controller {
 		switch (menuNumber) {
 
 		case 1: // Search order
-				selectOrderSearchMenuSwitch();
-				break;
-				
+			selectOrderSearchMenuSwitch();
+			break;
+
 		case 2: // Create order for a customer
-				doCreateOrder((customerController.searchCustomerByLastName()));
-				break;
-				
+			doCreateOrder((customerController.searchCustomerByLastName()));
+			break;
+
 		case 0: // Go back to previous menu
-				MainController.setController(TypeOfController.EMPLOYEE);
-				break;
-				
-		default:	orderView.printMenuInputIsWrong();
-				runView();
-				break;
+			MainController.setController(TypeOfController.EMPLOYEE);
+			break;
+
+		default:
+			orderView.printMenuInputIsWrong();
+			runView();
+			break;
 		}
 	}
 
 	public void updateOrDeleteOrderSwitch(Order order) {
 
-		if(order == null) {
-			orderView.printOrderNotFound();
+		orderView.printAskUserToUpdateOrDeleteProduct();
+		int menuNumber = orderView.getIntInput();
+
+		switch (menuNumber) {
+
+		case 1:// Update order
+			updateExistingOrder(order);
+			break;
+
+		case 2: // Delete order
+			doDeleteOrder(order);
+			break;
+
+		case 0:// Go back to previous Menu
+
+		default:
+			orderView.printMenuInputIsWrong();
 			runView();
 
-		}	else {
-
-			for (OrderLine orderLine: order.getTotalOrderLines()) {
-				System.out.println(orderLine.toString());
-			}
-
-			orderView.printAskUserToUpdateOrDeleteProduct();
-			int menuNumber = orderView.getIntInput();
-
-			switch (menuNumber) {
-
-				case 1:// Update order
-						updateExistingOrder(order);
-						break;
-						
-				case 2: // Delete order
-						orderDao.deleteOrder(order);
-						break;
-
-				case 0:// Go back to previous Menu
-
-				default:
-					orderView.printMenuInputIsWrong();
-					runView();
-
-			}
 		}
 	}
-	
+
 	public void updateExistingOrder(Order order) {
-		
+
 		orderView.printUpdateExistingOrder();
+
 		int menuNumber = orderView.getIntInput();
-		
-		switch(menuNumber) {
-		
-		case 1: //Go to orderLine
-				orderLineController.viewAllOrderLinesInCurrentOrder(order);
-				
-				break;
-				
-		case 2: //Add orderLines to order
-				break;
+
+		switch (menuNumber) {
+
+		case 1: // Go to orderLine
+
+			orderLineController.viewAllOrderLinesInCurrentOrder(order);
 			
-		case 3: //Completely destroy order till eternity
-				break;
-		
-		case 4: //Save changes in the database
-				
-				break;
-		
-		default: 
-				break;
+
+			break;
+
+		case 2: // Add orderLines to order
+			break;
+
+		case 3: // Completely destroy order till eternity
+			break;
+
+		case 4: // Save changes in the database
+
+			break;
+
+		default:
+			break;
 		}
-				
+
 	}
-	
-	
-	
-	/*	orderView.printWhatOrderToUpdate();
-		int choice = orderView.getIntInput();
-		
-		editOrderLines(choice, order);
-}
-*/
-	
-	
-	
-	//with the number you pick the index in the arraylist you want to edit
-	public void editOrderLines(int choice, Order order)	{
-		
-		//First print out the choosen orderline
+
+	/*
+	 * orderView.printWhatOrderToUpdate(); int choice = orderView.getIntInput();
+	 * 
+	 * editOrderLines(choice, order); }
+	 */
+
+	// with the number you pick the index in the arraylist you want to edit
+	public void editOrderLines(int choice, Order order) {
+
+		// First print out the choosen orderline
 		System.out.println(order.getTotalOrderLines().get(choice - 1));
-		
-	//	orderView.print
-		
+
+		// orderView.print
+
 	}
-	
 
 	public void selectOrderSearchMenuSwitch() {
 
@@ -136,21 +123,21 @@ public class OrderController extends Controller {
 
 		switch (menuNumber) {
 		case 1:// Search order by order ID
-				updateOrDeleteOrderSwitch(searchOrderByOrderId());
-				break;
-				
+			updateOrDeleteOrderSwitch(searchOrderByOrderId());
+			break;
+
 		case 2:// Search order by customer last name
-				updateOrDeleteOrderSwitch(searchOrderByLastName(customerController.searchCustomerByLastName()));
-				break;
-				
+			updateOrDeleteOrderSwitch(searchOrderByLastName(customerController.searchCustomerByLastName()));
+			break;
+
 		case 0: // Back to previous menu
-				runView();
-				break;
-				
+			runView();
+			break;
+
 		default: // Back to this same menu
-				orderView.printMenuInputIsWrong();
-				selectOrderSearchMenuSwitch();
-				break;
+			orderView.printMenuInputIsWrong();
+			selectOrderSearchMenuSwitch();
+			break;
 		}
 	}
 
@@ -160,31 +147,31 @@ public class OrderController extends Controller {
 		List<Order> orderList = new ArrayList<>();
 
 		if (person == null) {
-			
+
 			customerView.printCustomerNotFound();
 			runView();
-			
+
 		} else {
 
 			orderList = orderDao.getAllOrdersFromPerson(person);
-			
 
 			if (orderList.size() == 0) {
-				
-				//print "Geen bestellingen gevonden"
+
+				// print "Geen bestellingen gevonden"
 				return null;
 			}
 
 			if (orderList.size() == 1) {
-				
-				orderView.printOrdersFound(orderList.get(0));
+
+				orderView.printOrdersFound("Order nummer:", 1, orderList.get(0));
 
 				return orderList.get(0);
 
 			} else {
 
-				for (int i = 1; i < orderList.size(); i++) {
-					orderView.printOrdersFound(orderList.get(i - 1));
+				for (int i = 0; i < orderList.size(); i++) {
+
+					orderView.printOrdersFound("Order nummer:", i + 1, orderList.get(i));
 				}
 			}
 
@@ -208,29 +195,37 @@ public class OrderController extends Controller {
 		return orderDao.getOrderById(orderView.getIntInput());
 	}
 
-	
-	
+	public void doDeleteOrder(Order order) {
+
+		if (orderView.confirmYesOrNo().equalsIgnoreCase("J")) {
+			orderDao.deleteOrder(order);
+			orderView.printOrderSuccessFullyDeleted();
+			runView();
+		} else {
+			runView();
+		}
+
+	}
+
 	public void doCreateOrder(Person person) {
 
-		//check if person was found
+		// check if person was found
 		if (person == null) {
 			runView();
 		} else {
 
-			//Build an order object with the person object
+			// Build an order object with the person object
 			Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 			orderBuilder.person(person);
 			Order order = orderBuilder.build();
 			order.getPerson().toString();
 			order.toString();
-			
-			//Pass the order to the switch in the orderLineController
+
+			// Pass the order to the switch in the orderLineController
 			orderLineController.orderLineMenuSwitch(order);
-			
 
 		}
-		
+
 	}
-	
 
 }

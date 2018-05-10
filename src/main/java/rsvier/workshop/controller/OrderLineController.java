@@ -18,6 +18,7 @@ public class OrderLineController extends Controller {
 	private OrderLineDAO orderLineDAO = new OrderLineDAOImp();
 	private OrderDAO orderDAO = new OrderDAOImp();
 
+	
 	@Override
 	public void runView() {
 		orderLineView.printHeaderMessage();
@@ -25,6 +26,8 @@ public class OrderLineController extends Controller {
 		// orderLineMenuSwitch(orderLineView.getIntInput());
 	}
 
+	
+	
 	public void orderLineMenuSwitch(Order order) {
 
 		// As long as placingOrder is true, the orderlines are being created and added
@@ -68,6 +71,8 @@ public class OrderLineController extends Controller {
 
 	}
 
+	
+	
 	public void cancelAllOrderLines(Order order) {
 		List<OrderLine> orderLines = order.getTotalOrderLines();
 
@@ -79,6 +84,8 @@ public class OrderLineController extends Controller {
 		}
 	}
 
+	
+	
 	// Save order and order lines
 	public void saveOrderAndOrderLinesInDatabase(Order order) {
 
@@ -92,6 +99,8 @@ public class OrderLineController extends Controller {
 
 	}
 
+	
+	
 	// Add order lines into order
 	public void addOrderLineToOrder(Order order) {
 
@@ -141,6 +150,8 @@ public class OrderLineController extends Controller {
 		}
 	}
 
+	
+	
 	public boolean checkForDuplicateProductInOrderLines(Order order, int requestProduct, Product retrievedProduct) {
 		List<OrderLine> orderLines = order.getTotalOrderLines();
 
@@ -162,6 +173,8 @@ public class OrderLineController extends Controller {
 		return false;
 	}
 
+	
+	
 	// Method for asking how many copies of the product
 	public int requestAmountOfProducts() {
 
@@ -169,6 +182,8 @@ public class OrderLineController extends Controller {
 		return orderLineView.getIntInput();
 	}
 
+	
+	
 	// Method for viewing all the orderLines in the current order
 	public void viewAllOrderLinesInCurrentOrder(Order order) {
 
@@ -182,6 +197,8 @@ public class OrderLineController extends Controller {
 		}
 	}
 
+	
+	
 	// Method for showing total price
 	public void showTotalPriceOfCurrentOrder(BigDecimal totalPrice) {
 
@@ -205,6 +222,8 @@ public class OrderLineController extends Controller {
 		return totalPriceOfOrder;
 	}
 
+	
+	
 	// Method to check product stock
 
 	public boolean checkProductStock(int requestedAmountOfProduct, Product product) {
@@ -216,6 +235,8 @@ public class OrderLineController extends Controller {
 		return false;
 	}
 
+	
+	
 	// Update product stock
 	public void updateProductInDatabase(OrderLine orderLine) {
 

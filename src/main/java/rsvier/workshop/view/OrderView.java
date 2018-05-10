@@ -14,7 +14,7 @@ public class OrderView extends View {
 		System.out.println("\n1- Zoek bestelling\n2- Plaats bestelling\n0- Verlaat bestellingbeheer");
 	}
 
-	public void printAskUserToUpdateOrDeleteProduct() {
+	public void printAskUserToUpdateOrDeleteOrder() {
 		System.out.println("1- Bestelling aanpassen\n2- Bestelling verwijderen\n0- Terug naar vorige menu");
 		
 	}
@@ -28,11 +28,11 @@ public class OrderView extends View {
 	}
 	
 	public void printOrderNotFound() {
-		System.out.println("De bestelling is niet gevonden. Probeert u het nogmaals.");	
+		System.out.println("De bestelling is niet gevonden. Probeert u het nogmaals.\n");	
 	}
 	
 	public void printAskSelectOrder() {
-		System.out.println("Kies het nummer van de bestelling die u wilt bekijken");	
+		System.out.println("\nKies het nummer van de bestelling die u wilt bekijken");	
 	}
 	
 	public void printAskOrderId() {

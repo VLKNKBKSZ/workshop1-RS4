@@ -90,13 +90,13 @@ public class AddressController extends Controller{
 			switch (choice) {
 
 				case 1: // update mail address
-						updateAddress(person, "mail");
+						updateAddressInDatabase(person, "mail");
 						break;
 				case 2: // update delivery address
-						updateAddress(person, "delivery");
+						updateAddressInDatabase(person, "delivery");
 						break;
 				case 3: // update invoice address
-						updateAddress(person, "invoice");
+						updateAddressInDatabase(person, "invoice");
 						break;
 				case 0: // back to previous menu
 						updating = false;
@@ -112,7 +112,7 @@ public class AddressController extends Controller{
 	}
 
 	
-	public void updateAddress(Person person, String addressType) {
+	public void updateAddressInDatabase(Person person, String addressType) {
 
 		List<Address> addressList = addressDAO.getAllAddressesForPerson(person.getPersonId());
 		Address oldAddress;

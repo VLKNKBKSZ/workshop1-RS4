@@ -15,19 +15,21 @@ public class OrderController extends Controller {
 	private OrderLineController orderLineController = new OrderLineController();
 	private CustomerView customerView = new CustomerView();
 
+	
 	@Override
 	public void runView() {
 		orderView.printHeaderMessage();
 		orderView.printMenuMessage();
-		orderMenuSwitch(orderView.getIntInput());
+		searchCreateOrderMenuSwitch(orderView.getIntInput());
 	}
 
-	public void orderMenuSwitch(int menuNumber) {
+	
+	public void searchCreateOrderMenuSwitch(int menuNumber) {
 
 		switch (menuNumber) {
 
 		case 1: // Search order
-				selectOrderSearchMenuSwitch();
+				searchOrderSwitch();
 				break;
 				
 		case 2: // Create order for a customer
@@ -44,25 +46,57 @@ public class OrderController extends Controller {
 		}
 	}
 
+	
+	//Search order by order-id or customer last name
+	
+	public void searchOrderSwitch() {
+
+		orderView.printAskSearchOrderByNumberOrByName();
+		int menuNumber = orderView.getIntInput();
+
+		switch (menuNumber) {
+		case 1:// Search order by order ID
+				updateOrDeleteOrderSwitch(searchOrderByOrderId());
+				break;
+				
+		case 2:// Search order by customer last name
+				updateOrDeleteOrderSwitch(searchOrderByLastName(customerController.searchCustomerByLastName()));
+				break;
+				
+		case 0: // Back to previous menu
+				runView();
+				break;
+				
+		default: // Back to this same menu
+				orderView.printMenuInputIsWrong();
+				searchOrderSwitch();
+				break;
+		}
+	}
+	
+	
 	public void updateOrDeleteOrderSwitch(Order order) {
-
-		if(order == null) {
+		
+		//Check if given order id exists in database, else go back to menu
+		do {
 			orderView.printOrderNotFound();
-			runView();
-
-		}	else {
-
-			for (OrderLine orderLine: order.getTotalOrderLines()) {
-				System.out.println(orderLine.toString());
+			searchOrderSwitch();
 			}
+			while(order == null);
+			
+		//Print the orderlines in the order
+		for (OrderLine orderLine: order.getTotalOrderLines()) {
+				
+			System.out.println(orderLine.toString());
+		}
 
-			orderView.printAskUserToUpdateOrDeleteProduct();
-			int menuNumber = orderView.getIntInput();
+		orderView.printAskUserToUpdateOrDeleteOrder();
+		int menuNumber = orderView.getIntInput();
 
-			switch (menuNumber) {
+		switch (menuNumber) {
 
 				case 1:// Update order
-						updateExistingOrder(order);
+						updateExistingOrderSwitch(order);
 						break;
 						
 				case 2: // Delete order
@@ -74,35 +108,100 @@ public class OrderController extends Controller {
 				default:
 					orderView.printMenuInputIsWrong();
 					runView();
-
-			}
-		}
+		}	
 	}
 	
-	public void updateExistingOrder(Order order) {
+	
+	// Search order by OrderId
+	public Order searchOrderByOrderId() {
+
+		orderView.printAskOrderId();
+
+		return orderDao.getOrderById(orderView.getIntInput());
+	}
 		
-		orderView.printUpdateExistingOrder();
-		int menuNumber = orderView.getIntInput();
+	
+
+	// Search order by Last name
+	public Order searchOrderByLastName(Person person) {
+
+		List<Order> orderList = new ArrayList<>();
+
+		if (person == null) {
+
+			customerView.printCustomerNotFound();
+			searchOrderSwitch();
+
+		} else {
+
+			orderList = orderDao.getAllOrdersFromPerson(person);
+
+			if (orderList.size() == 0) {
+
+				// print "Geen bestellingen gevonden"
+				return null;
+			}
+
+			if (orderList.size() == 1) {
+
+				orderView.printOrdersFound(orderList.get(0));
+
+				return orderList.get(0);
+
+			} else {
+
+				for (int i = 1; i < orderList.size(); i++) {
+					orderView.printOrdersFound(orderList.get(i - 1));
+				}
+			}
+		}
+
+		return orderList.get(selectOrder() - 1);
+	}
+
 		
-		switch(menuNumber) {
+	
+	public int selectOrder() {
+
+		orderView.printAskSelectOrder();
+
+		return orderView.getIntInput();
+	}
+
+	
+	
+	public void updateExistingOrderSwitch(Order order) {
 		
-		case 1: //Go to orderLine
-				orderLineController.viewAllOrderLinesInCurrentOrder(order);
-				
-				break;
-				
-		case 2: //Add orderLines to order
-				break;
+		Boolean updating = true;
+		while (updating) {
 			
-		case 3: //Completely destroy order till eternity
-				break;
+			orderView.printUpdateExistingOrder();
+			int menuNumber = orderView.getIntInput();
 		
-		case 4: //Save changes in the database
+			switch(menuNumber) {
+		
+			case 1: //Go to orderLine
+					orderLineController.viewAllOrderLinesInCurrentOrder(order);
 				
-				break;
+					break;
+				
+			case 2: //Add orderLines to order
+					orderLineController.addOrderLineToOrder(order);
+					break;
+			
+			case 3: //Delete order
+					break;
 		
-		default: 
-				break;
+			case 4: //Save changes in the database
+				
+					updating = false;
+					break;
+					
+			case 0: updating = false;
+					break;
+			default: 
+					break;
+			}
 		}
 				
 	}
@@ -129,86 +228,6 @@ public class OrderController extends Controller {
 	}
 	
 
-	public void selectOrderSearchMenuSwitch() {
-
-		orderView.printAskSearchOrderByNumberOrByName();
-		int menuNumber = orderView.getIntInput();
-
-		switch (menuNumber) {
-		case 1:// Search order by order ID
-				updateOrDeleteOrderSwitch(searchOrderByOrderId());
-				break;
-				
-		case 2:// Search order by customer last name
-				updateOrDeleteOrderSwitch(searchOrderByLastName(customerController.searchCustomerByLastName()));
-				break;
-				
-		case 0: // Back to previous menu
-				runView();
-				break;
-				
-		default: // Back to this same menu
-				orderView.printMenuInputIsWrong();
-				selectOrderSearchMenuSwitch();
-				break;
-		}
-	}
-
-	// Search order by Last name
-	public Order searchOrderByLastName(Person person) {
-
-		List<Order> orderList = new ArrayList<>();
-
-		if (person == null) {
-			
-			customerView.printCustomerNotFound();
-			runView();
-			
-		} else {
-
-			orderList = orderDao.getAllOrdersFromPerson(person);
-			
-
-			if (orderList.size() == 0) {
-				
-				//print "Geen bestellingen gevonden"
-				return null;
-			}
-
-			if (orderList.size() == 1) {
-				
-				orderView.printOrdersFound(orderList.get(0));
-
-				return orderList.get(0);
-
-			} else {
-
-				for (int i = 1; i < orderList.size(); i++) {
-					orderView.printOrdersFound(orderList.get(i - 1));
-				}
-			}
-
-		}
-
-		return orderList.get(selectOrder() - 1);
-	}
-
-	public int selectOrder() {
-
-		orderView.printAskSelectOrder();
-
-		return orderView.getIntInput();
-	}
-
-	// Search order by OrderId
-	public Order searchOrderByOrderId() {
-
-		orderView.printAskOrderId();
-
-		return orderDao.getOrderById(orderView.getIntInput());
-	}
-
-	
 	
 	public void doCreateOrder(Person person) {
 
@@ -227,10 +246,9 @@ public class OrderController extends Controller {
 			//Pass the order to the switch in the orderLineController
 			orderLineController.orderLineMenuSwitch(order);
 			
-
 		}
 		
-	}
+}
 	
 
 }

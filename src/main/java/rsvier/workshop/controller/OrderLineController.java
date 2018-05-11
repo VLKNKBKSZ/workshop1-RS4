@@ -178,58 +178,76 @@ public class OrderLineController extends Controller {
 		}
 
 		for (int i = 0; i < order.getTotalOrderLines().size(); i++) {
-			System.out.println("Bestelregel nummer" + (i+1) +order.getTotalOrderLines().get(i).toString());
-			
+			System.out.println("Bestelregel nummer" + (i + 1) + order.getTotalOrderLines().get(i).toString());
+
 		}
 
 	}
 
 	public void editOrDeleteOrderLineSwitchMenu(Order order) {
 		
-		OrderLine selectedOrderLine = viewAndSelectOrderLine(order);  // show orderLineList and select order line
-		orderLineView.printEditOrDeleteOrderLine();   // ask to choose edit or delete order lines
+		// show orderLineList and select order line
+		OrderLine selectedOrderLine = viewAndSelectOrderLine(order);
+		// ask to choose edit or delete order lines
+		orderLineView.printEditOrDeleteOrderLine();
 		int menuNumber = orderLineView.getIntInput();
+		boolean updating = true;
+		
+		while (updating) {
+			switch (menuNumber) {
 
-		switch (menuNumber) {
+			case 1: // update order line
+				updateNumberOfProductsInOrderLine(selectedOrderLine);
 
-		case 1:
-			OrderLine updatedOrderLine = updateNumberOfProductsInOrderLine(selectedOrderLine);
-			
-			break;
-			
-		case 2:
-			
-			//deleteOrderLineFromOrder();
-			break;
+				break;
 
-		default:
+			case 2: // delete order line
+
+				// deleteOrderLineFromOrder();
+				break;
+
+			case 3: // save changes in database
+
+				break;
+
+			case 4: // cancel changes
+
+				break;
+				
+			case 0: // back to previous menu
+
+				break;
+				
+			default:
+				break;
+			}
 		}
 	}
 
 	public OrderLine viewAndSelectOrderLine(Order order) {
-		
+
 		viewAllOrderLinesInCurrentOrder(order);
 		System.out.println(order.toString());
-		
+
 		List<OrderLine> orderLineList = order.getTotalOrderLines();
-		
-		if(orderLineList.size() == 1) {
-			
+
+		if (orderLineList.size() == 1) {
+
 			return orderLineList.get(0);
-			
-		}else {
-			
+
+		} else {
+
 			orderLineView.printAskUserToChoseOrderLine();
 			int choice = orderLineView.getIntInput();
-			
-			while(choice < 1 | choice > orderLineList.size()) {
-				
+
+			while (choice < 1 | choice > orderLineList.size()) {
+
 				orderLineView.printMenuInputIsWrong();
 				choice = orderLineView.getIntInput();
 			}
-			return orderLineList.get(choice -1);
+			return orderLineList.get(choice - 1);
 		}
-		
+
 	}
 
 	// Method for showing total price
@@ -276,11 +294,11 @@ public class OrderLineController extends Controller {
 
 		productDAO.updateProduct(product);
 	}
-	
-	public OrderLine updateNumberOfProductsInOrderLine(OrderLine orderLine) {
+
+	public void updateNumberOfProductsInOrderLine(OrderLine orderLine) {
 		orderLineView.printAskNewNumberOfProductsInOrderLine();
 		int newNumberOfProducts = orderLineView.getIntInput();
-		 orderLine.setNumberOfProducts(newNumberOfProducts);
-		return orderLine;
+		orderLine.setNumberOfProducts(newNumberOfProducts);
+
 	}
 }

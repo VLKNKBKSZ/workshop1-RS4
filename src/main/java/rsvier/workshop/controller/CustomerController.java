@@ -123,7 +123,7 @@ public class CustomerController extends Controller {
 		} else {
 
 			for (int i = 0; i < customerList.size(); i++) {
-				System.out.println("No. " + i+1 + " : " + customerList.get(i).toString());
+				System.out.println("No. " + (i+1) + " : " + customerList.get(i).toString());
 			}
 
 		}

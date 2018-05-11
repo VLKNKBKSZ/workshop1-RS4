@@ -185,15 +185,18 @@ public class OrderLineController extends Controller {
 	}
 
 	public void editOrDeleteOrderLineSwitchMenu(Order order) {
-		
+
 		// show orderLineList and select order line
 		OrderLine selectedOrderLine = viewAndSelectOrderLine(order);
-		// ask to choose edit or delete order lines
-		orderLineView.printEditOrDeleteOrderLine();
-		int menuNumber = orderLineView.getIntInput();
+
 		boolean updating = true;
-		
+
 		while (updating) {
+
+			// ask to choose edit or delete order lines
+			orderLineView.printEditOrDeleteOrderLine();
+			int menuNumber = orderLineView.getIntInput();
+
 			switch (menuNumber) {
 
 			case 1: // update order line
@@ -207,17 +210,17 @@ public class OrderLineController extends Controller {
 				break;
 
 			case 3: // save changes in database
-
+				updating = false;
 				break;
 
 			case 4: // cancel changes
-
+				updating = false;
 				break;
-				
+
 			case 0: // back to previous menu
-
+				updating = false;
 				break;
-				
+
 			default:
 				break;
 			}
@@ -296,9 +299,23 @@ public class OrderLineController extends Controller {
 	}
 
 	public void updateNumberOfProductsInOrderLine(OrderLine orderLine) {
+
+		int oldNumberOfProducts = orderLine.getNumberOfProducts();
+		
 		orderLineView.printAskNewNumberOfProductsInOrderLine();
 		int newNumberOfProducts = orderLineView.getIntInput();
+		
+		Product retrievedProduct = productDAO.getProductById(orderLine.getProduct().getProductId());
+		
+		// check if product stock is available
+		while (!checkProductStock((newNumberOfProducts-oldNumberOfProducts), retrievedProduct)) {
+			orderLineView.printAskNewNumberOfProductsInOrderLine();
+			newNumberOfProducts = orderLineView.getIntInput();
+		}
+		
+		retrievedProduct.setStock(retrievedProduct.getStock() - (newNumberOfProducts-oldNumberOfProducts));
 		orderLine.setNumberOfProducts(newNumberOfProducts);
 
 	}
+
 }

@@ -92,4 +92,20 @@ public class OrderLine {
 				+ getProduct().getPrice().multiply(new BigDecimal(getNumberOfProducts()));
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrderLine other = (OrderLine) obj;
+		if (orderLineId != other.orderLineId)
+			return false;
+		return true;
+	}
+	
+	
+
 }

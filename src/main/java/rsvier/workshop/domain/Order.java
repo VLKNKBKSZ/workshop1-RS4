@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class Order {
+public class Order implements Cloneable {
 
 	private int orderId;
 	private List<OrderLine> listOfTotalOrderLines = new ArrayList<>();
@@ -132,5 +132,21 @@ public class Order {
 		return getOrderId() + " " + getTotalOrderLines() + getPerson().getName() + " " + getPerson().getLastName() + " "
 				+ getTotalPrice();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		if (orderId != other.orderId)
+			return false;
+		return true;
+	}
+	
+	
 
 }

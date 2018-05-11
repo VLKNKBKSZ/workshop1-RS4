@@ -205,8 +205,14 @@ public class OrderController extends Controller {
 			}
 
 		}
-
-		return orderList.get(selectOrder() - 1);
+		
+		int choice = selectOrder();
+		while(choice < 1 | choice > orderList.size()) {
+			orderView.printMenuInputIsWrong();
+			choice = selectOrder();
+		}
+		
+		return (orderList.get(choice - 1));
 	}
 
 	public int selectOrder() {

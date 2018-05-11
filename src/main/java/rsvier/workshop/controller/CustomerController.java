@@ -122,16 +122,22 @@ public class CustomerController extends Controller {
 
 		} else {
 
-			for (int i = 1; i < customerList.size(); i++) {
-				System.out.println("No. " + i + " : " + customerList.get(i - 1).toString());
+			for (int i = 0; i < customerList.size(); i++) {
+				System.out.println("No. " + i+1 + " : " + customerList.get(i).toString());
 			}
 
+		}
+		
+		int choice = selectCustomer();
+		while(choice < 1 | choice > customerList.size()) {
+			customerView.printMenuInputIsWrong();
+			choice = selectCustomer();
 		}
 
 		// Let user select specific person in case there is more than one persons with
 		// the same last name
 
-		return customerList.get(selectCustomer() - 1);
+		return customerList.get(choice - 1);
 	}
 
 	public int selectCustomer() {

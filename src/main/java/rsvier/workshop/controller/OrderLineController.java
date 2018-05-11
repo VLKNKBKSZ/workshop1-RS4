@@ -185,14 +185,15 @@ public class OrderLineController extends Controller {
 	}
 
 	public void editOrDeleteOrderLineSwitchMenu(Order order) {
-
-		orderLineView.printEditOrDeleteOrderLine();
+		
+		OrderLine selectedOrderLine = viewAndSelectOrderLine(order);  // show orderLineList and select order line
+		orderLineView.printEditOrDeleteOrderLine();   // ask to choose edit or delete order lines
 		int menuNumber = orderLineView.getIntInput();
 
 		switch (menuNumber) {
 
 		case 1:
-			viewAndSelectOrderLine(order);
+			OrderLine updatedOrderLine = updateNumberOfProductsInOrderLine(selectedOrderLine);
 			
 			break;
 			
@@ -274,5 +275,12 @@ public class OrderLineController extends Controller {
 		product.setStock((product.getStock() - orderLine.getNumberOfProducts()));
 
 		productDAO.updateProduct(product);
+	}
+	
+	public OrderLine updateNumberOfProductsInOrderLine(OrderLine orderLine) {
+		orderLineView.printAskNewNumberOfProductsInOrderLine();
+		int newNumberOfProducts = orderLineView.getIntInput();
+		 orderLine.setNumberOfProducts(newNumberOfProducts);
+		return orderLine;
 	}
 }

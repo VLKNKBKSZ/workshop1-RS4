@@ -35,6 +35,9 @@ public class OrderLineView extends View {
 		System.out.println("Het aantal wat u heeft ingevoerd is " + requestedAmountOfProducts + ". De voorraad voor dit product is " + stockFromDatabase + ". Probeer het nogmaals.\n");
 	}
 	
+	public void printAskNewNumberOfProductsInOrderLine() {
+		System.out.println("Voer het nieuwe aantal van de producten in a.u.b : \n");
+	}
 	
 
 }

@@ -109,7 +109,7 @@ public class OrderController extends Controller {
 		case 1: // Go to orderLine
 
 			orderLineController.viewAllOrderLinesInCurrentOrder(order);
-
+			System.out.println(order.toString());
 			break;
 
 		case 2: // Add orderLines to order

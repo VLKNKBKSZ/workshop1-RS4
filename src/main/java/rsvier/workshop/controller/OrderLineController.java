@@ -18,7 +18,6 @@ public class OrderLineController extends Controller {
 	private OrderLineDAO orderLineDAO = new OrderLineDAOImp();
 	private OrderDAO orderDAO = new OrderDAOImp();
 
-	
 	@Override
 	public void runView() {
 		orderLineView.printHeaderMessage();
@@ -26,8 +25,6 @@ public class OrderLineController extends Controller {
 		// orderLineMenuSwitch(orderLineView.getIntInput());
 	}
 
-	
-	
 	public void orderLineMenuSwitch(Order order) {
 
 		// As long as placingOrder is true, the orderlines are being created and added
@@ -71,12 +68,10 @@ public class OrderLineController extends Controller {
 
 	}
 
-	
-	
 	public void cancelAllOrderLines(Order order) {
 		List<OrderLine> orderLines = order.getTotalOrderLines();
 
-		for (OrderLine orderLine: orderLines) {
+		for (OrderLine orderLine : orderLines) {
 			Product product = productDAO.getProductByName(orderLine.getProduct().getName());
 
 			product.setStock(product.getStock() + orderLine.getNumberOfProducts());
@@ -84,8 +79,6 @@ public class OrderLineController extends Controller {
 		}
 	}
 
-	
-	
 	// Save order and order lines
 	public void saveOrderAndOrderLinesInDatabase(Order order) {
 
@@ -99,8 +92,6 @@ public class OrderLineController extends Controller {
 
 	}
 
-	
-	
 	// Add order lines into order
 	public void addOrderLineToOrder(Order order) {
 
@@ -123,7 +114,7 @@ public class OrderLineController extends Controller {
 			if (checkProductStock(requestedProduct, retrievedProduct)) {
 
 				// Check orderLines if product is already in the order
-				if(checkForDuplicateProductInOrderLines(order, requestedProduct,retrievedProduct)) {
+				if (checkForDuplicateProductInOrderLines(order, requestedProduct, retrievedProduct)) {
 					return;
 				}
 
@@ -150,31 +141,27 @@ public class OrderLineController extends Controller {
 		}
 	}
 
-	
-	
 	public boolean checkForDuplicateProductInOrderLines(Order order, int requestProduct, Product retrievedProduct) {
 		List<OrderLine> orderLines = order.getTotalOrderLines();
 
-		for (OrderLine orderLine: orderLines) {
+		for (OrderLine orderLine : orderLines) {
 
-			if (retrievedProduct.getName().equalsIgnoreCase(orderLine.getProduct().getName())){
+			if (retrievedProduct.getName().equalsIgnoreCase(orderLine.getProduct().getName())) {
 				int previousNumberOfProducts = orderLine.getNumberOfProducts();
 
-				//set numberOfProducts to the new number and reduct this from database
+				// set numberOfProducts to the new number and reduct this from database
 				orderLine.setNumberOfProducts(requestProduct);
 				updateProductInDatabase(orderLine);
 
-				//add both product numbers together in same orderline
+				// add both product numbers together in same orderline
 				orderLine.setNumberOfProducts(orderLine.getNumberOfProducts() + previousNumberOfProducts);
-				
+
 				return true;
 			}
 		}
 		return false;
 	}
 
-	
-	
 	// Method for asking how many copies of the product
 	public int requestAmountOfProducts() {
 
@@ -182,8 +169,6 @@ public class OrderLineController extends Controller {
 		return orderLineView.getIntInput();
 	}
 
-	
-	
 	// Method for viewing all the orderLines in the current order
 	public void viewAllOrderLinesInCurrentOrder(Order order) {
 
@@ -192,13 +177,61 @@ public class OrderLineController extends Controller {
 			runView();
 		}
 
-		for (OrderLine orderLine : order.getTotalOrderLines()) {
-			System.out.println("\n" + orderLine.toString());
+		for (int i = 0; i < order.getTotalOrderLines().size(); i++) {
+			System.out.println("Bestelregel nummer" + (i+1) +order.getTotalOrderLines().get(i).toString());
+			
+		}
+
+	}
+
+	public void editOrDeleteOrderLineSwitchMenu(Order order) {
+
+		orderLineView.printEditOrDeleteOrderLine();
+		int menuNumber = orderLineView.getIntInput();
+
+		switch (menuNumber) {
+
+		case 1:
+			viewAndSelectOrderLine(order);
+			
+			break;
+			
+		case 2:
+			
+			deleteOrderLineFromOrder();
+			break;
+
+		default:
 		}
 	}
 
-	
-	
+	public OrderLine viewAndSelectOrderLine(Order order) {
+		
+		viewAllOrderLinesInCurrentOrder(order);
+		System.out.println(order.toString());
+		
+		orderLineView.printAskUserToChoseOrderLine();
+		
+		
+		
+		List<OrderLine> orderLineList = order.getTotalOrderLines();
+		
+		if(orderLineList.size() == 1) {
+			
+			return orderLineList.get(0);
+			
+		}else {
+			orderLineView.printAskUserToChoseOrderLine();
+			int choice = orderLineView.getIntInput();
+			
+			while(choice)
+			
+			
+		}
+		
+		return;
+	}
+
 	// Method for showing total price
 	public void showTotalPriceOfCurrentOrder(BigDecimal totalPrice) {
 
@@ -222,8 +255,6 @@ public class OrderLineController extends Controller {
 		return totalPriceOfOrder;
 	}
 
-	
-	
 	// Method to check product stock
 
 	public boolean checkProductStock(int requestedAmountOfProduct, Product product) {
@@ -235,8 +266,6 @@ public class OrderLineController extends Controller {
 		return false;
 	}
 
-	
-	
 	// Update product stock
 	public void updateProductInDatabase(OrderLine orderLine) {
 

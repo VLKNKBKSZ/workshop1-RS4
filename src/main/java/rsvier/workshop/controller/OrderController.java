@@ -98,33 +98,42 @@ public class OrderController extends Controller {
 
 	}
 
+	
 	public void updateExistingOrder(Order order) {
 
-		orderView.printUpdateExistingOrder();
+		
+		boolean updating = true;
 
-		int menuNumber = orderView.getIntInput();
+		while (updating) {
+			
+			orderView.printUpdateExistingOrder();
 
-		switch (menuNumber) {
+			int menuNumber = orderView.getIntInput();
 
-		case 1: // Go to orderLine
+			switch (menuNumber) {
 
-			orderLineController.viewAllOrderLinesInCurrentOrder(order);
-			System.out.println(order.toString());
-			break;
+			case 1: // Go to orderLine
 
-		case 2: // Add orderLines to order
-			break;
+				orderLineController.editNumberOfProductsInsideTheOrderLine(order);
+				break;
 
-		case 3: // Completely destroy order till eternity
-			break;
+			case 2: // Add orderLines to order
+				
+				break;
 
-		case 4: // Save changes in the database
+			case 3: // Completely destroy order till eternity'
+				
+				updating = false;
+				
+				break;
 
-			break;
+			case 4: // Save changes in the database
+				updating = false;
+				break;
 
-		default:
-			break;
-
+			default:
+				break;
+			}
 		}
 
 	}
@@ -177,7 +186,6 @@ public class OrderController extends Controller {
 
 		if (person == null) {
 
-			
 			runView();
 
 		} else {
@@ -227,7 +235,7 @@ public class OrderController extends Controller {
 
 		orderView.printAskOrderId();
 		Order order = orderDao.getOrderById(orderView.getIntInput());
-		
+
 		if (order == null) {
 			orderView.printOrderNotFound();
 			runView();

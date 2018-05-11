@@ -55,7 +55,7 @@ public class OrderController extends Controller {
 
 		switch (menuNumber) {
 		case 1:// Search order by order ID
-			updateOrDeleteOrderSwitch(searchOrderByOrderId());
+			searchOrderByOrderId();
 			break;
 
 		case 2:// Search order by customer last name
@@ -152,7 +152,7 @@ public class OrderController extends Controller {
 
 		switch (menuNumber) {
 		case 1:// Search order by order ID
-			updateOrDeleteOrderSwitch(searchOrderByOrderId());
+		
 			break;
 
 		case 2:// Search order by customer last name
@@ -205,13 +205,13 @@ public class OrderController extends Controller {
 			}
 
 		}
-		
+
 		int choice = selectOrder();
-		while(choice < 1 | choice > orderList.size()) {
+		while (choice < 1 | choice > orderList.size()) {
 			orderView.printMenuInputIsWrong();
 			choice = selectOrder();
 		}
-		
+
 		return (orderList.get(choice - 1));
 	}
 
@@ -223,11 +223,16 @@ public class OrderController extends Controller {
 	}
 
 	// Search order by OrderId
-	public Order searchOrderByOrderId() {
+	public void searchOrderByOrderId() {
 
 		orderView.printAskOrderId();
-
-		return orderDao.getOrderById(orderView.getIntInput());
+		Order order = orderDao.getOrderById(orderView.getIntInput());
+		
+		if (order == null) {
+			runView();
+		} else {
+			updateOrDeleteOrderSwitch(order);
+		}
 	}
 
 	public void doDeleteOrder(Order order) {

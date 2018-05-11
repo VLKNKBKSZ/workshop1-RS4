@@ -4,7 +4,7 @@ import java.math.*;
 
 //Added this class to match the database EER diagram. Not sure how this will work with the database.
 
-public class OrderLine {
+public class OrderLine implements Cloneable {
 
 	private int orderLineId;
 	private Product product;

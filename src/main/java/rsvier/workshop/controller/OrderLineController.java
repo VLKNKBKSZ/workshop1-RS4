@@ -185,6 +185,9 @@ public class OrderLineController extends Controller {
 	}
 
 	public void editOrDeleteOrderLineSwitchMenu(Order order) {
+		
+	//	OrderLine clonedOrderLine =  order.getTotalOrderLines().clone();
+		Product updatedProduct = null;
 
 		// show orderLineList and select order line
 		OrderLine selectedOrderLine = viewAndSelectOrderLine(order);
@@ -200,7 +203,7 @@ public class OrderLineController extends Controller {
 			switch (menuNumber) {
 
 			case 1: // update order line
-				updateNumberOfProductsInOrderLine(selectedOrderLine);
+				 updatedProduct = updateNumberOfProductsInOrderLine(selectedOrderLine);
 
 				break;
 
@@ -298,7 +301,7 @@ public class OrderLineController extends Controller {
 		productDAO.updateProduct(product);
 	}
 
-	public void updateNumberOfProductsInOrderLine(OrderLine orderLine) {
+	public Product updateNumberOfProductsInOrderLine(OrderLine orderLine) {
 
 		int oldNumberOfProducts = orderLine.getNumberOfProducts();
 		
@@ -313,9 +316,15 @@ public class OrderLineController extends Controller {
 			newNumberOfProducts = orderLineView.getIntInput();
 		}
 		
+		// set new stock to product
 		retrievedProduct.setStock(retrievedProduct.getStock() - (newNumberOfProducts-oldNumberOfProducts));
+		// set new NumberOfProducts to order line
 		orderLine.setNumberOfProducts(newNumberOfProducts);
+		
+		return retrievedProduct;
 
 	}
+	
+	
 
 }

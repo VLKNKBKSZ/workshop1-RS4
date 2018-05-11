@@ -210,10 +210,6 @@ public class OrderLineController extends Controller {
 		viewAllOrderLinesInCurrentOrder(order);
 		System.out.println(order.toString());
 		
-		orderLineView.printAskUserToChoseOrderLine();
-		
-		
-		
 		List<OrderLine> orderLineList = order.getTotalOrderLines();
 		
 		if(orderLineList.size() == 1) {
@@ -221,15 +217,18 @@ public class OrderLineController extends Controller {
 			return orderLineList.get(0);
 			
 		}else {
+			
 			orderLineView.printAskUserToChoseOrderLine();
 			int choice = orderLineView.getIntInput();
 			
-			while(choice)
-			
-			
+			while(choice < 1 | choice > orderLineList.size()) {
+				
+				orderLineView.printMenuInputIsWrong();
+				choice = orderLineView.getIntInput();
+			}
+			return orderLineList.get(choice -1);
 		}
 		
-		return;
 	}
 
 	// Method for showing total price

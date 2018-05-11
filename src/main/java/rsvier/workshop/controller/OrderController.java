@@ -152,7 +152,7 @@ public class OrderController extends Controller {
 
 		switch (menuNumber) {
 		case 1:// Search order by order ID
-		
+			searchOrderByOrderId();
 			break;
 
 		case 2:// Search order by customer last name
@@ -229,6 +229,7 @@ public class OrderController extends Controller {
 		Order order = orderDao.getOrderById(orderView.getIntInput());
 		
 		if (order == null) {
+			orderView.printOrderNotFound();
 			runView();
 		} else {
 			updateOrDeleteOrderSwitch(order);

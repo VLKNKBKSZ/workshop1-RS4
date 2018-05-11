@@ -177,7 +177,7 @@ public class OrderController extends Controller {
 
 		if (person == null) {
 
-			customerView.printCustomerNotFound();
+			
 			runView();
 
 		} else {

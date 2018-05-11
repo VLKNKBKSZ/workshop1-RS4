@@ -14,6 +14,7 @@ public class OrderView extends View {
 		System.out.println("\n1- Zoek bestelling\n2- Plaats bestelling\n0- Verlaat bestellingbeheer");
 	}
 
+	
 	public void printAskUserToUpdateOrDeleteOrder() {
 		System.out.println("1- Bestelling aanpassen\n2- Bestelling verwijderen\n0- Terug naar vorige menu");
 

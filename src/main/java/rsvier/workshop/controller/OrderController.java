@@ -229,6 +229,7 @@ public class OrderController extends Controller {
 		Order order = orderDao.getOrderById(orderView.getIntInput());
 		
 		if (order == null) {
+			orderView.printOrderNotFound();
 			runView();
 		} else {
 			updateOrDeleteOrderSwitch(order);

@@ -114,7 +114,7 @@ public class OrderController extends Controller {
 
 			case 1: // Go to orderLine
 
-				orderLineController.editNumberOfProductsInsideTheOrderLine(order);
+				orderLineController.viewAndSelectOrderLine(order);
 				break;
 
 			case 2: // Add orderLines to order

@@ -198,7 +198,7 @@ public class OrderLineController extends Controller {
 			
 		case 2:
 			
-			deleteOrderLineFromOrder();
+			//deleteOrderLineFromOrder();
 			break;
 
 		default:

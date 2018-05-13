@@ -79,7 +79,29 @@ public class OrderLineController extends Controller {
 		}
 	}
 
-	// Save order and order lines
+	// Save order and orderLines for a already existing order
+
+	public void saveOrderAndOrderLinesInDatabaseForAlreadyExistingOrder(Product product, Order order) {
+		
+		System.out.println(order.toString());
+		if (order.getTotalOrderLines().size() == 0) {
+			orderDAO.deleteOrder(order);
+		} else {
+			order.setOrderDateTime(LocalDateTime.now());
+			order.setTotalPrice(getTotalPriceOfOrder(order));
+			// Update order
+			orderDAO.updateOrder(order);
+
+			// Update orderLines
+			for (OrderLine orderLineItems : order.getTotalOrderLines()) {
+				orderLineDAO.updateOrderLine(orderLineItems);
+			}
+
+		}
+		productDAO.updateProduct(product);
+	}
+
+	// Save order and order lines for a new order
 	public void saveOrderAndOrderLinesInDatabase(Order order) {
 
 		order.setOrderDateTime(LocalDateTime.now());
@@ -185,12 +207,16 @@ public class OrderLineController extends Controller {
 	}
 
 	public void editOrDeleteOrderLineSwitchMenu(Order order) {
-		
-	//	OrderLine clonedOrderLine =  order.getTotalOrderLines().clone();
+
+		// OrderLine clonedOrderLine = order.getTotalOrderLines().clone();
 		Product updatedProduct = null;
 
 		// show orderLineList and select order line
-		OrderLine selectedOrderLine = viewAndSelectOrderLine(order);
+		// OrderLine selectedOrderLine = viewAndSelectOrderLine(order);
+
+		int selecterOrderLineInt = viewAndSelectOrderLineInt(order);
+
+		List<OrderLine> orderLineList = order.getTotalOrderLines();
 
 		boolean updating = true;
 
@@ -203,27 +229,26 @@ public class OrderLineController extends Controller {
 			switch (menuNumber) {
 
 			case 1: // update order line
-				 updatedProduct = updateNumberOfProductsInOrderLine(selectedOrderLine);
+				
+				updatedProduct = updateNumberOfProductsInOrderLine(orderLineList.get(selecterOrderLineInt));
+				saveOrderAndOrderLinesInDatabaseForAlreadyExistingOrder(updatedProduct, order);
+				updating = false;
 
 				break;
 
 			case 2: // delete order line
-
-				// deleteOrderLineFromOrder();
-				break;
-
-			case 3: // save changes in database
+				
+				OrderLine orderLine = order.getTotalOrderLines().get(selecterOrderLineInt);
+				orderLineDAO.deleteOrderLine(orderLineList.get(selecterOrderLineInt));
+				updateNegativeProductStockInDatabaseWhenOrderLineDeleted(orderLine);
+				order.getTotalOrderLines().remove(orderLineList.get(selecterOrderLineInt));
+				saveOrderAndOrderLinesInDatabaseForAlreadyExistingOrder(orderLine.getProduct(), order);
 				updating = false;
 				break;
+			case 0:
 
-			case 4: // cancel changes
 				updating = false;
 				break;
-
-			case 0: // back to previous menu
-				updating = false;
-				break;
-
 			default:
 				break;
 			}
@@ -252,6 +277,34 @@ public class OrderLineController extends Controller {
 				choice = orderLineView.getIntInput();
 			}
 			return orderLineList.get(choice - 1);
+		}
+
+	}
+
+	// Testing method to delete the orderLine from the order object
+
+	public int viewAndSelectOrderLineInt(Order order) {
+
+		viewAllOrderLinesInCurrentOrder(order);
+		System.out.println(order.toString());
+
+		List<OrderLine> orderLineList = order.getTotalOrderLines();
+
+		if (orderLineList.size() == 1) {
+
+			return 0;
+
+		} else {
+
+			orderLineView.printAskUserToChoseOrderLine();
+			int choice = orderLineView.getIntInput();
+
+			while (choice < 1 | choice > orderLineList.size()) {
+
+				orderLineView.printMenuInputIsWrong();
+				choice = orderLineView.getIntInput();
+			}
+			return choice - 1;
 		}
 
 	}
@@ -290,6 +343,16 @@ public class OrderLineController extends Controller {
 		return false;
 	}
 
+	public void updateNegativeProductStockInDatabaseWhenOrderLineDeleted(OrderLine orderLine) {
+
+		Product product = orderLine.getProduct();
+
+		// deduct numberOfProducts that customer ordered from product stock
+		product.setStock((product.getStock() + orderLine.getNumberOfProducts()));
+
+		productDAO.updateProduct(product);
+	}
+
 	// Update product stock
 	public void updateProductInDatabase(OrderLine orderLine) {
 
@@ -304,27 +367,29 @@ public class OrderLineController extends Controller {
 	public Product updateNumberOfProductsInOrderLine(OrderLine orderLine) {
 
 		int oldNumberOfProducts = orderLine.getNumberOfProducts();
-		
+
 		orderLineView.printAskNewNumberOfProductsInOrderLine();
 		int newNumberOfProducts = orderLineView.getIntInput();
-		
+
 		Product retrievedProduct = productDAO.getProductById(orderLine.getProduct().getProductId());
-		
+
 		// check if product stock is available
-		while (!checkProductStock((newNumberOfProducts-oldNumberOfProducts), retrievedProduct)) {
-			orderLineView.printAskNewNumberOfProductsInOrderLine();
+		while (!checkProductStock((newNumberOfProducts - oldNumberOfProducts), retrievedProduct)) {
+
+			// show current stock of the product so the user enters the right amount
+
+			System.out.println(retrievedProduct.toString());
+			orderLineView.printNewNumberOfProductsForOrderLineIsHigherThanStock();
 			newNumberOfProducts = orderLineView.getIntInput();
 		}
-		
+
 		// set new stock to product
-		retrievedProduct.setStock(retrievedProduct.getStock() - (newNumberOfProducts-oldNumberOfProducts));
+		retrievedProduct.setStock(retrievedProduct.getStock() - (newNumberOfProducts - oldNumberOfProducts));
 		// set new NumberOfProducts to order line
 		orderLine.setNumberOfProducts(newNumberOfProducts);
-		
+
 		return retrievedProduct;
 
 	}
-	
-	
 
 }

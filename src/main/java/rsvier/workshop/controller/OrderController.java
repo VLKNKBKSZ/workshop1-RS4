@@ -22,7 +22,6 @@ public class OrderController extends Controller {
 		searchCreateOrderSwitch(orderView.getIntInput());
 	}
 
-	
 	public void searchCreateOrderSwitch(int menuNumber) {
 
 		switch (menuNumber) {
@@ -46,7 +45,6 @@ public class OrderController extends Controller {
 		}
 	}
 
-	
 	// Search order by order-id or customer last name
 	public void searchOrderSwitch() {
 
@@ -88,7 +86,9 @@ public class OrderController extends Controller {
 			doDeleteOrder(order);
 			break;
 
-		case 0:// Go back to previous Menu
+		case 0:// Go back to EmployeeController
+
+			MainController.setController(TypeOfController.ORDER);
 
 		default:
 			orderView.printMenuInputIsWrong();
@@ -98,14 +98,12 @@ public class OrderController extends Controller {
 
 	}
 
-	
 	public void updateExistingOrder(Order order) {
 
-		
 		boolean updating = true;
 
 		while (updating) {
-			
+
 			orderView.printUpdateExistingOrder();
 			int menuNumber = orderView.getIntInput();
 
@@ -113,28 +111,29 @@ public class OrderController extends Controller {
 
 			case 1: // Go to orderLine
 				orderLineController.editOrDeleteOrderLineSwitchMenu(order);
+				updating = false;
 				break;
 
 			case 2: // Add orderLines to order
-				break;
+				orderLineController.addOrderLineToOrder(order);
 
-			case 3: // Save changes in the database
-				
-				//DEZE MOET NOG GEIMPLEMENTEERD WORDEN MET DAO
 				updating = false;
 				break;
-
-			case 4: // Abort operation and don't apply the changes made in the order
+			case 0:
+				MainController.setController(TypeOfController.ORDER);
 				updating = false;
 				break;
-				
 			default:
 				break;
 			}
 		}
 
-	}
+		// After we are done here we want to back to the main employeecontroller
+		// runview?
 
+		MainController.setController(TypeOfController.EMPLOYEE);
+
+	}
 
 	public void selectOrderSearchMenuSwitch() {
 
@@ -161,13 +160,12 @@ public class OrderController extends Controller {
 		}
 	}
 
-	
 	// Search order by Last name
 	public Order searchOrderByLastName(Person person) {
-		
-		//One person can have more than one order, so first get all orders
-		//and store them in a order list
-		
+
+		// One person can have more than one order, so first get all orders
+		// and store them in a order list
+
 		List<Order> orderList = new ArrayList<>();
 
 		if (person == null) {
@@ -192,8 +190,8 @@ public class OrderController extends Controller {
 				return orderList.get(0);
 
 			} else {
-				
-				//if the person has more than 1 order, a list is printed
+
+				// if the person has more than 1 order, a list is printed
 				for (int i = 0; i < orderList.size(); i++) {
 
 					orderView.printOrdersFound("Order nummer:", i + 1, orderList.get(i));
@@ -201,8 +199,8 @@ public class OrderController extends Controller {
 			}
 
 		}
-		
-		//The user is then asked to select an order
+
+		// The user is then asked to select an order
 		int choice = selectOrder();
 		while (choice < 1 | choice > orderList.size()) {
 			orderView.printMenuInputIsWrong();
@@ -212,7 +210,6 @@ public class OrderController extends Controller {
 		return (orderList.get(choice - 1));
 	}
 
-	
 	public int selectOrder() {
 
 		orderView.printAskSelectOrder();
@@ -220,7 +217,6 @@ public class OrderController extends Controller {
 		return orderView.getIntInput();
 	}
 
-	
 	// Search order by OrderId
 	public void searchOrderByOrderId() {
 
@@ -231,11 +227,11 @@ public class OrderController extends Controller {
 			orderView.printOrderNotFound();
 			runView();
 		} else {
+			orderView.printOrdersFound("Order nummer", 1, order);
 			updateOrDeleteOrderSwitch(order);
 		}
 	}
 
-	
 	public void doDeleteOrder(Order order) {
 
 		if (orderView.confirmYesOrNo().equalsIgnoreCase("J")) {
@@ -248,14 +244,13 @@ public class OrderController extends Controller {
 
 	}
 
-	
 	public void doCreateOrder(Person person) {
 
 		// check if person was found
 		if (person == null) {
-			
+
 			runView();
-		
+
 		} else {
 
 			// Build an order object with the person object

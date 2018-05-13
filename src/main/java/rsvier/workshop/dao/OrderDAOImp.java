@@ -39,6 +39,8 @@ public class OrderDAOImp implements OrderDAO {
 
 				Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 				orderBuilder.orderId(resultSet.getInt(1));
+				Order order1 = orderBuilder.build();
+				orderBuilder.totalOrderLines(orderLineDAO.getAllOrderLinesFromOrder(order1));
 				Person person = personDAO.getPersonById(resultSet.getInt(2));
 				orderBuilder.person(person);
 				orderBuilder.totalPrice(resultSet.getBigDecimal(3));
@@ -81,7 +83,8 @@ public class OrderDAOImp implements OrderDAO {
 
 					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 					orderBuilder.orderId(resultSet.getInt(1));
-					orderBuilder.totalOrderLines(orderLineDAO.getAllOrderLinesFromOrder(getOrderById(resultSet.getInt(1))));
+					Order order1 = orderBuilder.build();
+					orderBuilder.totalOrderLines(orderLineDAO.getAllOrderLinesFromOrder(order1));
 					orderBuilder.person(personDAO.getPersonById(resultSet.getInt(2)));
 					orderBuilder.totalPrice(resultSet.getBigDecimal(3));
 					LocalDateTime parsedDate = LocalDateTime.parse(resultSet.getString(4));
@@ -124,6 +127,8 @@ public class OrderDAOImp implements OrderDAO {
 
 					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 					orderBuilder.orderId(resultSet.getInt(1));
+					Order order1 = orderBuilder.build();
+					orderBuilder.totalOrderLines(orderLineDAO.getAllOrderLinesFromOrder(order1));
 					Person person = personDAO.getPersonById(resultSet.getInt(2));
 					orderBuilder.person(person);
 					orderBuilder.totalPrice(resultSet.getBigDecimal(3));
@@ -179,11 +184,13 @@ public class OrderDAOImp implements OrderDAO {
 	@Override
 	public void updateOrder(Order order) {
 
-		String query = "UPDATE order_table (person_id) WHERE orderline_id = ?;";
+		String query = "UPDATE order_table SET total_price = ?, order_date = ? WHERE order_table_id = ?;";
 		try (Connection conn = DatabaseConnectionXML.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
-			preparedStatement.setInt(1, order.getPerson().getPersonId());
+			preparedStatement.setBigDecimal(1, order.getTotalPrice());
+			preparedStatement.setString(2, order.getOrderDateTime().toString());
+			preparedStatement.setInt(3, order.getOrderId());
 			preparedStatement.executeUpdate();
 
 			logger.log(Level.INFO, "Order succesfully updated");

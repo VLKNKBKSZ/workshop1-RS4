@@ -11,10 +11,13 @@ public class OrderLineView extends View {
 		System.out.println("1- Voeg product toe aan bestelling"
 				+ "\n2- Bekijk huidige bestelling\n3- Bestelling plaatsen\n4- Annuleer bestelling");
 	}
+	
+	public void printNewNumberOfProductsForOrderLineIsHigherThanStock() {
+		System.out.println("Het aantal wat u van dit product wilt bestellen is niet op voorraad, Voer het nieuwe aantal van de producten in a.u.b");
+	}
 
 	public void printEditOrDeleteOrderLine() {
-		System.out.println("1 - Pas aantal in de bestelregel aan\n 2- Verwijder bestelregel van bestelling"
-				+ "\n 3- Sla de wijzigingen op.\n 4- Annuleer de wijzigingen.\n 0- Terug naar hoofdmenu.");
+		System.out.println("1 - Pas aantal in de bestelregel aan\n 2- Verwijder bestelregel van bestelling\n 0- Terug naar hoofdmenu.");
 	}
 	public void printRequestNameOfProductToView() {
 		System.out.println("Voer de naam in van het product dat u wilt bestellen.");

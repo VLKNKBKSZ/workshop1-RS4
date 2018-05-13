@@ -64,13 +64,12 @@ public class OrderView extends View {
 
 	public void printUpdateExistingOrder() {
 		System.out.println("\n1- Bekijk bestelregels van de bestelling"
-						+ "\n2- Voeg nieuwe bestelregels toe aan de bestelling"
-						+ "\n3- Sla wijzigingen op"
-						+ "\n4- Maak wijzigingen ongedaan en ga terug naar vorig menu");
+						+ "\n2- Voeg nieuwe bestelregels toe aan de bestelling\n3- Terug naar vorige menu"
+				);
 	}
 	
 
-	public void printWhatOrderToUpdate() {
+	public void printWhatOrderLineToUpdate() {
 		System.out.println("\nWelke bestelregel wilt u aanpassen?");
 	}
 

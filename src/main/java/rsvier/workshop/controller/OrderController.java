@@ -19,10 +19,10 @@ public class OrderController extends Controller {
 	public void runView() {
 		orderView.printHeaderMessage();
 		orderView.printMenuMessage();
-		searchCreateOrderMenuSwitch(orderView.getIntInput());
+		searchCreateOrderSwitch(orderView.getIntInput());
 	}
 
-	public void searchCreateOrderMenuSwitch(int menuNumber) {
+	public void searchCreateOrderSwitch(int menuNumber) {
 
 		switch (menuNumber) {
 
@@ -183,7 +183,10 @@ public class OrderController extends Controller {
 
 	// Search order by Last name
 	public Order searchOrderByLastName(Person person) {
-
+		
+		//One person can have more than one order, so first get all orders
+		//and store them in a order list
+		
 		List<Order> orderList = new ArrayList<>();
 
 		if (person == null) {
@@ -196,7 +199,8 @@ public class OrderController extends Controller {
 
 			if (orderList.size() == 0) {
 
-				// print "Geen bestellingen gevonden"
+				orderView.printYouDontHaveOrders();
+				runView();
 				return null;
 			}
 

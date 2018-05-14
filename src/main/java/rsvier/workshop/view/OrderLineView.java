@@ -46,7 +46,7 @@ public class OrderLineView extends View {
 	}
 	
 	public void printUpdateExistingOrderLine() {
-		System.out.println("\n1- Pas bestelregel aan\n2- Verwijder bestelregel \n3- Terug naar vorig menu");
+		System.out.println("\n1- Pas bestelregel aan\n2- Verwijder bestelregel \n0- Terug naar vorig menu");
 	}
 	
 	public void printOrderLineHasBeenAddedToOrder() {

@@ -144,13 +144,18 @@ public class ProductController extends Controller {
 	}
 
 	public void showProductList() {
+		
+		System.out.println("\nLijst van alle Nevvo-Producten:");
+		System.out.println("-------------------------------");
 		List<Product> products = productDAO.getAllProducts();
 
 		for (Product product : products) {
-			System.out.println("\n" + product.toString());
+			System.out.println(product.toString());
 		}
+		System.out.println("-------------------------------\n");
 	}
 
+	
 	public void updateProductSwitch(Product product) {
 
 		boolean updatingProduct = true;

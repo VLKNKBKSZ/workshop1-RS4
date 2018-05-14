@@ -19,6 +19,7 @@ public class OrderLineView extends View {
 	public void printEditOrDeleteOrderLine() {
 		System.out.println("1 - Pas aantal in de bestelregel aan\n 2- Verwijder bestelregel van bestelling\n 0- Terug naar hoofdmenu.");
 	}
+	
 	public void printRequestNameOfProductToView() {
 		System.out.println("Voer de naam in van het product dat u wilt bestellen.");
 	}

@@ -166,11 +166,12 @@ public class OrderController extends Controller {
 		}
 	}
 
-	// Search order by Last name
+	
+
 	public Order searchOrderByLastName(Person person) {
 
 		// One person can have more than one order, so first get all orders
-		// and store them in a order list
+		// and store them in an order list
 
 		List<Order> orderList = new ArrayList<>();
 
@@ -263,9 +264,9 @@ public class OrderController extends Controller {
 			Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 			orderBuilder.person(person);
 			Order order = orderBuilder.build();
-			order.getPerson().toString();
-			order.toString();
-
+			
+			orderView.printYouCanNowAddProducts();
+			
 			// Pass the order to the switch in the orderLineController
 			orderLineController.orderLineMenuSwitch(order);
 

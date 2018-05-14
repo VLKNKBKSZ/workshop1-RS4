@@ -74,7 +74,12 @@ public class OrderView extends View {
 	}
 
 	public void printYouDontHaveOrders() {
-		System.out.println("\nU heeft geen bestellingen staan op dit moment\n");
+		System.out.println("\nU heeft geen bestellingen staan op dit moment\n");	
+	}
+
+
+	public void printYouCanNowAddProducts() {
+		System.out.println("U kunt nu producten toevoegen aan uw bestelling.\n");
 		
 	}
 	

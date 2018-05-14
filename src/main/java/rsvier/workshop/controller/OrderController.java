@@ -1,5 +1,6 @@
 package rsvier.workshop.controller;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import rsvier.workshop.controller.MainController.TypeOfController;
@@ -10,7 +11,7 @@ import rsvier.workshop.view.*;
 public class OrderController extends Controller {
 
 	private OrderView orderView = new OrderView();
-	private OrderDAO orderDao = new OrderDAOImp();
+	private OrderDAO orderDAO = new OrderDAOImp();
 	private CustomerController customerController = new CustomerController();
 	private OrderLineController orderLineController = new OrderLineController();
 	private CustomerView customerView = new CustomerView();
@@ -118,7 +119,9 @@ public class OrderController extends Controller {
 			case 2: // Add orderLines to order
 				orderLineController.addOrderLineToOrder(order);
 				orderLineDAO.createOrderLine(order.getTotalOrderLines().get(order.getTotalOrderLines().size ()-1), order.getOrderId());
-				
+				order.setOrderDateTime(LocalDateTime.now());
+		        order.setTotalPrice(orderLineController.getTotalPriceOfOrder(order));
+		        orderDAO.updateOrder(order);
 				updating = false;
 				break;
 			case 0:
@@ -176,7 +179,7 @@ public class OrderController extends Controller {
 
 		} else {
 
-			orderList = orderDao.getAllOrdersFromPerson(person);
+			orderList = orderDAO.getAllOrdersFromPerson(person);
 
 			if (orderList.size() == 0) {
 
@@ -223,7 +226,7 @@ public class OrderController extends Controller {
 	public void searchOrderByOrderId() {
 
 		orderView.printAskOrderId();
-		Order order = orderDao.getOrderById(orderView.getIntInput());
+		Order order = orderDAO.getOrderById(orderView.getIntInput());
 
 		if (order == null) {
 			orderView.printOrderNotFound();
@@ -237,7 +240,7 @@ public class OrderController extends Controller {
 	public void doDeleteOrder(Order order) {
 
 		if (orderView.confirmYesOrNo().equalsIgnoreCase("J")) {
-			orderDao.deleteOrder(order);
+			orderDAO.deleteOrder(order);
 			orderView.printOrderSuccessFullyDeleted();
 			runView();
 		} else {

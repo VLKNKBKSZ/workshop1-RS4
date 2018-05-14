@@ -140,18 +140,18 @@ public class OrderLineController extends Controller {
 					return;
 				}
 
-				// Create an orderLine object with the product and the amount of products chosen
-				OrderLine orderLine = new OrderLine.OrderLineBuilder().product(retrievedProduct)
-						.numberOfProducts(requestedProduct).build();
+			// Create an orderLine object with the product and the amount of products chosen
+			OrderLine orderLine = new OrderLine.OrderLineBuilder().product(retrievedProduct)
+					.numberOfProducts(requestedProduct).build();
 
-				// Print order line details
-				System.out.println(orderLine.toString() + "\n");
+			// Print order line details
+			System.out.println(orderLine.toString() + "\n");
 
-				// Add the created orderLine to the order
-				order.getTotalOrderLines().add(orderLine);
+			// Add the created orderLine to the order
+			order.getTotalOrderLines().add(orderLine);
 
-				// Update stock in database
-				updateProductInDatabase(orderLine);
+			// Update stock in database
+			updateProductInDatabase(orderLine);
 
 			} else {
 				orderLineView.printProductStockIsNotAvailable(retrievedProduct.getStock(), requestedProduct);

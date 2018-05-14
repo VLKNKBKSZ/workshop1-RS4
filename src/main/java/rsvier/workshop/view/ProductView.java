@@ -7,6 +7,10 @@ public class ProductView extends View {
 		System.out.println("\n=========== Werknemer	|  Productenbeheer ===========\n");
 		
 	}
+	
+	public void printProductInfoHeader() {
+		System.out.println("\n========Productgegevens======");
+	}
 
 	@Override
 	public void printMenuMessage() {

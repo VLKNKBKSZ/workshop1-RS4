@@ -141,6 +141,7 @@ public class OrderController extends Controller {
 
 	}
 
+	
 	public void selectOrderSearchMenuSwitch() {
 
 		orderView.printAskSearchOrderByNumberOrByName();
@@ -217,6 +218,8 @@ public class OrderController extends Controller {
 		return (orderList.get(choice - 1));
 	}
 
+	
+	
 	public int selectOrder() {
 
 		orderView.printAskSelectOrder();
@@ -224,6 +227,8 @@ public class OrderController extends Controller {
 		return orderView.getIntInput();
 	}
 
+	
+	
 	// Search order by OrderId
 	public void searchOrderByOrderId() {
 
@@ -239,6 +244,8 @@ public class OrderController extends Controller {
 		}
 	}
 
+	
+	
 	public void doDeleteOrder(Order order) {
 
 		if (orderView.confirmYesOrNo().equalsIgnoreCase("J")) {
@@ -251,6 +258,7 @@ public class OrderController extends Controller {
 
 	}
 
+	
 	public void doCreateOrder(Person person) {
 
 		// check if person was found

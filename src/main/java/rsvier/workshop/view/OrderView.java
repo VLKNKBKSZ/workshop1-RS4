@@ -12,7 +12,7 @@ public class OrderView extends View {
 
 	@Override
 	public void printMenuMessage() {
-		System.out.println("\n1- Zoek bestelling\n2- Plaats bestelling\n0- Verlaat bestellingbeheer");
+		System.out.println("\n1- Zoek een bestelling\n2- Maak een bestelling\n0- Verlaat bestellingbeheer");
 	}
 
 	
@@ -55,6 +55,9 @@ public class OrderView extends View {
 		System.out.println("Uw bestelling is geplaatst.");
 	}
 
+	public void printOrderHasNotBeenPlaced() {
+		System.out.println("Uw bestelling is niet geplaatst.");
+	}
 	
 	public void printOrdersFound(String message, int i, Order order) {
 		System.out.println(message + i + ", " + " Bestelling id-nummer: " + order.getOrderId() + " Datum van bestelling: "

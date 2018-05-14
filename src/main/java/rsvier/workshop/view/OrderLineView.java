@@ -56,5 +56,10 @@ public class OrderLineView extends View {
 	public void printOrderHasBeenDeletedBecauseOfNoMoreOrderLines() {
 		System.out.println("De bestelling is verwijderd omdat deze geen bestelregels meer bevat.");
 	}
+	
+	public void printYouCanAddMoreOrPlaceOrder() {
+		System.out.println("\nU kunt nog meer producten toevoegen of uw bestelling plaatsen.\n");
+	}
+	
 }
 

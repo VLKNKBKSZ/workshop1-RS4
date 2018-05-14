@@ -50,10 +50,16 @@ public class OrderLineController extends Controller {
 				break;
 
 			case 3: // Place order in the database
-				saveOrderAndOrderLinesInDatabase(order);
-				orderView.printOrderHasBeenPlaced();
-				placingOrder = false;
-				MainController.setController(TypeOfController.ORDER);
+				if(order == null) {
+					orderLineView.printOrderIsEmpty();
+				}
+				//Ask confirmation before saving in database
+				if (orderLineView.confirmYesOrNo().equalsIgnoreCase("J")) {
+					saveOrderAndOrderLinesInDatabase(order);
+					orderView.printOrderHasBeenPlaced();
+				} else { 
+					orderView.printOrderHasNotBeenPlaced();
+				}
 				break;
 
 			case 4: // Cancel order
@@ -144,6 +150,7 @@ public class OrderLineController extends Controller {
 		if (retrievedProduct != null) {
 
 			// Print product details
+			productView.printProductInfoHeader();
 			System.out.println("\n" + retrievedProduct.toString() + "\n");
 
 			// Ask how many products customer wants to order
@@ -152,7 +159,7 @@ public class OrderLineController extends Controller {
 			// Check if the product stock is available
 			if (checkProductStock(requestedProduct, retrievedProduct)) {
 
-				// Check orderLines if product is already in the order
+				// Check orderLines if product is already in another order line in the order 
 				if (checkForDuplicateProductInOrderLines(order, requestedProduct, retrievedProduct)) {
 					return;
 				}
@@ -162,7 +169,9 @@ public class OrderLineController extends Controller {
 					.numberOfProducts(requestedProduct).build();
 
 			// Print order line details
-			System.out.println(orderLine.toString() + "\n");
+			System.out.println("Uw huidige bestelregel bevat de volgende gegevens:");
+			System.out.println(orderLine.toString());
+			orderLineView.printYouCanAddMoreOrPlaceOrder();
 
 			// Add the created orderLine to the order
 			order.getTotalOrderLines().add(orderLine);
@@ -173,6 +182,7 @@ public class OrderLineController extends Controller {
 			} else {
 				orderLineView.printProductStockIsNotAvailable(retrievedProduct.getStock(), requestedProduct);
 			}
+			
 		} else {
 			productView.printProductNotFound();
 			System.out.println(" ");

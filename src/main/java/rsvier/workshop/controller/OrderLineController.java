@@ -52,7 +52,9 @@ public class OrderLineController extends Controller {
 			case 3: // Place order in the database
 				if(order == null) {
 					orderLineView.printOrderIsEmpty();
+					break;
 				}
+				
 				//Ask confirmation before saving in database
 				if (orderLineView.confirmYesOrNo().equalsIgnoreCase("J")) {
 					saveOrderAndOrderLinesInDatabase(order);

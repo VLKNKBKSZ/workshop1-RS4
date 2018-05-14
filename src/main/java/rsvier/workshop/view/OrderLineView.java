@@ -47,5 +47,13 @@ public class OrderLineView extends View {
 	public void printUpdateExistingOrderLine() {
 		System.out.println("\n1- Pas bestelregel aan\n2- Verwijder bestelregel \n3- Terug naar vorig menu");
 	}
-
+	
+	public void printOrderLineHasBeenAddedToOrder() {
+		System.out.println("De bestelregel is toegevoegd aan de bestelling.");
+	}
+	
+	public void printOrderHasBeenDeletedBecauseOfNoMoreOrderLines() {
+		System.out.println("De bestelling is verwijderd omdat deze geen bestelregels meer bevat.");
+	}
 }
+

@@ -84,11 +84,19 @@ public class OrderLineController extends Controller {
 	public void saveOrderAndOrderLinesInDatabaseForAlreadyExistingOrder(Product product, Order order) {
 		
 		System.out.println(order.toString());
+		
 		if (order.getTotalOrderLines().size() == 0) {
+			
 			orderDAO.deleteOrder(order);
+			orderLineView.printOrderHasBeenDeletedBecauseOfNoMoreOrderLines();
+			
 		} else {
+			
 			order.setOrderDateTime(LocalDateTime.now());
 			order.setTotalPrice(getTotalPriceOfOrder(order));
+			
+			System.out.println(order.toString());
+			
 			// Update order
 			orderDAO.updateOrder(order);
 
@@ -200,7 +208,7 @@ public class OrderLineController extends Controller {
 		}
 
 		for (int i = 0; i < order.getTotalOrderLines().size(); i++) {
-			System.out.println("Bestelregel nummer" + (i + 1) + order.getTotalOrderLines().get(i).toString());
+			System.out.println("Bestelregel nummer " + (i + 1) + order.getTotalOrderLines().get(i).toString());
 
 		}
 
@@ -233,7 +241,7 @@ public class OrderLineController extends Controller {
 				updatedProduct = updateNumberOfProductsInOrderLine(orderLineList.get(selecterOrderLineInt));
 				saveOrderAndOrderLinesInDatabaseForAlreadyExistingOrder(updatedProduct, order);
 				updating = false;
-
+				
 				break;
 
 			case 2: // delete order line

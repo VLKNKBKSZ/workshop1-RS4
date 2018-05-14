@@ -16,6 +16,7 @@ public class OrderController extends Controller {
 	private OrderLineController orderLineController = new OrderLineController();
 	private CustomerView customerView = new CustomerView();
 	private OrderLineDAO orderLineDAO = new OrderLineDAOImp();
+	private OrderLineView orderLineView = new OrderLineView();
 
 	@Override
 	public void runView() {
@@ -113,7 +114,7 @@ public class OrderController extends Controller {
 
 			case 1: // Go to orderLine
 				orderLineController.editOrDeleteOrderLineSwitchMenu(order);
-				updating = false;
+				
 				break;
 
 			case 2: // Add orderLines to order
@@ -122,7 +123,7 @@ public class OrderController extends Controller {
 				order.setOrderDateTime(LocalDateTime.now());
 		        order.setTotalPrice(orderLineController.getTotalPriceOfOrder(order));
 		        orderDAO.updateOrder(order);
-				updating = false;
+		        orderLineView.printOrderLineHasBeenAddedToOrder();
 				break;
 			case 0:
 				MainController.setController(TypeOfController.ORDER);

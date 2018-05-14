@@ -179,6 +179,29 @@ public class OrderLineDAOImp implements OrderLineDAO {
 		}
 
 	}
+	
+	@Override
+	public void createOrderLine(OrderLine orderLine, int orderId) {
+		String query = "INSERT INTO orderline (order_table_id, product_id , number_of_products) VALUES (?, ? ,?)";
+
+		try (Connection conn = DatabaseConnectionXML.getConnection();
+				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+
+				preparedStatement.setInt(1, orderId);
+				preparedStatement.setInt(2, orderLine.getProduct().getProductId());
+				preparedStatement.setInt(3, orderLine.getNumberOfProducts());
+
+				preparedStatement.executeUpdate();
+
+
+			logger.log(Level.INFO, "OrderLine succesfully created.");
+
+		} catch (SQLException e) {
+
+			logger.log(Level.WARNING, "SQL Exception occured", e);
+		}
+		
+	}
 
 	@Override
 	public void deleteOrderLine(OrderLine orderLine) {
@@ -224,5 +247,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 		}
 
 	}
+
+	
 
 }

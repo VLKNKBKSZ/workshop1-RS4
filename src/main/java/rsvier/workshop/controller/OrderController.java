@@ -14,6 +14,7 @@ public class OrderController extends Controller {
 	private CustomerController customerController = new CustomerController();
 	private OrderLineController orderLineController = new OrderLineController();
 	private CustomerView customerView = new CustomerView();
+	private OrderLineDAO orderLineDAO = new OrderLineDAOImp();
 
 	@Override
 	public void runView() {
@@ -116,7 +117,8 @@ public class OrderController extends Controller {
 
 			case 2: // Add orderLines to order
 				orderLineController.addOrderLineToOrder(order);
-
+				orderLineDAO.createOrderLine(order.getTotalOrderLines().get(order.getTotalOrderLines().size ()-1), order.getOrderId());
+				
 				updating = false;
 				break;
 			case 0:

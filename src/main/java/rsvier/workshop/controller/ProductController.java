@@ -1,7 +1,6 @@
 package rsvier.workshop.controller;
 
 import java.math.BigDecimal;
-import java.util.*;
 import java.util.List;
 
 import rsvier.workshop.controller.MainController.TypeOfController;
@@ -119,7 +118,7 @@ public class ProductController extends Controller {
 		Product product = productBuilder.build();
 
 		productDAO.createProduct(product);
-		productView.printProductIsSuccesfullyCreated();
+		productView.printProductIsSuccessfullyCreated();
 	}
 
 	public void doDeleteProduct(Product product) {

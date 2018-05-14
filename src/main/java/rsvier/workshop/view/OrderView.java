@@ -76,7 +76,7 @@ public class OrderView extends View {
 		System.out.println("\nWelke bestelregel wilt u aanpassen?");
 	}
 
-	public void printYouDontHaveOrders() {
+	public void printYouDoNotHaveOrders() {
 		System.out.println("\nU heeft geen bestellingen staan op dit moment\n");	
 	}
 

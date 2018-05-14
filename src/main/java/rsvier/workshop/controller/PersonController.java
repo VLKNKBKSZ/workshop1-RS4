@@ -49,7 +49,7 @@ public class PersonController extends Controller {
 					break;
 					
 			case 5: personDAO.updatePerson(person);
-					personView.printPersonUserDetailsAreSuccesfullyUpdated();
+					personView.printPersonUserDetailsAreSuccessfullyUpdated();
 					
 			case 0: // exit and go back to employee menu
 					MainController.setController(TypeOfController.EMPLOYEE);

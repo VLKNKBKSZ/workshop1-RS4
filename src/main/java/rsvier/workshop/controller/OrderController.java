@@ -186,7 +186,7 @@ public class OrderController extends Controller {
 
 			if (orderList.size() == 0) {
 
-				orderView.printYouDontHaveOrders();
+				orderView.printYouDoNotHaveOrders();
 				runView();
 				return null;
 			}

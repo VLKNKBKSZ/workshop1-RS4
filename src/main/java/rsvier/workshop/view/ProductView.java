@@ -9,7 +9,7 @@ public class ProductView extends View {
 	}
 	
 	public void printProductInfoHeader() {
-		System.out.println("\n========Productgegevens======");
+		System.out.println("\n======== Productgegevens ======");
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class ProductView extends View {
 				"0- Terug naar vorige menu");
 	}
 
-	public void printProductIsSuccesfullyCreated() {
+	public void printProductIsSuccessfullyCreated() {
 		System.out.println("Product is succesvol aangemaakt en opgeslagen");
 	}
 	

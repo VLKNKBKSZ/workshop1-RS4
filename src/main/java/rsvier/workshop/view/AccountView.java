@@ -20,7 +20,7 @@ public class AccountView extends View{
 	}
 		
 	public void printRequestEmailInput() {
-		System.out.print("Vul email adres in: ");
+		System.out.print("Vul e-mailadres in: ");
 	}
 
 	public void printRequestPasswordInput() {

@@ -23,7 +23,7 @@ public class DatabaseConnectionXML {
 	 * be more efficient. Consider this later on in big projects
 	 */
 
-	public static void initializeXml() {
+	public static void initializeXmlSQL() {
 
 		/*
 		 * Finding the right path for the xml file was a big problem. So when you are
@@ -67,7 +67,7 @@ public class DatabaseConnectionXML {
 		 * method otherwise skip it.
 		 */
 		if (URL == null | USER == null | PASSWORD == null) {
-			initializeXml();
+			initializeXmlSQL();
 		}
 		Connection conn = null;
 		try {

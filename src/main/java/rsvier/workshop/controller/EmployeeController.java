@@ -26,11 +26,15 @@ public class EmployeeController extends Controller{
 					MainController.setController(TypeOfController.CUSTOMER);
 					break;
 
-			case 2: //producten beheren
+			case 2: //Accounts beheren
+					MainController.setController(TypeOfController.ACCOUNT);
+					break;
+
+			case 3: //producten beheren
 					MainController.setController(TypeOfController.PRODUCT);
 					break;
 			
-			case 3:	//bestellingen beheren
+			case 4:	//bestellingen beheren
 					MainController.setController(TypeOfController.ORDER);
 					break;
 			case 0:	//Exit Menu

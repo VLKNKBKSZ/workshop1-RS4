@@ -27,34 +27,54 @@ public class AccountController extends Controller{
 	public void runView() {
 		
 		accountView.printHeaderMessage();
-		accountView.printMenuMessage();
-	//	accountMenuSwitch(View.getIntInput());
+		changeAccountSwitch(searchAccountByMail());
 
 	}
-	
-	/* Not using this method right now:
 
-	public void accountMenuSwitch(int menuNumber) {
-		
-		switch (menuNumber) {
 
-			case 1:	//Make new account
-					
-					break;
-			case 2:	//Back to main menu
-					
-					break;
-			case 0:
-					accountView.printExitApplicationMessage();
-					break;		
-		
-			default:
+	public Account searchAccountByMail(){
 
+		accountView.printRequestEmailInput();
+		return accountDAO.getAccountByEmail(accountView.getStringInput());
+
+	}
+
+	public void changeAccountSwitch(Account account) {
+
+
+		if (account != null) {
+			boolean updating = true;
+
+			while (updating) {
+				accountView.printMenuMessage();
+				int choice = accountView.getIntInput();
+				switch (choice) {
+					case 1: // change e-mail
+						updateEmail(account);
+						break;
+
+					case 2: // change password
+						updatePassword(account);
+						break;
+
+					case 3: // save changes
+						accountDAO.updateAccount(account);
+
+						break;
+
+					case 0: // cancel
+						updating = false;
+						MainController.setController(MainController.TypeOfController.EMPLOYEE);
+						break;
+
+					default:
+						accountView.printMenuInputIsWrong();
+				}
+			}
+		} else {
+			accountView.printAccountNotFound();
 		}
 	}
-	
-	*/
-	
 	
 	
 	public String requestAndValidateEmail() {
@@ -70,7 +90,16 @@ public class AccountController extends Controller{
 		return email;
 	}
 	
-	
+	public void updateEmail (Account account) {
+		String email = requestAndValidateEmail();
+		account.setEmail(email);
+	}
+
+	public void updatePassword (Account account) {
+		String hashedPassword = requestAndValidatePassword();
+		account.setPassword(hashedPassword);
+	}
+
 	public String requestAndValidatePassword() {
 		
 		String password;

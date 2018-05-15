@@ -57,7 +57,7 @@ public class PersonController extends Controller {
 					break;
 			default: // back to this menu again
 					personView.printMenuInputIsWrong();
-					
+
 					break;
 			}
 		}

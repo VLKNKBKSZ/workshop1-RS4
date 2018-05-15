@@ -21,7 +21,7 @@ public abstract class View {
 	
 	public boolean printAskUserToEnableHikariOrNot() {
 		
-		
+		System.out.println("\n=================================   Nevvo Meubels =================================\n");
 		System.out.println("Wilt u hikari als connection pool gebruiken? Vul in \"J\" indien Ja en \"N\" indien Nee.");
 		String userAnswer= userInput.nextLine();
 		if(userAnswer.equalsIgnoreCase("J")) {

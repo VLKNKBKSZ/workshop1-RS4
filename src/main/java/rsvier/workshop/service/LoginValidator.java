@@ -11,6 +11,7 @@ public class LoginValidator {
 	private AccountView accountView = new AccountView();
 	private AccountDAO accountDAOImp = new AccountDAOImp();
 	private Controller employeeController = new EmployeeController();
+	private Hashing hashing = new Hashing();
 
 	public void loginCheckAccountValidation() {
 
@@ -20,7 +21,7 @@ public class LoginValidator {
 		String password = accountView.getStringInput();
 		Account account = accountDAOImp.getAccountByEmail(email);
 
-		if (account.getEmail() == null || (!account.getPassword().equals(password))) {
+		if (account.getEmail() == null || (!hashing.checkPassword(password, account.getPassword()))) {
 
 			accountView.printLoginDetailsWrong();
 			MainController.setController(TypeOfController.MAINMENU);

@@ -11,7 +11,8 @@ public class AccountView extends View{
 	//Not using the printMenuMessage now
 	@Override
 	public void printMenuMessage() {
-		System.out.println("1- Maak nieuw account\n2- Terug naar Hoofdmenu\n0- Verlaat Nevvo Meubels");
+		System.out.println("Welke gegevens wilt u veranderen?");
+		System.out.println("1- E-mail\n2- Wachtwoord\n3- Veranderingen opslaan\n0- Terug naar vorige menu");
 	}
 		
 	
@@ -35,5 +36,7 @@ public class AccountView extends View{
 		System.out.println("\nU bent nu ingelogd in uw account.");
 	}
 	
-	
+	public void printAccountNotFound() {
+		System.out.println("Geen account met dit e-mailadres gevonden.");
+	}
 }

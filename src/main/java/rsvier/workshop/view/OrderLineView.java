@@ -9,7 +9,7 @@ public class OrderLineView extends View {
 	@Override
 	public void printMenuMessage() {
 		System.out.println("1- Voeg product toe aan bestelling"
-				+ "\n2- Bekijk huidige bestelling\n3- Bestelling plaatsen\n4- Annuleer bestelling");
+				+ "\n2- Bekijk huidige bestelling\n3- Bestelling plaatsen\n4- Annuleer bestelling of verlaat menu");
 	}
 	
 	public void printNewNumberOfProductsForOrderLineIsHigherThanStock() {
@@ -17,7 +17,7 @@ public class OrderLineView extends View {
 	}
 
 	public void printEditOrDeleteOrderLine() {
-		System.out.println("1 - Pas aantal in de bestelregel aan\n 2- Verwijder bestelregel van bestelling\n 0- Terug naar hoofdmenu.");
+		System.out.println("1 - Pas aantal in de bestelregel aan\n2- Verwijder bestelregel van bestelling\n0- Terug naar hoofdmenu.");
 	}
 	
 	public void printRequestNameOfProductToView() {

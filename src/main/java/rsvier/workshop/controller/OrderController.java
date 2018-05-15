@@ -91,7 +91,8 @@ public class OrderController extends Controller {
 
 		case 0:// Go back to EmployeeController
 
-			MainController.setController(TypeOfController.ORDER);
+			searchOrderSwitch();
+			break;
 
 		default:
 			orderView.printMenuInputIsWrong();
@@ -130,14 +131,14 @@ public class OrderController extends Controller {
 				updating = false;
 				break;
 			default:
+				orderView.printMenuInputIsWrong();
+				runView();
 				break;
 			}
 		}
 
 		// After we are done here we want to back to the main employeecontroller
 		// runview?
-
-		MainController.setController(TypeOfController.EMPLOYEE);
 
 	}
 

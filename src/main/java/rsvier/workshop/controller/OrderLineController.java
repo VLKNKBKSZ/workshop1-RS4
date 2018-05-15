@@ -274,11 +274,16 @@ public class OrderLineController extends Controller {
 				saveOrderAndOrderLinesInDatabaseForAlreadyExistingOrder(orderLine.getProduct(), order);
 				updating = false;
 				break;
+				
 			case 0:
-
+				
 				updating = false;
+				
 				break;
+				
 			default:
+				orderLineView.printMenuInputIsWrong();
+				runView();
 				break;
 			}
 		}

@@ -67,7 +67,7 @@ public class OrderView extends View {
 
 	public void printUpdateExistingOrder() {
 		System.out.println("\n1- Bekijk bestelregels van de bestelling"
-						+ "\n2- Voeg nieuwe bestelregels toe aan de bestelling\n3- Terug naar vorige menu"
+						+ "\n2- Voeg nieuwe bestelregels toe aan de bestelling\n0- Terug naar vorige menu"
 				);
 	}
 	

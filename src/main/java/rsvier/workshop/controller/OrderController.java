@@ -16,6 +16,7 @@ public class OrderController extends Controller {
 	private OrderLineController orderLineController = new OrderLineController();
 	private CustomerView customerView = new CustomerView();
 	private OrderLineDAO orderLineDAO = new OrderLineDAOImp();
+	private OrderLineView orderLineView = new OrderLineView();
 
 	@Override
 	public void runView() {
@@ -90,7 +91,8 @@ public class OrderController extends Controller {
 
 		case 0:// Go back to EmployeeController
 
-			MainController.setController(TypeOfController.ORDER);
+			searchOrderSwitch();
+			break;
 
 		default:
 			orderView.printMenuInputIsWrong();
@@ -113,7 +115,7 @@ public class OrderController extends Controller {
 
 			case 1: // Go to orderLine
 				orderLineController.editOrDeleteOrderLineSwitchMenu(order);
-			//	updating = false;
+
 				break;
 
 			case 2: // Add orderLines to order
@@ -122,13 +124,15 @@ public class OrderController extends Controller {
 				order.setOrderDateTime(LocalDateTime.now());
 		        order.setTotalPrice(orderLineController.getTotalPriceOfOrder(order));
 		        orderDAO.updateOrder(order);
-				updating = false;
+		        orderLineView.printOrderLineHasBeenAddedToOrder();
 				break;
 			case 0:
 				MainController.setController(TypeOfController.ORDER);
 				updating = false;
 				break;
 			default:
+				orderView.printMenuInputIsWrong();
+				runView();
 				break;
 			}
 		}
@@ -136,10 +140,9 @@ public class OrderController extends Controller {
 		// After we are done here we want to back to the main employeecontroller
 		// runview?
 
-		MainController.setController(TypeOfController.EMPLOYEE);
-
 	}
 
+	
 	public void selectOrderSearchMenuSwitch() {
 
 		orderView.printAskSearchOrderByNumberOrByName();
@@ -165,11 +168,12 @@ public class OrderController extends Controller {
 		}
 	}
 
-	// Search order by Last name
+	
+
 	public Order searchOrderByLastName(Person person) {
 
 		// One person can have more than one order, so first get all orders
-		// and store them in a order list
+		// and store them in an order list
 
 		List<Order> orderList = new ArrayList<>();
 
@@ -183,7 +187,7 @@ public class OrderController extends Controller {
 
 			if (orderList.size() == 0) {
 
-				orderView.printYouDontHaveOrders();
+				orderView.printYouDoNotHaveOrders();
 				runView();
 				return null;
 			}
@@ -215,6 +219,8 @@ public class OrderController extends Controller {
 		return (orderList.get(choice - 1));
 	}
 
+	
+	
 	public int selectOrder() {
 
 		orderView.printAskSelectOrder();
@@ -222,6 +228,8 @@ public class OrderController extends Controller {
 		return orderView.getIntInput();
 	}
 
+	
+	
 	// Search order by OrderId
 	public void searchOrderByOrderId() {
 
@@ -237,6 +245,8 @@ public class OrderController extends Controller {
 		}
 	}
 
+	
+	
 	public void doDeleteOrder(Order order) {
 
 		if (orderView.confirmYesOrNo().equalsIgnoreCase("J")) {
@@ -249,6 +259,7 @@ public class OrderController extends Controller {
 
 	}
 
+	
 	public void doCreateOrder(Person person) {
 
 		// check if person was found
@@ -262,9 +273,9 @@ public class OrderController extends Controller {
 			Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 			orderBuilder.person(person);
 			Order order = orderBuilder.build();
-			order.getPerson().toString();
-			order.toString();
-
+			
+			orderView.printYouCanNowAddProducts();
+			
 			// Pass the order to the switch in the orderLineController
 			orderLineController.orderLineMenuSwitch(order);
 

@@ -1,7 +1,6 @@
 package rsvier.workshop.controller;
 
 import java.math.BigDecimal;
-import java.util.*;
 import java.util.List;
 
 import rsvier.workshop.controller.MainController.TypeOfController;
@@ -119,7 +118,7 @@ public class ProductController extends Controller {
 		Product product = productBuilder.build();
 
 		productDAO.createProduct(product);
-		productView.printProductIsSuccesfullyCreated();
+		productView.printProductIsSuccessfullyCreated();
 	}
 
 	public void doDeleteProduct(Product product) {
@@ -144,13 +143,18 @@ public class ProductController extends Controller {
 	}
 
 	public void showProductList() {
+		
+		System.out.println("\nLijst van alle Nevvo-Producten:");
+		System.out.println("-------------------------------");
 		List<Product> products = productDAO.getAllProducts();
 
 		for (Product product : products) {
-			System.out.println("\n" + product.toString());
+			System.out.println(product.toString());
 		}
+		System.out.println("-------------------------------\n");
 	}
 
+	
 	public void updateProductSwitch(Product product) {
 
 		boolean updatingProduct = true;

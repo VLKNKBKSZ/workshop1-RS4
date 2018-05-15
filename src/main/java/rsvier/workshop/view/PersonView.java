@@ -43,7 +43,7 @@ public class PersonView extends View {
 		System.out.println("\nUw tussenvoegsel is aangepast.\n");
 	}
 	
-	public void printPersonUserDetailsAreSuccesfullyUpdated() {
+	public void printPersonUserDetailsAreSuccessfullyUpdated() {
 		System.out.println("De gegevens van de gebruiker zijn succesvol aangepast");
 	}
 

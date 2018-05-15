@@ -1,8 +1,10 @@
 package rsvier.workshop.controller;
 
+import org.mindrot.jbcrypt.BCrypt;
 import rsvier.workshop.dao.AccountDAO;
 import rsvier.workshop.dao.AccountDAOImp;
 import rsvier.workshop.domain.Account;
+import rsvier.workshop.service.Hashing;
 import rsvier.workshop.service.Validator;
 import rsvier.workshop.view.AccountView;
 
@@ -12,6 +14,7 @@ public class AccountController extends Controller{
 	private AccountView accountView = new AccountView();
 	private Account account;
 	private Validator validator = new Validator();
+	private Hashing hashing = new Hashing();
 
 
 	
@@ -26,7 +29,7 @@ public class AccountController extends Controller{
 		accountView.printHeaderMessage();
 		accountView.printMenuMessage();
 	//	accountMenuSwitch(View.getIntInput());
-		
+
 	}
 	
 	/* Not using this method right now:
@@ -78,15 +81,15 @@ public class AccountController extends Controller{
 		
 		} while (!validator.validatePassword(password));
 
-		return password;
+		return hashing.createHash(password);
 	}
 
 	
 	public Account doCreateAccount() {
 		
 		String email = requestAndValidateEmail();
-		String password = requestAndValidatePassword();
-		account = new Account(email, password);
+		String hashedPassword = requestAndValidatePassword();
+		account = new Account(email, hashedPassword);
 		account.setAccountId(accountDAO.createAccount(account));
 		return account;
 	}

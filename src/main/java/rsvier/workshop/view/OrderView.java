@@ -12,7 +12,7 @@ public class OrderView extends View {
 
 	@Override
 	public void printMenuMessage() {
-		System.out.println("\n1- Zoek bestelling\n2- Plaats bestelling\n0- Verlaat bestellingbeheer");
+		System.out.println("\n1- Zoek een bestelling\n2- Maak een bestelling\n0- Verlaat bestellingbeheer");
 	}
 
 	
@@ -55,6 +55,9 @@ public class OrderView extends View {
 		System.out.println("Uw bestelling is geplaatst.");
 	}
 
+	public void printOrderHasNotBeenPlaced() {
+		System.out.println("Uw bestelling is niet geplaatst.");
+	}
 	
 	public void printOrdersFound(String message, int i, Order order) {
 		System.out.println(message + i + ", " + " Bestelling id-nummer: " + order.getOrderId() + " Datum van bestelling: "
@@ -64,7 +67,7 @@ public class OrderView extends View {
 
 	public void printUpdateExistingOrder() {
 		System.out.println("\n1- Bekijk bestelregels van de bestelling"
-						+ "\n2- Voeg nieuwe bestelregels toe aan de bestelling\n3- Terug naar vorige menu"
+						+ "\n2- Voeg nieuwe bestelregels toe aan de bestelling\n0- Terug naar vorige menu"
 				);
 	}
 	
@@ -73,8 +76,13 @@ public class OrderView extends View {
 		System.out.println("\nWelke bestelregel wilt u aanpassen?");
 	}
 
-	public void printYouDontHaveOrders() {
-		System.out.println("\nU heeft geen bestellingen staan op dit moment\n");
+	public void printYouDoNotHaveOrders() {
+		System.out.println("\nU heeft geen bestellingen staan op dit moment\n");	
+	}
+
+
+	public void printYouCanNowAddProducts() {
+		System.out.println("U kunt nu producten toevoegen aan uw bestelling.\n");
 		
 	}
 	

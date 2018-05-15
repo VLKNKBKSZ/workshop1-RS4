@@ -2,7 +2,6 @@ package rsvier.workshop.controller;
 
 
 import rsvier.workshop.service.LoginValidator;
-
 import rsvier.workshop.view.MainMenuView;
 
 public class MainMenuController extends Controller{
@@ -34,7 +33,7 @@ public class MainMenuController extends Controller{
 					runView();
 		
 					break;
-					
+
 			case 0:
 					mainMenuView.printExitApplicationMessage();
 					break;

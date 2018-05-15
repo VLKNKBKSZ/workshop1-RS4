@@ -18,7 +18,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 		List<OrderLine> orderLineList = new ArrayList<>();
 		String query = "SELECT * FROM orderline;";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);
 				ResultSet resultSet = preparedStatement.executeQuery()) {
 
@@ -51,7 +51,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 		List<OrderLine> orderLineList = new ArrayList<>();
 		String query = "SELECT * FROM orderline WHERE order_table_id =?;";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
 			preparedStatement.setInt(1, order.getOrderId());
@@ -89,7 +89,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 		List<OrderLine> orderLineList = new ArrayList<>();
 		String query = "SELECT * FROM orderline WHERE product_id = ?;";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
 			preparedStatement.setInt(1, product.getProductId());
@@ -124,7 +124,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 		OrderLine orderLine = null;
 		String query = "SELECT * FROM orderline WHERE orderline_id = ?";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, orderLineId);
@@ -158,7 +158,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 
 		String query = "INSERT INTO orderline (order_table_id, product_id , number_of_products) VALUES (?, ? ,?)";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
 			for (OrderLine orderLine : orderLines) {
@@ -184,7 +184,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 	public void createOrderLine(OrderLine orderLine, int orderId) {
 		String query = "INSERT INTO orderline (order_table_id, product_id , number_of_products) VALUES (?, ? ,?)";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
 				preparedStatement.setInt(1, orderId);
@@ -208,7 +208,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 
 		String query = "DELETE FROM orderline WHERE orderline_id=?";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, orderLine.getOrderLineId());
@@ -230,7 +230,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 
 		String query = "UPDATE orderline SET number_of_products = ? WHERE orderline_id=?;";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, orderLine.getNumberOfProducts());

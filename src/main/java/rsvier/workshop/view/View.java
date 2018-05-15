@@ -19,6 +19,20 @@ public abstract class View {
 		System.out.println("Vul in \"J\" indien Ja en \"N\" indien Nee.");
 	}
 	
+	public boolean printAskUserToEnableHikariOrNot() {
+		
+		
+		System.out.println("Wilt u hikari als connection pool gebruiken? Vul in \"J\" indien Ja en \"N\" indien Nee.");
+		String userAnswer= userInput.nextLine();
+		if(userAnswer.equalsIgnoreCase("J")) {
+			System.out.println("Hikari connection pool word nu geactiveerd...");
+			return true;
+		}
+		System.out.println("Jdbc connection pool word nu geactiveerd...");
+		return false;
+	
+	}
+	
 
 	public void printAskConfirmation() {
 		System.out.println("Weet u het zeker?");

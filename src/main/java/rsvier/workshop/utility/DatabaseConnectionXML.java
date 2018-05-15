@@ -8,6 +8,9 @@ import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+import com.mongodb.*;
+
+
 public class DatabaseConnectionXML {
 
 	private static Logger logger = LogConnection.getLogger();
@@ -15,6 +18,7 @@ public class DatabaseConnectionXML {
 	private static String URL;
 	private static String USER;
 	private static String PASSWORD;
+	private static String DATABASE_NAME;
 
 	/*
 	 * Create a function that is parsing the xml file. Getting the right values of
@@ -23,7 +27,7 @@ public class DatabaseConnectionXML {
 	 * be more efficient. Consider this later on in big projects
 	 */
 
-	public static void initializeXml() {
+	public static void initializeXmlSQL() {
 
 		/*
 		 * Finding the right path for the xml file was a big problem. So when you are
@@ -32,7 +36,7 @@ public class DatabaseConnectionXML {
 		 * missing parts to the new File() and it should find the file. btw don't forget
 		 * to use double backslashes to make it compatible with all Operating Systems.
 		 */
-		File xmlFile = new File("src/main/java/rsvier/workshop/utility/DCXML.xml");
+		File xmlFile = new File("src/main/java/rsvier/workshop/utility/DCXMLSQL.xml");
 
 		if (xmlFile.exists()) {
 
@@ -60,6 +64,37 @@ public class DatabaseConnectionXML {
 
 	}
 
+	public static void initializeXmlSQLMongoDB() {
+
+		
+		File xmlFile = new File("src/main/java/rsvier/workshop/utility/DCXMLMONGO.xml");
+
+		if (xmlFile.exists()) {
+
+			try {
+
+				DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+				Document document = dBuilder.parse(xmlFile);
+				document.getDocumentElement().normalize();
+				
+				URL = document.getElementsByTagName("url").item(0).getTextContent();
+				DATABASE_NAME = document.getElementsByTagName("databaseName").item(0).getTextContent();
+				
+				
+				logger.log(Level.CONFIG,"Xml file exist, parsing is succesfull.");
+				
+			} catch (ParserConfigurationException | SAXException | IOException e) {
+				
+				logger.log(Level.WARNING, "Parser/Sax/IOexception occured check log", e);
+
+			}
+		} else {
+			
+			logger.log(Level.INFO, "xmlFile is not existing.");
+		}
+
+	}
+
 	public static Connection getConnection() throws SQLException {
 
 		/*
@@ -67,7 +102,7 @@ public class DatabaseConnectionXML {
 		 * method otherwise skip it.
 		 */
 		if (URL == null | USER == null | PASSWORD == null) {
-			initializeXml();
+			initializeXmlSQL();
 		}
 		Connection conn = null;
 		try {
@@ -83,5 +118,26 @@ public class DatabaseConnectionXML {
 		}
 
 		return conn;
+	}
+	
+	public static DB getConnectionMongoDB() {
+		
+		if (URL == null | DATABASE_NAME == null) {
+			initializeXmlSQLMongoDB();
+		}
+		
+		DB db = null;
+		
+		MongoClientURI mongoClientUri = new MongoClientURI(URL);
+		logger.log(Level.INFO, "MongoClientURI set");
+		
+		MongoClient mongoClient = new MongoClient(mongoClientUri);
+		logger.log(Level.INFO, "MongoClient set");
+		
+		db = mongoClient.getDB(DATABASE_NAME);
+		logger.log(Level.INFO, "Connected to MongoDB Database");
+		
+		return db;
+		
 	}
 }

@@ -99,7 +99,6 @@ public class PersonDAOImp implements PersonDAO {
 
 			preparedStatement.executeUpdate();
 
-			System.out.println("Person succesfully created");
 			logger.log(Level.INFO, "Person succesfully created");
 			try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
 				if (resultSet.next()) {

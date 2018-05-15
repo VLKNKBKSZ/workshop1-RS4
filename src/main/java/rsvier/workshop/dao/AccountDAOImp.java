@@ -19,7 +19,7 @@ public class AccountDAOImp implements AccountDAO {
 
 		String query = "SELECT * FROM account";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSourceHikari.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);
 				ResultSet resultSet = preparedStatement.executeQuery();) {
 
@@ -50,7 +50,7 @@ public class AccountDAOImp implements AccountDAO {
 
 		String query = "INSERT INTO account (account_type,email,password) VALUES(?,?,?)";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSourceHikari.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 			
@@ -81,7 +81,7 @@ public class AccountDAOImp implements AccountDAO {
 
 		String query = "UPDATE account SET account_type = ?, email = ?, password = ? WHERE account_id = ?";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSourceHikari.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 			
 			preparedStatement.setInt(1, account.getAccountType());
@@ -107,7 +107,7 @@ public class AccountDAOImp implements AccountDAO {
 
 		String query = "DELETE FROM account WHERE account_id = ?";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSourceHikari.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, account.getAccountId());
@@ -130,7 +130,7 @@ public class AccountDAOImp implements AccountDAO {
 
 		String query = "SELECT * FROM account WHERE email = ?";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSourceHikari.getConnection();
 			 PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setString(1, email);
@@ -163,7 +163,7 @@ public class AccountDAOImp implements AccountDAO {
 
 		String query = "SELECT * FROM account WHERE account_id = ?";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSourceHikari.getConnection();
 			 PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, accountId);

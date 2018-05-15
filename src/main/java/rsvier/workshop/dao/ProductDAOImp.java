@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 import rsvier.workshop.domain.*;
+import rsvier.workshop.utility.DataSourceHikari;
 import rsvier.workshop.utility.DatabaseConnectionXML;
 import rsvier.workshop.utility.LogConnection;
 
@@ -17,7 +18,7 @@ public class ProductDAOImp implements ProductDAO {
 		List<Product> productList = new ArrayList<>();
 		String query = "SELECT * FROM product;";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSourceHikari.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);
 				ResultSet resultSet = preparedStatement.executeQuery();) {
 
@@ -51,7 +52,7 @@ public class ProductDAOImp implements ProductDAO {
 		Product product = null;
 		String query = "SELECT * FROM product WHERE name = ?;";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSourceHikari.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setString(1, name);
@@ -85,7 +86,7 @@ public class ProductDAOImp implements ProductDAO {
 		Product product = null;
 		String query = "SELECT * FROM product WHERE product_id = ?;";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSourceHikari.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, productId);
@@ -119,7 +120,7 @@ public class ProductDAOImp implements ProductDAO {
 	public void createProduct(Product product) {
 		String query = "INSERT INTO product (name, price, stock) VALUES (?, ?, ?);";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSourceHikari.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setString(1, product.getName());
@@ -141,7 +142,7 @@ public class ProductDAOImp implements ProductDAO {
 
 		String query = "UPDATE product SET name = ?, price = ? , stock = ? WHERE product_id = ?";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSourceHikari.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 				
 				preparedStatement.setString(1, product.getName());
@@ -163,7 +164,7 @@ public class ProductDAOImp implements ProductDAO {
 
 		String query = "DELETE FROM product WHERE product_id =?";
 
-		try (Connection conn = DatabaseConnectionXML.getConnection();
+		try (Connection conn = DataSourceHikari.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
 			preparedStatement.setInt(1, product.getProductId());

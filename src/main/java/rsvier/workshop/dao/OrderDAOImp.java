@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.logging.*;
 import rsvier.workshop.domain.Order;
 import rsvier.workshop.domain.Person;
-import rsvier.workshop.utility.DataSourceHikari;
+import rsvier.workshop.utility.DataSource;
 import rsvier.workshop.utility.DatabaseConnectionXML;
 import rsvier.workshop.utility.LogConnection;
 
@@ -32,7 +32,7 @@ public class OrderDAOImp implements OrderDAO {
 		List<Order> orderList = new ArrayList<>();
 		String query = "SELECT * FROM order_table;";
 
-		try (Connection conn = DataSourceHikari.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);
 				ResultSet resultSet = preparedStatement.executeQuery();) {
 
@@ -74,7 +74,7 @@ public class OrderDAOImp implements OrderDAO {
 		List<Order> orderList = new ArrayList<>();
 		String query = "SELECT * FROM order_table WHERE person_id = ?;";
 
-		try (Connection conn = DataSourceHikari.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, person.getPersonId());
@@ -118,7 +118,7 @@ public class OrderDAOImp implements OrderDAO {
 		String query = "SELECT * FROM order_table WHERE order_table_id =?";
 		Order order = null;
 
-		try (Connection conn = DataSourceHikari.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
 			preparedStatement.setInt(1, orderId);
@@ -155,7 +155,7 @@ public class OrderDAOImp implements OrderDAO {
 		int generatedId = 0;
 
 		String query = "INSERT INTO order_table (person_id, total_price, order_date) VALUES (?,?,?);";
-		try (Connection conn = DataSourceHikari.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 
@@ -186,7 +186,7 @@ public class OrderDAOImp implements OrderDAO {
 	public void updateOrder(Order order) {
 
 		String query = "UPDATE order_table SET total_price = ?, order_date = ? WHERE order_table_id = ?;";
-		try (Connection conn = DataSourceHikari.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
 			preparedStatement.setBigDecimal(1, order.getTotalPrice());
@@ -208,7 +208,7 @@ public class OrderDAOImp implements OrderDAO {
 
 		String query = "DELETE FROM order_table WHERE order_table_id =?;";
 
-		try (Connection conn = DataSourceHikari.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {
 
 			pstmt.setInt(1, order.getOrderId());

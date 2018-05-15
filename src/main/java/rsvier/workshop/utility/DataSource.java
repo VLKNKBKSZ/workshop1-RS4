@@ -5,7 +5,7 @@ import com.zaxxer.hikari.*;
 
 import rsvier.workshop.App;
 
-public class DataSourceHikari {
+public class DataSource {
 
 	private static HikariConfig hikariConfig;
 	private static HikariDataSource ds;

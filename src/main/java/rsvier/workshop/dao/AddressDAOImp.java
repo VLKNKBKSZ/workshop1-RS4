@@ -20,7 +20,7 @@ public class AddressDAOImp implements AddressDAO {
 
 		String query = "SELECT * FROM address";
 
-		try (Connection conn = DataSourceHikari.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);
 				ResultSet resultSet = preparedStatement.executeQuery();) {
 
@@ -65,7 +65,7 @@ public class AddressDAOImp implements AddressDAO {
 
 		String query = "SELECT * FROM address WHERE person_id = ?";
 
-		try (Connection connection = DataSourceHikari.getConnection();
+		try (Connection connection = DataSource.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, personId);
@@ -107,7 +107,7 @@ public class AddressDAOImp implements AddressDAO {
 		String query = "INSERT INTO address (person_id, address_type, street_name,house_number,additional_house_number,postal_code,city,country) "
 				+ "VALUES (?,?,?,?,?,?,?,?)";
 
-		try (Connection conn = DataSourceHikari.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, address.getPerson().getPersonId());
@@ -137,7 +137,7 @@ public class AddressDAOImp implements AddressDAO {
 				+ "SET address_type = ?, street_name = ?,house_number = ?,additional_house_number = ?,postal_code = ?,city = ?,country = ? "
 				+ "WHERE address_id = ?";
 
-		try (Connection conn = DataSourceHikari.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setString(1, address.getAddressType());
@@ -166,7 +166,7 @@ public class AddressDAOImp implements AddressDAO {
 
 		String query = "DELETE FROM address WHERE person_id=?";
 
-		try (Connection conn = DataSourceHikari.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query);) {
 
 			preparedStatement.setInt(1, personId);
@@ -186,7 +186,7 @@ public class AddressDAOImp implements AddressDAO {
 	public void deleteAdressByAddressId(Address address) {
 		String query = "DELETE FROM address WHERE id =?;";
 
-		try (Connection conn = DataSourceHikari.getConnection();
+		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
 			preparedStatement.setInt(1, address.getAddressId());

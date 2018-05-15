@@ -113,7 +113,7 @@ public class OrderController extends Controller {
 
 			case 1: // Go to orderLine
 				orderLineController.editOrDeleteOrderLineSwitchMenu(order);
-				updating = false;
+			//	updating = false;
 				break;
 
 			case 2: // Add orderLines to order

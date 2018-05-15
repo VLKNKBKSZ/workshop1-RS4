@@ -55,18 +55,18 @@ public class AddressView extends View {
     }
     
     public void printRequestMailAddressInput() {
-    		System.out.println("\nVul a.u.b uw postadres gegevens in.\n");
+    		System.out.println("\nVul a.u.b uw postadres in.\n");
     }
     
     public void printRequestDeliveryAddressInput() {
-    		System.out.println("\nVul a.u.b uw bezorg gegevens in.\n");
+    		System.out.println("\nVul a.u.b uw bezorgadres in.\n");
     }
 
     public void printRequestInvoiceAddressInput() {
-    		System.out.println("\nVul a.u.b uw factuur gegevens in.\n");
+    		System.out.println("\nVul a.u.b uw factuuradres in.\n");
     }
     
-    public void printAddressAreSuccesFullyCreatedAndSaved() {
+    public void printAddressAreSuccessFullyCreatedAndSaved() {
     		System.out.println("\nAl uw adresgegevens zijn succesvol aangemaakt en opgeslagen.\n");
     }
     

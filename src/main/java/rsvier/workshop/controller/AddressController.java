@@ -32,7 +32,7 @@ public class AddressController extends Controller{
 		Address address = createNewAddress("mail", person);
 		Address addressDelivery;
 		addressDAO.createAddress(address);
-		addressView.printAddressAreSuccesFullyCreatedAndSaved();
+		addressView.printAddressAreSuccessFullyCreatedAndSaved();
 		
 		// Setting the types of addresses (mail/invoice/delivery):
 
@@ -42,14 +42,14 @@ public class AddressController extends Controller{
 
 			address.setAddressType("delivery");
 			addressDAO.createAddress(address);
-			addressView.printAddressAreSuccesFullyCreatedAndSaved();
+			addressView.printAddressAreSuccessFullyCreatedAndSaved();
 			addressDelivery = address;
 
 		} else {
 			addressView.printRequestDeliveryAddressInput();
 			addressDelivery = createNewAddress("delivery", person);
 			addressDAO.createAddress(addressDelivery);
-			addressView.printAddressAreSuccesFullyCreatedAndSaved();
+			addressView.printAddressAreSuccessFullyCreatedAndSaved();
 		}
 
 		addressView.printAskMailAndInvoiceSame();
@@ -58,7 +58,7 @@ public class AddressController extends Controller{
 
 			address.setAddressType("invoice");
 			addressDAO.createAddress(address);
-			addressView.printAddressAreSuccesFullyCreatedAndSaved();
+			addressView.printAddressAreSuccessFullyCreatedAndSaved();
 			return;
 		}
 
@@ -68,12 +68,12 @@ public class AddressController extends Controller{
 
 			addressDelivery.setAddressType("invoice");
 			addressDAO.createAddress(addressDelivery);
-			addressView.printAddressAreSuccesFullyCreatedAndSaved();
+			addressView.printAddressAreSuccessFullyCreatedAndSaved();
 			
 		} else {
 			addressView.printRequestInvoiceAddressInput();
 			addressDAO.createAddress(createNewAddress("invoice", person));
-			addressView.printAddressAreSuccesFullyCreatedAndSaved();
+			addressView.printAddressAreSuccessFullyCreatedAndSaved();
 		}
 	}
 

@@ -13,7 +13,7 @@ public class OrderLineView extends View {
 	}
 	
 	public void printNewNumberOfProductsForOrderLineIsHigherThanStock() {
-		System.out.println("Het aantal wat u van dit product wilt bestellen is niet op voorraad, Voer het nieuwe aantal van de producten in a.u.b");
+		System.out.println("Er is onvoldoende voorraad van dit product, vul a.u.b een lagere hoeveelheid in.");
 	}
 
 	public void printEditOrDeleteOrderLine() {
@@ -37,7 +37,7 @@ public class OrderLineView extends View {
 	}
 	
 	public void printProductStockIsNotAvailable(int stockFromDatabase, int requestedAmountOfProducts) {
-		System.out.println("Het aantal wat u heeft ingevoerd is " + requestedAmountOfProducts + 
+		System.out.println("Het aantal dat u heeft ingevoerd is " + requestedAmountOfProducts +
 				". De voorraad voor dit product is " + stockFromDatabase + ". Probeer het nogmaals.\n");
 	}
 	

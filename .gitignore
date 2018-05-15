@@ -64,3 +64,4 @@ fabric.properties
 /log.xml.lck
 /log.xml.3
 /log.xml.3.lck
+/hikari.properties

@@ -14,7 +14,6 @@ public class OrderController extends Controller {
 	private OrderDAO orderDAO = new OrderDAOImp();
 	private CustomerController customerController = new CustomerController();
 	private OrderLineController orderLineController = new OrderLineController();
-	private CustomerView customerView = new CustomerView();
 	private OrderLineDAO orderLineDAO = new OrderLineDAOImp();
 	private OrderLineView orderLineView = new OrderLineView();
 
@@ -119,13 +118,9 @@ public class OrderController extends Controller {
 				break;
 
 			case 2: // Add orderLines to order
-				orderLineController.addOrderLineToOrder(order);
-				orderLineDAO.createOrderLine(order.getTotalOrderLines().get(order.getTotalOrderLines().size ()-1), order.getOrderId());
-				order.setOrderDateTime(LocalDateTime.now());
-		        order.setTotalPrice(orderLineController.getTotalPriceOfOrder(order));
-		        orderDAO.updateOrder(order);
-		        orderLineView.printOrderLineHasBeenAddedToOrder();
+				addOrderLineToExistingOrder(order);
 				break;
+
 			case 0:
 				MainController.setController(TypeOfController.ORDER);
 				updating = false;
@@ -168,7 +163,15 @@ public class OrderController extends Controller {
 		}
 	}
 
-	
+	public void addOrderLineToExistingOrder(Order order) {
+		orderLineController.addOrderLineToOrder(order);
+		orderLineDAO.createOrderLine(order.getTotalOrderLines().get(order.getTotalOrderLines().size ()-1), order.getOrderId());
+		order.setOrderDateTime(LocalDateTime.now());
+		order.setTotalPrice(orderLineController.getTotalPriceOfOrder(order));
+		orderDAO.updateOrder(order);
+		orderLineView.printOrderLineHasBeenAddedToOrder();
+	}
+
 
 	public Order searchOrderByLastName(Person person) {
 

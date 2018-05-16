@@ -8,7 +8,7 @@ public class MainMenuController extends Controller{
 
 	private MainMenuView mainMenuView = new MainMenuView();
 	private AccountController accountController = new AccountController();
-	private LoginValidator loginValidation = new LoginValidator();
+	private LoginValidator loginValidator = new LoginValidator();
 	
 	@Override
 	public void runView() {
@@ -26,7 +26,7 @@ public class MainMenuController extends Controller{
 		switch (menuNumber) {
 			
 			case 1://Login into account
-					loginValidation.loginCheckAccountValidation(); 
+					loginValidator.loginCheckAccountValidation();
 					break;
 
 			case 2: //Create a new account

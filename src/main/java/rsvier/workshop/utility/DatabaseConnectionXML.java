@@ -1,6 +1,7 @@
 package rsvier.workshop.utility;
 
 import java.io.*;
+import java.net.UnknownHostException;
 import java.sql.*;
 import java.util.logging.*;
 
@@ -120,7 +121,8 @@ public class DatabaseConnectionXML {
 		return conn;
 	}
 	
-	public static DB getConnectionMongoDB() {
+	@SuppressWarnings("deprecation")
+	public static DB getConnectionMongoDB() throws UnknownHostException {
 		
 		if (URL == null | DATABASE_NAME == null) {
 			initializeXmlSQLMongoDB();

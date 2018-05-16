@@ -37,7 +37,7 @@ public class DatabaseConnectionXML {
 		 * missing parts to the new File() and it should find the file. btw don't forget
 		 * to use double backslashes to make it compatible with all Operating Systems.
 		 */
-		File xmlFile = new File("src/main/java/rsvier/workshop/utility/DCXMLSQL.xml");
+		File xmlFile = new File("src/main/java/rsvier/workshop/utility/DCXML.xml");
 
 		if (xmlFile.exists()) {
 
@@ -65,7 +65,7 @@ public class DatabaseConnectionXML {
 
 	}
 
-	public static void initializeXmlSQLMongoDB() {
+	public static void initializeXmlMongoDB() {
 
 		
 		File xmlFile = new File("src/main/java/rsvier/workshop/utility/DCXMLMONGO.xml");
@@ -125,7 +125,7 @@ public class DatabaseConnectionXML {
 	public static DB getConnectionMongoDB() throws UnknownHostException {
 		
 		if (URL == null | DATABASE_NAME == null) {
-			initializeXmlSQLMongoDB();
+			initializeXmlMongoDB();
 		}
 		
 		DB db = null;
@@ -136,7 +136,7 @@ public class DatabaseConnectionXML {
 		MongoClient mongoClient = new MongoClient(mongoClientUri);
 		logger.log(Level.INFO, "MongoClient set");
 		
-		db = mongoClient.getDB(DATABASE_NAME);
+		db = (DB) mongoClient.getDatabase(DATABASE_NAME);
 		logger.log(Level.INFO, "Connected to MongoDB Database");
 		
 		return db;

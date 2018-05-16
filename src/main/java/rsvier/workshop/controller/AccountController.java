@@ -42,7 +42,7 @@ public class AccountController extends Controller{
 	public void changeAccountSwitch(Account account) {
 
 
-		if (account != null) {
+		if (account.getEmail() != null) {
 			boolean updating = true;
 
 			while (updating) {
@@ -73,6 +73,7 @@ public class AccountController extends Controller{
 			}
 		} else {
 			accountView.printAccountNotFound();
+			MainController.setController(MainController.TypeOfController.EMPLOYEE);
 		}
 	}
 	

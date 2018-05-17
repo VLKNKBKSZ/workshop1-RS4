@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package rsvier.workshop;
 
 import java.net.UnknownHostException;
@@ -64,3 +65,4 @@ public class TestMongo {
 	}
 
 }
+

@@ -17,7 +17,7 @@ public class OrderLineView extends View {
 	}
 
 	public void printEditOrDeleteOrderLine() {
-		System.out.println("1 - Pas aantal in de bestelregel aan\n2- Verwijder bestelregel van bestelling\n0- Terug naar hoofdmenu.");
+		System.out.println("1 - Pas het aantal van het bestelde product aan\n2- Verwijder product van bestelling\n0- Terug naar hoofdmenu.");
 	}
 	
 	public void printRequestNameOfProductToView() {
@@ -33,7 +33,7 @@ public class OrderLineView extends View {
 	}
 
 	public void printAskUserToChoseOrderLine() {
-		System.out.println("Voer het nummer van de bestelregel in die uw wilt aanpassen");
+		System.out.println("Voer het nummer in van het product dat u wilt aanpassen");
 	}
 	
 	public void printProductStockIsNotAvailable(int stockFromDatabase, int requestedAmountOfProducts) {
@@ -45,16 +45,12 @@ public class OrderLineView extends View {
 		System.out.println("Voer het nieuwe aantal van de producten in a.u.b : \n");
 	}
 	
-	public void printUpdateExistingOrderLine() {
-		System.out.println("\n1- Pas bestelregel aan\n2- Verwijder bestelregel \n0- Terug naar vorig menu");
-	}
-	
 	public void printOrderLineHasBeenAddedToOrder() {
-		System.out.println("De bestelregel is toegevoegd aan de bestelling.");
+		System.out.println("Het product is toegevoegd aan de bestelling.");
 	}
 	
 	public void printOrderHasBeenDeletedBecauseOfNoMoreOrderLines() {
-		System.out.println("De bestelling is verwijderd omdat deze geen bestelregels meer bevat.");
+		System.out.println("De bestelling is verwijderd omdat deze geen producten meer bevat.");
 	}
 	
 	public void printYouCanAddMoreOrPlaceOrder() {

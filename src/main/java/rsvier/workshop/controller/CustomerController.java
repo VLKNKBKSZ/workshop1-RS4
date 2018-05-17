@@ -36,32 +36,22 @@ public class CustomerController extends Controller {
 		switch (menuNumber) {
 
 			case 1: // Search customer by last name
-					Person person = searchCustomerByLastName();
-
-						if (person != null) {
-
-							updateOrDeleteCustomerSwitch(person);
-
-						} else {
-
-						runView();
-						}
+					findCustomerAndCheckIfExist();
 					break;
-			case 2: // Add customer
-					AccountView.printMakeCustomerAccount();
-					Account account = accountController.doCreateAccount();
-					person = personController.doCreatePerson(account);
-					addressController.doCreateAddresses(person);
 
+			case 2: // Add customer
+					addCustomer();
 					runView();
 					break;
-			case 0: // Go back to employee-menu
 
+			case 0: // Go back to employee-menu
 					MainController.setController(TypeOfController.EMPLOYEE);
 					break;
+
 			default:
 					customerView.printMenuInputIsWrong();
 					runView();
+
 					break;
 
 		}
@@ -80,26 +70,52 @@ public class CustomerController extends Controller {
 			case 1: // Update person
 					personController.personUpdateMenuSwitch(person);
 					break;
+
 			case 2: // Delete person
-					String yesOrNo = customerView.confirmYesOrNo();
-
-						if (yesOrNo.equalsIgnoreCase("J")) {
-
-							addressDao.deleteAddressByPersonId(person.getPersonId());
-							accountDao.deleteAccount(person.getAccount());
-							personDao.deletePerson(person);
-
-						}
-						runView();
-
+					confirmAndDeletePerson(person);
+					runView();
 					break;
+
 			case 0: // back to previous menu
 					runView();
 					break;
+
 			default: // back to previous menu
 					customerView.printMenuInputIsWrong();
 					runView();
 					break;
+		}
+	}
+
+	public void findCustomerAndCheckIfExist() {
+		Person person = searchCustomerByLastName();
+
+		if (person != null) {
+
+			updateOrDeleteCustomerSwitch(person);
+
+		} else {
+
+			runView();
+		}
+	}
+
+	public void addCustomer() {
+		AccountView.printMakeCustomerAccount();
+		Account account = accountController.doCreateAccount();
+		Person person = personController.doCreatePerson(account);
+		addressController.doCreateAddresses(person);
+	}
+
+	public void confirmAndDeletePerson(Person person) {
+		String yesOrNo = customerView.confirmYesOrNo();
+
+		if (yesOrNo.equalsIgnoreCase("J")) {
+
+			addressDao.deleteAddressByPersonId(person.getPersonId());
+			accountDao.deleteAccount(person.getAccount());
+			personDao.deletePerson(person);
+
 		}
 	}
 

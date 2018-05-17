@@ -41,7 +41,6 @@ public class OrderLineController extends Controller {
 
 			case 1: // Add orderline(s) to order object
 				addOrderLineToOrder(order);
-
 				break;
 
 			case 2: // View current order
@@ -50,18 +49,7 @@ public class OrderLineController extends Controller {
 				break;
 
 			case 3: // Place order in the database
-				if(order == null) {
-					orderLineView.printOrderIsEmpty();
-					break;
-				}
-				
-				//Ask confirmation before saving in database
-				if (orderLineView.confirmYesOrNo().equalsIgnoreCase("J")) {
-					saveOrderAndOrderLinesInDatabase(order);
-					orderView.printOrderHasBeenPlaced();
-				} else { 
-					orderView.printOrderHasNotBeenPlaced();
-				}
+				placeOrderInDatabase(order);
 				break;
 
 			case 4: // Cancel order
@@ -75,6 +63,21 @@ public class OrderLineController extends Controller {
 			}
 		}
 
+	}
+
+	public void placeOrderInDatabase(Order order) {
+		if(order == null) {
+			orderLineView.printOrderIsEmpty();
+			return;
+		}
+
+		//Ask confirmation before saving in database
+		if (orderLineView.confirmYesOrNo().equalsIgnoreCase("J")) {
+			saveOrderAndOrderLinesInDatabase(order);
+			orderView.printOrderHasBeenPlaced();
+		} else {
+			orderView.printOrderHasNotBeenPlaced();
+		}
 	}
 
 	
@@ -258,27 +261,17 @@ public class OrderLineController extends Controller {
 			switch (menuNumber) {
 
 			case 1: // update order line
-				
 				updatedProduct = updateNumberOfProductsInOrderLine(orderLineList.get(selectedOrderLineInt));
 				saveOrderAndOrderLinesInDatabaseForAlreadyExistingOrder(updatedProduct, order);
-	//			updating = false;
-				
 				break;
 
 			case 2: // delete order line
-				
-				OrderLine orderLine = order.getTotalOrderLines().get(selectedOrderLineInt);
-				orderLineDAO.deleteOrderLine(orderLineList.get(selectedOrderLineInt));
-				updateNegativeProductStockInDatabaseWhenOrderLineDeleted(orderLine);
-				order.getTotalOrderLines().remove(orderLineList.get(selectedOrderLineInt));
-				saveOrderAndOrderLinesInDatabaseForAlreadyExistingOrder(orderLine.getProduct(), order);
+				choseOrderLineAndDelete(order, selectedOrderLineInt, orderLineList);
 				updating = false;
 				break;
 				
 			case 0:
-				
 				updating = false;
-				
 				break;
 				
 			default:
@@ -288,31 +281,13 @@ public class OrderLineController extends Controller {
 			}
 		}
 	}
-	
 
-	public OrderLine viewAndSelectOrderLine(Order order) {
-
-		viewAllOrderLinesInCurrentOrder(order);
-
-		List<OrderLine> orderLineList = order.getTotalOrderLines();
-
-		if (orderLineList.size() == 1) {
-
-			return orderLineList.get(0);
-
-		} else {
-
-			orderLineView.printAskUserToChoseOrderLine();
-			int choice = orderLineView.getIntInput();
-
-			while (choice < 1 | choice > orderLineList.size()) {
-
-				orderLineView.printMenuInputIsWrong();
-				choice = orderLineView.getIntInput();
-			}
-			return orderLineList.get(choice - 1);
-		}
-
+	public void choseOrderLineAndDelete(Order order, int selectedOrderLineInt, List<OrderLine> orderLineList) {
+		OrderLine orderLine = order.getTotalOrderLines().get(selectedOrderLineInt);
+		orderLineDAO.deleteOrderLine(orderLineList.get(selectedOrderLineInt));
+		updateNegativeProductStockInDatabaseWhenOrderLineDeleted(orderLine);
+		order.getTotalOrderLines().remove(orderLineList.get(selectedOrderLineInt));
+		saveOrderAndOrderLinesInDatabaseForAlreadyExistingOrder(orderLine.getProduct(), order);
 	}
 	
 

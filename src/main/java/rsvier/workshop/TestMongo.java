@@ -18,7 +18,7 @@ public class TestMongo {
 	
 		Account account2 = new Account();
 		account2.setAccountType(1);
-		account2.setEmail("hippo@gmail.com");
+		account2.setEmail("hsjaak@gmail.com");
 		account2.setPassword("77777");
 		
 		int generatedId = accountDao.createAccount(account2);

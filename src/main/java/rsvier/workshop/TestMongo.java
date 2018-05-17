@@ -48,12 +48,6 @@ public class TestMongo {
 			
 			
 		}
-		*/
-		
-		//				delete account = successful
-		
-	//	accountDao.deleteAccount(account);
-		
 		
 		//           	get account by email  = successful
 		/*
@@ -61,6 +55,14 @@ public class TestMongo {
 		Account account = accountDao.getAccountByEmail("hippo@gmail.com");
 		System.out.println(account.toString());
 		*/
+		
+		//				delete account = successful
+		
+	//	accountDao.deleteAccount(account);
+		
+		
+		       
+	
 	}
 
 }

@@ -59,8 +59,6 @@ public class AccountDAOImpMongo implements AccountDAO {
 	@Override
 	public int createAccount(Account account) {
 
-		
-		int accountId = account.getAccountId();
 		int accountType = account.getAccountType();
 		String email = account.getEmail();
 		String password = account.getPassword();

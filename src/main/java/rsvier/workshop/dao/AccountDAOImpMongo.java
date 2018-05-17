@@ -32,7 +32,7 @@ public class AccountDAOImpMongo implements AccountDAO {
 	@Override
 	public List<Account> getAllAccounts() {
 		List<Account> addressList = new ArrayList<>();
-
+// skip(1) means Find every document except the first document
 		try (DBCursor cursor = collection.find().skip(1);) {
 			while (cursor.hasNext()) {
 				DBObject object = cursor.next();
@@ -62,8 +62,9 @@ public class AccountDAOImpMongo implements AccountDAO {
 		int accountType = account.getAccountType();
 		String email = account.getEmail();
 		String password = account.getPassword();
-
+// getNextSequence() gives the generatedId as a Double object. Have to cast object to double
 		double generatedIdDouble = (Double) getNextSequence("account_id");
+// Cast double to int. Then you generatedId as int
 		int generatedIdInteger = (int) generatedIdDouble;
 		DBObject newAccount = new BasicDBObject("_id", generatedIdInteger).append("account_type", accountType)
 				.append("email", email).append("password", password);
@@ -145,7 +146,7 @@ public class AccountDAOImpMongo implements AccountDAO {
 		}
 		return account;
 	}
-
+// Method of auto-increment Id
 	public Object getNextSequence(String accountId) {
 
 		BasicDBObject find = new BasicDBObject();
@@ -153,8 +154,8 @@ public class AccountDAOImpMongo implements AccountDAO {
 		BasicDBObject update = new BasicDBObject();
 		update.put("$inc", new BasicDBObject("seq", 1));
 		DBObject obj = collection.findAndModify(find, update);
-
-		return obj.get("seq");
+// return Object
+		return obj.get("seq");  
 	}
 
 }

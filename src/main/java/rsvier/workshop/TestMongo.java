@@ -16,7 +16,7 @@ public class TestMongo {
 		
 		AccountDAO accountDao = new AccountDAOImpMongo();
 	//						create account and auto generated id = successful
-	
+	/*
 		Account account2 = new Account();
 		account2.setAccountType(1);
 		account2.setEmail("tiger@gmail.com");
@@ -24,13 +24,13 @@ public class TestMongo {
 		
 		int generatedId = accountDao.createAccount(account2);
 		System.out.println("generated ID : " + generatedId);
-		
+		*/
 		
 		
 			//			get account by id = successful
 		  
-	//	Account account = accountDao.getAccountById(16);
-	//	System.out.println(account.toString());
+		Account account = accountDao.getAccountById(4);
+		System.out.println(account.toString());
 					
 		/*
 		

@@ -14,14 +14,12 @@ public class AccountDAOImpMongo implements AccountDAO {
 
 	private DB db;
 	private DBCollection collection;
-
 	private Logger logger = LogConnection.getLogger();
 
 	public AccountDAOImpMongo() {
 		try {
 			db = DatabaseConnectionXML.getConnectionMongoDB();
 			collection = db.getCollection("account");
-
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -126,8 +124,8 @@ public class AccountDAOImpMongo implements AccountDAO {
 		DBObject query = new BasicDBObject("_id", accountId);
 
 		try (DBCursor cursor = collection.find(query);) {
-			if (cursor.hasNext()) {
-				DBObject object = cursor.next();
+		if (cursor.hasNext()) {
+				DBObject object = cursor.next(); {
 				BasicDBObject accountObj = (BasicDBObject) object;
 
 				int retrievedAccountId = accountObj.getInt("_id");
@@ -141,8 +139,8 @@ public class AccountDAOImpMongo implements AccountDAO {
 				account.setEmail(email);
 				account.setPassword(password);
 
-			}
-
+				}
+		}
 		}
 		return account;
 	}

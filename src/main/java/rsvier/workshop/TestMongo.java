@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package rsvier.workshop;
 
 import java.net.UnknownHostException;

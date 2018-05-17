@@ -9,7 +9,7 @@ import rsvier.workshop.view.*;
 public class LoginValidator {
 
 	private AccountView accountView = new AccountView();
-	private AccountDAO accountDAOImp = new AccountDAOImp();
+	public AccountDAO accountDAO = DAOFactory.getAccountDAO();
 	private Controller employeeController = new EmployeeController();
 	private Hashing hashing = new Hashing();
 
@@ -19,7 +19,7 @@ public class LoginValidator {
 		String email = accountView.getStringInput();
 		accountView.printRequestPasswordInput();
 		String password = accountView.getStringInput();
-		Account account = accountDAOImp.getAccountByEmail(email);
+		Account account = DAOFactory.getAccountDAO().getAccountByEmail(email);
 
 		if (account.getEmail() == null || (!hashing.checkPassword(password, account.getPassword()))) {
 

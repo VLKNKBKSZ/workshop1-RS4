@@ -12,12 +12,14 @@ import rsvier.workshop.view.*;
 
 public class OrderLineController extends Controller {
 	private OrderLineView orderLineView = new OrderLineView();
-	private ProductDAO productDAO = new ProductDAOImp();
+	
 	private ProductView productView = new ProductView();
 	private OrderView orderView = new OrderView();
-	private OrderLineDAO orderLineDAO = new OrderLineDAOImp();
-	private OrderDAO orderDAO = new OrderDAOImp();
 	private ProductController productController = new ProductController();
+
+	private ProductDAO productDAO = DAOFactory.getProductDAO();
+	private OrderDAO orderDAO = DAOFactory.getOrderDAO();
+	private OrderLineDAO orderLineDAO = DAOFactory.getOrderLineDAO();
 
 	@Override
 	public void runView() {

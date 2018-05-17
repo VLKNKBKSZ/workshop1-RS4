@@ -11,7 +11,8 @@ import rsvier.workshop.view.*;
 public class ProductController extends Controller {
 
 	private ProductView productView = new ProductView();
-	private ProductDAO productDAO = new ProductDAOImp();
+	private ProductDAO productDAO = DAOFactory.getProductDAO();
+
 
 	@Override
 	public void runView() {

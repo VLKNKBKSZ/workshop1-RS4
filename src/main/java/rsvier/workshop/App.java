@@ -11,6 +11,7 @@ public class App {
 		
 		View view = new MainMenuView();
 		hikariEnabled = view.printAskUserToEnableHikariOrNot();
+		view.printAskUserToUseSQLOrMongo();
 		
 		MainMenuController mainMenuController = new MainMenuController();
 		mainMenuController.runView();

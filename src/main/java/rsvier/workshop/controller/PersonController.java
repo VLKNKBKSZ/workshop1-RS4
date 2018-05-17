@@ -1,5 +1,6 @@
 package rsvier.workshop.controller;
 
+import rsvier.workshop.dao.DAOFactory;
 import rsvier.workshop.dao.PersonDAO;
 import rsvier.workshop.dao.PersonDAOImp;
 import rsvier.workshop.domain.Account;
@@ -11,7 +12,7 @@ import rsvier.workshop.controller.MainController.TypeOfController;
 public class PersonController extends Controller {
 
 	private PersonView personView = new PersonView();
-	private PersonDAO personDAO = new PersonDAOImp();
+	private PersonDAO personDAO = DAOFactory.getPersonDAO();
 	private AddressController addressController = new AddressController();
 
 	@Override

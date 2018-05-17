@@ -128,21 +128,48 @@ public class PersonDAOImpMongo implements PersonDAO{
 	@Override
 	public int createPerson(Person person) {
 		
+		int accountId = person.getAccount().getAccountId();
+		String name = person.getName();
+		String lastName = person.getLastName();
+		String middleName = person.getMiddleName();
 		
+		double generatedIdDouble = (Double)getNextSequence("person_id");
+		int generatedIdInt = (int)generatedIdDouble;
+		
+		DBObject newPerson = new BasicDBObject("_id",generatedIdInt)
+				.append("account_id", accountId)
+				.append("name", name)
+				.append("last_name", lastName)
+				.append("middle_name", middleName);
+		
+		collection.insert(newPerson);
 	
-		return 0;
+		return generatedIdInt;
 		
 	}
 
 	@Override
 	public void updatePerson(Person person) {
-		// TODO Auto-generated method stub
+		
+		int personId = person.getPersonId();
+		int accountId = person.getAccount().getAccountId();
+		String name = person.getName();
+		String lastName = person.getLastName();
+		String middleName = person.getMiddleName();
+		
+		DBObject updatePerson = new BasicDBObject("_id",personId)
+				.append("account_id", accountId)
+				.append("name", name)
+				.append("last_name", lastName)
+				.append("middle_name", middleName);
+		
+		collection.update(new BasicDBObject("_id",person.getPersonId()), updatePerson);
 		
 	}
 
 	@Override
 	public void deletePerson(Person person) {
-		// TODO Auto-generated method stub
+		collection.remove(new BasicDBObject("_id",person.getPersonId()));
 		
 	}
 	

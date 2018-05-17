@@ -13,7 +13,7 @@ public class TestMongo {
 
 	public static void main(String[] args) {
 		
-		AccountDAOImpMongo accountDao = new AccountDAOImpMongo();
+		AccountDAO accountDao = new AccountDAOImpMongo();
 	//						create account and auto generated id = successful
 	
 		Account account2 = new Account();
@@ -25,11 +25,8 @@ public class TestMongo {
 		System.out.println("generated ID : " + generatedId);
 		
 		
-		//System.out.println(accountDao.getNextSequence("account_id"));
 		
-		
-		
-			//		get account by id = successful
+			//			get account by id = successful
 		  
 	//	Account account = accountDao.getAccountById(16);
 	//	System.out.println(account.toString());
@@ -42,7 +39,7 @@ public class TestMongo {
 		accountDao.updateAccount(account);
 		
 		*/
-			//					get all accounts = successful
+			//			get all accounts = successful
 		
 		/*
 		List<Account> accountList = accountDao.getAllAccounts();
@@ -53,15 +50,15 @@ public class TestMongo {
 		}
 		*/
 		
-						// delete account = successful
+		//				delete account = successful
 		
 	//	accountDao.deleteAccount(account);
 		
 		
-		//           get account by email  = successful
+		//           	get account by email  = successful
 		/*
 		
-		Account account = accountDao.getAccountByEmail("owl@gmail.com");
+		Account account = accountDao.getAccountByEmail("hippo@gmail.com");
 		System.out.println(account.toString());
 		*/
 	}

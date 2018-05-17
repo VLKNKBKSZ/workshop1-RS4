@@ -20,14 +20,14 @@ public class DAOFactory {
 				personDAO = new PersonDAOImp();
 				productDAO = new ProductDAOImp();
 				break;
-		case 2:	accountDAO = new AccountDAOImpMongo();
+		/*case 2:	accountDAO = new AccountDAOImpMongo();
 				addressDAO = new AddressDAOImpMongo();
 				orderDAO = new OrderDAOImpMongo();
 				orderLineDAO = new OrderLineDAOImpMongo();
 				personDAO = new PersonDAOImpMongo();
 				productDAO = new ProductDAOImpMongo();
 				break;
-		default:	break;
+		default:	break;*/
 		}
 	}
 	

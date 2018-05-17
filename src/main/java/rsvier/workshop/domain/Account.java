@@ -63,7 +63,7 @@ public class Account {
 	@Override
 
 	public String toString() {
-		return "Account ID = " + getAccountId() + "Account type = " + getAccountType() + 
+		return "Account ID = " + getAccountId() + " Account type = " + getAccountType() + 
 				" Email = "  + getEmail() + " Password = " + getPassword();
 	
 	}

@@ -136,7 +136,7 @@ public class DatabaseConnectionXML {
 		MongoClient mongoClient = new MongoClient(mongoClientUri);
 		logger.log(Level.INFO, "MongoClient set");
 		
-		db = (DB) mongoClient.getDatabase(DATABASE_NAME);
+		db = (DB) mongoClient.getDB(DATABASE_NAME);
 		logger.log(Level.INFO, "Connected to MongoDB Database");
 		
 		return db;

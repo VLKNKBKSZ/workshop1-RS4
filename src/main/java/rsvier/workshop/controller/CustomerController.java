@@ -13,9 +13,9 @@ import rsvier.workshop.controller.MainController.TypeOfController;
 public class CustomerController extends Controller {
 
 	private CustomerView customerView = new CustomerView();
-	private PersonDAO personDao = new PersonDAOImp();
-	private AccountDAO accountDao = new AccountDAOImp();
-	private AddressDAO addressDao = new AddressDAOImp();
+	private PersonDAO personDao = DAOFactory.getPersonDAO();
+	private AccountDAO accountDao = DAOFactory.getAccountDAO();
+	private AddressDAO addressDao = DAOFactory.getAddressDAO();
 	private AccountController accountController = new AccountController();
 	private PersonController personController = new PersonController();
 	private AddressController addressController = new AddressController();

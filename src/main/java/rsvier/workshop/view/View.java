@@ -3,11 +3,11 @@ package rsvier.workshop.view;
 import java.math.BigDecimal;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import rsvier.workshop.dao.*;
 
 public abstract class View {
 
 	private Scanner userInput = new Scanner(System.in);
-
 	
 	public abstract void printHeaderMessage();
 
@@ -31,6 +31,11 @@ public abstract class View {
 		System.out.println("Jdbc connection pool word nu geactiveerd...");
 		return false;
 	
+	}
+	
+	public void printAskUserToUseSQLOrMongo() {
+		System.out.println("\nWelke database wilt u gebruiken?\n1- MySQL\n2- MongoDb");
+		new DAOFactory(getIntInput());
 	}
 	
 

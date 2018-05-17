@@ -5,6 +5,7 @@ import java.util.List;
 import rsvier.workshop.controller.MainController.TypeOfController;
 import rsvier.workshop.dao.AddressDAO;
 import rsvier.workshop.dao.AddressDAOImp;
+import rsvier.workshop.dao.DAOFactory;
 import rsvier.workshop.domain.Address;
 import rsvier.workshop.domain.Person;
 import rsvier.workshop.service.Validator;
@@ -14,7 +15,7 @@ import rsvier.workshop.view.AddressView;
 public class AddressController extends Controller{
 
 	private AddressView addressView = new AddressView();
-	private AddressDAO addressDAO = new AddressDAOImp();
+	private AddressDAO addressDAO = DAOFactory.getAddressDAO();
 	private Validator validator = new Validator();
 
 	

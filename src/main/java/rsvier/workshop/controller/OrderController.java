@@ -11,10 +11,10 @@ import rsvier.workshop.view.*;
 public class OrderController extends Controller {
 
 	private OrderView orderView = new OrderView();
-	private OrderDAO orderDAO = new OrderDAOImp();
+	private OrderDAO orderDAO = DAOFactory.getOrderDAO();
 	private CustomerController customerController = new CustomerController();
 	private OrderLineController orderLineController = new OrderLineController();
-	private OrderLineDAO orderLineDAO = new OrderLineDAOImp();
+	private OrderLineDAO orderLineDAO = DAOFactory.getOrderLineDAO();
 	private OrderLineView orderLineView = new OrderLineView();
 
 	@Override

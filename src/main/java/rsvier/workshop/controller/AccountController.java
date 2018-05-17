@@ -1,8 +1,7 @@
 package rsvier.workshop.controller;
 
 import org.mindrot.jbcrypt.BCrypt;
-import rsvier.workshop.dao.AccountDAO;
-import rsvier.workshop.dao.AccountDAOImp;
+import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.Account;
 import rsvier.workshop.service.Hashing;
 import rsvier.workshop.service.Validator;
@@ -10,7 +9,8 @@ import rsvier.workshop.view.AccountView;
 
 public class AccountController extends Controller{
 
-	private AccountDAO accountDAO = new AccountDAOImp();
+	
+	private AccountDAO accountDAO = DAOFactory.getAccountDAO();
 	private AccountView accountView = new AccountView();
 	private Account account;
 	private Validator validator = new Validator();
@@ -20,6 +20,7 @@ public class AccountController extends Controller{
 	
 	public AccountController() {
 	}
+	
 	
 
 	

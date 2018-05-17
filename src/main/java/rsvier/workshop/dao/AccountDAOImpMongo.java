@@ -3,9 +3,6 @@ package rsvier.workshop.dao;
 import java.net.UnknownHostException;
 import java.util.*;
 import java.util.logging.*;
-
-import org.bson.types.ObjectId;
-
 import com.mongodb.*;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.utility.*;
@@ -21,7 +18,6 @@ public class AccountDAOImpMongo implements AccountDAO {
 			db = DatabaseConnectionXML.getConnectionMongoDB();
 			collection = db.getCollection("account");
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 
@@ -30,7 +26,7 @@ public class AccountDAOImpMongo implements AccountDAO {
 	@Override
 	public List<Account> getAllAccounts() {
 		List<Account> addressList = new ArrayList<>();
-// skip(1) means Find every document except the first document
+		// skip(1) means Find every document except the first document
 		try (DBCursor cursor = collection.find().skip(1);) {
 			while (cursor.hasNext()) {
 				DBObject object = cursor.next();

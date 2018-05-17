@@ -122,6 +122,7 @@ public class AccountController extends Controller{
 		String hashedPassword = requestAndValidatePassword();
 		account = new Account(email, hashedPassword);
 		account.setAccountId(accountDAO.createAccount(account));
+		accountView.printYourAccountHasBeenCreated();
 		return account;
 	}
 }

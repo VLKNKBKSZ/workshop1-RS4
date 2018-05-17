@@ -39,4 +39,10 @@ public class AccountView extends View{
 	public void printAccountNotFound() {
 		System.out.println("Geen account met dit e-mailadres gevonden.");
 	}
+
+
+	public void printYourAccountHasBeenCreated() {
+		System.out.println("\nUw account is aangemaakt.");
+		
+	}
 }

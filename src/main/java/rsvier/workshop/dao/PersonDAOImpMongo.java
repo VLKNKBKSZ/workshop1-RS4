@@ -24,9 +24,9 @@ public class PersonDAOImpMongo implements PersonDAO{
 	public PersonDAOImpMongo() {
 	
 			try {
-				db = DatabaseConnectionXML.getConnectionMongoDB();
+				db = DataSource.getConnectionMongoDB();
 				collection = db.getCollection("person");
-			} catch (UnknownHostException e) {
+			} catch (Exception e) {
 				logger.log(Level.WARNING, "Host is unknown.", e);
 				e.printStackTrace();
 			}		
@@ -61,9 +61,14 @@ public class PersonDAOImpMongo implements PersonDAO{
 				
 			}
 			
+			return personList;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
+
 		}
 		
-		return personList;
+		return null;
 	}
 
 	@Override
@@ -91,9 +96,14 @@ public class PersonDAOImpMongo implements PersonDAO{
 				 person = personBuilder.build();
 			}
 			
+			return person;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
+
 		}
 		
-		return person;
+		return null;
 	}
 
 	@Override
@@ -120,9 +130,14 @@ public class PersonDAOImpMongo implements PersonDAO{
 				 person = personBuilder.build();
 			}
 			
+			return person;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
+
 		}
 		
-		return person;
+		return null;
 	}
 
 	@Override
@@ -142,7 +157,13 @@ public class PersonDAOImpMongo implements PersonDAO{
 				.append("last_name", lastName)
 				.append("middle_name", middleName);
 		
+		try {
 		collection.insert(newPerson);
+		
+		} catch (MongoException e) {
+			e.printStackTrace();
+
+		}
 	
 		return generatedIdInt;
 		
@@ -162,17 +183,30 @@ public class PersonDAOImpMongo implements PersonDAO{
 				.append("name", name)
 				.append("last_name", lastName)
 				.append("middle_name", middleName);
+		try {
 		
 		collection.update(new BasicDBObject("_id",person.getPersonId()), updatePerson);
+		
+		} catch (MongoException e) {
+			e.printStackTrace();
+
+		}
 		
 	}
 
 	@Override
 	public void deletePerson(Person person) {
+		try {
 		collection.remove(new BasicDBObject("_id",person.getPersonId()));
+		
+		} catch (MongoException e) {
+			e.printStackTrace();
+
+		}
 		
 	}
 	
+	// Method of auto-increment Id
 	public Object getNextSequence(String person_id) {
 		
 		BasicDBObject find = new BasicDBObject();

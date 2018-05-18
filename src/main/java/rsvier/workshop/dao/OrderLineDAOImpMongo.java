@@ -15,7 +15,7 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 
 	public OrderLineDAOImpMongo() {
 		try {
-			db = DatabaseConnectionXML.getConnectionMongoDB();
+			db = DataSource.getConnectionMongoDB();
 			collection = db.getCollection("orderLine");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,9 +41,14 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 				OrderLine orderLine = orderLineBuilder.build();
 				orderLineList.add(orderLine);
 			}
+			
+			return orderLineList;
+
+		} catch (MongoException e) {
+			e.printStackTrace();
 
 		}
-		return orderLineList;
+		return null;
 	}
 
 	@Override
@@ -65,9 +70,14 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 				OrderLine orderLine = orderLineBuilder.build();
 				orderLineList.add(orderLine);
 			}
+			
+			return orderLineList;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
 
 		}
-		return orderLineList;
+		return null;
 	}
 
 	@Override
@@ -89,9 +99,14 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 				OrderLine orderLine = orderLineBuilder.build();
 				orderLineList.add(orderLine);
 			}
+			
+			return orderLineList;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
 
 		}
-		return orderLineList;
+		return null;
 	}
 
 	@Override
@@ -113,9 +128,14 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 				orderLine = orderLineBuilder.build();
 
 			}
+			
+			return orderLine;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
 
 		}
-		return orderLine;
+		return null;
 	}
 
 	@Override
@@ -130,9 +150,13 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 				.append("product_id", orderLine.getProduct().getProductId())
 				.append("order_id", orderId)
 				.append("number_of_products",orderLine.getNumberOfProducts());
-		
+		try {
 				collection.insert(newOrderLine);
+				
+		} catch (MongoException e) {
+			e.printStackTrace();
 
+		}
 	}
 	}
 	@Override
@@ -146,12 +170,25 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 			.append("order_id", orderId)
 			.append("number_of_products",orderLine.getNumberOfProducts());
 	
+	try {
 			collection.insert(newOrderLine);
+			
+	} catch (MongoException e) {
+		e.printStackTrace();
+
+	}
 	}
 
 	@Override
 	public void deleteOrderLine(OrderLine orderLine) {
+		
+		try {
 		collection.remove(new BasicDBObject("_id", orderLine.getOrderLineId()));
+		
+		} catch (MongoException e) {
+			e.printStackTrace();
+
+		}
 
 	}
 
@@ -162,9 +199,15 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 				.append("product_id", orderLine.getProduct().getProductId())
 				.append("number_of_products",orderLine.getNumberOfProducts());
 		
+	try {
 		collection.update(new BasicDBObject("_id",orderLine.getOrderLineId()), updateOrderLine);
+		
+	} catch (MongoException e) {
+		e.printStackTrace();
 
 	}
+	}
+
 
 	// Method of auto-increment Id
 	public Object getNextSequence(String orderLineId) {

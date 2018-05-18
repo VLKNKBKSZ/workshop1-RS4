@@ -18,7 +18,7 @@ public class OrderDAOImpMongo implements OrderDAO {
 
 	public OrderDAOImpMongo() {
 		try {
-			db = DatabaseConnectionXML.getConnectionMongoDB();
+			db = DataSource.getConnectionMongoDB();
 			collection = db.getCollection("order_table");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,8 +50,14 @@ public class OrderDAOImpMongo implements OrderDAO {
 				 orderList.add(order);
 				 
 			}
+			
+			return orderList;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
+
 		}
-		return orderList;
+		return null;
 	}
 
 	@Override
@@ -78,8 +84,14 @@ public class OrderDAOImpMongo implements OrderDAO {
 				 Order order = orderBuilder.build();
 				 orderList.add(order);
 			}
+			
+			return orderList;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
+
 		}
-		return orderList;
+		return null;
 	}
 
 	@Override
@@ -105,8 +117,13 @@ public class OrderDAOImpMongo implements OrderDAO {
 				 orderBuilder.getOrderDateTime(LocalDateTime.parse(accountObj.getString("Local_date_time")));
 				  order = orderBuilder.build();
 			}
+			return order;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
+
 		}
-		return order;
+		return null;
 	}
 
 	@Override
@@ -119,7 +136,13 @@ public class OrderDAOImpMongo implements OrderDAO {
 						.append("total_price", order.getTotalPrice().doubleValue())
 						.append("Local_date_time", order.getOrderDateTime().toString());
 				
+				try {
+					
 				collection.insert(newOrder);
+				
+				} catch (MongoException e) {
+					e.printStackTrace();
+				}
 		return generatedIdInteger;
 	}
 
@@ -130,16 +153,24 @@ public class OrderDAOImpMongo implements OrderDAO {
 				.append("person_id", order.getPerson().getPersonId())
 				.append("total_price", order.getTotalPrice().doubleValue())
 				.append("Local_date_time", order.getOrderDateTime().toString());
-		
+		try {
 		collection.update(new BasicDBObject("_id",order.getOrderId()), updateOrder);
+		
+		} catch (MongoException e) {
+			e.printStackTrace();
 
+		}
 	}
 
 	@Override
 	public void deleteOrder(Order order) {
-		
+		try {
 		collection.remove(new BasicDBObject("_id", order.getOrderId()));
+		
+		} catch (MongoException e) {
+			e.printStackTrace();
 
+		}
 	}
 
 	// Method of auto-increment Id

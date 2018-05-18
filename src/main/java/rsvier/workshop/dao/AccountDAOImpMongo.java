@@ -16,7 +16,7 @@ public class AccountDAOImpMongo implements AccountDAO {
 
 	public AccountDAOImpMongo() {
 		try {
-			db = DatabaseConnectionXML.getConnectionMongoDB();
+			db = DataSource.getConnectionMongoDB();
 			collection = db.getCollection("account");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,10 +45,15 @@ public class AccountDAOImpMongo implements AccountDAO {
 				account.setPassword(password);
 				addressList.add(account);
 			}
+			
+			return addressList;
+
+		} catch (MongoException e) {
+			e.printStackTrace();
 
 		}
 
-		return addressList;
+		return null;
 	}
 
 	@Override
@@ -67,7 +72,13 @@ public class AccountDAOImpMongo implements AccountDAO {
 		DBObject newAccount = new BasicDBObject("_id", generatedIdInteger).append("account_type", accountType)
 				.append("email", email).append("password", password);
 
-		collection.insert(newAccount);
+		 try  {
+			 collection.insert(newAccount);
+			 
+		 } catch (MongoException e) {
+				e.printStackTrace();
+
+			}
 
 		return generatedIdInteger;
 	}
@@ -82,12 +93,26 @@ public class AccountDAOImpMongo implements AccountDAO {
 
 		DBObject updateAccount = new BasicDBObject("_id", accountId).append("account_type", accountType)
 				.append("email", email).append("password", password);
+		
+		try {
 		collection.update(new BasicDBObject("_id", account.getAccountId()), updateAccount);
+		
+		} catch (MongoException e) {
+			e.printStackTrace();
+
+		}
 	}
 
+	@Override
 	public void deleteAccount(Account account) {
+		
+		try {
 		collection.remove(new BasicDBObject("_id", account.getAccountId()));
+		
+		} catch (MongoException e) {
+			e.printStackTrace();
 
+		}
 	}
 
 	@Override
@@ -114,6 +139,7 @@ public class AccountDAOImpMongo implements AccountDAO {
 
 			}
 			return account;
+			
 		} catch (MongoException e) {
 			e.printStackTrace();
 

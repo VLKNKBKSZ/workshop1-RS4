@@ -1,5 +1,6 @@
 package rsvier.workshop.utility;
 
+import java.net.UnknownHostException;
 import java.sql.*;
 
 import com.mongodb.*;
@@ -42,6 +43,34 @@ public class DataSource {
 
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	public static DB getConnectionMongoDB() {
+
+		if (App.hikariEnabled) {
+
+			try {
+
+				return (DB) ds.getConnection();
+
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			
+			}
+		}
+		
+		try {
+
+			return DatabaseConnectionXML.getConnectionMongoDB();
+
+		} catch (UnknownHostException e) {
+			
+			e.printStackTrace();
+			
+		} 
+		
 		return null;
 	}
 	

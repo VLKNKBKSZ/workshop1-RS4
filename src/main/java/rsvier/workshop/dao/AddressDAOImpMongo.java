@@ -17,9 +17,9 @@ public class AddressDAOImpMongo implements AddressDAO {
 	public AddressDAOImpMongo() {
 
 		try {
-			DB db = DatabaseConnectionXML.getConnectionMongoDB();
+			DB db = DataSource.getConnectionMongoDB();
 			collection = db.getCollection("address");
-		} catch (UnknownHostException e) {
+		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
@@ -49,9 +49,13 @@ public class AddressDAOImpMongo implements AddressDAO {
 				Address address = addressBuilder.build();
 				addressList.add(address);
 			}
+			return addressList;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
 
 		}
-		return addressList;
+		return null;
 	}
 
 	@Override
@@ -77,9 +81,14 @@ public class AddressDAOImpMongo implements AddressDAO {
 				Address address = addressBuilder.build();
 				addressList.add(address);
 			}
+			
+			return addressList;
+
+		} catch (MongoException e) {
+			e.printStackTrace();
 
 		}
-		return addressList;
+		return null;
 	}
 
 	@Override
@@ -97,8 +106,14 @@ public class AddressDAOImpMongo implements AddressDAO {
 				.append("postal_code", address.getPostalCode())
 				.append("city", address.getCity())
 				.append("country", address.getCountry());
+		
+		try {
 				collection.insert(newAddress);
+				
+		} catch (MongoException e) {
+			e.printStackTrace();
 
+		}
 	}
 
 	@Override
@@ -113,19 +128,37 @@ public class AddressDAOImpMongo implements AddressDAO {
 				.append("postal_code", address.getPostalCode())
 				.append("city", address.getCity())
 				.append("country", address.getCountry());
+		
+		try {
 				collection.update(new BasicDBObject("_id",address.getAddressId()), updateAddress);
+				
+		} catch (MongoException e) {
+			e.printStackTrace();
 
+		}
 	}
 
 	@Override
 	public void deleteAddressByPersonId(int personId) {
+		try {
 		collection.remove(new BasicDBObject("person_id",personId));
+		
+		} catch (MongoException e) {
+			e.printStackTrace();
 
+		}
 	}
 
 	@Override
 	public void deleteAdressByAddressId(Address address) {
+		
+		try {
 		collection.remove(new BasicDBObject("_id",address.getAddressId()));
+		
+		} catch (MongoException e) {
+			e.printStackTrace();
+
+		}
 
 	}
 	

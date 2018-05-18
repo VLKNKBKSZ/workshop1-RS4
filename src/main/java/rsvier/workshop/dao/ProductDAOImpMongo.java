@@ -18,9 +18,9 @@ public class ProductDAOImpMongo implements ProductDAO {
 	public ProductDAOImpMongo() {
 	
 			try {
-				db = DatabaseConnectionXML.getConnectionMongoDB();
+				db = DataSource.getConnectionMongoDB();
 				collection = db.getCollection("product");
-			} catch (UnknownHostException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		
@@ -51,8 +51,13 @@ public class ProductDAOImpMongo implements ProductDAO {
 				
 			}
 			
+			return productList;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
+
 		}
-		return productList;
+		return null;
 	}
 
 	@Override
@@ -81,8 +86,13 @@ public class ProductDAOImpMongo implements ProductDAO {
 				
 			}
 			
+			return product;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
+
 		}
-		return product;
+		return null;
 	}
 
 	@Override
@@ -111,8 +121,13 @@ public class ProductDAOImpMongo implements ProductDAO {
 				
 			}
 			
+			return product;
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
+
 		}
-		return product;
+		return null;
 	}
 
 	@Override
@@ -126,7 +141,15 @@ public class ProductDAOImpMongo implements ProductDAO {
 				.append("price", product.getPrice().doubleValue())
 				.append("stock", product.getStock());
 		
-		collection.insert(newProduct);
+		try {
+			
+			collection.insert(newProduct);
+			
+		} catch (MongoException e) {
+			e.printStackTrace();
+
+		}
+	
 		
 	}
 
@@ -137,12 +160,25 @@ public class ProductDAOImpMongo implements ProductDAO {
 				.append("price", product.getPrice().doubleValue())
 				.append("stock", product.getStock());
 		
+		try {
+		
 		collection.update(new BasicDBObject("_id",product.getProductId()), updateProduct);
+		
+		} catch (MongoException e) {
+			e.printStackTrace();
+
+		}
 	}
 
 	@Override
 	public void deleteProduct(Product product) {
+		try {
 		collection.remove(new BasicDBObject("_id", product.getProductId()));
+		
+		} catch (MongoException e) {
+			e.printStackTrace();
+
+		}
 		
 	}
 	

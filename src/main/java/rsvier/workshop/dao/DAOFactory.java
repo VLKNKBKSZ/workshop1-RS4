@@ -4,8 +4,7 @@ import rsvier.workshop.view.*;
 
 public class DAOFactory {
 	
-	public static boolean hikariEnabled;
-	public View view = new MainMenuView();
+	
 	static AccountDAO accountDAO = null;
 	static AddressDAO addressDAO = null;
 	static OrderDAO orderDAO = null;
@@ -15,19 +14,12 @@ public class DAOFactory {
 
 	
 
-	public DAOFactory() {
-
-	}
-
-	public void chooseSQLOrMongoSwitch() {
-
-		view.printAskUserToUseSQLOrMongo();
-		int menuChoice = view.getIntInput();
-
+	public DAOFactory(int menuChoice) {
+		
 		switch (menuChoice) {
 
 		case 1:
-			hikariEnabled = view.printAskUserToEnableHikariOrNot();
+		
 			System.out.println("U werkt nu met de SQL database");
 			accountDAO = new AccountDAOImp();
 			addressDAO = new AddressDAOImp();
@@ -47,9 +39,14 @@ public class DAOFactory {
 			break;
 		default:
 			System.out.println("Dit is geen geldige invoer.");
-			chooseSQLOrMongoSwitch();
+			
 			break;
 		}
+
+		
+	}
+
+	public void chooseSQLOrMongoSwitch() {
 
 		
 	}

@@ -14,7 +14,7 @@ public class DataSource {
 	
 	static {
 		
-		if (DAOFactory.hikariEnabled) {
+		if (App.hikariEnabled) {
 			hikariConfig = new HikariConfig("hikari.properties");
 			ds = new HikariDataSource(hikariConfig);
 		}
@@ -22,7 +22,7 @@ public class DataSource {
 
 	public static Connection getConnection() {
 
-		if (DAOFactory.hikariEnabled) {
+		if (App.hikariEnabled) {
 
 			try {
 

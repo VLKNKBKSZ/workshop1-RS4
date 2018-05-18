@@ -50,7 +50,7 @@ public class AddressDAOImpMongo implements AddressDAO {
 				addressList.add(address);
 			}
 			return addressList;
-			
+
 		} catch (MongoException e) {
 			e.printStackTrace();
 
@@ -61,7 +61,7 @@ public class AddressDAOImpMongo implements AddressDAO {
 	@Override
 	public List<Address> getAllAddressesForPerson(int personId) {
 		List<Address> addressList = new ArrayList<>();
-		DBObject query = new BasicDBObject("person_id",personId);
+		DBObject query = new BasicDBObject("person_id", personId);
 
 		try (DBCursor cursor = collection.find(query)) {
 			while (cursor.hasNext()) {
@@ -81,7 +81,7 @@ public class AddressDAOImpMongo implements AddressDAO {
 				Address address = addressBuilder.build();
 				addressList.add(address);
 			}
-			
+
 			return addressList;
 
 		} catch (MongoException e) {
@@ -93,23 +93,20 @@ public class AddressDAOImpMongo implements AddressDAO {
 
 	@Override
 	public void createAddress(Address address) {
-		
-		double generatedIdDouble = (Double)getNextSequence("address_id");
-		int generatedIdInt = (int)generatedIdDouble;
-		
-		DBObject newAddress = new BasicDBObject("_id",generatedIdInt)
-				.append("person_id", address.getPerson().getPersonId())
-				.append("address_type", address.getAddressType())
-				.append("street_name", address.getStreetName())
-				.append("house_number", address.getHouseNumber())
+
+		double generatedIdDouble = (Double) getNextSequence("address_id");
+		int generatedIdInt = (int) generatedIdDouble;
+
+		DBObject newAddress = new BasicDBObject("_id", generatedIdInt)
+				.append("person_id", address.getPerson().getPersonId()).append("address_type", address.getAddressType())
+				.append("street_name", address.getStreetName()).append("house_number", address.getHouseNumber())
 				.append("additional_house_number", address.getAdditionalHouseNumber())
-				.append("postal_code", address.getPostalCode())
-				.append("city", address.getCity())
+				.append("postal_code", address.getPostalCode()).append("city", address.getCity())
 				.append("country", address.getCountry());
-		
+
 		try {
-				collection.insert(newAddress);
-				
+			collection.insert(newAddress);
+
 		} catch (MongoException e) {
 			e.printStackTrace();
 
@@ -118,20 +115,17 @@ public class AddressDAOImpMongo implements AddressDAO {
 
 	@Override
 	public void updateAddress(Address address) {
-		
-		DBObject updateAddress = new BasicDBObject("_id",address.getAddressId())
-				.append("person_id", address.getPerson().getPersonId())
-				.append("address_type", address.getAddressType())
-				.append("street_name", address.getStreetName())
-				.append("house_number", address.getHouseNumber())
+
+		DBObject updateAddress = new BasicDBObject("_id", address.getAddressId())
+				.append("person_id", address.getPerson().getPersonId()).append("address_type", address.getAddressType())
+				.append("street_name", address.getStreetName()).append("house_number", address.getHouseNumber())
 				.append("additional_house_number", address.getAdditionalHouseNumber())
-				.append("postal_code", address.getPostalCode())
-				.append("city", address.getCity())
+				.append("postal_code", address.getPostalCode()).append("city", address.getCity())
 				.append("country", address.getCountry());
-		
+
 		try {
-				collection.update(new BasicDBObject("_id",address.getAddressId()), updateAddress);
-				
+			collection.update(new BasicDBObject("_id", address.getAddressId()), updateAddress);
+
 		} catch (MongoException e) {
 			e.printStackTrace();
 
@@ -141,8 +135,8 @@ public class AddressDAOImpMongo implements AddressDAO {
 	@Override
 	public void deleteAddressByPersonId(int personId) {
 		try {
-		collection.remove(new BasicDBObject("person_id",personId));
-		
+			collection.remove(new BasicDBObject("person_id", personId));
+
 		} catch (MongoException e) {
 			e.printStackTrace();
 
@@ -151,23 +145,23 @@ public class AddressDAOImpMongo implements AddressDAO {
 
 	@Override
 	public void deleteAdressByAddressId(Address address) {
-		
+
 		try {
-		collection.remove(new BasicDBObject("_id",address.getAddressId()));
-		
+			collection.remove(new BasicDBObject("_id", address.getAddressId()));
+
 		} catch (MongoException e) {
 			e.printStackTrace();
 
 		}
 
 	}
-	
+
 	public Object getNextSequence(String address_id) {
-		
+
 		BasicDBObject find = new BasicDBObject();
 		find.put("_id", address_id);
 		BasicDBObject update = new BasicDBObject();
-		update.put("$inc", new BasicDBObject("seq",1));
+		update.put("$inc", new BasicDBObject("seq", 1));
 		DBObject obj = collection.findAndModify(find, update);
 		return obj.get("seq");
 	}

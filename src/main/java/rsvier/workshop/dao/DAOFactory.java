@@ -24,11 +24,11 @@ public class DAOFactory {
 				break;
 		case 2:	System.out.println("U werkt nu met de Mongo database");
 				accountDAO = new AccountDAOImpMongo();
-				//addressDAO = new AddressDAOImpMongo();
-				//orderDAO = new OrderDAOImpMongo();
-				//orderLineDAO = new OrderLineDAOImpMongo();
+				addressDAO = new AddressDAOImpMongo();
+				orderDAO = new OrderDAOImpMongo();
+				orderLineDAO = new OrderLineDAOImpMongo();
 				personDAO = new PersonDAOImpMongo();
-				//productDAO = new ProductDAOImpMongo();
+				productDAO = new ProductDAOImpMongo();
 				break;
 		default:	break;
 		}

@@ -122,7 +122,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 				String middleName = personObj.getString("middle_name");
 				
 				Person.PersonBuilder personBuilder = new Person.PersonBuilder();
-				personBuilder.personId(personId);
+				personBuilder.personId(retrievedPersonId);
 				personBuilder.account(account);
 				personBuilder.name(name);
 				personBuilder.lastName(retrievedLastName);

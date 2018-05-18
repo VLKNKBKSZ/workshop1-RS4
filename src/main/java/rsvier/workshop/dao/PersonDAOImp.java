@@ -10,7 +10,7 @@ import rsvier.workshop.utility.*;
 public class PersonDAOImp implements PersonDAO {
 
 	private Logger logger = LogConnection.getLogger();
-	private AccountDAO accountDao = new AccountDAOImp();
+	private AccountDAO accountDao = DAOFactory.getAccountDAO();
 
 	
 

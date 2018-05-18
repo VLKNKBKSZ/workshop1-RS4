@@ -1,5 +1,7 @@
 package rsvier.workshop.dao;
 
+import rsvier.workshop.view.*;
+
 public class DAOFactory {
 
 	static AccountDAO accountDAO = null;
@@ -9,6 +11,7 @@ public class DAOFactory {
 	static PersonDAO personDAO = null;
 	static ProductDAO productDAO = null;
 	
+	View accountView = new AccountView();
 	
 	public DAOFactory(int implementation) {
 		
@@ -22,7 +25,7 @@ public class DAOFactory {
 				personDAO = new PersonDAOImp();
 				productDAO = new ProductDAOImp();
 				break;
-		case 2:	System.out.println("U werkt nu met de Mongo database");
+		case 2:	System.out.println("U werkt nu met de MongoDB database");
 				accountDAO = new AccountDAOImpMongo();
 				addressDAO = new AddressDAOImpMongo();
 				orderDAO = new OrderDAOImpMongo();
@@ -30,7 +33,9 @@ public class DAOFactory {
 				personDAO = new PersonDAOImpMongo();
 				productDAO = new ProductDAOImpMongo();
 				break;
-		default:	break;
+		default:	System.out.println("Dit is geen geldige invoer.");
+				accountView.printAskUserToUseSQLOrMongo();
+				break;
 		}
 	}
 	

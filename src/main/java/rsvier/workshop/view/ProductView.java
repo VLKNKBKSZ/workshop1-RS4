@@ -25,7 +25,7 @@ public class ProductView extends View {
 	}
 
 	public void printProductIsSuccessfullyCreated() {
-		System.out.println("Product is succesvol aangemaakt en opgeslagen");
+		System.out.println("\nProduct is succesvol aangemaakt en opgeslagen");
 	}
 	
 	public void printUpdateProduct() {
@@ -47,11 +47,11 @@ public class ProductView extends View {
 	}
 	
 	public void printAskForProductStock() {
-		System.out.print("Geef de huidige voorraad van het product: ");
+		System.out.print("\nGeef de huidige voorraad van het product: ");
 	}
 	
 	public void printProductNotFound() {
-		System.out.println("Product niet gevonden.");
+		System.out.println("\nProduct niet gevonden.");
 	}
 	
 }

@@ -19,7 +19,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 	private Logger logger = LogConnection.getLogger();
 	private DB db;
 	private DBCollection collection;
-	private AccountDAO accountDao = new AccountDAOImpMongo();
+	private AccountDAO accountDao = DAOFactory.getAccountDAO();
 	
 	public PersonDAOImpMongo() {
 	

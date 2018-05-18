@@ -14,8 +14,8 @@ import rsvier.workshop.utility.LogConnection;
 public class OrderDAOImp implements OrderDAO {
 
 	private Logger logger = LogConnection.getLogger();
-	private PersonDAOImp personDAO = new PersonDAOImp();
-	private OrderLineDAO orderLineDAO = new OrderLineDAOImp();
+	private PersonDAO personDAO = DAOFactory.getPersonDAO();
+	private OrderLineDAO orderLineDAO = DAOFactory.getOrderLineDAO();
 
 	/*
 	 * Static LocalDate parse(CharSequence text, DateTimeFormatter formatter)

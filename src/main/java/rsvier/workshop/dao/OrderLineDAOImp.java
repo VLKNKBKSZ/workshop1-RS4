@@ -10,7 +10,7 @@ import rsvier.workshop.utility.*;
 public class OrderLineDAOImp implements OrderLineDAO {
 
 	private Logger logger = LogConnection.getLogger();
-	private ProductDAOImp productDAO = new ProductDAOImp();
+	private ProductDAO productDAO = DAOFactory.getProductDAO();
 
 	@Override
 	public List<OrderLine> getAllOrderLines() {

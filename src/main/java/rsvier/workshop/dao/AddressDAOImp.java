@@ -9,7 +9,7 @@ import rsvier.workshop.utility.*;
 public class AddressDAOImp implements AddressDAO {
 
 	private Logger logger = LogConnection.getLogger();
-	private PersonDAO personDao = new PersonDAOImp();
+	private PersonDAO personDao = DAOFactory.getPersonDAO();
 
 	@Override
 	public List<Address> getAllAddresses() {

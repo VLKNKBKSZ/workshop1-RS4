@@ -117,8 +117,9 @@ public class ProductDAOImpMongo implements ProductDAO {
 	@Override
 	public void createProduct(Product product) {
 		
-		double generatedIdDouble = (Double) getNextSequence(" product_id");
+		double generatedIdDouble = (Double) getNextSequence("product_id");
 		int generatedIdInt = (int)generatedIdDouble;
+		
 		DBObject newProduct = new BasicDBObject("_id",generatedIdInt)
 				.append("name", product.getName())
 				.append("price", product.getPrice().doubleValue())

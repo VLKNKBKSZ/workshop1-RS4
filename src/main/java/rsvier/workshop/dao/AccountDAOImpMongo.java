@@ -56,12 +56,16 @@ public class AccountDAOImpMongo implements AccountDAO {
 		int accountType = account.getAccountType();
 		String email = account.getEmail();
 		String password = account.getPassword();
-// getNextSequence() gives the generatedId as a Double object. Have to cast object to double
+
+		// getNextSequence() gives the generatedId as a Double object. Have to cast object to double
 		double generatedIdDouble = (Double) getNextSequence("account_id");
-// Cast double to int. Then you generatedId as int
+		// Cast double to int. Then you generatedId as int
 		int generatedIdInteger = (int) generatedIdDouble;
-		DBObject newAccount = new BasicDBObject("_id", generatedIdInteger).append("account_type", accountType)
-				.append("email", email).append("password", password);
+	
+		DBObject newAccount = new BasicDBObject("_id", generatedIdInteger)
+				.append("account_type", accountType)
+				.append("email", email)
+				.append("password", password);
 
 		collection.insert(newAccount);
 

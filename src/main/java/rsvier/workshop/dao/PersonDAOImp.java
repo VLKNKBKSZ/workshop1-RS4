@@ -12,8 +12,6 @@ public class PersonDAOImp implements PersonDAO {
 	private Logger logger = LogConnection.getLogger();
 	private AccountDAO accountDao = DAOFactory.getAccountDAO();
 
-	
-
 	@Override
 	public List<Person> getCustomerByLastName(String lastName) {
 
@@ -21,7 +19,7 @@ public class PersonDAOImp implements PersonDAO {
 		String query = "SELECT * FROM person WHERE last_name = ?";
 
 		try (Connection conn = DataSource.getConnection();
-			PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 			preparedStatement.setString(1, lastName);
 
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -100,7 +98,6 @@ public class PersonDAOImp implements PersonDAO {
 
 			preparedStatement.executeUpdate();
 
-			
 			logger.log(Level.INFO, "Person succesfully created");
 			try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
 				if (resultSet.next()) {
@@ -120,8 +117,7 @@ public class PersonDAOImp implements PersonDAO {
 	@Override
 	public void updatePerson(Person person) {
 
-		String query = "UPDATE person "
-				+ "SET account_id = ?, name = ?, last_name = ?, middle_name = ? "
+		String query = "UPDATE person " + "SET account_id = ?, name = ?, last_name = ?, middle_name = ? "
 				+ "WHERE person_id = ?";
 
 		try (Connection connection = DataSource.getConnection();
@@ -135,7 +131,7 @@ public class PersonDAOImp implements PersonDAO {
 
 			preparedStatement.executeUpdate();
 			logger.log(Level.INFO, "Person succesfully updated");
-			
+
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL exception occured", e);
 
@@ -186,7 +182,7 @@ public class PersonDAOImp implements PersonDAO {
 					personBuilder.lastName(resultSet.getString(4));
 					personBuilder.middleName(resultSet.getString(5));
 					person = personBuilder.build();
-					
+
 				}
 
 			}

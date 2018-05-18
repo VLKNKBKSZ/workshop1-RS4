@@ -12,7 +12,7 @@ public class AddressDAOImpMongo implements AddressDAO {
 	private Logger logger = LogConnection.getLogger();
 	private DB db;
 	private DBCollection collection;
-	PersonDAO personDao = new PersonDAOImpMongo();
+	PersonDAO personDao = DAOFactory.getPersonDAO();
 
 	public AddressDAOImpMongo() {
 

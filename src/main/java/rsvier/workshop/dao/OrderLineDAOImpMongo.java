@@ -11,7 +11,7 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 	private DB db;
 	private DBCollection collection;
 	private Logger logger = LogConnection.getLogger();
-	private ProductDAO productDao = new ProductDAOImpMongo();
+	private ProductDAO productDao = DAOFactory.getProductDAO();
 
 	public OrderLineDAOImpMongo() {
 		try {

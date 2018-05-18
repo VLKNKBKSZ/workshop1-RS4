@@ -1,7 +1,6 @@
 package rsvier.workshop;
 
 import rsvier.workshop.controller.MainMenuController;
-import rsvier.workshop.dao.DAOFactory;
 import rsvier.workshop.view.MainMenuView;
 import rsvier.workshop.view.View;
 

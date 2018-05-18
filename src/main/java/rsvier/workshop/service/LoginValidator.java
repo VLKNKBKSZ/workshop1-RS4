@@ -19,7 +19,7 @@ public class LoginValidator {
 		String email = accountView.getStringInput();
 		accountView.printRequestPasswordInput();
 		String password = accountView.getStringInput();
-		Account account = DAOFactory.getAccountDAO().getAccountByEmail(email);
+		Account account = new DAOFactory().getAccountDAO().getAccountByEmail(email);
 
 		/*
 		 * first accounts value is checked. This has been added because of mongoDB. In

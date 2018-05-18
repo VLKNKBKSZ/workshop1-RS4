@@ -10,6 +10,8 @@ public class MainMenuController extends Controller{
 	private AccountController accountController = new AccountController();
 	private LoginValidator loginValidator = new LoginValidator();
 	
+	
+	
 	@Override
 	public void runView() {
 		

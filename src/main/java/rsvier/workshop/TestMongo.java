@@ -15,6 +15,7 @@ public class TestMongo {
 	public static void main(String[] args) {
 		
 		AccountDAO accountDao = new AccountDAOImpMongo();
+		PersonDAO personDao = new PersonDAOImpMongo();
 	//						create account and auto generated id = successful
 	/*
 		Account account2 = new Account();
@@ -24,13 +25,13 @@ public class TestMongo {
 		
 		int generatedId = accountDao.createAccount(account2);
 		System.out.println("generated ID : " + generatedId);
-		*/
 		
+		*/
 		
 			//			get account by id = successful
 		  
-		Account account = accountDao.getAccountById(4);
-		System.out.println(account.toString());
+	//	Account account = accountDao.getAccountById(2);
+	//	System.out.println(account.toString());
 					
 		/*
 		
@@ -62,7 +63,17 @@ public class TestMongo {
 	//	accountDao.deleteAccount(account);
 		
 		
-		       
+		       // 		get person by ID == fail
+		
+		Person person = personDao.getPersonById(1);
+		System.out.println(person.toString());
+		
+		
+		// 				get person by account ID == fail
+		
+	//	Person person = personDao.getPersonByAccountId(2);
+	//	System.out.println(person.toString());
+			
 	
 	}
 

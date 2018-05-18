@@ -3,9 +3,9 @@ package rsvier.workshop.dao;
 import rsvier.workshop.view.*;
 
 public class DAOFactory {
+	
 	public static boolean hikariEnabled;
 	public View view = new MainMenuView();
-
 	static AccountDAO accountDAO = null;
 	static AddressDAO addressDAO = null;
 	static OrderDAO orderDAO = null;
@@ -13,7 +13,7 @@ public class DAOFactory {
 	static PersonDAO personDAO = null;
 	static ProductDAO productDAO = null;
 
-	View accountView = new AccountView();
+	
 
 	public DAOFactory() {
 
@@ -51,6 +51,7 @@ public class DAOFactory {
 			break;
 		}
 
+		
 	}
 
 	public static AccountDAO getAccountDAO() {

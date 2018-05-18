@@ -27,7 +27,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 				db = DatabaseConnectionXML.getConnectionMongoDB();
 				collection = db.getCollection("person");
 			} catch (Exception e) {
-				logger.log(Level.WARNING, "Host is unknown.", e);
+				
 				e.printStackTrace();
 			}		
 		
@@ -116,7 +116,12 @@ public class PersonDAOImpMongo implements PersonDAO{
 				DBObject object = cursor.next();
 				BasicDBObject personObj = (BasicDBObject) object;
 				int retrievedPersonId = personObj.getInt("_id");
+				
+			//	System.out.println("Account Id: " + personObj.getInt("account_id"));
 				Account account = accountDao.getAccountById(personObj.getInt("account_id"));
+			//	System.out.println(account == null);
+				
+				
 				String name = personObj.getString("name");
 				String retrievedLastName = personObj.getString("last_name");
 				String middleName = personObj.getString("middle_name");

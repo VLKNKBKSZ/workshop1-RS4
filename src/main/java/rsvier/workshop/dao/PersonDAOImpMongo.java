@@ -37,7 +37,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 	public List<Person> getCustomerByLastName(String lastName) {
 		List<Person> personList = new ArrayList<>();
 		
-		DBObject query = new BasicDBObject("lastName",lastName);
+		DBObject query = new BasicDBObject("last_name",lastName);
 		
 		try(DBCursor cursor = collection.find(query)){
 			while(cursor.hasNext()) {

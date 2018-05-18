@@ -41,6 +41,7 @@ public class ProductDAOImpMongo implements ProductDAO {
 				Product.ProductBuilder productBuilder = new Product.ProductBuilder();
 				productBuilder.productId(productObj.getInt("_id"));
 				productBuilder.name(productObj.getString("name"));
+				// Covert double to be BigDecimal
 				BigDecimal price = BigDecimal.valueOf(productObj.getDouble("price"));
 				price.setScale(2);
 				productBuilder.price(price);

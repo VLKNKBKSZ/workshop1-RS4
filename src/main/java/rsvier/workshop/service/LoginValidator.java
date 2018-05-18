@@ -21,7 +21,15 @@ public class LoginValidator {
 		String password = accountView.getStringInput();
 		Account account = DAOFactory.getAccountDAO().getAccountByEmail(email);
 
-		if (account==null || account.getEmail() == null || (!hashing.checkPassword(password, account.getPassword()))) {
+		/*
+		 * first accounts value is checked. This has been added because of mongoDB. In
+		 * mongo if a field is not existing that field has no null value like we would
+		 * have in mysql so a check if account.getEmail() == null was resulting in a
+		 * nullpointer when we where using mongodb instead of sql.
+		 */
+
+		if (account == null || account.getEmail() == null
+				|| (!hashing.checkPassword(password, account.getPassword()))) {
 
 			accountView.printLoginDetailsWrong();
 			MainController.setController(TypeOfController.MAINMENU);

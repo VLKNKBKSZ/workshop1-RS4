@@ -1,6 +1,7 @@
 package rsvier.workshop.dao;
 
 import java.net.UnknownHostException;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.*;
 import com.mongodb.*;
@@ -57,15 +58,14 @@ public class AccountDAOImpMongo implements AccountDAO {
 		String email = account.getEmail();
 		String password = account.getPassword();
 
-		// getNextSequence() gives the generatedId as a Double object. Have to cast object to double
+		// getNextSequence() gives the generatedId as a Double object. Have to cast
+		// object to double
 		double generatedIdDouble = (Double) getNextSequence("account_id");
 		// Cast double to int. Then you generatedId as int
 		int generatedIdInteger = (int) generatedIdDouble;
-	
-		DBObject newAccount = new BasicDBObject("_id", generatedIdInteger)
-				.append("account_type", accountType)
-				.append("email", email)
-				.append("password", password);
+
+		DBObject newAccount = new BasicDBObject("_id", generatedIdInteger).append("account_type", accountType)
+				.append("email", email).append("password", password);
 
 		collection.insert(newAccount);
 
@@ -113,9 +113,13 @@ public class AccountDAOImpMongo implements AccountDAO {
 				account.setPassword(password);
 
 			}
+			return account;
+		} catch (MongoException e) {
+			e.printStackTrace();
 
 		}
-		return account;
+
+		return null;
 	}
 
 	@Override
@@ -124,27 +128,36 @@ public class AccountDAOImpMongo implements AccountDAO {
 		DBObject query = new BasicDBObject("_id", accountId);
 
 		try (DBCursor cursor = collection.find(query);) {
-		if (cursor.hasNext()) {
-				DBObject object = cursor.next(); {
-				BasicDBObject accountObj = (BasicDBObject) object;
+			if (cursor.hasNext()) {
+				DBObject object = cursor.next();
+				{
+					BasicDBObject accountObj = (BasicDBObject) object;
 
-				int retrievedAccountId = accountObj.getInt("_id");
-				int accountType = accountObj.getInt("account_type");
-				String email = accountObj.getString("email");
-				String password = accountObj.getString("password");
+					int retrievedAccountId = accountObj.getInt("_id");
+					int accountType = accountObj.getInt("account_type");
+					String email = accountObj.getString("email");
+					String password = accountObj.getString("password");
 
-				account = new Account();
-				account.setAccountId(retrievedAccountId);
-				account.setAccountType(accountType);
-				account.setEmail(email);
-				account.setPassword(password);
+					account = new Account();
+					account.setAccountId(retrievedAccountId);
+					account.setAccountType(accountType);
+					account.setEmail(email);
+					account.setPassword(password);
 
 				}
+			}
+			return account;
 		}
+
+		catch (MongoException e) {
+			e.printStackTrace();
+
 		}
-		return account;
+
+		return null;
 	}
-// Method of auto-increment Id
+
+	// Method of auto-increment Id
 	public Object getNextSequence(String accountId) {
 
 		BasicDBObject find = new BasicDBObject();
@@ -152,8 +165,8 @@ public class AccountDAOImpMongo implements AccountDAO {
 		BasicDBObject update = new BasicDBObject();
 		update.put("$inc", new BasicDBObject("seq", 1));
 		DBObject obj = collection.findAndModify(find, update);
-// return Object
-		return obj.get("seq");  
+		// return Object
+		return obj.get("seq");
 	}
 
 }

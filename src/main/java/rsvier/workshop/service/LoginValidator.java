@@ -21,7 +21,7 @@ public class LoginValidator {
 		String password = accountView.getStringInput();
 		Account account = DAOFactory.getAccountDAO().getAccountByEmail(email);
 
-		if (account.getEmail() == null || (!hashing.checkPassword(password, account.getPassword()))) {
+		if (account==null || account.getEmail() == null || (!hashing.checkPassword(password, account.getPassword()))) {
 
 			accountView.printLoginDetailsWrong();
 			MainController.setController(TypeOfController.MAINMENU);

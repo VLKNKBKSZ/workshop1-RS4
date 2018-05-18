@@ -2,11 +2,10 @@ package rsvier.workshop.utility;
 
 import java.net.UnknownHostException;
 import java.sql.*;
-
 import com.mongodb.*;
 import com.zaxxer.hikari.*;
-
 import rsvier.workshop.App;
+import rsvier.workshop.dao.DAOFactory;
 
 public class DataSource {
 
@@ -15,7 +14,7 @@ public class DataSource {
 	
 	static {
 		
-		if (App.hikariEnabled) {
+		if (DAOFactory.hikariEnabled) {
 			hikariConfig = new HikariConfig("hikari.properties");
 			ds = new HikariDataSource(hikariConfig);
 		}
@@ -23,7 +22,7 @@ public class DataSource {
 
 	public static Connection getConnection() {
 
-		if (App.hikariEnabled) {
+		if (DAOFactory.hikariEnabled) {
 
 			try {
 
@@ -46,33 +45,6 @@ public class DataSource {
 		return null;
 	}
 	
-	public static DB getConnectionMongoDB() {
-
-		if (App.hikariEnabled) {
-
-			try {
-
-				return (DB) ds.getConnection();
-
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			
-			}
-		}
-		
-		try {
-
-			return DatabaseConnectionXML.getConnectionMongoDB();
-
-		} catch (UnknownHostException e) {
-			
-			e.printStackTrace();
-			
-		} 
-		
-		return null;
-	}
 	
 	
 	

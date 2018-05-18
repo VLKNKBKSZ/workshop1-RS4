@@ -15,7 +15,7 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 
 	public OrderLineDAOImpMongo() {
 		try {
-			db = DataSource.getConnectionMongoDB();
+			db = DatabaseConnectionXML.getConnectionMongoDB();
 			collection = db.getCollection("orderLine");
 		} catch (Exception e) {
 			e.printStackTrace();

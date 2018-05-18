@@ -17,7 +17,7 @@ public class AddressDAOImpMongo implements AddressDAO {
 	public AddressDAOImpMongo() {
 
 		try {
-			DB db = DataSource.getConnectionMongoDB();
+			DB db = DatabaseConnectionXML.getConnectionMongoDB();
 			collection = db.getCollection("address");
 		} catch (Exception e) {
 

@@ -18,7 +18,7 @@ public class OrderDAOImpMongo implements OrderDAO {
 
 	public OrderDAOImpMongo() {
 		try {
-			db = DataSource.getConnectionMongoDB();
+			db = DatabaseConnectionXML.getConnectionMongoDB();
 			collection = db.getCollection("order_table");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -24,7 +24,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 	public PersonDAOImpMongo() {
 	
 			try {
-				db = DataSource.getConnectionMongoDB();
+				db = DatabaseConnectionXML.getConnectionMongoDB();
 				collection = db.getCollection("person");
 			} catch (Exception e) {
 				logger.log(Level.WARNING, "Host is unknown.", e);

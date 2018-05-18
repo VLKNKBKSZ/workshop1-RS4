@@ -35,7 +35,7 @@ public abstract class View {
 	
 	public void printAskUserToUseSQLOrMongo() {
 		System.out.println("\nWelke database wilt u gebruiken?\n1- MySQL\n2- MongoDb");
-		new DAOFactory(getIntInput());
+		
 	}
 	
 

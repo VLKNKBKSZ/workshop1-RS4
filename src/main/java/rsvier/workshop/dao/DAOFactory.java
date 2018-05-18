@@ -3,7 +3,8 @@ package rsvier.workshop.dao;
 import rsvier.workshop.view.*;
 
 public class DAOFactory {
-
+	public static boolean hikariEnabled;
+	public View view = new MainMenuView();
 	static AccountDAO accountDAO = null;
 	static AddressDAO addressDAO = null;
 	static OrderDAO orderDAO = null;
@@ -13,11 +14,15 @@ public class DAOFactory {
 	
 	View accountView = new AccountView();
 	
-	public DAOFactory(int implementation) {
+	public DAOFactory() {
 		
-		switch(implementation) {
+		view.printAskUserToUseSQLOrMongo();
+		int menuChoice = view.getIntInput();
+		switch(menuChoice) {
 		
-		case 1:	System.out.println("U werkt nu met de SQL database");
+		case 1:	
+			hikariEnabled = view.printAskUserToEnableHikariOrNot();
+			System.out.println("U werkt nu met de SQL database");
 				accountDAO = new AccountDAOImp();
 				addressDAO = new AddressDAOImp();
 				orderDAO = new OrderDAOImp();

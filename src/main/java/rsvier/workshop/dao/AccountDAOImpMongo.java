@@ -16,7 +16,7 @@ public class AccountDAOImpMongo implements AccountDAO {
 
 	public AccountDAOImpMongo() {
 		try {
-			db = DataSource.getConnectionMongoDB();
+			db = DatabaseConnectionXML.getConnectionMongoDB();
 			collection = db.getCollection("account");
 		} catch (Exception e) {
 			e.printStackTrace();

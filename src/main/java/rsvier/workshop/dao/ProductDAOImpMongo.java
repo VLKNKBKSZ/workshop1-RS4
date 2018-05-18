@@ -18,7 +18,7 @@ public class ProductDAOImpMongo implements ProductDAO {
 	public ProductDAOImpMongo() {
 	
 			try {
-				db = DataSource.getConnectionMongoDB();
+				db = DatabaseConnectionXML.getConnectionMongoDB();
 				collection = db.getCollection("product");
 			} catch (Exception e) {
 				e.printStackTrace();

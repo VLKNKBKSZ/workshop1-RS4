@@ -169,7 +169,7 @@ public class PersonDAOImp implements PersonDAO {
 
 		Person person = null;
 
-		String query = "SELECT * FROM person WHERE person_id = ?";
+		String query = "SELECT * FROM person WHERE person_id = ?;";
 
 		try (Connection conn = DataSource.getConnection();
 				PreparedStatement preparedStatement = conn.prepareStatement(query)) {
@@ -186,6 +186,7 @@ public class PersonDAOImp implements PersonDAO {
 					personBuilder.lastName(resultSet.getString(4));
 					personBuilder.middleName(resultSet.getString(5));
 					person = personBuilder.build();
+					
 				}
 
 			}

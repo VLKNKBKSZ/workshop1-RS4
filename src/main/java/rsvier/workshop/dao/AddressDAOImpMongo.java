@@ -103,6 +103,7 @@ public class AddressDAOImpMongo implements AddressDAO {
 
 	@Override
 	public void updateAddress(Address address) {
+		
 		DBObject updateAddress = new BasicDBObject("_id",address.getAddressId())
 				.append("person_id", address.getPerson().getPersonId())
 				.append("address_type", address.getAddressType())

@@ -1,15 +1,9 @@
 package rsvier.workshop.dao;
 
-
-import java.net.UnknownHostException;
 import java.util.*;
-
 import java.util.logging.*;
-
 import com.mongodb.*;
-
 import rsvier.workshop.domain.*;
-
 import rsvier.workshop.utility.*;
 
 

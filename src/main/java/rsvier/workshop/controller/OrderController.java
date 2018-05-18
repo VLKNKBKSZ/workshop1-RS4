@@ -149,7 +149,12 @@ public class OrderController extends Controller {
 			break;
 
 		case 2:// Search order by customer last name
-			updateOrDeleteOrderSwitch(searchOrderByLastName(customerController.searchCustomerByLastName()));
+			Order order = searchOrderByLastName(customerController.searchCustomerByLastName());
+			if(order==null) {
+				runView();
+				break;
+			}
+			updateOrDeleteOrderSwitch(order);
 			break;
 
 		case 0: // Back to previous menu
@@ -191,7 +196,6 @@ public class OrderController extends Controller {
 			if (orderList.size() == 0) {
 
 				orderView.printYouDoNotHaveOrders();
-				runView();
 				return null;
 			}
 

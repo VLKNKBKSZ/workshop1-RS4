@@ -1,10 +1,7 @@
 package rsvier.workshop.dao;
 
-import rsvier.workshop.view.*;
-
 public class DAOFactory {
-	
-	
+
 	static AccountDAO accountDAO = null;
 	static AddressDAO addressDAO = null;
 	static OrderDAO orderDAO = null;
@@ -12,14 +9,12 @@ public class DAOFactory {
 	static PersonDAO personDAO = null;
 	static ProductDAO productDAO = null;
 
-	
-
 	public DAOFactory(int menuChoice) {
-		
+
 		switch (menuChoice) {
 
 		case 1:
-		
+
 			System.out.println("U werkt nu met de SQL database");
 			accountDAO = new AccountDAOImp();
 			addressDAO = new AddressDAOImp();
@@ -39,16 +34,14 @@ public class DAOFactory {
 			break;
 		default:
 			System.out.println("Dit is geen geldige invoer.");
-			
+
 			break;
 		}
 
-		
 	}
 
 	public void chooseSQLOrMongoSwitch() {
 
-		
 	}
 
 	public static AccountDAO getAccountDAO() {

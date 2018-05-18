@@ -8,54 +8,48 @@ import rsvier.workshop.dao.*;
 public abstract class View {
 
 	private Scanner userInput = new Scanner(System.in);
-	
+
 	public abstract void printHeaderMessage();
 
-	
 	public abstract void printMenuMessage();
 
-	
 	public void printAskUserYesOrNo() {
 		System.out.println("Vul in \"J\" indien Ja en \"N\" indien Nee.");
 	}
-	
+
 	public boolean printAskUserToEnableHikariOrNot() {
-		
+
 		System.out.println("\n=================================   Nevvo Meubels =================================\n");
 		System.out.println("Wilt u hikari als connection pool gebruiken? Vul in \"J\" indien Ja en \"N\" indien Nee.");
-		String userAnswer= userInput.nextLine();
-		if(userAnswer.equalsIgnoreCase("J")) {
+		String userAnswer = userInput.nextLine();
+		if (userAnswer.equalsIgnoreCase("J")) {
 			System.out.println("Hikari connection pool word nu geactiveerd...");
 			return true;
 		}
 		System.out.println("Jdbc connection pool word nu geactiveerd...");
 		return false;
-	
+
 	}
-	
+
 	public void printAskUserToUseSQLOrMongo() {
 		System.out.println("\nWelke database wilt u gebruiken?\n1- MySQL\n2- MongoDb");
 		new DAOFactory(getIntInput());
 	}
-	
 
 	public void printAskConfirmation() {
 		System.out.println("Weet u het zeker?");
 	}
 
-	
 	public void printMenuInputIsWrong() {
 		System.out.println("De ingevoerde menu keuze is onjuist, probeer het nogmaals");
 	}
 
-	
 	public void printExitApplicationMessage() {
 		System.out.println("U verlaat het programma. Bedankt en tot ziens!");
 	}
 
-	
 	public Integer getIntInput() {
-		
+
 		try {
 			return Integer.parseInt(userInput.nextLine());
 		} catch (NumberFormatException ex) {
@@ -64,9 +58,8 @@ public abstract class View {
 		}
 	}
 
-	
 	public String getStringInput() {
-		
+
 		String string = userInput.nextLine();
 
 		if (string == null || (string.trim().isEmpty())) {
@@ -91,21 +84,21 @@ public abstract class View {
 				System.out.print("U kunt dit gedeelte niet leeg laten. Vul aub iets in: ");
 				return getBigDecimalInput();
 			}
-			
+
 			return bigDecimal;
-			
+
 		} catch (InputMismatchException ex) {
 			System.out.print("Verkeerde input.");
 			return getBigDecimalInput();
 		}
 
 	}
-	
+
 	public String confirmYesOrNo() {
-		
+
 		printAskConfirmation();
 		printAskUserYesOrNo();
-		
+
 		return getStringInput();
 	}
 

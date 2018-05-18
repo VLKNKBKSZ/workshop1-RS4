@@ -19,31 +19,31 @@ public class AddressView extends View {
     }
     
     public void printAskUserForStreetName() {
-        System.out.print("\nVul je (nieuwe) straatnaam in: ");
+        System.out.print("Vul je (nieuwe) straatnaam in: ");
     }
 
     public void printAskUserForHouseNumber() {
-        System.out.print("\nVul je (nieuwe) huisnummer in: ");
+        System.out.print("Vul je (nieuwe) huisnummer in: ");
     }
 
     public void printAskUserForAdditionalHouseNumber() {
-        System.out.print("\nVul je (nieuwe) huisnummertoevoeging in: ");
+        System.out.print("Vul je (nieuwe) huisnummertoevoeging in: ");
     }
 
     public void printAskUserForPostalCode() {
-        System.out.print("\nVul je (nieuwe) postcode in: ");
+        System.out.print("Vul je (nieuwe) postcode in: ");
     }
 
     public void printAskUserForCity() {
-        System.out.print("\nVul je (nieuwe) plaatsnaam in: ");
+        System.out.print("Vul je (nieuwe) plaatsnaam in: ");
     }
 
     public void printAskUserForCountry() {
-        System.out.print("\nVul je (nieuwe) land in: ");
+        System.out.print("Vul je (nieuwe) land in: ");
     }
 
     public void printAskMailAndDeliverySame() {
-        System.out.print("Is het bezorgadres hetzelfde als het postadres?\n");
+        System.out.print("\nIs het bezorgadres hetzelfde als het postadres?\n");
     }
 
     public void printAskMailAndInvoiceSame() {
@@ -67,7 +67,7 @@ public class AddressView extends View {
     }
     
     public void printAddressAreSuccessFullyCreatedAndSaved() {
-    		System.out.println("\nAl uw adresgegevens zijn succesvol aangemaakt en opgeslagen.\n");
+    		System.out.println("\nUw adresgegevens zijn succesvol aangemaakt en opgeslagen.");
     }
     
     public void printAddressSuccessfullyUpdated() {

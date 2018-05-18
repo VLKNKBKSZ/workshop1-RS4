@@ -14,8 +14,7 @@ public class ProductView extends View {
 
 	@Override
 	public void printMenuMessage() {
-		System.out.println("---------------------------\n" + 
-				"1- Zoek product\n2- Product toevoegen\r\n" +
+		System.out.println("1- Zoek product\n2- Product toevoegen\r\n" +
 				"3- Alle producten weergeven\n0- Verlaat Medewerker - Productenbeheer");
 	}
 

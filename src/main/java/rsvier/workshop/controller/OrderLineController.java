@@ -49,6 +49,7 @@ public class OrderLineController extends Controller {
 			case 3: // Place order in the database
 				placeOrderInDatabase(order);
 				placingOrder = false;
+				MainController.setController(TypeOfController.EMPLOYEE);
 				break;
 
 			case 4: // Cancel order

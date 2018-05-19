@@ -12,14 +12,12 @@ import rsvier.workshop.utility.*;
 public class PersonDAOImpMongo implements PersonDAO{
 	
 	private Logger logger = LogConnection.getLogger();
-	private DB db;
 	private DBCollection collection;
-	private AccountDAO accountDao = DAOFactory.getAccountDAO();
 	
 	public PersonDAOImpMongo() {
 	
 			try {
-				db = DatabaseConnectionXML.getConnectionMongoDB();
+				DB db = DatabaseConnectionXML.getConnectionMongoDB();
 				collection = db.getCollection("person");
 			} catch (Exception e) {
 				logger.log(Level.WARNING, "Host is unknown.", e);
@@ -40,7 +38,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 				BasicDBObject personObj = (BasicDBObject) object;
 				
 				int personId = personObj.getInt("_id");
-				Account account = accountDao.getAccountById(personObj.getInt("account_id"));
+				Account account = DAOFactory.getAccountDAO().getAccountById(personObj.getInt("account_id"));
 				String name = personObj.getString("name");
 				String retrievedLastName = personObj.getString("last_name");
 				String middleName = personObj.getString("middle_name");
@@ -77,7 +75,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 				DBObject object = cursor.next();
 				BasicDBObject personObj = (BasicDBObject) object;
 				int personId = personObj.getInt("_id");
-				Account account = accountDao.getAccountById(personObj.getInt("account_id"));
+				Account account = DAOFactory.getAccountDAO().getAccountById(personObj.getInt("account_id"));
 				String name = personObj.getString("name");
 				String retrievedLastName = personObj.getString("last_name");
 				String middleName = personObj.getString("middle_name");
@@ -111,7 +109,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 				DBObject object = cursor.next();
 				BasicDBObject personObj = (BasicDBObject) object;
 				int retrievedPersonId = personObj.getInt("_id");
-				Account account = accountDao.getAccountById(personObj.getInt("_id"));
+				Account account = DAOFactory.getAccountDAO().getAccountById(personObj.getInt("_id"));
 				String name = personObj.getString("name");
 				String retrievedLastName = personObj.getString("last_name");
 				String middleName = personObj.getString("middle_name");

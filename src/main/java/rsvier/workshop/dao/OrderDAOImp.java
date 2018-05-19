@@ -14,8 +14,6 @@ import rsvier.workshop.utility.LogConnection;
 public class OrderDAOImp implements OrderDAO {
 
 	private Logger logger = LogConnection.getLogger();
-	private PersonDAO personDAO = DAOFactory.getPersonDAO();
-	private OrderLineDAO orderLineDAO = DAOFactory.getOrderLineDAO();
 
 	/*
 	 * Static LocalDate parse(CharSequence text, DateTimeFormatter formatter)
@@ -41,8 +39,8 @@ public class OrderDAOImp implements OrderDAO {
 				Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 				orderBuilder.orderId(resultSet.getInt(1));
 				Order order1 = orderBuilder.build();
-				orderBuilder.totalOrderLines(orderLineDAO.getAllOrderLinesFromOrder(order1));
-				Person person = personDAO.getPersonById(resultSet.getInt(2));
+				orderBuilder.totalOrderLines(DAOFactory.getOrderLineDAO().getAllOrderLinesFromOrder(order1));
+				Person person = DAOFactory.getPersonDAO().getPersonById(resultSet.getInt(2));
 				orderBuilder.person(person);
 				orderBuilder.totalPrice(resultSet.getBigDecimal(3));
 				LocalDateTime parsedDate = LocalDateTime.parse(resultSet.getString(4));
@@ -85,8 +83,8 @@ public class OrderDAOImp implements OrderDAO {
 					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 					orderBuilder.orderId(resultSet.getInt(1));
 					Order order1 = orderBuilder.build();
-					orderBuilder.totalOrderLines(orderLineDAO.getAllOrderLinesFromOrder(order1));
-					orderBuilder.person(personDAO.getPersonById(resultSet.getInt(2)));
+					orderBuilder.totalOrderLines(DAOFactory.getOrderLineDAO().getAllOrderLinesFromOrder(order1));
+					orderBuilder.person(DAOFactory.getPersonDAO().getPersonById(resultSet.getInt(2)));
 					orderBuilder.totalPrice(resultSet.getBigDecimal(3));
 					LocalDateTime parsedDate = LocalDateTime.parse(resultSet.getString(4));
 					orderBuilder.getOrderDateTime(parsedDate);
@@ -129,8 +127,8 @@ public class OrderDAOImp implements OrderDAO {
 					Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 					orderBuilder.orderId(resultSet.getInt(1));
 					Order order1 = orderBuilder.build();
-					orderBuilder.totalOrderLines(orderLineDAO.getAllOrderLinesFromOrder(order1));
-					Person person = personDAO.getPersonById(resultSet.getInt(2));
+					orderBuilder.totalOrderLines(DAOFactory.getOrderLineDAO().getAllOrderLinesFromOrder(order1));
+					Person person = DAOFactory.getPersonDAO().getPersonById(resultSet.getInt(2));
 					orderBuilder.person(person);
 					orderBuilder.totalPrice(resultSet.getBigDecimal(3));
 					LocalDateTime parsedDate = LocalDateTime.parse(resultSet.getString(4));

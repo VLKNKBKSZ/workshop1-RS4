@@ -10,7 +10,6 @@ import rsvier.workshop.utility.*;
 public class PersonDAOImp implements PersonDAO {
 
 	private Logger logger = LogConnection.getLogger();
-	private AccountDAO accountDao = DAOFactory.getAccountDAO();
 
 	@Override
 	public List<Person> getCustomerByLastName(String lastName) {
@@ -27,7 +26,7 @@ public class PersonDAOImp implements PersonDAO {
 				while (resultSet.next()) {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
-					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
+					personBuilder.account(DAOFactory.getAccountDAO().getAccountById(resultSet.getInt(2)));
 					personBuilder.name(resultSet.getString(3));
 					personBuilder.lastName(resultSet.getString(4));
 					personBuilder.middleName(resultSet.getString(5));
@@ -63,7 +62,7 @@ public class PersonDAOImp implements PersonDAO {
 				if (resultSet.next()) {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
-					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
+					personBuilder.account(DAOFactory.getAccountDAO().getAccountById(resultSet.getInt(2)));
 					personBuilder.name(resultSet.getString(3));
 					personBuilder.lastName(resultSet.getString(4));
 					personBuilder.middleName(resultSet.getString(5));
@@ -177,7 +176,7 @@ public class PersonDAOImp implements PersonDAO {
 				if (resultSet.next()) {
 					Person.PersonBuilder personBuilder = new Person.PersonBuilder();
 					personBuilder.personId(resultSet.getInt(1));
-					personBuilder.account(accountDao.getAccountById(resultSet.getInt(2)));
+					personBuilder.account(DAOFactory.getAccountDAO().getAccountById(resultSet.getInt(2)));
 					personBuilder.name(resultSet.getString(3));
 					personBuilder.lastName(resultSet.getString(4));
 					personBuilder.middleName(resultSet.getString(5));

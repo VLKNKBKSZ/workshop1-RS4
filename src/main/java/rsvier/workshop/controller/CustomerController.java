@@ -13,9 +13,6 @@ import rsvier.workshop.controller.MainController.TypeOfController;
 public class CustomerController extends Controller {
 
 	private CustomerView customerView = new CustomerView();
-	private PersonDAO personDao = DAOFactory.getPersonDAO();
-	private AccountDAO accountDao = DAOFactory.getAccountDAO();
-	private AddressDAO addressDao = DAOFactory.getAddressDAO();
 	private AccountController accountController = new AccountController();
 	private PersonController personController = new PersonController();
 	private AddressController addressController = new AddressController();
@@ -112,9 +109,9 @@ public class CustomerController extends Controller {
 
 		if (yesOrNo.equalsIgnoreCase("J")) {
 
-			addressDao.deleteAddressByPersonId(person.getPersonId());
-			accountDao.deleteAccount(person.getAccount());
-			personDao.deletePerson(person);
+			DAOFactory.getAddressDAO().deleteAddressByPersonId(person.getPersonId());
+			DAOFactory.getAccountDAO().deleteAccount(person.getAccount());
+			DAOFactory.getPersonDAO().deletePerson(person);
 
 		}
 	}
@@ -123,7 +120,7 @@ public class CustomerController extends Controller {
 
 		customerView.printAskCustomerLastName();
 		String customerLastName = customerView.getStringInput();
-		List<Person> customerList = personDao.getCustomerByLastName(customerLastName);
+		List<Person> customerList = DAOFactory.getPersonDAO().getCustomerByLastName(customerLastName);
 
 		if (customerList.size() == 0) {
 			customerView.printCustomerNotFound();

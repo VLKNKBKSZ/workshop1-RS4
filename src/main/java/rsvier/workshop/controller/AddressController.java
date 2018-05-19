@@ -15,7 +15,6 @@ import rsvier.workshop.view.AddressView;
 public class AddressController extends Controller{
 
 	private AddressView addressView = new AddressView();
-	private AddressDAO addressDAO = DAOFactory.getAddressDAO();
 	private Validator validator = new Validator();
 
 	
@@ -32,7 +31,7 @@ public class AddressController extends Controller{
 		addressView.printRequestMailAddressInput();
 		Address address = createNewAddress("mail", person);
 		Address addressDelivery;
-		addressDAO.createAddress(address);
+		DAOFactory.getAddressDAO().createAddress(address);
 		addressView.printAddressAreSuccessFullyCreatedAndSaved();
 		
 		// Setting the types of addresses (mail/invoice/delivery):
@@ -42,14 +41,14 @@ public class AddressController extends Controller{
 		if (addressView.confirmYesOrNo().equalsIgnoreCase("J")) {
 
 			address.setAddressType("delivery");
-			addressDAO.createAddress(address);
+			DAOFactory.getAddressDAO().createAddress(address);
 			addressView.printAddressAreSuccessFullyCreatedAndSaved();
 			addressDelivery = address;
 
 		} else {
 			addressView.printRequestDeliveryAddressInput();
 			addressDelivery = createNewAddress("delivery", person);
-			addressDAO.createAddress(addressDelivery);
+			DAOFactory.getAddressDAO().createAddress(addressDelivery);
 			addressView.printAddressAreSuccessFullyCreatedAndSaved();
 		}
 
@@ -58,7 +57,7 @@ public class AddressController extends Controller{
 		if (addressView.confirmYesOrNo().equalsIgnoreCase("J")) {
 
 			address.setAddressType("invoice");
-			addressDAO.createAddress(address);
+			DAOFactory.getAddressDAO().createAddress(address);
 			addressView.printAddressAreSuccessFullyCreatedAndSaved();
 			return;
 		}
@@ -68,12 +67,12 @@ public class AddressController extends Controller{
 		if (addressView.confirmYesOrNo().equalsIgnoreCase("J")) {
 
 			addressDelivery.setAddressType("invoice");
-			addressDAO.createAddress(addressDelivery);
+			DAOFactory.getAddressDAO().createAddress(addressDelivery);
 			addressView.printAddressAreSuccessFullyCreatedAndSaved();
 			
 		} else {
 			addressView.printRequestInvoiceAddressInput();
-			addressDAO.createAddress(createNewAddress("invoice", person));
+			DAOFactory.getAddressDAO().createAddress(createNewAddress("invoice", person));
 			addressView.printAddressAreSuccessFullyCreatedAndSaved();
 		}
 	}
@@ -101,11 +100,10 @@ public class AddressController extends Controller{
 						break;
 				case 0: // back to previous menu
 						updating = false;
-						MainController.setController(TypeOfController.CUSTOMER);
 						break;
 				default: // back to this menu again
 						addressView.printMenuInputIsWrong();
-						updateAddressTypeSwitch( person);
+						updateAddressTypeSwitch(person);
 						break;
 
 			}
@@ -115,7 +113,7 @@ public class AddressController extends Controller{
 	
 	public void updateAddressInDatabase(Person person, String addressType) {
 
-		List<Address> addressList = addressDAO.getAllAddressesForPerson(person.getPersonId());
+		List<Address> addressList = DAOFactory.getAddressDAO().getAllAddressesForPerson(person.getPersonId());
 		Address oldAddress;
 		
 		for (Address address : addressList) {
@@ -134,8 +132,8 @@ public class AddressController extends Controller{
 				addressBuilder.city(addressUpdateCity());
 				addressBuilder.country(addressUpdateCountry());
 				Address updatedAddress = addressBuilder.build();
-				
-				addressDAO.updateAddress(updatedAddress);
+
+				DAOFactory.getAddressDAO().updateAddress(updatedAddress);
 				addressView.printAddressSuccessfullyUpdated();
 			}
 

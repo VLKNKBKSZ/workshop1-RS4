@@ -9,7 +9,6 @@ import rsvier.workshop.utility.*;
 public class AddressDAOImp implements AddressDAO {
 
 	private Logger logger = LogConnection.getLogger();
-	private PersonDAO personDao = DAOFactory.getPersonDAO();
 
 	@Override
 	public List<Address> getAllAddresses() {
@@ -31,7 +30,7 @@ public class AddressDAOImp implements AddressDAO {
 
 				Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 				addressBuilder.addressId(resultSet.getInt(1));
-				addressBuilder.person(personDao.getPersonById(resultSet.getInt(2)));
+				addressBuilder.person(DAOFactory.getPersonDAO().getPersonById(resultSet.getInt(2)));
 				addressBuilder.addressType(resultSet.getString(3));
 				addressBuilder.streetName(resultSet.getString(4));
 				addressBuilder.houseNumber(resultSet.getInt(5));
@@ -75,7 +74,7 @@ public class AddressDAOImp implements AddressDAO {
 				while (resultSet.next()) {
 					Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 					addressBuilder.addressId(resultSet.getInt(1));
-					addressBuilder.person(personDao.getPersonById(resultSet.getInt(2)));
+					addressBuilder.person(DAOFactory.getPersonDAO().getPersonById(resultSet.getInt(2)));
 					addressBuilder.addressType(resultSet.getString(3));
 					addressBuilder.streetName(resultSet.getString(4));
 					addressBuilder.houseNumber(resultSet.getInt(5));

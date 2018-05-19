@@ -11,10 +11,8 @@ import rsvier.workshop.view.*;
 public class OrderController extends Controller {
 
 	private OrderView orderView = new OrderView();
-	private OrderDAO orderDAO = DAOFactory.getOrderDAO();
 	private CustomerController customerController = new CustomerController();
 	private OrderLineController orderLineController = new OrderLineController();
-	private OrderLineDAO orderLineDAO = DAOFactory.getOrderLineDAO();
 	private OrderLineView orderLineView = new OrderLineView();
 
 	@Override
@@ -127,7 +125,6 @@ public class OrderController extends Controller {
 				break;
 			default:
 				orderView.printMenuInputIsWrong();
-				runView();
 				break;
 			}
 		}
@@ -150,7 +147,7 @@ public class OrderController extends Controller {
 
 		case 2:// Search order by customer last name
 			Order order = searchOrderByLastName(customerController.searchCustomerByLastName());
-			if(order==null) {
+			if(order == null) {
 				runView();
 				break;
 			}
@@ -170,10 +167,10 @@ public class OrderController extends Controller {
 
 	public void addOrderLineToExistingOrder(Order order) {
 		orderLineController.addOrderLineToOrder(order);
-		orderLineDAO.createOrderLine(order.getTotalOrderLines().get(order.getTotalOrderLines().size ()-1), order.getOrderId());
+		DAOFactory.getOrderLineDAO().createOrderLine(order.getTotalOrderLines().get(order.getTotalOrderLines().size ()-1), order.getOrderId());
 		order.setOrderDateTime(LocalDateTime.now());
 		order.setTotalPrice(orderLineController.getTotalPriceOfOrder(order));
-		orderDAO.updateOrder(order);
+		DAOFactory.getOrderDAO().updateOrder(order);
 		orderLineView.printOrderLineHasBeenAddedToOrder();
 	}
 
@@ -191,7 +188,7 @@ public class OrderController extends Controller {
 
 		} else {
 
-			orderList = orderDAO.getAllOrdersFromPerson(person);
+			orderList = DAOFactory.getOrderDAO().getAllOrdersFromPerson(person);
 
 			if (orderList.size() == 0) {
 
@@ -201,7 +198,7 @@ public class OrderController extends Controller {
 
 			if (orderList.size() == 1) {
 
-				orderView.printOrdersFound("Order nummer:", 1, orderList.get(0));
+				orderView.printOrdersFound("Bestelnummer: ", 1, orderList.get(0));
 
 				return orderList.get(0);
 
@@ -210,7 +207,7 @@ public class OrderController extends Controller {
 				// if the person has more than 1 order, a list is printed
 				for (int i = 0; i < orderList.size(); i++) {
 
-					orderView.printOrdersFound("Order nummer:", i + 1, orderList.get(i));
+					orderView.printOrdersFound("Bestelnummer: ", i + 1, orderList.get(i));
 				}
 			}
 
@@ -241,13 +238,13 @@ public class OrderController extends Controller {
 	public void searchOrderByOrderId() {
 
 		orderView.printAskOrderId();
-		Order order = orderDAO.getOrderById(orderView.getIntInput());
+		Order order = DAOFactory.getOrderDAO().getOrderById(orderView.getIntInput());
 
 		if (order == null) {
 			orderView.printOrderNotFound();
 			runView();
 		} else {
-			orderView.printOrdersFound("Order nummer", 1, order);
+			orderView.printOrdersFound("Bestelnummer: ", 1, order);
 			updateOrDeleteOrderSwitch(order);
 		}
 	}
@@ -257,7 +254,7 @@ public class OrderController extends Controller {
 	public void doDeleteOrder(Order order) {
 
 		if (orderView.confirmYesOrNo().equalsIgnoreCase("J")) {
-			orderDAO.deleteOrder(order);
+			DAOFactory.getOrderDAO().deleteOrder(order);
 			orderView.printOrderSuccessFullyDeleted();
 			runView();
 		} else {

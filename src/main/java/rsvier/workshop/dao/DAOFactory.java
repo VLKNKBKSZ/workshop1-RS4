@@ -2,12 +2,12 @@ package rsvier.workshop.dao;
 
 public class DAOFactory {
 
-	static AccountDAO accountDAO = null;
-	static AddressDAO addressDAO = null;
-	static OrderDAO orderDAO = null;
-	static OrderLineDAO orderLineDAO = null;
-	static PersonDAO personDAO = null;
-	static ProductDAO productDAO = null;
+	private static AccountDAO accountDAO = null;
+	private static AddressDAO addressDAO = null;
+	private static OrderDAO orderDAO = null;
+	private static OrderLineDAO orderLineDAO = null;
+	private static PersonDAO personDAO = null;
+	private static ProductDAO productDAO = null;
 
 	public DAOFactory(int menuChoice) {
 

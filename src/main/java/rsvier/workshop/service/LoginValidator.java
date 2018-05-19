@@ -9,7 +9,6 @@ import rsvier.workshop.view.*;
 public class LoginValidator {
 
 	private AccountView accountView = new AccountView();
-	public AccountDAO accountDAO = DAOFactory.getAccountDAO();
 	private Controller employeeController = new EmployeeController();
 	private Hashing hashing = new Hashing();
 

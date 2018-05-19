@@ -11,8 +11,6 @@ import rsvier.workshop.view.*;
 public class ProductController extends Controller {
 
 	private ProductView productView = new ProductView();
-	private ProductDAO productDAO = DAOFactory.getProductDAO();
-
 
 	@Override
 	public void runView() {
@@ -86,7 +84,7 @@ public class ProductController extends Controller {
 		productView.printAskForProductName();
 		String productName = productView.getStringInput();
 
-		Product returnedProduct = productDAO.getProductByName(productName);
+		Product returnedProduct = DAOFactory.getProductDAO().getProductByName(productName);
 
 		if (returnedProduct != null) {
 
@@ -118,7 +116,7 @@ public class ProductController extends Controller {
 		productBuilder.stock(productView.getIntInput());
 		Product product = productBuilder.build();
 
-		productDAO.createProduct(product);
+		DAOFactory.getProductDAO().createProduct(product);
 		productView.printProductIsSuccessfullyCreated();
 	}
 
@@ -126,7 +124,7 @@ public class ProductController extends Controller {
 
 		if (productView.confirmYesOrNo().equalsIgnoreCase("J")) {
 
-			productDAO.deleteProduct(product);
+			DAOFactory.getProductDAO().deleteProduct(product);
 
 		} else {
 			runView();
@@ -135,7 +133,7 @@ public class ProductController extends Controller {
 
 	public boolean checkIfProductAlreadyExists(String nameOfProduct) {
 
-		if (productDAO.getProductByName(nameOfProduct) != null) {
+		if (DAOFactory.getProductDAO().getProductByName(nameOfProduct) != null) {
 
 			return true;
 		}
@@ -147,7 +145,7 @@ public class ProductController extends Controller {
 		
 		System.out.println("\nLijst van alle Nevvo-Producten:");
 		System.out.println("-------------------------------");
-		List<Product> products = productDAO.getAllProducts();
+		List<Product> products = DAOFactory.getProductDAO().getAllProducts();
 
 		for (Product product : products) {
 			System.out.println(product.toString());
@@ -217,6 +215,6 @@ public class ProductController extends Controller {
 	// Method for updating product
 
 	public void updateProduct(Product product) {
-		productDAO.updateProduct(product);
+		DAOFactory.getProductDAO().updateProduct(product);
 	}
 }

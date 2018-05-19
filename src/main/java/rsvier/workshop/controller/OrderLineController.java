@@ -17,10 +17,6 @@ public class OrderLineController extends Controller {
 	private OrderView orderView = new OrderView();
 	private ProductController productController = new ProductController();
 
-	private ProductDAO productDAO = DAOFactory.getProductDAO();
-	private OrderDAO orderDAO = DAOFactory.getOrderDAO();
-	private OrderLineDAO orderLineDAO = DAOFactory.getOrderLineDAO();
-
 	@Override
 	public void runView() {
 		orderLineView.printHeaderMessage();
@@ -52,6 +48,7 @@ public class OrderLineController extends Controller {
 
 			case 3: // Place order in the database
 				placeOrderInDatabase(order);
+				placingOrder = false;
 				break;
 
 			case 4: // Cancel order
@@ -88,10 +85,10 @@ public class OrderLineController extends Controller {
 		List<OrderLine> orderLines = order.getTotalOrderLines();
 
 		for (OrderLine orderLine : orderLines) {
-			Product product = productDAO.getProductByName(orderLine.getProduct().getName());
+			Product product = DAOFactory.getProductDAO().getProductByName(orderLine.getProduct().getName());
 
 			product.setStock(product.getStock() + orderLine.getNumberOfProducts());
-			productDAO.updateProduct(product);
+			DAOFactory.getProductDAO().updateProduct(product);
 		}
 	}
 
@@ -103,8 +100,8 @@ public class OrderLineController extends Controller {
 		
 		
 		if (order.getTotalOrderLines().size() == 0) {
-			
-			orderDAO.deleteOrder(order);
+
+			DAOFactory.getOrderDAO().deleteOrder(order);
 			orderLineView.printOrderHasBeenDeletedBecauseOfNoMoreOrderLines();
 			
 		} else {
@@ -115,16 +112,16 @@ public class OrderLineController extends Controller {
 			System.out.println(order.toString());
 			
 			// Update order
-			orderDAO.updateOrder(order);
+			DAOFactory.getOrderDAO().updateOrder(order);
 			
 
 			// Update orderLines
 			for (OrderLine orderLineItems : order.getTotalOrderLines()) {
-				orderLineDAO.updateOrderLine(orderLineItems);
+				DAOFactory.getOrderLineDAO().updateOrderLine(orderLineItems);
 			}
 
 		}
-		productDAO.updateProduct(product);
+		DAOFactory.getProductDAO().updateProduct(product);
 	}
 
 	
@@ -134,10 +131,10 @@ public class OrderLineController extends Controller {
 		order.setOrderDateTime(LocalDateTime.now());
 		order.setTotalPrice(getTotalPriceOfOrder(order));
 		// Create order
-		int orderId = orderDAO.createOrder(order);
+		int orderId = DAOFactory.getOrderDAO().createOrder(order);
 
 		// Create orderLines
-		orderLineDAO.createOrderLine(order.getTotalOrderLines(), orderId);
+		DAOFactory.getOrderLineDAO().createOrderLine(order.getTotalOrderLines(), orderId);
 
 	}
 	
@@ -152,7 +149,7 @@ public class OrderLineController extends Controller {
 		String productName = orderLineView.getStringInput();
 
 		// Get the product from the database and store it in a product object
-		Product retrievedProduct = productDAO.getProductByName(productName);
+		Product retrievedProduct = DAOFactory.getProductDAO().getProductByName(productName);
 
 		if (retrievedProduct != null) {
 
@@ -237,7 +234,7 @@ public class OrderLineController extends Controller {
 		}
 
 		for (int i = 0; i < order.getTotalOrderLines().size(); i++) {
-			System.out.println("Bestelregel nummer " + (i + 1) + order.getTotalOrderLines().get(i).toString());
+			System.out.println("Productnummer " + (i + 1) + " - "+ order.getTotalOrderLines().get(i).toString());
 
 		}
 
@@ -246,7 +243,7 @@ public class OrderLineController extends Controller {
 	
 	public void editOrDeleteOrderLineSwitchMenu(Order order) {
 
-		Product updatedProduct = null;
+		Product updatedProduct;
 		List<OrderLine> orderLineList = order.getTotalOrderLines();
 		
 		//Have user select an order line and store the selected order line in a variable
@@ -278,7 +275,6 @@ public class OrderLineController extends Controller {
 				
 			default:
 				orderLineView.printMenuInputIsWrong();
-				runView();
 				break;
 			}
 		}
@@ -286,7 +282,7 @@ public class OrderLineController extends Controller {
 
 	public void choseOrderLineAndDelete(Order order, int selectedOrderLineInt, List<OrderLine> orderLineList) {
 		OrderLine orderLine = order.getTotalOrderLines().get(selectedOrderLineInt);
-		orderLineDAO.deleteOrderLine(orderLineList.get(selectedOrderLineInt));
+		DAOFactory.getOrderLineDAO().deleteOrderLine(orderLineList.get(selectedOrderLineInt));
 		updateNegativeProductStockInDatabaseWhenOrderLineDeleted(orderLine);
 		order.getTotalOrderLines().remove(orderLineList.get(selectedOrderLineInt));
 		saveOrderAndOrderLinesInDatabaseForAlreadyExistingOrder(orderLine.getProduct(), order);
@@ -363,7 +359,7 @@ public class OrderLineController extends Controller {
 		// deduct numberOfProducts that customer ordered from product stock
 		product.setStock((product.getStock() + orderLine.getNumberOfProducts()));
 
-		productDAO.updateProduct(product);
+		DAOFactory.getProductDAO().updateProduct(product);
 	}
 
 	
@@ -375,7 +371,7 @@ public class OrderLineController extends Controller {
 		// deduct numberOfProducts that customer ordered from product stock
 		product.setStock((product.getStock() - orderLine.getNumberOfProducts()));
 
-		productDAO.updateProduct(product);
+		DAOFactory.getProductDAO().updateProduct(product);
 	}
 
 	
@@ -386,7 +382,7 @@ public class OrderLineController extends Controller {
 		orderLineView.printAskNewNumberOfProductsInOrderLine();
 		int newNumberOfProducts = orderLineView.getIntInput();
 
-		Product retrievedProduct = productDAO.getProductById(orderLine.getProduct().getProductId());
+		Product retrievedProduct = DAOFactory.getProductDAO().getProductById(orderLine.getProduct().getProductId());
 
 		// check if product stock is available
 		while (!checkProductStock((newNumberOfProducts - oldNumberOfProducts), retrievedProduct)) {

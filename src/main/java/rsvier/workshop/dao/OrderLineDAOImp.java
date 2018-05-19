@@ -10,7 +10,6 @@ import rsvier.workshop.utility.*;
 public class OrderLineDAOImp implements OrderLineDAO {
 
 	private Logger logger = LogConnection.getLogger();
-	private ProductDAO productDAO = DAOFactory.getProductDAO();
 
 	@Override
 	public List<OrderLine> getAllOrderLines() {
@@ -26,7 +25,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 
 				OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
 				orderLineBuilder.orderLineId(resultSet.getInt(1));
-				Product product = productDAO.getProductById(resultSet.getInt(3));
+				Product product = DAOFactory.getProductDAO().getProductById(resultSet.getInt(3));
 				orderLineBuilder.product(product);
 				orderLineBuilder.numberOfProducts(resultSet.getInt(4));
 				OrderLine orderLine = orderLineBuilder.build();
@@ -62,7 +61,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 
 					OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
 					orderLineBuilder.orderLineId(resultSet.getInt(1));
-					Product product = productDAO.getProductById(resultSet.getInt(2));
+					Product product = DAOFactory.getProductDAO().getProductById(resultSet.getInt(2));
 					orderLineBuilder.product(product);
 					orderLineBuilder.numberOfProducts(resultSet.getInt(4));
 					OrderLine orderLine = orderLineBuilder.build();
@@ -100,7 +99,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 
 					OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
 					orderLineBuilder.orderLineId(resultSet.getInt(1));
-					orderLineBuilder.product(productDAO.getProductById(resultSet.getInt(3)));
+					orderLineBuilder.product(DAOFactory.getProductDAO().getProductById(resultSet.getInt(3)));
 					orderLineBuilder.numberOfProducts(resultSet.getInt(4));
 					OrderLine orderLine = orderLineBuilder.build();
 					orderLineList.add(orderLine);
@@ -135,7 +134,7 @@ public class OrderLineDAOImp implements OrderLineDAO {
 
 					OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
 					orderLineBuilder.orderLineId(resultSet.getInt(1));
-					Product product = productDAO.getProductById(resultSet.getInt(3));
+					Product product = DAOFactory.getProductDAO().getProductById(resultSet.getInt(3));
 					orderLineBuilder.product(product);
 					orderLineBuilder.numberOfProducts(resultSet.getInt(4));
 					orderLine = orderLineBuilder.build();

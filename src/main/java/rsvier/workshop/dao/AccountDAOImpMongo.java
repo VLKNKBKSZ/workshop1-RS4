@@ -10,13 +10,12 @@ import rsvier.workshop.utility.*;
 
 public class AccountDAOImpMongo implements AccountDAO {
 
-	private DB db;
 	private DBCollection collection;
 	private Logger logger = LogConnection.getLogger();
 
 	public AccountDAOImpMongo() {
 		try {
-			db = DatabaseConnectionXML.getConnectionMongoDB();
+			DB db = DatabaseConnectionXML.getConnectionMongoDB();
 			collection = db.getCollection("account");
 		} catch (Exception e) {
 			e.printStackTrace();

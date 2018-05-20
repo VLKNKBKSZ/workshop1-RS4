@@ -10,15 +10,14 @@ import rsvier.workshop.utility.*;
 
 public class OrderDAOImpMongo implements OrderDAO {
 
-	private DB db;
 	private DBCollection collection;
 	private Logger logger = LogConnection.getLogger();
-	private OrderLineDAO orderLineDAO = DAOFactory.getOrderLineDAO();
-	private PersonDAO personDao = DAOFactory.getPersonDAO();
+
+
 
 	public OrderDAOImpMongo() {
 		try {
-			db = DatabaseConnectionXML.getConnectionMongoDB();
+			DB db = DatabaseConnectionXML.getConnectionMongoDB();
 			collection = db.getCollection("order_table");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -40,8 +39,8 @@ public class OrderDAOImpMongo implements OrderDAO {
 				Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 				 orderBuilder.orderId(accountObj.getInt("_id"));
 				 Order order1 = orderBuilder.build();
-				 orderBuilder.totalOrderLines(orderLineDAO.getAllOrderLinesFromOrder(order1));
-				 orderBuilder.person(personDao .getPersonById(accountObj.getInt("person_id")));
+				 orderBuilder.totalOrderLines(DAOFactory.getOrderLineDAO().getAllOrderLinesFromOrder(order1));
+				 orderBuilder.person(DAOFactory.getPersonDAO().getPersonById(accountObj.getInt("person_id")));
 				 BigDecimal totalPrice = BigDecimal.valueOf(accountObj.getDouble("total_price"));
 				 totalPrice.setScale(2);
 				 orderBuilder.totalPrice(totalPrice);
@@ -75,8 +74,8 @@ public class OrderDAOImpMongo implements OrderDAO {
 				Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 				 orderBuilder.orderId(accountObj.getInt("_id"));
 				 Order order1 = orderBuilder.build();
-				 orderBuilder.totalOrderLines(orderLineDAO.getAllOrderLinesFromOrder(order1));
-				 orderBuilder.person(personDao .getPersonById(accountObj.getInt("person_id")));
+				 orderBuilder.totalOrderLines(DAOFactory.getOrderLineDAO().getAllOrderLinesFromOrder(order1));
+				 orderBuilder.person(DAOFactory.getPersonDAO().getPersonById(accountObj.getInt("person_id")));
 				 BigDecimal totalPrice = BigDecimal.valueOf(accountObj.getDouble("total_price"));
 				 totalPrice.setScale(2);
 				 orderBuilder.totalPrice(totalPrice);
@@ -109,8 +108,8 @@ public class OrderDAOImpMongo implements OrderDAO {
 				Order.OrderBuilder orderBuilder = new Order.OrderBuilder();
 				 orderBuilder.orderId(accountObj.getInt("_id"));
 				 Order order1 = orderBuilder.build();
-				 orderBuilder.totalOrderLines(orderLineDAO.getAllOrderLinesFromOrder(order1));
-				 orderBuilder.person(personDao .getPersonById(accountObj.getInt("person_id")));
+				 orderBuilder.totalOrderLines(DAOFactory.getOrderLineDAO().getAllOrderLinesFromOrder(order1));
+				 orderBuilder.person(DAOFactory.getPersonDAO().getPersonById(accountObj.getInt("person_id")));
 				 BigDecimal totalPrice = BigDecimal.valueOf(accountObj.getDouble("total_price"));
 				 totalPrice.setScale(2);
 				 orderBuilder.totalPrice(totalPrice);

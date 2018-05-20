@@ -9,10 +9,7 @@ import rsvier.workshop.view.AccountView;
 
 public class AccountController extends Controller{
 
-	
-	private AccountDAO accountDAO = DAOFactory.getAccountDAO();
 	private AccountView accountView = new AccountView();
-	private Account account;
 	private Validator validator = new Validator();
 	private Hashing hashing = new Hashing();
 
@@ -36,7 +33,7 @@ public class AccountController extends Controller{
 	public Account searchAccountByMail(){
 
 		accountView.printRequestEmailInput();
-		return accountDAO.getAccountByEmail(accountView.getStringInput());
+		return DAOFactory.getAccountDAO().getAccountByEmail(accountView.getStringInput());
 
 	}
 
@@ -59,7 +56,7 @@ public class AccountController extends Controller{
 						break;
 
 					case 3: // save changes
-						accountDAO.updateAccount(account);
+						DAOFactory.getAccountDAO().updateAccount(account);
 
 						break;
 
@@ -120,8 +117,8 @@ public class AccountController extends Controller{
 		
 		String email = requestAndValidateEmail();
 		String hashedPassword = requestAndValidatePassword();
-		account = new Account(email, hashedPassword);
-		account.setAccountId(accountDAO.createAccount(account));
+		Account account = new Account(email, hashedPassword);
+		account.setAccountId(DAOFactory.getAccountDAO().createAccount(account));
 		accountView.printYourAccountHasBeenCreated();
 		return account;
 	}

@@ -12,13 +12,12 @@ import rsvier.workshop.utility.*;
 public class ProductDAOImpMongo implements ProductDAO {
 	
 	private Logger logger = LogConnection.getLogger();
-	private DB db;
 	private DBCollection collection;
 	
 	public ProductDAOImpMongo() {
 	
 			try {
-				db = DatabaseConnectionXML.getConnectionMongoDB();
+				DB db = DatabaseConnectionXML.getConnectionMongoDB();
 				collection = db.getCollection("product");
 			} catch (Exception e) {
 				e.printStackTrace();

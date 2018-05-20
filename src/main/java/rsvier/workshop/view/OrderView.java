@@ -60,8 +60,8 @@ public class OrderView extends View {
 	}
 	
 	public void printOrdersFound(String message, int i, Order order) {
-		System.out.println(message + i + ", " + " Bestelling id-nummer: " + order.getOrderId() + " Datum van bestelling: "
-				+ order.getOrderDateTime() + " Totale prijs:" + order.getTotalPrice());
+		System.out.println(message + i + ", " + " Bestelling id-nummer: " + order.getOrderId() + ", Datum van bestelling: "
+				+ order.getOrderDateTime() + ", Totale prijs:" + order.getTotalPrice());
 	}
 	
 

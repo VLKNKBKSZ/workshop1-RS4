@@ -10,9 +10,7 @@ import rsvier.workshop.utility.*;
 public class AddressDAOImpMongo implements AddressDAO {
 
 	private Logger logger = LogConnection.getLogger();
-	private DB db;
 	private DBCollection collection;
-	private PersonDAO personDao = DAOFactory.getPersonDAO();
 
 	public AddressDAOImpMongo() {
 
@@ -38,7 +36,7 @@ public class AddressDAOImpMongo implements AddressDAO {
 
 				Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 				addressBuilder.addressId(addressObj.getInt("_id"));
-				addressBuilder.person(personDao.getPersonById(addressObj.getInt("person_id")));
+				addressBuilder.person(DAOFactory.getPersonDAO().getPersonById(addressObj.getInt("person_id")));
 				addressBuilder.addressType(addressObj.getString("address_type"));
 				addressBuilder.streetName(addressObj.getString("street_name"));
 				addressBuilder.houseNumber(addressObj.getInt("house_number"));
@@ -70,7 +68,7 @@ public class AddressDAOImpMongo implements AddressDAO {
 
 				Address.AddressBuilder addressBuilder = new Address.AddressBuilder();
 				addressBuilder.addressId(addressObj.getInt("_id"));
-				addressBuilder.person(personDao.getPersonById(addressObj.getInt("person_id")));
+				addressBuilder.person(DAOFactory.getPersonDAO().getPersonById(addressObj.getInt("person_id")));
 				addressBuilder.addressType(addressObj.getString("address_type"));
 				addressBuilder.streetName(addressObj.getString("street_name"));
 				addressBuilder.houseNumber(addressObj.getInt("house_number"));

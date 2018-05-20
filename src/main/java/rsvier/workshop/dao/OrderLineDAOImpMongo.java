@@ -8,14 +8,12 @@ import rsvier.workshop.utility.*;
 
 public class OrderLineDAOImpMongo implements OrderLineDAO {
 
-	private DB db;
 	private DBCollection collection;
 	private Logger logger = LogConnection.getLogger();
-	private ProductDAO productDao = DAOFactory.getProductDAO();
 
 	public OrderLineDAOImpMongo() {
 		try {
-			db = DatabaseConnectionXML.getConnectionMongoDB();
+			DB db = DatabaseConnectionXML.getConnectionMongoDB();
 			collection = db.getCollection("orderLine");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,7 +34,7 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 
 				OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
 				orderLineBuilder.orderLineId(orderLineObj.getInt("_id"));
-				orderLineBuilder.product(productDao.getProductById(orderLineObj.getInt("product_id")));
+				orderLineBuilder.product(DAOFactory.getProductDAO().getProductById(orderLineObj.getInt("product_id")));
 				orderLineBuilder.numberOfProducts(orderLineObj.getInt("number_of_products"));
 				OrderLine orderLine = orderLineBuilder.build();
 				orderLineList.add(orderLine);
@@ -65,7 +63,7 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 
 				OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
 				orderLineBuilder.orderLineId(orderLineObj.getInt("_id"));
-				orderLineBuilder.product(productDao.getProductById(orderLineObj.getInt("product_id")));
+				orderLineBuilder.product(DAOFactory.getProductDAO().getProductById(orderLineObj.getInt("product_id")));
 				orderLineBuilder.numberOfProducts(orderLineObj.getInt("number_of_products"));
 				OrderLine orderLine = orderLineBuilder.build();
 				orderLineList.add(orderLine);
@@ -94,7 +92,7 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 
 				OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
 				orderLineBuilder.orderLineId(orderLineObj.getInt("_id"));
-				orderLineBuilder.product(productDao.getProductById(orderLineObj.getInt("product_id")));
+				orderLineBuilder.product(DAOFactory.getProductDAO().getProductById(orderLineObj.getInt("product_id")));
 				orderLineBuilder.numberOfProducts(orderLineObj.getInt("number_of_products"));
 				OrderLine orderLine = orderLineBuilder.build();
 				orderLineList.add(orderLine);
@@ -123,7 +121,7 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 
 				OrderLine.OrderLineBuilder orderLineBuilder = new OrderLine.OrderLineBuilder();
 				orderLineBuilder.orderLineId(orderLineObj.getInt("_id"));
-				orderLineBuilder.product(productDao.getProductById(orderLineObj.getInt("product_id")));
+				orderLineBuilder.product(DAOFactory.getProductDAO().getProductById(orderLineObj.getInt("product_id")));
 				orderLineBuilder.numberOfProducts(orderLineObj.getInt("number_of_products"));
 				orderLine = orderLineBuilder.build();
 

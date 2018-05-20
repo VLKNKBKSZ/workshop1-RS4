@@ -12,7 +12,6 @@ import rsvier.workshop.controller.MainController.TypeOfController;
 public class PersonController extends Controller {
 
 	private PersonView personView = new PersonView();
-	private PersonDAO personDAO = DAOFactory.getPersonDAO();
 	private AddressController addressController = new AddressController();
 
 	@Override
@@ -49,7 +48,7 @@ public class PersonController extends Controller {
 					addressController.updateAddressTypeSwitch(person);
 					break;
 					
-			case 5: personDAO.updatePerson(person);
+			case 5: DAOFactory.getPersonDAO().updatePerson(person);
 					personView.printPersonUserDetailsAreSuccessfullyUpdated();
 					
 			case 0: // exit and go back to employee menu
@@ -72,7 +71,7 @@ public class PersonController extends Controller {
 		personBuilder.lastName(personUpdateLastName());
 		personBuilder.middleName(personUpdateMiddleName());
 		Person person = personBuilder.build();
-		person.setPersonId(personDAO.createPerson(person));
+		person.setPersonId(DAOFactory.getPersonDAO().createPerson(person));
 
 		return person;
 	}

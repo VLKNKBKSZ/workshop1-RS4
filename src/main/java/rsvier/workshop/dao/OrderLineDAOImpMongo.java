@@ -16,7 +16,7 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 			DB db = DatabaseConnectionXML.getConnectionMongoDB();
 			collection = db.getCollection("orderLine");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured.Connection with MongoDB failed.", e);
 		}
 
 	}
@@ -43,7 +43,7 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 			return orderLineList;
 
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -72,7 +72,7 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 			return orderLineList;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -101,7 +101,7 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 			return orderLineList;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -130,7 +130,7 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 			return orderLine;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -150,9 +150,10 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 				.append("number_of_products",orderLine.getNumberOfProducts());
 		try {
 				collection.insert(newOrderLine);
+				logger.log(Level.INFO, "Orderline successfully created.");
 				
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 	}
@@ -170,9 +171,10 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 	
 	try {
 			collection.insert(newOrderLine);
+			logger.log(Level.INFO, "Orderline successfully created.");
 			
 	} catch (MongoException e) {
-		e.printStackTrace();
+		logger.log(Level.WARNING, "SQL exception occured", e);
 
 	}
 	}
@@ -182,9 +184,10 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 		
 		try {
 		collection.remove(new BasicDBObject("_id", orderLine.getOrderLineId()));
+		logger.log(Level.INFO, "Orderline successfully deleted.");
 		
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 
@@ -199,9 +202,10 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 		
 	try {
 		collection.update(new BasicDBObject("_id",orderLine.getOrderLineId()), updateOrderLine);
+		logger.log(Level.INFO, "Orderline successfully updated.");
 		
 	} catch (MongoException e) {
-		e.printStackTrace();
+		logger.log(Level.WARNING, "SQL exception occured", e);
 
 	}
 	}

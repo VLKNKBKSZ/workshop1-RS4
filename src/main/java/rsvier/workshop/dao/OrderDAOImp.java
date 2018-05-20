@@ -2,13 +2,11 @@ package rsvier.workshop.dao;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.*;
 import rsvier.workshop.domain.Order;
 import rsvier.workshop.domain.Person;
 import rsvier.workshop.utility.DataSource;
-import rsvier.workshop.utility.DatabaseConnectionXML;
 import rsvier.workshop.utility.LogConnection;
 
 public class OrderDAOImp implements OrderDAO {

@@ -1,7 +1,5 @@
 package rsvier.workshop.dao;
 
-import java.net.UnknownHostException;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.*;
 import com.mongodb.*;
@@ -18,7 +16,7 @@ public class AccountDAOImpMongo implements AccountDAO {
 			DB db = DatabaseConnectionXML.getConnectionMongoDB();
 			collection = db.getCollection("account");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured. Connection with MongoDB failed", e);
 		}
 
 	}
@@ -44,11 +42,11 @@ public class AccountDAOImpMongo implements AccountDAO {
 				account.setPassword(password);
 				addressList.add(account);
 			}
-			
+
 			return addressList;
 
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 
@@ -71,13 +69,14 @@ public class AccountDAOImpMongo implements AccountDAO {
 		DBObject newAccount = new BasicDBObject("_id", generatedIdInteger).append("account_type", accountType)
 				.append("email", email).append("password", password);
 
-		 try  {
-			 collection.insert(newAccount);
-			 
-		 } catch (MongoException e) {
-				e.printStackTrace();
+		try {
+			collection.insert(newAccount);
+			logger.log(Level.INFO, "Account successfully created.");
 
-			}
+		} catch (MongoException e) {
+			logger.log(Level.WARNING, "SQL exception occured", e);
+
+		}
 
 		return generatedIdInteger;
 	}
@@ -92,24 +91,24 @@ public class AccountDAOImpMongo implements AccountDAO {
 
 		DBObject updateAccount = new BasicDBObject("_id", accountId).append("account_type", accountType)
 				.append("email", email).append("password", password);
-		
+
 		try {
-		collection.update(new BasicDBObject("_id", account.getAccountId()), updateAccount);
-		
+			collection.update(new BasicDBObject("_id", account.getAccountId()), updateAccount);
+			logger.log(Level.INFO, "Account successfully updated.");
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured. Connection with MongoDB failed", e);
 
 		}
 	}
 
 	@Override
 	public void deleteAccount(Account account) {
-		
+
 		try {
-		collection.remove(new BasicDBObject("_id", account.getAccountId()));
-		
+			collection.remove(new BasicDBObject("_id", account.getAccountId()));
+			logger.log(Level.INFO, "Account successfully deleted.");
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 	}
@@ -138,9 +137,9 @@ public class AccountDAOImpMongo implements AccountDAO {
 
 			}
 			return account;
-			
+
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 
@@ -175,7 +174,7 @@ public class AccountDAOImpMongo implements AccountDAO {
 		}
 
 		catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 

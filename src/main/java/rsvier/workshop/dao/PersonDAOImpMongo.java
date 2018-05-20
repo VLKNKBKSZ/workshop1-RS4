@@ -20,8 +20,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 				DB db = DatabaseConnectionXML.getConnectionMongoDB();
 				collection = db.getCollection("person");
 			} catch (Exception e) {
-				logger.log(Level.WARNING, "Host is unknown.", e);
-				e.printStackTrace();
+				logger.log(Level.WARNING, "SQL exception occured.Connection with MongoDB failed", e);
 			}		
 		
 	}
@@ -57,7 +56,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 			return personList;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		
@@ -92,7 +91,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 			return person;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		
@@ -126,7 +125,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 			return person;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		
@@ -154,7 +153,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 		collection.insert(newPerson);
 		
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 	
@@ -181,7 +180,7 @@ public class PersonDAOImpMongo implements PersonDAO{
 		collection.update(new BasicDBObject("_id",person.getPersonId()), updatePerson);
 		
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		
@@ -191,9 +190,10 @@ public class PersonDAOImpMongo implements PersonDAO{
 	public void deletePerson(Person person) {
 		try {
 		collection.remove(new BasicDBObject("_id",person.getPersonId()));
+		logger.log(Level.INFO, "Person successfully deleted.");
 		
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		

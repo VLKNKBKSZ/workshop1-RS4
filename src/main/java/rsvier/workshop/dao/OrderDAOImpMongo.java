@@ -20,7 +20,7 @@ public class OrderDAOImpMongo implements OrderDAO {
 			DB db = DatabaseConnectionXML.getConnectionMongoDB();
 			collection = db.getCollection("order_table");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured. Connection with MongoDB failed", e);
 		}
 
 	}
@@ -53,7 +53,7 @@ public class OrderDAOImpMongo implements OrderDAO {
 			return orderList;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -87,7 +87,7 @@ public class OrderDAOImpMongo implements OrderDAO {
 			return orderList;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -119,7 +119,7 @@ public class OrderDAOImpMongo implements OrderDAO {
 			return order;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -138,9 +138,10 @@ public class OrderDAOImpMongo implements OrderDAO {
 				try {
 					
 				collection.insert(newOrder);
+				logger.log(Level.INFO, "Order successfully created.");
 				
 				} catch (MongoException e) {
-					e.printStackTrace();
+					logger.log(Level.WARNING, "SQL exception occured", e);
 				}
 		return generatedIdInteger;
 	}
@@ -154,9 +155,10 @@ public class OrderDAOImpMongo implements OrderDAO {
 				.append("Local_date_time", order.getOrderDateTime().toString());
 		try {
 		collection.update(new BasicDBObject("_id",order.getOrderId()), updateOrder);
+		logger.log(Level.INFO, "Order successfully created.");
 		
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 	}
@@ -165,9 +167,10 @@ public class OrderDAOImpMongo implements OrderDAO {
 	public void deleteOrder(Order order) {
 		try {
 		collection.remove(new BasicDBObject("_id", order.getOrderId()));
+		logger.log(Level.INFO, "Order successfully deleted.");
 		
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 	}

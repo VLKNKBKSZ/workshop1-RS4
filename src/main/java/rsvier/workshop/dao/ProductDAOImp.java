@@ -5,7 +5,6 @@ import java.util.*;
 import java.util.logging.*;
 import rsvier.workshop.domain.*;
 import rsvier.workshop.utility.DataSource;
-import rsvier.workshop.utility.DatabaseConnectionXML;
 import rsvier.workshop.utility.LogConnection;
 
 public class ProductDAOImp implements ProductDAO {

@@ -1,7 +1,6 @@
 package rsvier.workshop.dao;
 
 import java.math.BigDecimal;
-import java.net.UnknownHostException;
 import java.util.*;
 import java.util.logging.*;
 import com.mongodb.*;
@@ -20,7 +19,7 @@ public class ProductDAOImpMongo implements ProductDAO {
 				DB db = DatabaseConnectionXML.getConnectionMongoDB();
 				collection = db.getCollection("product");
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.log(Level.WARNING, "SQL exception occured.Connection with MongoDB failed.", e);
 			}
 		
 	}
@@ -53,7 +52,7 @@ public class ProductDAOImpMongo implements ProductDAO {
 			return productList;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -88,7 +87,7 @@ public class ProductDAOImpMongo implements ProductDAO {
 			return product;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -123,7 +122,7 @@ public class ProductDAOImpMongo implements ProductDAO {
 			return product;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -143,9 +142,10 @@ public class ProductDAOImpMongo implements ProductDAO {
 		try {
 			
 			collection.insert(newProduct);
+			logger.log(Level.INFO, "Product successfully created.");
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 	
@@ -162,9 +162,10 @@ public class ProductDAOImpMongo implements ProductDAO {
 		try {
 		
 		collection.update(new BasicDBObject("_id",product.getProductId()), updateProduct);
+		logger.log(Level.INFO, "Product successfully updated.");
 		
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 	}
@@ -173,9 +174,10 @@ public class ProductDAOImpMongo implements ProductDAO {
 	public void deleteProduct(Product product) {
 		try {
 		collection.remove(new BasicDBObject("_id", product.getProductId()));
+		logger.log(Level.INFO, "Product successfully deleted.");
 		
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured.", e);
 
 		}
 		

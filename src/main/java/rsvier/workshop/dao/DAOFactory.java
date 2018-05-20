@@ -2,6 +2,11 @@ package rsvier.workshop.dao;
 
 public class DAOFactory {
 
+	/*
+	 * Initializing all dao's to be null, @runtime this doa's will be assignden a
+	 * new value based on the input from the constructor
+	 */
+	
 	private static AccountDAO accountDAO = null;
 	private static AddressDAO addressDAO = null;
 	private static OrderDAO orderDAO = null;

@@ -11,7 +11,13 @@ public class App {
 	public static void main(String[] args) {
 
 		View view = new MainMenuView();
+
+		// Option to choose connection pool
+
 		hikariEnabled = view.printAskUserToEnableHikariOrNot();
+
+		// Option to choose database
+
 		view.printAskUserToUseSQLOrMongo();
 
 		MainMenuController mainMenuController = new MainMenuController();

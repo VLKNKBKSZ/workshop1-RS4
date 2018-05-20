@@ -11,7 +11,9 @@ public class Validator {
 
 		return true;
 	}
-
+	
+	//checks if String input matches some rules for user safety
+	
 	public boolean validatePassword(String password) {
 
 		if (password.matches(".*\\s+.*")) {
@@ -27,6 +29,8 @@ public class Validator {
 
 		return true;
 	}
+	
+	//checks if Postalcode input matches
 	
 	public boolean validatePostalCode(String inputPostalCode) {
 		

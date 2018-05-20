@@ -1,10 +1,6 @@
 package rsvier.workshop.controller;
 
-
 import java.util.List;
-import rsvier.workshop.controller.MainController.TypeOfController;
-import rsvier.workshop.dao.AddressDAO;
-import rsvier.workshop.dao.AddressDAOImp;
 import rsvier.workshop.dao.DAOFactory;
 import rsvier.workshop.domain.Address;
 import rsvier.workshop.domain.Person;

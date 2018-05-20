@@ -1,6 +1,5 @@
 package rsvier.workshop.dao;
 
-import java.net.UnknownHostException;
 import java.util.*;
 import java.util.logging.*;
 import com.mongodb.*;
@@ -19,7 +18,7 @@ public class AddressDAOImpMongo implements AddressDAO {
 			collection = db.getCollection("address");
 		} catch (Exception e) {
 
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured. Connection with MongoDB failed", e);
 		}
 
 	}
@@ -50,7 +49,7 @@ public class AddressDAOImpMongo implements AddressDAO {
 			return addressList;
 			
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured.", e);
 
 		}
 		return null;
@@ -83,7 +82,7 @@ public class AddressDAOImpMongo implements AddressDAO {
 			return addressList;
 
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 		return null;
@@ -107,9 +106,10 @@ public class AddressDAOImpMongo implements AddressDAO {
 		
 		try {
 				collection.insert(newAddress);
+				logger.log(Level.INFO, "Address successfully created.");
 				
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 	}
@@ -129,9 +129,10 @@ public class AddressDAOImpMongo implements AddressDAO {
 		
 		try {
 				collection.update(new BasicDBObject("_id",address.getAddressId()), updateAddress);
+				logger.log(Level.INFO, "Address successfully updated.");
 				
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 	}
@@ -140,9 +141,10 @@ public class AddressDAOImpMongo implements AddressDAO {
 	public void deleteAddressByPersonId(int personId) {
 		try {
 		collection.remove(new BasicDBObject("person_id",personId));
+		logger.log(Level.INFO, "Address successfully deleted.");
 		
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 	}
@@ -152,9 +154,10 @@ public class AddressDAOImpMongo implements AddressDAO {
 		
 		try {
 		collection.remove(new BasicDBObject("_id",address.getAddressId()));
+		logger.log(Level.INFO, "Address successfully deleted.");
 		
 		} catch (MongoException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL exception occured", e);
 
 		}
 

@@ -1,19 +1,25 @@
 package rsvier.workshop.utility;
 
-import java.net.UnknownHostException;
 import java.sql.*;
-import com.mongodb.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import com.zaxxer.hikari.*;
 import rsvier.workshop.App;
-import rsvier.workshop.dao.DAOFactory;
 
 public class DataSource {
 
 	private static HikariConfig hikariConfig;
 	private static HikariDataSource ds;
-	
+
+	private static Logger logger = LogConnection.getLogger();
+
+	/*
+	 * Static initializer, runs as soon as the class is loaded. before any static
+	 * method is called and even before any static variable can be used
+	 */
+
 	static {
-		
+
 		if (App.hikariEnabled) {
 			hikariConfig = new HikariConfig("hikari.properties");
 			ds = new HikariDataSource(hikariConfig);
@@ -29,9 +35,8 @@ public class DataSource {
 				return ds.getConnection();
 
 			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			
+				logger.log(Level.WARNING, "SQL Exception occured, connection with hikari connection pool failed", e);
+
 			}
 		}
 		try {
@@ -40,12 +45,9 @@ public class DataSource {
 
 		} catch (SQLException e) {
 
-			e.printStackTrace();
+			logger.log(Level.WARNING, "SQL Exception occured, connection with JDBC connection pool failed", e);
 		}
 		return null;
 	}
-	
-	
-	
-	
+
 }

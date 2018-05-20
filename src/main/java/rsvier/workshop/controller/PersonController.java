@@ -1,8 +1,6 @@
 package rsvier.workshop.controller;
 
 import rsvier.workshop.dao.DAOFactory;
-import rsvier.workshop.dao.PersonDAO;
-import rsvier.workshop.dao.PersonDAOImp;
 import rsvier.workshop.domain.Account;
 import rsvier.workshop.domain.Person;
 import rsvier.workshop.domain.Person.PersonBuilder;

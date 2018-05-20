@@ -1,6 +1,5 @@
 package rsvier.workshop.controller;
 
-import org.mindrot.jbcrypt.BCrypt;
 import rsvier.workshop.dao.*;
 import rsvier.workshop.domain.Account;
 import rsvier.workshop.service.Hashing;

@@ -73,9 +73,5 @@ public class AddressView extends View {
     public void printAddressSuccessfullyUpdated() {
     		System.out.println("\nDe gewijzigde gegevens zijn opgeslagen.");
     }
-    
-    public void printAddressSuccessfullyDeleted() {
-		System.out.println("\nHet adres is verwijderd");
-}
-    
+
 }

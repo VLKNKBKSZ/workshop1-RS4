@@ -174,7 +174,7 @@ public class OrderLineController extends Controller {
 					.numberOfProducts(requestedProduct).build();
 
 			// Print order line details
-			System.out.println("Uw huidige bestelregel bevat de volgende gegevens:");
+			System.out.println("Het volgende product is toegevoegd aan uw bestelling:");
 			System.out.println(orderLine.toString());
 			orderLineView.printYouCanAddMoreOrPlaceOrder();
 

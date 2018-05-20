@@ -21,11 +21,11 @@ public class OrderLineView extends View {
 	}
 	
 	public void printRequestNameOfProductToView() {
-		System.out.println("Voer de naam in van het product dat u wilt bestellen.");
+		System.out.print("Voer de naam in van het product dat u wilt bestellen: ");
 	}
 
 	public void printRequestAmountOfProducts() {
-		System.out.println("Voer het aantal producten in dat u wilt bestellen.");
+		System.out.print("Voer het aantal producten in dat u wilt bestellen: ");
 	}
 
 	public void printOrderIsEmpty() {
@@ -33,7 +33,7 @@ public class OrderLineView extends View {
 	}
 
 	public void printAskUserToChoseOrderLine() {
-		System.out.println("Voer het nummer in van het product dat u wilt aanpassen");
+		System.out.print("Voer het nummer in van het product dat u wilt aanpassen: ");
 	}
 	
 	public void printProductStockIsNotAvailable(int stockFromDatabase, int requestedAmountOfProducts) {
@@ -42,7 +42,7 @@ public class OrderLineView extends View {
 	}
 	
 	public void printAskNewNumberOfProductsInOrderLine() {
-		System.out.println("Voer het nieuwe aantal van de producten in a.u.b : \n");
+		System.out.print("Voer het nieuwe aantal van de producten in a.u.b : \n");
 	}
 	
 	public void printOrderLineHasBeenAddedToOrder() {

@@ -7,8 +7,7 @@ public class AccountView extends View{
 		System.out.println("\n=========== Werknemer  |  Accountbeheer ===========\n");	
 	}
 	
-	
-	//Not using the printMenuMessage now
+
 	@Override
 	public void printMenuMessage() {
 		System.out.println("Welke gegevens wilt u veranderen?");

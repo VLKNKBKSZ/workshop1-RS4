@@ -22,7 +22,7 @@ public class CustomerView extends View {
 	
 	public void printAskCustomerLastName() {
 
-		System.out.println("Vul achternaam in:");
+		System.out.print("Vul achternaam in: ");
 	}
 
 	public void printCustomerNotFound() {
@@ -33,7 +33,7 @@ public class CustomerView extends View {
 	
 	public void printAskNumberOfCustomer() {
 
-		System.out.println("Voer het nummer in van de klant die u wilt verwijderen of aanpassen:");
+		System.out.print("Selecteer een klant door het nummer in te voeren: ");
 	}
 	
 	

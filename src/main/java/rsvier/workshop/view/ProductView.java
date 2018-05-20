@@ -46,7 +46,7 @@ public class ProductView extends View {
 	}
 	
 	public void printAskForProductStock() {
-		System.out.print("\nGeef de huidige voorraad van het product: ");
+		System.out.print("Geef de huidige voorraad van het product: ");
 	}
 	
 	public void printProductNotFound() {

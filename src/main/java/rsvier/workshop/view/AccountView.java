@@ -45,4 +45,8 @@ public class AccountView extends View{
 		System.out.println("\nUw account is aangemaakt.");
 		
 	}
+	public void printConfirmUpdateAccount() {
+		System.out.println("\nUw account is met succes bijgewerkt.");
+		
+	}
 }

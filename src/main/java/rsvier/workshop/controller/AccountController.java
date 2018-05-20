@@ -57,7 +57,9 @@ public class AccountController extends Controller{
 
 					case 3: // save changes
 						DAOFactory.getAccountDAO().updateAccount(account);
-
+						accountView.printConfirmUpdateAccount();
+						updating = false;
+						MainController.setController(MainController.TypeOfController.EMPLOYEE);
 						break;
 
 					case 0: // cancel

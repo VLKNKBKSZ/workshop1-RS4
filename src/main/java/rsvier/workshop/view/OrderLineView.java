@@ -17,7 +17,7 @@ public class OrderLineView extends View {
 	}
 
 	public void printEditOrDeleteOrderLine() {
-		System.out.println("1 - Pas het aantal van het bestelde product aan\n2- Verwijder product van bestelling\n0- Terug naar hoofdmenu.");
+		System.out.println("1- Pas het aantal van het bestelde product aan\n2- Verwijder product van bestelling\n0- Terug naar vorige menu");
 	}
 	
 	public void printRequestNameOfProductToView() {

@@ -1,8 +1,5 @@
 package workshop1;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.logging.*;
 import org.junit.jupiter.api.AfterEach;
@@ -15,12 +12,6 @@ import rsvier.workshop.dao.OrderDAOImp;
 import rsvier.workshop.dao.OrderLineDAOImp;
 import rsvier.workshop.dao.PersonDAOImp;
 import rsvier.workshop.dao.ProductDAOImp;
-import rsvier.workshop.domain.Account;
-import rsvier.workshop.domain.Address;
-import rsvier.workshop.domain.Order;
-import rsvier.workshop.domain.OrderLine;
-import rsvier.workshop.domain.Person;
-import rsvier.workshop.domain.Product;
 import rsvier.workshop.utility.DatabaseConnectionXML;
 import rsvier.workshop.utility.LogConnection;
 
@@ -43,6 +34,7 @@ class OrderLineDAOImpTest {
 	void setUp() {
 		
 		try (Connection conn = DatabaseConnectionXML.getConnection(); Statement statement = conn.createStatement();) {
+			
 			
 		} catch (SQLException e) {
 			

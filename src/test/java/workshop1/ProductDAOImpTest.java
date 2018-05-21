@@ -23,7 +23,7 @@ class ProductDAOImpTest {
 	@BeforeEach
 	void setUp() {
 
-		try (Connection conn = DatabaseConnectionXML.getConnection(); Statement statement = conn.createStatement();) {
+		try (Connection conn = DataSource.getConnection(); Statement statement = conn.createStatement();) {
 
 			String query = "INSERT INTO product (name, price , stock) VALUES ('Tafel',95.00, 25)";
 			String query_2 = "INSERT INTO product (name, price , stock) VALUES ('Lamp',77.00, 77)";
@@ -48,7 +48,7 @@ class ProductDAOImpTest {
 
 	void tearDown() {
 		
-		try (Connection conn = DatabaseConnectionXML.getConnection(); Statement statement = conn.createStatement();) {
+		try (Connection conn = DataSource.getConnection(); Statement statement = conn.createStatement();) {
 
 			String query = "DELETE FROM product;";
 			String query_2 = "ALTER TABLE product AUTO_INCREMENT = 1";

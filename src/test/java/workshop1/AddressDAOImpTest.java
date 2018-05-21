@@ -9,7 +9,7 @@ import java.sql.*;
 import rsvier.workshop.dao.*;
 import rsvier.workshop.utility.*;
 
-public class AddressDAOTest {
+public class AddressDAOImpTest {
 
 	AddressDAO addressDAO = new AddressDAOImp();
 	private Logger logger = LogConnection.getLogger();
@@ -17,7 +17,7 @@ public class AddressDAOTest {
 	@BeforeEach
 	void setUp() {
 		try(//first create account
-			Connection connection = DatabaseConnectionXML.getConnection();
+			Connection connection = DataSource.getConnection();
 			Statement statement = connection.createStatement();) {
 			
 			String query1 = "INSERT INTO account (email, password) VALUES ('evg@gmail.com', 'weightword') ";
@@ -57,7 +57,7 @@ public class AddressDAOTest {
 	@AfterEach
 	void tearDown() {
 		try(
-			Connection connection = DatabaseConnectionXML.getConnection();
+			Connection connection = DataSource.getConnection();
 			Statement statement = connection.createStatement();) {
 			
 			String query1 = "DELETE FROM address";

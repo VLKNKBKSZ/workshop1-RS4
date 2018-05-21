@@ -66,6 +66,9 @@ public class OrderLineController extends Controller {
 	}
 
 	public void placeOrderInDatabase(Order order) {
+		
+		// this check is added so the user cannot place a order without orderlines.
+		
 		if(order.getTotalOrderLines().size() == 0) {
 			orderLineView.printOrderIsEmpty();
 			return;

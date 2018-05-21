@@ -41,7 +41,7 @@ public abstract class View {
 	}
 
 	public void printMenuInputIsWrong() {
-		System.out.println("De ingevoerde menu keuze is onjuist, probeer het nogmaals");
+		System.out.println("De ingevoerde menu keuze is onjuist, probeer het nogmaals\n");
 	}
 
 	public void printExitApplicationMessage() {

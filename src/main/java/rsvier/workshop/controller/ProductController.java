@@ -183,6 +183,7 @@ public class ProductController extends Controller {
 
 			case 5: // Save updates in database
 				updateProduct(product);
+				updatingProduct = false;
 				break;
 
 			case 0: // Go back to previous menu

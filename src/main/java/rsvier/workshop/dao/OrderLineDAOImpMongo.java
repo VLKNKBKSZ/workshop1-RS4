@@ -196,7 +196,25 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 	@Override
 	public void updateOrderLine(OrderLine orderLine) {
 		
+		
+		int orderId = 0;
+		
+		DBObject query = new BasicDBObject("_id", orderLine.getOrderLineId());
+
+		try (DBCursor cursor = collection.find(query)) {
+
+			if (cursor.hasNext()) {
+				DBObject object = cursor.next();
+				BasicDBObject orderLineObj = (BasicDBObject) object;
+				orderId = orderLineObj.getInt("order_id");
+				
+			}
+		}
+		
+		
+
 		DBObject updateOrderLine = new BasicDBObject("_id",orderLine.getOrderLineId())
+				.append("order_id", orderId)
 				.append("product_id", orderLine.getProduct().getProductId())
 				.append("number_of_products",orderLine.getNumberOfProducts());
 		

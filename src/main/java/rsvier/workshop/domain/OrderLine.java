@@ -87,7 +87,7 @@ public class OrderLine implements Cloneable {
 
 	@Override
 	public String toString() {
-		return "Id: " + getOrderLineId() + ", Naam: " + product.getName() + ", Prijs: " + getProduct().getPrice()
+		return " Naam: " + product.getName() + ", Prijs: " + getProduct().getPrice()
 		/* + " OrderId " + order.getOrderId() */ + ", Aantal: " + getNumberOfProducts() + ", Totaal Prijs: € "
 				+ getProduct().getPrice().multiply(new BigDecimal(getNumberOfProducts()));
 	}

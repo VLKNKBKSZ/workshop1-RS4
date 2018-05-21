@@ -119,6 +119,7 @@ public class OrderLineController extends Controller {
 			// Update orderLines
 			for (OrderLine orderLineItems : order.getTotalOrderLines()) {
 				DAOFactory.getOrderLineDAO().updateOrderLine(orderLineItems);
+				System.out.println("");
 				System.out.println(orderLineItems.toString());
 			}
 			System.out.println(order.toString());

@@ -130,7 +130,7 @@ public class Order implements Cloneable {
 	@Override
 	public String toString() {
 		return getOrderId() + " "+ getPerson().getName() + " " + getPerson().getLastName() + " "
-				+ getTotalPrice();
+				+ "Totale prijs: "+getTotalPrice();
 	}
 
 	@Override

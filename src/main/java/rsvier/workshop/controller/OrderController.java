@@ -245,9 +245,8 @@ public class OrderController extends Controller {
 			runView();
 		} else {
 			orderView.printOrdersFound("Bestelnummer: ", 1, order);
-			List <OrderLine> list= DAOFactory.getOrderLineDAO().getAllOrderLinesFromOrder(order);
-			for(OrderLine orderLine: list) {
-				System.out.println("Bestelregel:\t" + orderLine.toString() + "\n");
+			for(OrderLine orderLine: order.getTotalOrderLines()) {
+                System.out.println("Bestelregel:\t" + orderLine.toString() + "\n");
 			}
 			updateOrDeleteOrderSwitch(order);
 		}

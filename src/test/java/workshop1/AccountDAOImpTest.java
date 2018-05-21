@@ -26,7 +26,6 @@ public class AccountDAOImpTest {
 			String query2 = "INSERT INTO account (account_type, email,password) VALUES (1, 'hippo@gmail.com','5678')";
 			stmt.addBatch(query2);
 			stmt.executeBatch();
-			conn.close();
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL Exception occured", e);
 			fail("Error instantiating database table." + e.getMessage());
@@ -43,7 +42,6 @@ public class AccountDAOImpTest {
 			String query2 = "ALTER TABLE account AUTO_INCREMENT = 1";
 			stmt.addBatch(query2);
 			stmt.executeBatch();
-			conn.close();
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL Exception occured", e);
 

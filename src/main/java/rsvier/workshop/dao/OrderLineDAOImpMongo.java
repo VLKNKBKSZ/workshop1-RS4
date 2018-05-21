@@ -165,8 +165,8 @@ public class OrderLineDAOImpMongo implements OrderLineDAO {
 		int generatedIdInteger = (int) generatedIdDouble;
 		
 	DBObject newOrderLine = new BasicDBObject("_id",generatedIdInteger)
-			.append("product_id", orderLine.getProduct().getProductId())
 			.append("order_id", orderId)
+			.append("product_id", orderLine.getProduct().getProductId())
 			.append("number_of_products",orderLine.getNumberOfProducts());
 	
 	try {

@@ -110,7 +110,7 @@ public class OrderLineController extends Controller {
 			order.setOrderDateTime(LocalDateTime.now());
 			order.setTotalPrice(getTotalPriceOfOrder(order));
 			
-			System.out.println(order.toString());
+			
 			
 			// Update order
 			DAOFactory.getOrderDAO().updateOrder(order);
@@ -119,8 +119,9 @@ public class OrderLineController extends Controller {
 			// Update orderLines
 			for (OrderLine orderLineItems : order.getTotalOrderLines()) {
 				DAOFactory.getOrderLineDAO().updateOrderLine(orderLineItems);
+				orderLineItems.toString();
 			}
-
+			System.out.println(order.toString());
 		}
 		DAOFactory.getProductDAO().updateProduct(product);
 	}

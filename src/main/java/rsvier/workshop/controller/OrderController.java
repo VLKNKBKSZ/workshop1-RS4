@@ -185,6 +185,7 @@ public class OrderController extends Controller {
 		if (person == null) {
 
 			runView();
+			return null;
 
 		} else {
 

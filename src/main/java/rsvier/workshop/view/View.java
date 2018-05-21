@@ -78,6 +78,11 @@ public abstract class View {
 
 		try {
 			BigDecimal bigDecimal = userInput.nextBigDecimal();
+			/*
+			 * This is added because the scanner is not consuming \n so when you ask a new
+			 * int value of the user after the bigdecimal input you will get an error
+			 * message. With this call that \n is consumed and the error is fixed.
+			 */
 			userInput.nextLine();
 
 			if (bigDecimal == null) {

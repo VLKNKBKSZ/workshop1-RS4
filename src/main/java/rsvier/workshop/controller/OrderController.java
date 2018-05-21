@@ -148,7 +148,6 @@ public class OrderController extends Controller {
 		case 2:// Search order by customer last name
 			Order order = searchOrderByLastName(customerController.searchCustomerByLastName());
 			if(order == null) {
-				runView();
 				break;
 			}
 			updateOrDeleteOrderSwitch(order);

@@ -97,7 +97,7 @@ public class OrderLineController extends Controller {
 	// Save order and orderLines for a already existing order
 	public void saveOrderAndOrderLinesInDatabaseForAlreadyExistingOrder(Product product, Order order) {
 		
-		System.out.println(order.toString());
+		//System.out.println(order.toString());
 		
 		
 		if (order.getTotalOrderLines().size() == 0) {

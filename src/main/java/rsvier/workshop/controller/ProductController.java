@@ -217,5 +217,6 @@ public class ProductController extends Controller {
 
 	public void updateProduct(Product product) {
 		DAOFactory.getProductDAO().updateProduct(product);
+		productView.printConfirmUpdateProduct();
 	}
 }

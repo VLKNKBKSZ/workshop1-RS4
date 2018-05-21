@@ -53,4 +53,7 @@ public class ProductView extends View {
 		System.out.println("\nProduct niet gevonden.");
 	}
 	
+	public void printConfirmUpdateProduct() {
+		System.out.println("\nHet product is met succes bijgewerkt.");
+	}
 }

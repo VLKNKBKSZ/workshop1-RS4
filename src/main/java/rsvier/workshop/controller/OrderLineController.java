@@ -66,7 +66,7 @@ public class OrderLineController extends Controller {
 	}
 
 	public void placeOrderInDatabase(Order order) {
-		if(order == null) {
+		if(order.getTotalOrderLines().size() == 0) {
 			orderLineView.printOrderIsEmpty();
 			return;
 		}

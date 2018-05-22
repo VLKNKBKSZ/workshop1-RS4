@@ -20,11 +20,17 @@ public class AccountDAOImpTest {
 
 		logger.info("Setting up database....");
 		try (Connection conn = DataSource.getConnection(); Statement stmt = conn.createStatement();) {
-
-			String query = "INSERT INTO account (account_type, email,password) VALUES (1,'evy@gmail.com','1234')";
+			
+			String query = "DELETE FROM account";
 			stmt.addBatch(query);
-			String query2 = "INSERT INTO account (account_type, email,password) VALUES (1, 'hippo@gmail.com','5678')";
+			String query2 = "ALTER TABLE account AUTO_INCREMENT = 1";
 			stmt.addBatch(query2);
+			stmt.executeBatch();
+
+			String query3 = "INSERT INTO account (account_type, email,password) VALUES (1,'evy@gmail.com','1234')";
+			stmt.addBatch(query3);
+			String query4 = "INSERT INTO account (account_type, email,password) VALUES (1, 'hippo@gmail.com','5678')";
+			stmt.addBatch(query4);
 			stmt.executeBatch();
 		} catch (SQLException e) {
 			logger.log(Level.WARNING, "SQL Exception occured", e);

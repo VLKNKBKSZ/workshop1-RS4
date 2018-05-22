@@ -227,7 +227,12 @@ public class OrderLineController extends Controller {
 	public int requestAmountOfProducts() {
 
 		orderLineView.printRequestAmountOfProducts();
-		return orderLineView.getIntInput();
+		int requestedAmountOfProducts = orderLineView.getIntInput();
+		while(requestedAmountOfProducts<= 0) {
+			orderLineView.printRequestAmountOfProducts();
+			requestedAmountOfProducts = orderLineView.getIntInput();
+		}
+		return requestedAmountOfProducts;
 	}
 	
 

@@ -111,9 +111,21 @@ public class ProductController extends Controller {
 
 		productBuilder.name(nameOfNewProduct);
 		productView.printAskForProductPrice();
-		productBuilder.price(productView.getBigDecimalInput());
+		// Check for negative price or zero value
+		BigDecimal productPrice = productView.getBigDecimalInput();
+		while(productPrice.intValue()<=0) {
+			productView.printAskForProductPrice();
+			productPrice = productView.getBigDecimalInput();
+		}
+		productBuilder.price(productPrice);
 		productView.printAskForProductStock();
-		productBuilder.stock(productView.getIntInput());
+		// Check for negative stock or zero value
+		int productStock = productView.getIntInput();
+		while(productStock<=0) {
+			productView.printAskForProductStock();
+			productStock = productView.getIntInput();
+		}
+		productBuilder.stock(productStock);
 		Product product = productBuilder.build();
 
 		DAOFactory.getProductDAO().createProduct(product);

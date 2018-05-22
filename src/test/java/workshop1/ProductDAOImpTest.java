@@ -24,7 +24,14 @@ class ProductDAOImpTest {
 	void setUp() {
 
 		try (Connection conn = DataSource.getConnection(); Statement statement = conn.createStatement();) {
-
+			
+			String query11 = "DELETE FROM product;";
+			String query22 = "ALTER TABLE product AUTO_INCREMENT = 1";
+			
+			statement.addBatch(query11);
+			statement.addBatch(query22);
+			statement.executeBatch();
+			
 			String query = "INSERT INTO product (name, price , stock) VALUES ('Tafel',95.00, 25)";
 			String query_2 = "INSERT INTO product (name, price , stock) VALUES ('Lamp',77.00, 77)";
 			String query_3 = "INSERT INTO product (name, price , stock) VALUES ('Hoekbank',77.00, 77)";

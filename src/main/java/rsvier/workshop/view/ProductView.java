@@ -26,7 +26,9 @@ public class ProductView extends View {
 	public void printProductIsSuccessfullyCreated() {
 		System.out.println("\nProduct is succesvol aangemaakt en opgeslagen");
 	}
-	
+	public void printInsertedProductStockIsNotCorrect() {
+		System.out.println("U heeft 0 of een negative nummer ingevoerd als voorraad. Probeer het nogmaals.");
+	}
 	public void printUpdateProduct() {
 		System.out.println("1- Toon huidig product\n2- Productnaam aanpassen\n3- Productprijs aanpassen\n" +
 				"4- Productvoorraad aanpassen\n5- Veranderingen opslaan\n0- Terug naar vorige menu");

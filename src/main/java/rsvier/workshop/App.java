@@ -22,6 +22,5 @@ public class App {
 
 		MainMenuController mainMenuController = new MainMenuController();
 		mainMenuController.runView();
-		//
 	}
 }
